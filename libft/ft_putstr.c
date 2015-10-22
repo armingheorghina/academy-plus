@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/21 20:38:05 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/22 16:17:31 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/22 21:30:57 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/22 21:52:26 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <unistd.h>
 
-char	*ft_strncpy(char *dst, const char *src, size_t n)
+void	ft_putstr(const char *s)
 {
-	size_t i;
+	int i;
 
 	i = 0;
-	while (src[i] && i < n)
+	while (*(const char*)(s + i))
 	{
-		dst[i] = src[i];
+		write(1, &*(const char*)(s + i), 1);
 		i++;
 	}
-	while (i < n)
-	{
-		dst[i] = '\0';
-		i++;
-	}
-	return (dst);
 }

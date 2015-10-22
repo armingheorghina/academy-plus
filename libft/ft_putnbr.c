@@ -1,31 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/21 20:38:05 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/22 16:17:31 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/22 21:59:16 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/22 22:21:38 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-char	*ft_strncpy(char *dst, const char *src, size_t n)
+void	ft_putnbr(int n)
 {
-	size_t i;
+	char	v[10];
+	int		i;
+	long	nb;
 
 	i = 0;
-	while (src[i] && i < n)
+	nb = n;
+	if (nb < 0)
 	{
-		dst[i] = src[i];
+		ft_putchar('-');
+		nb = -nb;
+	}
+	if (nb == 0)
+		ft_putchar('0');
+	while (nb > 0)
+	{
+		v[i] = nb % 10 + '0';
+		nb = nb / 10;
 		i++;
 	}
-	while (i < n)
+	i--;
+	while (i >= 0)
 	{
-		dst[i] = '\0';
-		i++;
+		ft_putchar(v[i]);
+		i--;
 	}
-	return (dst);
 }

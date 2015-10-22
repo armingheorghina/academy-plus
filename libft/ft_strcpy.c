@@ -6,11 +6,11 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/21 20:06:46 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/21 20:17:38 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/21 22:42:37 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *restrict dst, const char *restrict src)
+char	*ft_strcpy(char *dst, const char *src)
 {
 	int i;
 

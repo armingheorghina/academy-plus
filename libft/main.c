@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 20:08:38 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/21 20:54:48 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/22 22:21:54 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@
 
 int		main(void)
 {
-	char str1[] = "    -2147483648";
-	char str2[] = "   -";
 
-	printf("%zu\n", ft_strlen(str1));			//test ft_strlen
+	char str1[100] = "asdf";
+	char str[100] = "asdf";
+	char str2[] = "xyzd";
+
+
+/*	printf("%zu\n", ft_strlen(str1));			//test ft_strlen
 	printf("%lu\n", strlen(str1));				//test strlen
 	printf("%d\n", ft_atoi(str1));				//test ft_atoi
 	printf("%d\n", atoi(str1));					//test atoi
@@ -55,10 +58,22 @@ int		main(void)
 	printf("%s\n", ft_strcpy(str1, str2));		//test ft_strcpy
 	printf("%s\n", strcpy(str1, str2));			//test strcpy
 	printf("%s\n", ft_strncpy(str1, str2, 3));	//test ft_strncpy
-	printf("%s\n", strncpy(str1, str2, 3));		//test strncpy
-
-
-
+	printf("%s\n", strncpy(str, str2, 3));		//test strncpy
+	printf("%d\n", strcmp(str, str1));
+	printf("%s\n", ft_strcat(str1, str2));		//test ft_strcat
+	printf("%s\n", strcat(str1, str2));			//test strcat
+	printf("%s\n", ft_strncat(str1, str2, 3));		//test ft_strncat
+	printf("%s\n", strncat(str1, str2, 3));			//test strncat
+	printf("%zu\n", ft_strlcat(str1, str2, 5));		//test ft_strlcat
+	printf("%lu\n", strlcat(str1, str2, 5));			//test strlcat
+	*/
+	ft_putendl(str);
+	ft_putchar('\n');
+	ft_putstr(str1);
+	ft_putchar('\n');
+	ft_putstr(str2);
+	ft_putchar('\n');
+	ft_putnbr(-2147483648);
 
 
 

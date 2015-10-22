@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/21 20:38:05 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/22 16:17:31 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/22 21:52:56 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/22 21:59:06 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-char	*ft_strncpy(char *dst, const char *src, size_t n)
+void	ft_putendl(char const *s)
 {
-	size_t i;
-
-	i = 0;
-	while (src[i] && i < n)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	while (i < n)
-	{
-		dst[i] = '\0';
-		i++;
-	}
-	return (dst);
+	ft_putstr(s);
+	ft_putchar('\n');
 }

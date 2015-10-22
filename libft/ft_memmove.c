@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/21 20:38:05 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/22 16:17:31 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/22 18:00:01 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/22 21:20:56 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stdlib.h>
 
-char	*ft_strncpy(char *dst, const char *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t i;
+	size_t			i;
+	unsigned char	*tmp;
 
 	i = 0;
-	while (src[i] && i < n)
+	tmp = (void*)malloc(len);
+	while (i < len)
 	{
-		dst[i] = src[i];
+		*(tmp + i) = *(unsigned char*)(src + i);
 		i++;
 	}
-	while (i < n)
+	i = 0;
+	while (i < len)
 	{
-		dst[i] = '\0';
+		*(unsigned char*)(dst + i) = *(tmp + i);
 		i++;
 	}
+	free(tmp);
 	return (dst);
 }
