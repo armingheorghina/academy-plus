@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 19:25:07 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/22 22:21:47 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/23 17:14:18 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <string.h>
+# include <stdlib.h>
 
 size_t		ft_strlen(const char *s);
 int			ft_atoi(const char *str);
@@ -59,15 +60,15 @@ char *ft_strsub(char const *s, unsigned int start, size_t len);
 char *ft_strjoin(char const *s1, char const	*s2);
 char *ft_strtrim(char const *s);
 char **ft_strsplit(char const *s, char c);
-char *ft_itoa(int n);
+char		*ft_itoa(int n);
 void		ft_putchar(char c);
 void		ft_putstr(char const *s);
 void		ft_putendl(char const *s);
 void		ft_putnbr(int n);
-void ft_putchar_fd(char c, int fd);
-void ft_putstr_fd(char const *s, int fd);
-void ft_putendl_fd(char const *s, int fd);
-void ft_putnbr_fd(int n, int fd);
+void		ft_putchar_fd(char c, int fd);
+void		ft_putstr_fd(char const *s, int fd);
+void		ft_putendl_fd(char const *s, int fd);
+void		ft_putnbr_fd(int n, int fd);
 
 
 #endif

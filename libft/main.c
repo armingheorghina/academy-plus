@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 20:08:38 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/22 22:21:54 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/23 17:14:15 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 int		main(void)
 {
 
-	char str1[100] = "asdf";
-	char str[100] = "asdf";
+	char str1[] = "asdf";
+	char str[] = "asdf";
 	char str2[] = "xyzd";
 
 
@@ -67,6 +67,7 @@ int		main(void)
 	printf("%zu\n", ft_strlcat(str1, str2, 5));		//test ft_strlcat
 	printf("%lu\n", strlcat(str1, str2, 5));			//test strlcat
 	*/
+	/*
 	ft_putendl(str);
 	ft_putchar('\n');
 	ft_putstr(str1);
@@ -74,7 +75,19 @@ int		main(void)
 	ft_putstr(str2);
 	ft_putchar('\n');
 	ft_putnbr(-2147483648);
+	ft_putstr("\n------------------\n");
+	ft_putendl_fd(str, 2);
+	ft_putchar_fd('\n', 2);
+	ft_putstr_fd(str1, 2);
+	ft_putchar_fd('\n', 2);
+	ft_putstr_fd(str2, 2);
+	ft_putchar_fd('\n', 2);
+	ft_putnbr_fd(-2147483648, 2);
+	ft_putstr_fd("\n------------------\n", 2);
+	*/
 
+
+	printf("%s\n", ft_itoa(-2147483648));
 
 
 
