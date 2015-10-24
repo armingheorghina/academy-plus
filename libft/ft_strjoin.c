@@ -1,23 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/20 19:16:55 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/24 19:36:47 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/24 19:51:47 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/24 20:13:10 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t i;
-
+	char	*dst;
+	int		i;
+	int		j;
+	
+	dst = (char*)malloc(sizeof(dst) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!dst)
+		return (NULL);
 	i = 0;
-	while (s[i])
+	j = 0;
+	while (s1[j])
+	{
+		dst[i] = s1[j];
+		j++;
 		i++;
-	return (i);
+	}
+	j = 0;
+	while (s2[j])
+	{
+		dst[i] = s2[j];
+		j++;
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }

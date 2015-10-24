@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 20:08:38 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/24 14:46:50 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/24 22:07:55 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int		main(void)
 
 //	char str1[] = "asdf";
 //	char str[] = "asdf";
-//	char str2[] = "xyzd";
-
+	char str2[] = "  \t\nasdifX\t  \n dsfdsf   \n\t";
 
 /*	printf("%zu\n", ft_strlen(str1));			//test ft_strlen
 	printf("%lu\n", strlen(str1));				//test strlen
@@ -108,10 +107,14 @@ int		main(void)
 	*/
 
 
-	printf("%s\n", ft_itoa(-2147483648));
+//	printf("%d", ft_strequ(str1, str2));
+//	printf("%d", ft_strnequ(str1, str2, 9));
 
-
-
+//	printf("%s", ft_strjoin(str1, str2));
+	
+	printf("%s", ft_strtrim(str2));
+	//printf("\n");
+	//printf("%s", ft_strrev_no_malloc("abcde"));
 
 	return (0);
 }

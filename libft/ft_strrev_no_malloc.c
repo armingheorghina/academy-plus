@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strrev_no_malloc.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/20 19:16:55 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/24 19:36:47 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/24 21:47:04 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/24 22:08:04 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strrev_no_malloc(char *s)
 {
-	size_t i;
+	char	tmp;
+	int		i;
+	int		len;
 
+	len = 0;
+	while (s[len])
+		len++;
 	i = 0;
-	while (s[i])
+	len--;
+	while (i < len)
+	{
+		tmp = s[i];
+		s[i] = s[len];
+		s[len] = tmp;
 		i++;
-	return (i);
+		len--;
+	}
+	//		s[len] = '\0';
+	return (s);
 }
