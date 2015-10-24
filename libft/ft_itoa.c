@@ -6,15 +6,15 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 14:32:54 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/23 17:14:12 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/24 14:44:18 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_str_str(char *dst, char *str, int i)
+char	*ft_skip_sign(char *dst, char *str, int i)
 {
-	int j;
+	size_t j;
 
 	j = 0;
 	while (j < ft_strlen(str))
@@ -29,9 +29,9 @@ char	*ft_str_str(char *dst, char *str, int i)
 
 char    *ft_char_strrev(char c, char *str)
 {
-	int     i;
-	int		j;
-	char    *dst;
+	int		i;
+	size_t	j;
+	char	*dst;
 
 	dst = (char*)malloc(sizeof(*dst) * (ft_strlen(str) + 1));
 	i = 0;
@@ -52,7 +52,7 @@ char    *ft_char_strrev(char c, char *str)
 		return (dst);
 	}
 	else
-		return (ft_str_str(dst, str, i));
+		return (ft_skip_sign(dst, str, i));
 }
 
 long	ft_nsize(long nb)
@@ -75,7 +75,7 @@ long	ft_nsize(long nb)
 	return (size);
 }
 
-char	*ft_nb_is_zero(char *v, int nb)
+char	*ft_nb_is_zero(char *v)
 {
 	v[0] = '0';
 	v[1] = '\0';
@@ -85,8 +85,8 @@ char	*ft_nb_is_zero(char *v, int nb)
 char	*ft_itoa(int n)
 {
 	char	*v;
-	char	s;
 	int		i;
+	char	s;
 	long	nb;
 
 	nb = n;
@@ -99,7 +99,7 @@ char	*ft_itoa(int n)
 		s = '-';
 	}
 	if (nb == 0)
-		return (ft_nb_is_zero(v, nb));
+		return (ft_nb_is_zero(v));
 	while (nb > 0)
 	{
 		v[i] = nb % 10 + '0';
