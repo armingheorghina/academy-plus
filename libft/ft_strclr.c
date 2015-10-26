@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/22 16:52:03 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/26 15:54:45 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/26 19:25:31 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/26 19:29:10 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-
-void	*ft_memset(void *b, int c, size_t len)
+void	ft_strclr(char *s)
 {
-	size_t i;
+	int i;
 
 	i = 0;
-	while (i < len)
+	while (s[i])
 	{
-		*(unsigned char*)(b + i) = (unsigned char)c;
+		s[i] = '\0';
 		i++;
 	}
-	return (b);
 }

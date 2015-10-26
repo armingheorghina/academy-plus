@@ -6,13 +6,13 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/24 14:51:12 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/24 19:01:54 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/26 19:23:22 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_parts_nr(char const *s, char c)
+static int		ft_parts_nr(char const *s, char c)
 {
 	int i;
 	int cnt;
@@ -35,7 +35,7 @@ int		ft_parts_nr(char const *s, char c)
 	return (cnt);
 }
 
-int		ft_part_len(char const *s, char c, int i)
+static int		ft_part_len(char const *s, char c, int i)
 {
 	int len;
 

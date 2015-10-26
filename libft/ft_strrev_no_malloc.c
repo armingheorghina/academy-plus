@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/24 21:47:04 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/24 22:08:04 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/26 20:10:25 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ char	*ft_strrev_no_malloc(char *s)
 	len = 0;
 	while (s[len])
 		len++;
-	i = 0;
 	len--;
+	i = 0;
 	while (i < len)
 	{
 		tmp = s[i];
@@ -31,6 +31,5 @@ char	*ft_strrev_no_malloc(char *s)
 		i++;
 		len--;
 	}
-	//		s[len] = '\0';
 	return (s);
 }

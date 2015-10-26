@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 19:25:07 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/24 22:07:51 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/26 20:10:20 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <string.h>
 # include <stdlib.h>
+
+//make sure all secondary functions within a .c file are static !!!!
+//use only explicit cast !!!!
 
 size_t		ft_strlen(const char *s);
 int			ft_atoi(const char *str);
@@ -45,15 +48,15 @@ void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 
-void *ft_memalloc(size_t size);
-void ft_memdel(void **ap);
-char *ft_strnew(size_t size);
-void ft_strdel(char **as);
-void ft_strclr(char *s);
-void ft_striter(char *s, void (*f)(char *));
-void ft_striteri(char *s, void (*f)(unsigned int, char *));
-char *ft_strmap(char const *s, char (*f)(char));
-char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
+void		*ft_memalloc(size_t size);
+void		ft_memdel(void **ap);
+char		*ft_strnew(size_t size);
+void		ft_strdel(char **as);
+void		ft_strclr(char *s);
+void	ft_striter(char *s, void (*f)(char *));
+void 	ft_striteri(char *s, void (*f)(unsigned int, char *));
+char 	*ft_strmap(char const *s, char (*f)(char));
+char 	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int			ft_strequ(char const *s1, char const *s2);
 int			ft_strnequ(char const *s1, char const *s2, size_t n);
 char		*ft_strsub(char const *s, unsigned int start, size_t len);
@@ -69,7 +72,7 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putstr_fd(char const *s, int fd);
 void		ft_putendl_fd(char const *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
-
-char		*ft_strrev(char const *s); //-> str reverse - malloc for tmp string  
-char		*ft_strrev_no_malloc(char *s); //can edit the string - NOT WORKING 
+/* */
+char		*ft_strrev(char const *s);
+char		*ft_strrev_no_malloc(char *s);
 #endif

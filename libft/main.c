@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 20:08:38 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/24 22:07:55 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/26 20:10:28 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ int		main(void)
 
 //	char str1[] = "asdf";
 //	char str[] = "asdf";
-	char str2[] = "  \t\nasdifX\t  \n dsfdsf   \n\t";
+//	char str2[] = "xyzght";
+//	char str3[] = "asdf";
+//	char str4[] = "xyzght";
+	
+
 
 /*	printf("%zu\n", ft_strlen(str1));			//test ft_strlen
 	printf("%lu\n", strlen(str1));				//test strlen
@@ -60,13 +64,26 @@ int		main(void)
 	
 	printf("%s\n", ft_strnstr(str1, str2, 9));	//test ft_strnstr
 	printf("%s\n", strnstr(str1, str2, 9));		//test strnstr
-	
-	printf("%s\n", ft_strchr(str1, '\0'));		//test ft_strchr
-	printf("%s\n", strchr(str1, '\0'));			//test strchr
-	
-	printf("%s\n", ft_strrchr(str1, '4'));		//test ft_strrchr
-	printf("%s\n", strrchr(str1, '4'));			//test strrchr
-	
+*/
+/*	
+	char str1[] = "asdfasdfa";
+	printf("%s\n", ft_strchr(str1, 'p'));		//test ft_strrchr
+	printf("%s\n", strchr(str1, 'p'));			//test strrchr
+	printf("%s\n", ft_strchr(str1, '\0'));		//test ft_strrchr
+	printf("%s\n", strchr(str1, '\0'));			//test strrchr
+	printf("%s\n", ft_strchr(str1, 'f'));		//test ft_strrchr
+	printf("%s\n", strchr(str1, 'f'));			//test strrchr
+*/
+/*
+	char str1[] = "asdfasdfa";
+	printf("%s\n", ft_strrchr(str1, 'p'));		//test ft_strrchr
+	printf("%s\n", strrchr(str1, 'p'));			//test strrchr
+	printf("%s\n", ft_strrchr(str1, '\0'));		//test ft_strrchr
+	printf("%s\n", strrchr(str1, '\0'));			//test strrchr
+	printf("%s\n", ft_strrchr(str1, 'f'));		//test ft_strrchr
+	printf("%s\n", strrchr(str1, 'f'));			//test strrchr
+*/
+/*
 	printf("%s\n", ft_strdup(""));				//test ft_strdup
 	printf("%s\n", strdup(""));					//test strdup
 	
@@ -82,11 +99,17 @@ int		main(void)
 	
 	printf("%s\n", ft_strncat(str1, str2, 3));		//test ft_strncat
 	printf("%s\n", strncat(str1, str2, 3));			//test strncat
-	
-	printf("%zu\n", ft_strlcat(str1, str2, 5));		//test ft_strlcat
-	printf("%lu\n", strlcat(str1, str2, 5));			//test strlcat
-	*/
-	/*
+*/
+/*
+	char str1[] = "asdf";
+	char str2[] = "xyzght";
+	char str3[] = "asdf";
+	char str4[] = "xyzght";
+	printf("%zu\n", ft_strlcat(str1, str2, 2));		//test ft_strlcat
+	printf("%lu\n", strlcat(str3, str4, 2));			//test strlcat
+*/
+/* --> ft_itoa, ft_putchar, ft_putstr, ft_puntendl; ft_puntnbr
+*  -->  ft_putchar_fd, ft_putstr_fd, ft_puntendl_fd; ft_puntnbr_fd
 	printf("%s\n", ft_itoa(-2147483648));
 	ft_putendl(str);
 	ft_putchar('\n');
@@ -104,7 +127,7 @@ int		main(void)
 	ft_putchar_fd('\n', 2);
 	ft_putnbr_fd(-2147483648, 2);
 	ft_putstr_fd("\n------------------\n", 2);
-	*/
+*/
 
 
 //	printf("%d", ft_strequ(str1, str2));
@@ -112,9 +135,10 @@ int		main(void)
 
 //	printf("%s", ft_strjoin(str1, str2));
 	
-	printf("%s", ft_strtrim(str2));
-	//printf("\n");
-	//printf("%s", ft_strrev_no_malloc("abcde"));
+//	printf("%s", ft_strtrim(str2));
+//	printf("\n");
+	char str[] = "abcdefghijklmnopqrstuvwxyz";
+	printf("%s", ft_strrev_no_malloc(str));
 
 	return (0);
 }
