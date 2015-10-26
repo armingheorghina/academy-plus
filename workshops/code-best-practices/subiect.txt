@@ -1,0 +1,1 @@
+Scrieti un program care citeste un fisier .csv si listeaza toti studentii din Cluj cu nota peste 8.
