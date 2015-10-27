@@ -6,13 +6,13 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 14:32:54 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/24 14:44:18 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/27 17:26:51 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_skip_sign(char *dst, char *str, int i)
+static char		*ft_skip_sign(char *dst, char *str, int i)
 {
 	size_t j;
 
@@ -27,7 +27,7 @@ char	*ft_skip_sign(char *dst, char *str, int i)
 	return (dst);
 }
 
-char    *ft_char_strrev(char c, char *str)
+static char		*ft_char_strrev(char c, char *str)
 {
 	int		i;
 	size_t	j;
@@ -55,7 +55,7 @@ char    *ft_char_strrev(char c, char *str)
 		return (ft_skip_sign(dst, str, i));
 }
 
-long	ft_nsize(long nb)
+static long		ft_nsize(long nb)
 {
 	long size;
 
@@ -75,7 +75,7 @@ long	ft_nsize(long nb)
 	return (size);
 }
 
-char	*ft_nb_is_zero(char *v)
+static char		*ft_nb_is_zero(char *v)
 {
 	v[0] = '0';
 	v[1] = '\0';

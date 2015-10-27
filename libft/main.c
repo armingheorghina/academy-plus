@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 20:08:38 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/26 20:10:28 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/27 17:14:18 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,29 @@
 int		main(void)
 {
 
-//	char str1[] = "asdf";
+
 //	char str[] = "asdf";
 //	char str2[] = "xyzght";
 //	char str3[] = "asdf";
 //	char str4[] = "xyzght";
 	
 
-
-/*	printf("%zu\n", ft_strlen(str1));			//test ft_strlen
-	printf("%lu\n", strlen(str1));				//test strlen
-	
+/*
+	char str1[] = "asdf";
+	printf("test ft_strlen vs strlen\n");
+	printf("ft_strlen: %zu\n", ft_strlen(str1));			//test ft_strlen
+	printf("strlen   : %zu\n", strlen(str1));				//test strlen
+	if (ft_strlen(str1) != strlen(str1))
+		printf("test ERROR\n");
+	else
+		printf("test OK\n");
+*/
+/*	
+	char str1[] = "-3a";
 	printf("%d\n", ft_atoi(str1));				//test ft_atoi
 	printf("%d\n", atoi(str1));					//test atoi
-	
+*/
+/*	
 	printf("%d\n", ft_isalpha('y'));			//test ft_isalpha
 	printf("%d\n", isalpha('y'));				//test isalpha
 	
@@ -49,10 +58,12 @@ int		main(void)
 	
 	printf("%c\n", ft_toupper('a'));			//test ft_toupper
 	printf("%c\n", toupper('a'));				//test toupper
-	
+*/
+/*
 	printf("%c\n", ft_tolower('A'));			//test ft_tolower
 	printf("%c\n", tolower('A'));				//test tolower
-	
+*/
+/*	
 	printf("%d\n", ft_strcmp(str1, str2));		//test ft_strcmp
 	printf("%d\n", strcmp(str1, str2));			//test strcmp
 	
@@ -61,9 +72,12 @@ int		main(void)
 	
 	printf("%s\n", ft_strstr(str1, str2));		//test ft_strstr
 	printf("%s\n", strstr(str1, str2));			//test strstr
-	
-	printf("%s\n", ft_strnstr(str1, str2, 9));	//test ft_strnstr
-	printf("%s\n", strnstr(str1, str2, 9));		//test strnstr
+*/
+/*	
+	char str1[] = "abcdeeee";
+	char str2[] = "abc";
+	printf("%s\n", ft_strnstr(str1, str2, 3));	//test ft_strnstr
+	printf("%s\n", strnstr(str1, str2, 3));		//test strnstr
 */
 /*	
 	char str1[] = "asdfasdfa";
@@ -135,10 +149,15 @@ int		main(void)
 
 //	printf("%s", ft_strjoin(str1, str2));
 	
-//	printf("%s", ft_strtrim(str2));
+/*
+	char str3[] = "";
+	char str1[] = "adfgd\tadsfa  sdf";
+	char str2[] = "    \n\t   adfgd\tadsfa  sdf  ";
+	printf("%s", ft_strtrim(str3));
+*/
 //	printf("\n");
-	char str[] = "abcdefghijklmnopqrstuvwxyz";
-	printf("%s", ft_strrev_no_malloc(str));
+//	char str[] = "abcdefghijklmnopqrstuvwxyz";
+//	printf("%s", ft_strrev_no_malloc(str));
 
 	return (0);
 }

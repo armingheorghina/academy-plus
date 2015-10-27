@@ -6,13 +6,13 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/21 13:23:16 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/21 13:29:48 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/27 17:14:05 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
+	if ((unsigned char)c >= 'a' && (unsigned char)c <= 'z')
 		c = c - 32;
 	return (c);
 }

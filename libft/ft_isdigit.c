@@ -6,13 +6,13 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 21:07:51 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/20 21:15:00 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/27 17:24:41 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_isdigit(int c)
 {
-	if (c >= '0' && c <= '9')
+	if ((unsigned char)c >= '0' && (unsigned char)c <= '9')
 		return (1);
 	return (0);
 }

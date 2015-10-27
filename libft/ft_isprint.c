@@ -6,13 +6,13 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 21:41:53 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/20 22:56:56 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/27 17:26:02 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_isprint(int c)
 {
-	if (c >= 32 && c <= 126)
+	if ((unsigned char)c >= 32 && (unsigned char)c <= 126)
 		return (1);
 	return (0);
 }
