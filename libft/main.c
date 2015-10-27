@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 20:08:38 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/27 17:14:18 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/27 20:33:35 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+
+void	ft_test_striteri(unsigned int i, char *s)
+{
+	i = i + 9;
+	*(char *)s = *(char *)s + 1; 
+}
 
 int		main(void)
 {
@@ -158,6 +164,17 @@ int		main(void)
 //	printf("\n");
 //	char str[] = "abcdefghijklmnopqrstuvwxyz";
 //	printf("%s", ft_strrev_no_malloc(str));
+
+
+/*	
+	char str[] = "abcde";
+	void (*f)(unsigned int, char *);
+
+	f = &ft_test_striteri;
+	printf("%s\n", str);
+	ft_striteri(str, f);
+	printf("%s\n", str);
+*/	
 
 	return (0);
 }

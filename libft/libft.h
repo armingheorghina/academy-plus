@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 19:25:07 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/27 17:27:12 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/27 20:34:54 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void		ft_memdel(void **ap);
 char		*ft_strnew(size_t size);
 void		ft_strdel(char **as);
 void		ft_strclr(char *s);
-void	ft_striter(char *s, void (*f)(char *));
-void 	ft_striteri(char *s, void (*f)(unsigned int, char *));
+void		ft_striter(char *s, void (*f)(char *));
+void		ft_striteri(char *s, void (*f)(unsigned int, char *));
 char 	*ft_strmap(char const *s, char (*f)(char));
 char 	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int			ft_strequ(char const *s1, char const *s2);
