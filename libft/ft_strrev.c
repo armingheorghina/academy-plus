@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/24 20:45:24 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/24 20:55:36 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/28 16:57:37 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strrev(char const *s)
 	int 	i;
 	int 	j;
 
-	rev = (char*)malloc(sizeof(rev) * (ft_strlen(s) + 1));
+	rev = (char*)malloc(sizeof(*rev) * (ft_strlen(s) + 1));
 	i = 0;
 	while (s[i])
 		i++;

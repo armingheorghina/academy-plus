@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 14:32:54 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/27 18:16:38 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/28 16:22:53 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*ft_itoa(int n)
 
 	nb = n;
 	i = 0;
-	if (!(v = (char*)malloc(ft_nsize(nb))))
+	if (!(v = (char*)malloc(sizeof(*v) * (ft_nsize(nb) + 1))))
 		return (NULL);
 	s = '+';
 	if (nb < 0)

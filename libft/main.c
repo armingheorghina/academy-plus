@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 20:08:38 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/27 20:33:35 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/28 16:29:56 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,17 @@ int		main(void)
 /*
 	printf("%s\n", ft_strdup(""));				//test ft_strdup
 	printf("%s\n", strdup(""));					//test strdup
-	
-	printf("%s\n", ft_strcpy(str1, str2));		//test ft_strcpy
-	printf("%s\n", strcpy(str1, str2));			//test strcpy
+*/
+/*
+	char str1[6] = "abcde";
+	char str2[6] = "abcde";
+	char str3[30] = "zzzzzzzzzzzzzzzzzzzzzzz";
 
+
+	printf("%s\n", ft_strcpy(str1, str3));		//test ft_strcpy
+	printf("%s\n", strcpy(str2, str3));			//test strcpy
+*/
+/*
 	printf("%s\n", ft_strncpy(str1, str2, 3));	//test ft_strncpy
 	printf("%s\n", strncpy(str, str2, 3));		//test strncpy
 	printf("%d\n", strcmp(str, str1));			
@@ -175,6 +182,9 @@ int		main(void)
 	ft_striteri(str, f);
 	printf("%s\n", str);
 */	
+
+	printf("sizeof char  : %lu\n", sizeof(void));
+	printf("sizeof char* : %lu\n", sizeof(void*));
 
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/24 20:13:20 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/27 14:27:09 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/28 13:50:03 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_strtrim(char const *s)
 	i = 0;
 	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
 		i++;
-	dst = (char*)malloc(sizeof(dst) * (ft_strlen_and_rev_for_dst(s + i) + 1));
+	dst = (char*)malloc(sizeof(*dst) * (ft_strlen_and_rev_for_dst(s + i) + 1));
 	if (!dst)
 		return (NULL);
 	dst = (char*)(s + i);

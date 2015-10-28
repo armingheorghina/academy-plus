@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 19:25:07 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/27 20:34:54 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/28 18:31:14 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include <string.h>
 # include <stdlib.h>
-
-//make sure all secondary functions within a .c file are static !!!!
-//use only explicit cast !!!!
 
 size_t		ft_strlen(const char *s);
 int			ft_atoi(const char *str);
@@ -55,8 +52,8 @@ void		ft_strdel(char **as);
 void		ft_strclr(char *s);
 void		ft_striter(char *s, void (*f)(char *));
 void		ft_striteri(char *s, void (*f)(unsigned int, char *));
-char 	*ft_strmap(char const *s, char (*f)(char));
-char 	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char		*ft_strmap(char const *s, char (*f)(char));
+char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int			ft_strequ(char const *s1, char const *s2);
 int			ft_strnequ(char const *s1, char const *s2, size_t n);
 char		*ft_strsub(char const *s, unsigned int start, size_t len);
@@ -72,6 +69,22 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putstr_fd(char const *s, int fd);
 void		ft_putendl_fd(char const *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
+
+typedef struct		s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}					t_list;
+
+t_list		*ft_lstnew(void const *content, size_t content_size);
+void		ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
+void 		ft_lstdel(t_list **alst, void (*del)(void *, size_t));
+void 		ft_lstadd(t_list **alst, t_list *new);
+void 		ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+
+
 /* */
 char		*ft_strrev(char const *s);
 char		*ft_strrev_no_malloc(char *s);
