@@ -1,1 +1,7 @@
 Scrieti un program care citeste un fisier .csv si listeaza toti studentii din Cluj cu nota peste 8.
+validare imput
+tratare erori
+mecanism de logare
++prog separat care testeaza ... cred ca se face cu makefile
+
+email @ colegu'
