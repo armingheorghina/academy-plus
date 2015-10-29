@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/26 18:05:43 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/26 18:05:49 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/29 15:54:05 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,49 +25,49 @@ int		main()
 	while(fscanf(fp, "%s", buff) > 0)
 	{
 		j=0;k=0;i=0;
-		while(*(buff+i) != 0)
+		while(buff[i] != 0)
 		{
 			if(buff[i] == ';')
 			{
 				j++;
-				k=0;
+				k = 0;
 			}
 			else{
 				if (j == 0)
 				{
 					a[k] = buff[i];
-					if(buff[i + 1] == ';')
+					if (buff[i + 1] == ';')
 						a[k + 1] = '\0';
 				}
-				if(j==1)
+				if (j == 1)
 				{
-				b[k] = buff[i];
-				if(buff[i+1]== ';')
-					b[k+1]='\0';
+					b[k] = buff[i];
+					if (buff[i + 1]== ';')
+						b[k + 1]='\0';
 				}
-				if(j==2)
+				if (j == 2)
 				{
-				c[k] = buff[i];
-				if(buff[i+1]== ';')
-					c[k+1]='\0';
+					c[k] = buff[i];
+					if (buff[i + 1]== ';')
+						c[k + 1]='\0';
 				}
-				if(j==3)
+				if (j == 3)
 				{
-				d[k] = buff[i];
-				if(buff[i+1]== ';')
-					d[k+1]='\0';
+					d[k] = buff[i];
+					if (buff[i + 1]== ';')
+						d[k + 1]='\0';
 				}
-				if(j==4)
+				if (j == 4)
 				{
-				e[k] = buff[i];
-				if(buff[i+1]== 0)
-					e[k+1]='\0';
+					e[k] = buff[i];
+					if (buff[i + 1]== 0)
+						e[k + 1]='\0';
 				}
 				k++;
 			}
 			i++;
 		}
-	
+
 		if(strcmp(e,"Cluj") == 0 && atof(d) > 8.00)
 		{
 			printf("%s %s\n",a,b);
