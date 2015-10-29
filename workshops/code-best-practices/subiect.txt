@@ -5,3 +5,5 @@ mecanism de logare
 +prog separat care testeaza ... cred ca se face cu makefile
 
 email @ colegu'
+
+clean code - robert c martin
