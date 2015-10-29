@@ -14,7 +14,14 @@
 #include <string.h>
 #include <stdlib.h>
 
-int		main()
+void	ft_add_to_str(char *a, char *buff, int k, int i)
+{
+	a[k] = buff[i];
+	if (buff[i + 1] == ';' || buff[i + 1] == 0)
+		a[k + 1] = '\0';
+}
+
+int	main(void)
 {
 	FILE *fp;
 	char buff[255];
@@ -32,46 +39,24 @@ int		main()
 				j++;
 				k = 0;
 			}
-			else{
+			else
+			{
 				if (j == 0)
-				{
-					a[k] = buff[i];
-					if (buff[i + 1] == ';')
-						a[k + 1] = '\0';
-				}
+					ft_add_to_str(a, buff, k, i);
 				if (j == 1)
-				{
-					b[k] = buff[i];
-					if (buff[i + 1]== ';')
-						b[k + 1]='\0';
-				}
+					ft_add_to_str(b, buff, k, i);
 				if (j == 2)
-				{
-					c[k] = buff[i];
-					if (buff[i + 1]== ';')
-						c[k + 1]='\0';
-				}
+					ft_add_to_str(c, buff, k, i);
 				if (j == 3)
-				{
-					d[k] = buff[i];
-					if (buff[i + 1]== ';')
-						d[k + 1]='\0';
-				}
+					ft_add_to_str(d, buff, k, i);
 				if (j == 4)
-				{
-					e[k] = buff[i];
-					if (buff[i + 1]== 0)
-						e[k + 1]='\0';
-				}
+					ft_add_to_str(e, buff, k, i);
 				k++;
 			}
 			i++;
 		}
-
 		if(strcmp(e,"Cluj") == 0 && atof(d) > 8.00)
-		{
 			printf("%s %s\n",a,b);
-		}
 	}
 	return (0);
 }
