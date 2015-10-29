@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 20:08:38 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/28 19:52:55 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/29 12:26:39 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,9 +182,23 @@ int		main(void)
 	ft_striteri(str, f);
 	printf("%s\n", str);
 */	
-
+/*
 	printf("sizeof char  : %lu\n", sizeof(void));
 	printf("sizeof char* : %lu\n", sizeof(void*));
+*/
 
+	char s[] = "*salut*les***etudiants*";
+	char c;
+	char **map;
+	int i;
+
+	c = '*';
+	map = ft_strsplit(s, c);
+	i = 0;
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
 	return (0);
 }

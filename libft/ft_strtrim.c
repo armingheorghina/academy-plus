@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/24 20:13:20 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/28 13:50:03 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/10/29 15:25:12 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char	*ft_strtrim(char const *s)
 	int		i;
 	char	*dst;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
 		i++;
