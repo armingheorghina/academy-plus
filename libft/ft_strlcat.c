@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/22 13:16:15 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/02 14:43:44 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/03 18:23:33 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ size_t		ft_strlcat(char *dst, const char *src, size_t size)
 	j = 0;
 	if (size < len)
 		return (ft_strlen(src) + size);
+	if (size == len)
+		return (len + ft_strlen(src))
 	else
 	{
 		while (src[j] && j < size - len - 1)
