@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/26 15:58:20 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/28 19:16:35 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/02 14:44:04 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ char	*ft_strnew(size_t size)
 	if (!(new = (char*)malloc(sizeof(*new) * (size + 1))))
 		return (NULL);
 	new = (char*)ft_memset(new, 0, size + 1);
-	return(new);
+	return (new);
 }

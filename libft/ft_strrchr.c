@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/21 18:30:01 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/28 18:31:07 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/02 14:44:34 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int i;
-	const char *t;
+	int			i;
+	const char	*t;
 
 	i = 0;
 	t = NULL;

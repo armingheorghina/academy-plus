@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/24 14:51:12 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/26 19:23:22 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/02 14:45:17 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		ft_parts_nr(char const *s, char c)
 	{
 		if (s[i] == c && part == 1)
 			part = 0;
-		if (s[i] !=c && part == 0)
+		if (s[i] != c && part == 0)
 		{
 			part = 1;
 			cnt++;
@@ -48,7 +48,7 @@ static int		ft_part_len(char const *s, char c, int i)
 	return (len);
 }
 
-char	**ft_strsplit(char const *s, char c)
+char			**ft_strsplit(char const *s, char c)
 {
 	char	**map;
 	int		i;

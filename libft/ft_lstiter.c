@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/29 18:26:33 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/29 18:34:01 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/02 13:35:09 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,9 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {
-	
+	while (lst != NULL)
+	{
+		f(lst);
+		lst = lst->next;
+	}
 }

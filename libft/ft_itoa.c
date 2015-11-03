@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 14:32:54 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/28 16:22:53 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/02 14:40:07 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static char		*ft_nb_is_zero(char *v)
 	return (v);
 }
 
-char	*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
 	char	*v;
 	int		i;
