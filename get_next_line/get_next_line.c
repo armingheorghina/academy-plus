@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/03 13:05:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/03 14:10:20 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/03 14:51:43 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ int		main(void)
 	int		ret;
 	char	buff[BUFF_SIZE + 1];
 
-	if (!(fd = open("file1", O_RDONLY)))
-		return (0);
+	fd = open("file1", O_RDONLY);
+	if (fd == -1)
+		return (1);
 	while (ret = read(fd, buff, BUFF_SIZE))
 	{
-		buff[ret] = '\0';
+		get_next_line(fd, &buff);
 	}
 	return (0);
 }
