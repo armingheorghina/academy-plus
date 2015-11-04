@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/03 13:09:06 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/04 16:01:47 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/04 18:06:20 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 # include <unistd.h>
 # define BUFF_SIZE 32
 
-int		get_next_line(int const fd, char ** line);
+int		get_next_line(int const fd, char **line);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
 char	*ft_strcpy(char *dst, const char *src);
+
 #endif
