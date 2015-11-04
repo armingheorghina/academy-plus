@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 19:25:07 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/02 14:39:13 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/04 14:06:11 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 size_t				ft_strlen(const char *s);
 int					ft_atoi(const char *str);
