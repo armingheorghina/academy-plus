@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/03 13:09:06 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/04 16:01:47 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/21 20:06:46 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/28 13:34:24 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+char	*ft_strcpy(char *dst, const char *src)
+{
+	int i;
 
-# include <string.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <unistd.h>
-# define BUFF_SIZE 32
-
-int		get_next_line(int const fd, char ** line);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s1);
-char	*ft_strcpy(char *dst, const char *src);
-#endif
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = src[i];
+	return (dst);
+}

@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/03 13:09:06 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/04 16:01:47 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/21 17:59:58 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/27 15:11:21 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include <string.h>
 
-# include <string.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <unistd.h>
-# define BUFF_SIZE 32
+char	*ft_strchr(const char *s, int c)
+{
+	int i;
 
-int		get_next_line(int const fd, char ** line);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s1);
-char	*ft_strcpy(char *dst, const char *src);
-#endif
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return ((char*)(s + i));
+		i++;
+	}
+	if (s[i] == (char)c)
+		return ((char*)(s + i));
+	return (NULL);
+}
