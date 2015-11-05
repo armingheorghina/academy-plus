@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/03 13:05:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/05 15:04:16 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/05 16:16:39 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,29 @@ int		get_next_line(int const fd, char **line)
 		return (-1);
 	if (BUFF_SIZE < 1)
 		return (-1);
-	if (!(buffs = (char*)malloc(sizeof(*buffs) * (BUFF_SIZE + 1))))
+	buffs = (char*)malloc(sizeof(*buffs) * (BUFF_SIZE + 1));
+	if (!buffs)
 		return (-1);
+
 	ret = read(fd, buffs, BUFF_SIZE);
 		if (ret == 0)
 			return (0);
-//	while ((pos = ft_strchr(buffs, '\n')) == NULL)
-//	{
-//		get_next_line(fd, line);
-//	}
+	buffs[ret] = '\0';
+	while ((pos = ft_strchr(buffs, '\n')) == NULL)
+	{
+		get_next_line(fd, line);
+	}
 
-		printf("%s\n", buffs);
-//	pos[0] = '\0';
-//	*line = ft_strdup(buffs);
-		//printf("%s\n", *line);
-//	buffs = ft_strcpy(buffs, (pos + 1));
-		//printf("%s", buffs);
+//	printf("%s\n", buffs);
+	pos[0] = '\0';
+	*line = ft_strdup(buffs);
+	printf("%s\n", *line);
+	buffs = ft_strcpy(buffs, (pos + 1));
+//	printf("%s", buffs);
+	if (ft_strlen(buffs) < BUFF_SIZE)
+	{
+		*tmp = ft_strdup(buff)
+	}
 	return (1);
 }
 
@@ -71,7 +78,7 @@ int		main(void)
 	fd = open("file1", O_RDONLY);
 	get_next_line(fd, line);
 	get_next_line(fd, line);
-//		printf("%s", *line);
+//	printf("%s", *line);
 
 	close(fd);
 	return (0);
