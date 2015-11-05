@@ -6,13 +6,13 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/03 13:05:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/04 20:14:09 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/05 15:04:16 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h> //printf
-
+/*
 char	*ft_read(int fd, char **line)
 {
 	int		ret;
@@ -33,34 +33,33 @@ char	*ft_read(int fd, char **line)
 	//else
 		//get_next_line(fd, buffs);
 }
-
+*/
 int		get_next_line(int const fd, char **line)
 {
-	static char	*buffs = NULL;
+	static char	*buffs;
 	char		*pos;
 	int			ret;
-printf("asd\n");
+	
 	if (fd == -1)	
 		return (-1);
 	if (BUFF_SIZE < 1)
 		return (-1);
 	if (!(buffs = (char*)malloc(sizeof(*buffs) * (BUFF_SIZE + 1))))
 		return (-1);
-	pos = ft_strchr(buffs, '\n');
-	if (pos != NULL)
-	{
-		*pos = 0;
-		*line = ft_strdup(buffs);
-		buffs = ft_strcpy(buffs, (pos + 1));
-		return (1);
-	}
-	else if (pos == NULL)
-	{
-		ret = read(fd, buffs, BUFF_SIZE);
+	ret = read(fd, buffs, BUFF_SIZE);
 		if (ret == 0)
 			return (0);
-		get_next_line(fd, line);
-	}
+//	while ((pos = ft_strchr(buffs, '\n')) == NULL)
+//	{
+//		get_next_line(fd, line);
+//	}
+
+		printf("%s\n", buffs);
+//	pos[0] = '\0';
+//	*line = ft_strdup(buffs);
+		//printf("%s\n", *line);
+//	buffs = ft_strcpy(buffs, (pos + 1));
+		//printf("%s", buffs);
 	return (1);
 }
 
@@ -70,14 +69,10 @@ int		main(void)
 	char	**line;
 
 	fd = open("file1", O_RDONLY);
-	printf("%d", fd);
-	printf("%s", ft_read(fd, line));
-//	get_next_line(fd, line);
-	
-//		write(1, *line, 32);
-		//printf("%s", *line);
-		//write(1, "Asd", 3);
-	
+	get_next_line(fd, line);
+	get_next_line(fd, line);
+//		printf("%s", *line);
+
 	close(fd);
 	return (0);
 }

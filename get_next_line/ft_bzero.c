@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/03 13:09:06 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/05 15:04:21 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/22 14:54:22 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/22 20:22:16 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include <string.h>
 
-# include <string.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <unistd.h>
-# define BUFF_SIZE 45
+void	ft_bzero(void *s, size_t n)
+{
+	size_t i;
 
-int		get_next_line(int const fd, char **line);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s1);
-char	*ft_strcpy(char *dst, const char *src);
-void	ft_bzero(void *s, size_t n);
-#endif
+	i = 0;
+	while (i < n)
+	{
+		*(unsigned char*)(s + i) = '\0';
+		i++;
+	}
+}
