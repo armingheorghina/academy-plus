@@ -23,7 +23,6 @@ int		main(void)
 	{
 		printf("%s\n", line);
 	}
-
 	close(fd);
 	return (0);
 }

@@ -26,6 +26,7 @@ $(NAME):
 
 clean:
 	/bin/rm -f $(OBJ)
+	make -C libft/ clean
 
 fclean: clean
 	/bin/rm -f $(NAME)
