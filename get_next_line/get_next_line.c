@@ -11,23 +11,21 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h> //printf
 
 int		read_to_stock(int const fd, char **stock)
 {
-	char	buff[BUFF_SIZE + 1];
-	int			ret;
-	char        *nstr;
+	char	*buff;
+	int	ret;
 
+	if (fd < 0 || BUFF_SIZE <= 0)
+		return (-1);
+	if (!(buff = (char *)malloc(sizeof(*buff) * (BUFF_SIZE + 1))))
+		return (-1);
 	ret = read(fd, buff, BUFF_SIZE);
 	if (ret > 0)
 	{
 		buff[ret] = '\0';
-		nstr = ft_strjoin(*stock, buff);
-		if (!nstr)
-			return (-1);
-		free(*stock);
-		*stock = nstr;
+		*stock = ft_strjoin(*stock, buff);
 	}
 	return (ret);
 }
@@ -45,11 +43,8 @@ int		get_next_line(int const fd, char ** line)
 	{
 		ret = read_to_stock(fd, &stock);
 		if (ret == 0)
-		{
-			if (ft_strlen((bn = ft_strchr(stock, '\0'))) == ft_strlen(stock))
-				return (0);
-		}
-		else if (ret < 0)
+			return (0);
+		if (ret < 0)
 			return (-1);
 		else
 			bn = ft_strchr(stock, '\n');
@@ -59,19 +54,4 @@ int		get_next_line(int const fd, char ** line)
 		return (-1);
 	stock = ft_strdup(bn + 1);
 	return (1);
-}
-
-int		main(void)
-{
-	int		fd;
-	char	*line;
-
-	fd = open("file1", O_RDONLY);
-	while (get_next_line(fd, &line) > 0)
-	{
-		printf("%s\n", line);
-	}
-
-	close(fd);
-	return (0);
 }
