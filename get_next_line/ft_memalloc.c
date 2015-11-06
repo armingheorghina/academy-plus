@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/03 13:09:06 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/06 12:48:44 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/26 13:24:55 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/29 15:08:39 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <string.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <unistd.h>
-# define BUFF_SIZE 45 
+void	*ft_memalloc(size_t size)
+{
+	void *mem;
 
-int		get_next_line(int const fd, char **line);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s1);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strsub(char const *s, unsigned int start, size_t len);
-#endif
+	if (!(mem = (void*)malloc(sizeof(*mem) * (size))) || !size)
+		return (NULL);
+	mem = ft_memset(mem, 0, size);
+	return (mem);
+}

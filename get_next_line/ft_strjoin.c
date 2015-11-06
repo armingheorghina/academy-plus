@@ -1,27 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/03 13:09:06 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/06 12:48:44 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/24 19:51:47 by vdruta            #+#    #+#             */
+/*   Updated: 2015/11/02 14:43:15 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <string.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <unistd.h>
-# define BUFF_SIZE 45 
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*dst;
+	int		i;
+	int		j;
 
-int		get_next_line(int const fd, char **line);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s1);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strsub(char const *s, unsigned int start, size_t len);
-#endif
+	dst = (char*)malloc(sizeof(*dst) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!dst)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[j])
+	{
+		dst[i] = s1[j];
+		j++;
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		dst[i] = s2[j];
+		j++;
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
