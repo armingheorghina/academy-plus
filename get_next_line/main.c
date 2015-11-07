@@ -12,28 +12,34 @@
 
 #include "get_next_line.h"
 #include <stdio.h>
-
+/* 
 int		main(void)
 {
 	int	fd;
-//	int	fd2;
 	char	*line;
-
+	
 	fd = open("file1", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
 		printf("%s\n", line);
 	}
-/*	//make it work to get 2nd bonus
-	fd = open("file1", O_RDONLY);
-	get_next_line(fd, &line);
-	printf("%s\n", line);
-	
-	fd2 = open("file4", O_RDONLY);
-	get_next_line(fd2, &line);
-	printf("%s\n", line);
-	close(fd2);
+	close(fd);
+	return (0);
+}
 */
+int	main(int argc, char **argv)
+{
+	int	fd;
+	char	*line;
+	
+	if (argc < 1)
+		return (0);
+	*argv = NULL;
+	fd = 0;
+	while (get_next_line(fd, &line) > 0)
+	{
+		printf("%s\n", line);
+	}
 	close(fd);
 	return (0);
 }

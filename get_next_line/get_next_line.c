@@ -17,7 +17,7 @@ static int		read_to_stock(int const fd, char **stock)
 	char	*buff;
 	int	ret;
 
-	if (fd < 0 || BUFF_SIZE <= 0)
+	if (fd < 0 || BUFF_SIZE < 0)
 		return (-1);
 	if (!(buff = (char *)malloc(sizeof(*buff) * (BUFF_SIZE + 1))))
 		return (-1);
