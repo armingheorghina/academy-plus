@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <errno.h>
 
 void	ft_add_to_str(char *a, char *buff, int k, int i)
 {
@@ -91,13 +93,47 @@ void	ft_validate_fname(char *str)
 	i = 0;
 	while (str[i])
 	{
-		//if (!ft_isalpha(str[i])  && !(str[i] == ' '))
 		if (!ft_isalpha(str[i]))
 			printf("Error. First name contains ilegal characters: %s\n", str);
-		//if ((str[i] == ' '))
-		//	printf("Error. First name contains ilegal characters: %s\n", str);
 		i++;
 	}
+}
+
+void	ft_validate_lname(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isalpha(str[i]))
+			printf("Error. Last name contains ilegal characters: %s\n", str);
+		i++;
+	}
+}
+	
+void	ft_validate_grade(char *grade)
+{
+	int i;
+	
+	i = 0;
+	while(grade[i])
+	{
+		if (!(grade[i] >= '0' && grade[i] <= '9') && grade[i] != '.')
+			printf("Error. Invalid characters in grade field: %s\n", grade);
+		i++;
+	}
+}
+
+int	ft_validate_open(FILE *fp)
+{
+	if (fp == NULL)
+	{
+		perror("Error opening file");
+		return (0);
+	}
+	else
+		return (1);
 }
 
 int	main(void)
@@ -107,14 +143,17 @@ int	main(void)
 	char fname[20],lname[20],email[20],grade[5],county[10];
 
 
-	fp = fopen("students2.csv", "r");
+	fp = fopen("students7.csv", "r");
+	if (!ft_validate_open(fp))
+		return (0);
 	while(fscanf(fp, "%s", buff) > 0)
 	{
 		ft_validate_line(buff);
 		ft_stock_line_data_into_corresponding_str(fname, lname, email, grade, county, buff);
 		ft_validate_fname(fname);
+		ft_validate_lname(lname);
+		ft_validate_grade(grade);
 		ft_print_results(fname, lname, grade, county);
 	}
-	close(fp);
 	return (0);
 }
