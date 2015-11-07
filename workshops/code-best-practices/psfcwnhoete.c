@@ -21,42 +21,100 @@ void	ft_add_to_str(char *a, char *buff, int k, int i)
 		a[k + 1] = '\0';
 }
 
+void	ft_stock_line_data_into_corresponding_str(char *fname, char *lname, char *email, char *grade, char *county, char *buff)
+{
+	int i,j,k;
+	i = 0; j = 0; k = 0;
+	while(buff[i] != 0)
+	{
+		if(buff[i] == ';')
+		{
+			j++;
+			k = 0;
+		}
+		else
+		{
+			if (j == 0)
+				ft_add_to_str(fname, buff, k, i);
+			if (j == 1)
+				ft_add_to_str(lname, buff, k, i);
+			if (j == 2)
+				ft_add_to_str(email, buff, k, i);
+			if (j == 3)
+				ft_add_to_str(grade, buff, k, i);
+			if (j == 4)
+				ft_add_to_str(county, buff, k, i);
+			k++;
+		}
+		i++;
+	}
+}
+
+void	ft_print_results(char *fname, char *lname, char *grade, char *county)
+{
+	if((strcmp(county,"Cluj") == 0 || strcmp(county,"cluj") == 0) && atof(grade) > 8.00)
+		printf("%s %s\n", fname, lname);
+}
+
+void	ft_validate_line(char *buff)
+{
+	int i;
+	int cnt;
+
+	i = 0;
+	cnt = 0;
+	while (buff[i])
+	{
+		if (buff[i] == ';')
+			cnt++;
+		i++;
+	}
+	if (cnt < 4)
+		printf("Error. Incomplete line: %s\n", buff);
+	if (cnt > 4)
+		printf("Error. Too many values in one line: %s\n", buff);
+}
+
+int	ft_isalpha(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	if (c >= 'A' && c <= 'Z')
+		return (1);
+	return (0);
+}
+
+void	ft_validate_fname(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		//if (!ft_isalpha(str[i])  && !(str[i] == ' '))
+		if (!ft_isalpha(str[i]))
+			printf("Error. First name contains ilegal characters: %s\n", str);
+		//if ((str[i] == ' '))
+		//	printf("Error. First name contains ilegal characters: %s\n", str);
+		i++;
+	}
+}
+
 int	main(void)
 {
 	FILE *fp;
 	char buff[255];
-	char a[20],b[20],c[20],d[5],e[10];
-	int i=0,j=0,k=0;
+	char fname[20],lname[20],email[20],grade[5],county[10];
 
-	fp = fopen("students.csv", "r");
+
+	fp = fopen("students2.csv", "r");
 	while(fscanf(fp, "%s", buff) > 0)
 	{
-		j=0;k=0;i=0;
-		while(buff[i] != 0)
-		{
-			if(buff[i] == ';')
-			{
-				j++;
-				k = 0;
-			}
-			else
-			{
-				if (j == 0)
-					ft_add_to_str(a, buff, k, i);
-				if (j == 1)
-					ft_add_to_str(b, buff, k, i);
-				if (j == 2)
-					ft_add_to_str(c, buff, k, i);
-				if (j == 3)
-					ft_add_to_str(d, buff, k, i);
-				if (j == 4)
-					ft_add_to_str(e, buff, k, i);
-				k++;
-			}
-			i++;
-		}
-		if(strcmp(e,"Cluj") == 0 && atof(d) > 8.00)
-			printf("%s %s\n",a,b);
+		ft_validate_line(buff);
+		ft_stock_line_data_into_corresponding_str(fname, lname, email, grade, county, buff);
+		ft_validate_fname(fname);
+		ft_print_results(fname, lname, grade, county);
 	}
+	close(fp);
 	return (0);
 }
