@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-int		read_to_stock(int const fd, char **stock)
+static int		read_to_stock(int const fd, char **stock)
 {
 	char	*buff;
 	int	ret;
@@ -27,6 +27,7 @@ int		read_to_stock(int const fd, char **stock)
 		buff[ret] = '\0';
 		*stock = ft_strjoin(*stock, buff);
 	}
+	free(buff);
 	return (ret);
 }
 

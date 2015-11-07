@@ -17,9 +17,9 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
-# define BUFF_SIZE 9 
+# define BUFF_SIZE 10000000
 
-int		get_next_line(int const fd, char **line);
+int	get_next_line(int const fd, char **line);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
 char	*ft_strjoin(char const *s1, char const *s2);

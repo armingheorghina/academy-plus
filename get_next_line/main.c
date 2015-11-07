@@ -15,7 +15,8 @@
 
 int		main(void)
 {
-	int		fd;
+	int	fd;
+//	int	fd2;
 	char	*line;
 
 	fd = open("file1", O_RDONLY);
@@ -23,6 +24,16 @@ int		main(void)
 	{
 		printf("%s\n", line);
 	}
+/*	//make it work to get 2nd bonus
+	fd = open("file1", O_RDONLY);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
+	
+	fd2 = open("file4", O_RDONLY);
+	get_next_line(fd2, &line);
+	printf("%s\n", line);
+	close(fd2);
+*/
 	close(fd);
 	return (0);
 }
