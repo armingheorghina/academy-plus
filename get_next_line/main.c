@@ -12,7 +12,13 @@
 
 #include "get_next_line.h"
 #include <stdio.h>
-/* 
+
+/* comment the one you want to test. make sure the other 2 are uncommented. */
+/*#define READ_FROM_FILE*/
+#define READ_FROM_STDIN
+#define READ_FROM_STDIN_FILE
+
+#ifndef READ_FROM_FILE
 int		main(void)
 {
 	int	fd;
@@ -26,7 +32,9 @@ int		main(void)
 	close(fd);
 	return (0);
 }
-*/
+#endif
+
+#ifndef READ_FROM_STDIN
 int	main(int argc, char **argv)
 {
 	int	fd;
@@ -43,3 +51,22 @@ int	main(int argc, char **argv)
 	close(fd);
 	return (0);
 }
+#endif
+
+#ifndef READ_FROM_STDIN_FILE
+int	main(int argc, char **argv)
+{
+	int	fd;
+	char	*line;
+	
+	if (argc < 1)
+		return (0);
+	fd = open(argv[1], O_RDONLY);
+	while (get_next_line(fd, &line) > 0)
+	{
+		printf("%s\n", line);
+	}
+	close(fd);
+	return (0);
+}
+#endif
