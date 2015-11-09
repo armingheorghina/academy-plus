@@ -23,7 +23,7 @@ int		main(void)
 {
 	int	fd;
 	char	*line;
-	
+
 	fd = open("file4", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 {
 	int	fd;
 	char	*line;
-	
+
 	if (argc < 1)
 		return (0);
 	*argv = NULL;
@@ -58,15 +58,21 @@ int	main(int argc, char **argv)
 {
 	int	fd;
 	char	*line;
-	
-	if (argc < 1)
+	int	i;
+
+	if (argc < 2)
 		return (0);
-	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd, &line) > 0)
+	i = 1;
+	while (i < argc)
 	{
-		printf("%s\n", line);
+		fd = open(argv[i], O_RDONLY);
+		while (get_next_line(fd, &line) > 0)
+		{
+			printf("%s\n", line);
+		}
+		close(fd);
+		i++;
 	}
-	close(fd);
 	return (0);
 }
 #endif
