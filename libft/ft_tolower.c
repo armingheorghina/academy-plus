@@ -6,13 +6,13 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/21 13:30:23 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/27 17:11:51 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/09 14:34:17 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_tolower(int c)
 {
-	if ((unsigned char)c >= 'A' && (unsigned char)c <= 'Z')
+	if (c >= 'A' && c <= 'Z')
 		c = c + 32;
 	return (c);
 }
