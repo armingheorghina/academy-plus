@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/03 13:05:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/06 15:08:09 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/09 19:37:47 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <stdio.h>
 
 /* comment the one you want to test. make sure the other 2 are uncommented. */
-/*#define READ_FROM_FILE*/
+#define READ_FROM_FILE
 #define READ_FROM_STDIN
-#define READ_FROM_STDIN_FILE
+//#define READ_FROM_STDIN_FILE
 
 #ifndef READ_FROM_FILE
 int		main(void)
@@ -24,7 +24,7 @@ int		main(void)
 	int	fd;
 	char	*line;
 	
-	fd = open("file1", O_RDONLY);
+	fd = open("file4", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
 		printf("%s\n", line);
