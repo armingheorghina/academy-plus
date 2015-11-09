@@ -61,7 +61,10 @@ int	main(int argc, char **argv)
 	int	i;
 
 	if (argc < 2)
+	{
+		printf("usage: ./test_gnl file1 file2 etc.\n");
 		return (0);
+	}
 	i = 1;
 	while (i < argc)
 	{
