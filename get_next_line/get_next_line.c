@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/03 13:05:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/09 19:45:25 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/10 14:13:24 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int		read_to_stock(int const fd, char **stock)
 {
 	char	*buff;
 	int		ret;
+	char	*temp;
 
 	if (!(buff = (char *)malloc(sizeof(*buff) * (BUFF_SIZE + 1))))
 		return (-1);
@@ -23,7 +24,9 @@ static int		read_to_stock(int const fd, char **stock)
 	if (ret > 0)
 	{
 		buff[ret] = '\0';
-		*stock = ft_strjoin(*stock, buff);
+		temp = ft_strjoin(*stock, buff);
+		free(*stock);
+		*stock = temp;
 	}
 	free(buff);
 	return (ret);

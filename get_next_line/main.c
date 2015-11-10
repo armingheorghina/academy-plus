@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/03 13:05:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/09 19:37:47 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/10 16:49:37 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #define READ_FROM_FILE
 #define READ_FROM_STDIN
 //#define READ_FROM_STDIN_FILE
+#define READ_FROM_BINARY_FILE
 
 #ifndef READ_FROM_FILE
 int		main(void)
@@ -76,6 +77,23 @@ int	main(int argc, char **argv)
 		close(fd);
 		i++;
 	}
+	return (0);
+}
+#endif
+
+#ifndef READ_FROM_BINARY_FILE
+int		main()
+{
+	int		fd;
+	char	*line;
+
+	line = (char*)malloc(sizeof(*line));
+	fd = open("file2.bin", O_RDONLY);
+	get_next_line(fd, &line);
+	close(fd);
+
+	printf("%s\n", line);
+
 	return (0);
 }
 #endif

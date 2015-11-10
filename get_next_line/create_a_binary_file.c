@@ -1,10 +1,11 @@
 #include <stdio.h>
+#include <fcntl.h>
 
 int main() 
 {
 	/* Create the file */
-	int x = 1;
-	FILE *fh = fopen ("file1.bin", "wb");
+	char x = 'a';
+	FILE *fh = fopen ("file2.bin", "wb");
 	if (fh != NULL) 
 	{
 		fwrite (&x, sizeof (x), 1, fh);
@@ -12,8 +13,8 @@ int main()
 	}
 
 	/* Read the file back in */
-	x = 7;
-	fh = fopen ("file1.bin", "rb");
+	x = 'b';
+	fh = fopen ("file2.bin", "rb");
 	if (fh != NULL) 
 	{
 		fread (&x, sizeof (x), 1, fh);
@@ -21,7 +22,7 @@ int main()
 	}
 
 	/* Check that it worked */
-	printf ("Value is: %d\n", x);
+	printf ("Value is: %c\n", x);
 
 	return (0);
 }

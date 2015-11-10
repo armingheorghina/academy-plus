@@ -6,7 +6,7 @@
 #    By: vdruta <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/02 16:35:04 by vdruta            #+#    #+#              #
-#    Updated: 2015/11/02 19:40:10 by vdruta           ###   ########.fr        #
+#    Updated: 2015/11/10 12:59:24 by vdruta           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ all: $(NAME)
 $(NAME):
 	make -C libft/ fclean
 	make -C libft/
-	gcc -Wall -Werror -Wextra -c $(SRCS)
+	gcc -Wall -Werror -Wextra -I libft/includes/ -c $(SRCS)
 	gcc -o $(NAME) $(OBJ) -L libft/ -lft
 
 clean:
