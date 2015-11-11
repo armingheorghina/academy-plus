@@ -6,12 +6,14 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/10 18:56:58 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/11 14:38:49 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
+# include "libft.h"
+# include <dirent.h> //opendir// DIR *opendir(const char *filename);
 
 #endif
 /*
