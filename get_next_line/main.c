@@ -6,14 +6,14 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/03 13:05:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/10 16:49:37 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/11 18:04:38 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-/* comment the one you want to test. make sure the other 2 are not commented. */
+/* comment the one you want to test. make sure the other 3 are not commented. */
 #define READ_FROM_FILE
 #define READ_FROM_STDIN
 //#define READ_FROM_STDIN_FILE
