@@ -6,25 +6,38 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/11 14:38:49 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/11 21:07:07 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
 # include "libft.h"
-# include <dirent.h> //opendir// DIR *opendir(const char *filename);
+# include <dirent.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <pwd.h>
+# include <uuid/uuid.h>
+# include <grp.h>
+# include <stdio.h>
 
 #endif
 /*
  * ◦ write
  * ◦ opendir
+DIR				*opendir(const char *filename);
  * ◦ readdir
+struct dirent	*readdir(DIR *dirp);
  * ◦ closedir
+int				closedir(DIR *dirp);
  * ◦ stat
+int				stat(const char *restrict path, struct stat *restrict buf);
  * ◦ lstat
+int				lstat(const char *restrict path, struct stat *restrict buf);
  * ◦ getpwuid
+struct passwd	*getpwuid(uid_t uid);
  * ◦ getgrgid
+struct group	*getgrgid(gid_t gid);
  * ◦ listxattr
  * ◦ getxattr
  * ◦ time
