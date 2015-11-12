@@ -60,13 +60,6 @@ void	ft_putlist(t_ls_list *start)
 	}
 }
 
-int		ft_isflag(int i, char *flag, char **argv)
-{
-	if (ft_strcmp(argv[i], flag) == 0)
-		return (1);
-	return (0);
-}
-
 int		main(int argc, char **argv)
 {
 	DIR				*dirp;
@@ -75,20 +68,14 @@ int		main(int argc, char **argv)
 	int				i;
 	t_ls_list			*start;
 
-
 	i = 1;
 	while (i < argc)
 	{
-		if (ft_isflag(i, "-a", argv) == 1 && i < 2)
-		{
+		if (ft_strcmp(argv[i], "-a") == 0)
 			i++;
-			if (argv[i] == NULL) //if nothing is given after flag;
-			argv[i] = ".";	
-		}
-		while (ft_isflag(i, "-a", argv) == 1 && i >= 2 && i < argc - 1)
-			i++;
-		if (ft_isflag(i, "-a", argv) == 1 && i >= 2 && i == argc - 1)
-			return (0);
+	//		ft_ls_a(i, argc, argv);
+		if (argv[i] == NULL) //if nothing is given after flag;
+		argv[i] = ".";
 		dirp = opendir(argv[i]);
 		if (dirp != NULL)
 		{
@@ -106,7 +93,7 @@ int		main(int argc, char **argv)
 			}
 			ft_putlist(start);
 			// *TODO free list : use ft_lstdel(start, f_free_str)
-			if (argc > 3 && i != argc - 1) // && ft_isflag(argc - 1, "-a", argv))
+			if (argc > 3 && i + 1 != argc)
 				ft_putchar('\n');
 			close_dir = closedir(dirp);
 			if (close_dir == -1)
