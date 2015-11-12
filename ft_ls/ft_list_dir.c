@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/11 18:16:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/11 21:07:05 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/12 11:52:17 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,21 @@ int		main(int argc, char **argv)
 	while (i < argc)
 	{
 		dirp = opendir(argv[i]);
-		if (dirp == NULL)
-		{
-			ft_putstr(argv[0]);
-			ft_putchar(':');
-			ft_putchar(' ');
-			perror(argv[i]);
-		}
-		else
+		if (dirp != NULL)
 		{
 			while ((dp = readdir(dirp)) != NULL)
-			{
 				ft_putendl(dp->d_name);
-			}
 			close_dir = closedir(dirp);
 			if (close_dir == -1)
 				perror("no close");
+		}
+		else if (dirp == NULL)
+		{
+			ft_putstr(argv[0]);
+			ft_putstr(": ");
+			//ft_putchar(':');
+			//ft_putchar(' ');
+			perror(argv[i]);
 		}
 
 		i++;
