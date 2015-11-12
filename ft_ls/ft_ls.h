@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/12 16:06:51 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/12 17:26:00 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <uuid/uuid.h>
 # include <grp.h>
 # include <stdio.h>
+
+typedef struct s_ls_list
+{
+	char *name;
+	struct s_ls_list *next;
+}t_ls_list;
 
 #endif
 /*
