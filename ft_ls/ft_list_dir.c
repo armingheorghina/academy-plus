@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/11 18:16:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/12 17:26:18 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/12 17:31:53 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int		main(int argc, char **argv)
 					perror("readdir error");
 			}
 			ft_putlist(start);
+			// *TODO free list : use ft_lstdel(start, f_free_str)
 			close_dir = closedir(dirp);
 			if (close_dir == -1)
 				perror("closedir error");
