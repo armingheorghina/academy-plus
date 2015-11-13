@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls_list_dir.c                                      :+:      :+:    :+:   */
+/*   ft_ls_a.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/11 18:16:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/13 11:49:17 by vdruta           ###   ########.fr       */
+/*   Created: 2015/11/13 16:41:04 by vdruta            #+#    #+#             */
+/*   Updated: 2015/11/13 18:57:14 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_push_sort(t_ls_list **begin, char *str)
+void	ft_push_sort_lsa(t_ls_list **begin, char *str)
 {
 	t_ls_list *new;
 	t_ls_list *list;
@@ -51,7 +51,7 @@ void	ft_push_sort(t_ls_list **begin, char *str)
 	}
 }
 
-void	ft_putlist(t_ls_list *start)
+void	ft_putlist_lsa(t_ls_list *start)
 {
 	while (start)
 	{
@@ -95,7 +95,7 @@ int		main(int argc, char **argv)
 			start = NULL;
 			while ((dp = readdir(dirp)) != NULL)
 			{
-				ft_push_sort(&start, dp->d_name);
+				ft_push_sort_lsa(&start, dp->d_name);
 				if (dp == NULL)
 					perror("readdir error");
 			}
@@ -104,7 +104,7 @@ int		main(int argc, char **argv)
 				ft_putstr(argv[i]);
 				ft_putstr(":\n");
 			}
-			ft_putlist(start);
+			ft_putlist_lsa(start);
 			// *TODO free list : use ft_lstdel(start, f_free_str)
 			if (argc > 3 && i != argc - 1) // && ft_isflag(argc - 1, "-a", argv))
 				ft_putchar('\n');

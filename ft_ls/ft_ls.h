@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/12 17:26:00 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/13 17:34:59 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <pwd.h>
-//# include <uuid/uuid.h>
+# include <uuid/uuid.h>
 # include <grp.h>
 # include <stdio.h>
 
