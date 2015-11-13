@@ -4,7 +4,7 @@
 int main() 
 {
 	/* Create the file */
-	char x = 'a';
+	int x = 1;
 	FILE *fh = fopen ("file2.bin", "wb");
 	if (fh != NULL) 
 	{
@@ -13,7 +13,7 @@ int main()
 	}
 
 	/* Read the file back in */
-	x = 'b';
+	x = 7;
 	fh = fopen ("file2.bin", "rb");
 	if (fh != NULL) 
 	{
@@ -22,7 +22,7 @@ int main()
 	}
 
 	/* Check that it worked */
-	printf ("Value is: %c\n", x);
+	printf ("Value is: %d\n", x);
 
 	return (0);
 }

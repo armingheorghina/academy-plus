@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/03 13:05:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/11 18:04:38 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/13 12:19:30 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 /* comment the one you want to test. make sure the other 3 are not commented. */
 #define READ_FROM_FILE
 #define READ_FROM_STDIN
-//#define READ_FROM_STDIN_FILE
-#define READ_FROM_BINARY_FILE
+#define READ_FROM_STDIN_FILE
+//#define READ_FROM_BINARY_FILE
 
 #ifndef READ_FROM_FILE
 int		main(void)
@@ -92,7 +92,7 @@ int		main()
 	get_next_line(fd, &line);
 	close(fd);
 
-	printf("%s\n", line);
+	ft_putnbr(*(int*)line); // chr * to int *, than get value
 
 	return (0);
 }
