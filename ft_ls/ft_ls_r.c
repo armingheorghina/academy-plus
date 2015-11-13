@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/11 18:16:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/13 11:49:17 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/13 12:54:15 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_push_sort(t_ls_list **begin, char *str)
 		*begin = new;
 	else
 	{
-		if (ft_strcmp(list->name, new->name) > 0)
+		if (ft_strcmp(list->name, new->name) < 0)
 		{
 			new->next = *begin;
 			*begin = new;
@@ -36,7 +36,7 @@ void	ft_push_sort(t_ls_list **begin, char *str)
 			ok = 1;
 			while (list->next && ok)
 			{
-				if (ft_strcmp((list->next)->name, new->name) > 0)
+				if (ft_strcmp((list->next)->name, new->name) < 0)
 				{
 					new->next = list->next;
 					list->next = new;
@@ -55,6 +55,7 @@ void	ft_putlist(t_ls_list *start)
 {
 	while (start)
 	{
+		while ()
 		ft_putendl(start->name);
 		start = start->next;
 	}
