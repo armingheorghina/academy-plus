@@ -6,7 +6,7 @@
 #    By: vdruta <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/02 16:35:04 by vdruta            #+#    #+#              #
-#    Updated: 2015/11/13 19:01:38 by vdruta           ###   ########.fr        #
+#    Updated: 2015/11/13 19:49:07 by vdruta           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ $(NAME):
 	gcc -o ft_ls_a ft_ls_a.o -L libft/ -lft
 	gcc -Wall -Werror -Wextra -I libft/ -c ft_ls_r.c
 	gcc -o ft_ls_r ft_ls_r.o -L libft/ -lft
-	gcc -Wall -Werror -Wextra -I libft/ -c ft_ls_R.c
-	gcc -o ft_ls_R ft_ls_R.o -L libft/ -lft
+	gcc -Wall -Werror -Wextra -I libft/ -c ft_ls_rm.c
+	gcc -o ft_ls_rm ft_ls_rm.o -L libft/ -lft
 	gcc -Wall -Werror -Wextra -I libft/ -c $(SRCS)
 	gcc -o $(NAME) $(OBJ) -L libft/ -lft
 
@@ -34,14 +34,14 @@ clean:
 	/bin/rm -f $(OBJ)
 	/bin/rm -f ft_ls_a.o
 	/bin/rm -f ft_ls_r.o
-	/bin/rm -f ft_ls_R.o
+	/bin/rm -f ft_ls_rm.o
 	make -C libft/ clean
 
 fclean: clean
 	/bin/rm -f $(NAME)
 	/bin/rm -f ft_ls_a
 	/bin/rm -f ft_ls_r
-	/bin/rm -f ft_ls_R
+	/bin/rm -f ft_ls_rm
 	/bin/rm -f libft/libft.a
 
 re: fclean all

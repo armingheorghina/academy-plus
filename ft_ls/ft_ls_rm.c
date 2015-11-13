@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls_r.c                                          :+:      :+:    :+:   */
+/*   ft_ls_rm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/13 20:02:17 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/13 20:14:26 by vdruta           ###   ########.fr       */
+/*   Created: 2015/11/13 20:16:25 by vdruta            #+#    #+#             */
+/*   Updated: 2015/11/13 20:25:55 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_push_sort_lsr(t_ls_list **begin, char *str)
+void	ft_push_sort_lsrm(t_ls_list **begin, char *str)
 {
 	t_ls_list *new;
 	t_ls_list *list;
@@ -26,7 +26,7 @@ void	ft_push_sort_lsr(t_ls_list **begin, char *str)
 		*begin = new;
 	else
 	{
-		if (ft_strcmp(list->name, new->name) < 0)
+		if (ft_strcmp(list->name, new->name) > 0)
 		{
 			new->next = *begin;
 			*begin = new;
@@ -36,7 +36,7 @@ void	ft_push_sort_lsr(t_ls_list **begin, char *str)
 			ok = 1;
 			while (list->next && ok)
 			{
-				if (ft_strcmp((list->next)->name, new->name) < 0)
+				if (ft_strcmp((list->next)->name, new->name) > 0)
 				{
 					new->next = list->next;
 					list->next = new;
@@ -57,11 +57,11 @@ int		ft_ishidden(char *str)
 	return (0);
 }
 
-void	ft_putlist_lsr(t_ls_list *start)
+void	ft_putlist_lsrm(t_ls_list *start)
 {
 	while (start)
 	{
-		if(!ft_ishidden(start->name))
+		if (!ft_ishidden(start->name))
 			ft_putendl(start->name);
 		start = start->next;
 	}
@@ -86,15 +86,15 @@ int		main(int argc, char **argv)
 	i = 1;
 	while (i < argc) // *TODO add multiple flags functionality
 	{
-		if (ft_isflag(i, "-r", argv) == 1 && i < 2)
+		if (ft_isflag(i, "-R", argv) == 1 && i < 2)
 		{
 			i++;
 			if (argv[i] == NULL) // flag only.
 			argv[i] = ".";
 		}
-		while (ft_isflag(i, "-r", argv) == 1 && i >= 2 && i < argc - 1)
+		while (ft_isflag(i, "-R", argv) == 1 && i >= 2 && i < argc - 1)
 			i++;
-		if (ft_isflag(i, "-r", argv) == 1 && i >= 2 && i == argc - 1)
+		if (ft_isflag(i, "-R", argv) == 1 && i >= 2 && i == argc - 1)
 			return (0);
 		dirp = opendir(argv[i]);
 		if (dirp != NULL)
@@ -102,7 +102,7 @@ int		main(int argc, char **argv)
 			start = NULL;
 			while ((dp = readdir(dirp)) != NULL)
 			{
-				ft_push_sort_lsr(&start, dp->d_name);
+				ft_push_sort_lsrm(&start, dp->d_name);
 				if (dp == NULL)
 					perror("readdir error");
 			}
@@ -111,9 +111,9 @@ int		main(int argc, char **argv)
 				ft_putstr(argv[i]);
 				ft_putstr(":\n");
 			}
-			ft_putlist_lsr(start);
+			ft_putlist_lsrm(start);
 			// *TODO free list : use ft_lstdel(start, f_free_str)
-			if (argc > 3 && i != argc - 1) // && ft_isflag(argc - 1, "-R", argv))
+			if (argc > 3 && i != argc - 1) 
 				ft_putchar('\n');
 			close_dir = closedir(dirp);
 			if (close_dir == -1)
