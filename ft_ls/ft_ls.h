@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/13 20:25:59 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/14 01:34:10 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 
 typedef struct s_ls_list
 {
-	char *name;
-	struct s_ls_list *next;
+	char				*name;
+	blkcnt_t  			blocks;
+	struct s_ls_list	*next;
 }t_ls_list;
 
 
