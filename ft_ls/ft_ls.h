@@ -17,14 +17,17 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <pwd.h>
-# include <uuid/uuid.h>
+//# include <uuid/uuid.h>
 # include <grp.h>
 # include <stdio.h>
+# include <time.h>
 
 typedef struct s_ls_list
 {
-	char				*name;
-	blkcnt_t  			blocks;
+	char			*name;
+	off_t			bytes_size;	/* stat - total size, in bytes */
+	int			bytes_len;
+	time_t   		mtime;		/* stat - time of last modification */
 	struct s_ls_list	*next;
 }t_ls_list;
 

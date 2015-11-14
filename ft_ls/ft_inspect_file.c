@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	ft_push_sort_lsa(t_ls_list **begin, char *str, blkcnt_t bl)
+void	ft_push_sort_lsa(t_ls_list **begin, char *str, off_t size, time_t time)
 {
 	t_ls_list *new;
 	t_ls_list *list;
@@ -20,7 +20,9 @@ void	ft_push_sort_lsa(t_ls_list **begin, char *str, blkcnt_t bl)
 
 	new = (t_ls_list*)malloc(sizeof(t_ls_list));
 	new->name = ft_strdup(str);
-	new->blocks = bl;
+	new->bytes_size = size;
+	new->bytes_len = ft_strlen(ft_itoa((int)size)); //*TODO nbrlen instead of this
+	new->mtime = time;
 	list = *begin;
 	new->next = NULL;
 	if (list == NULL)
@@ -51,13 +53,65 @@ void	ft_push_sort_lsa(t_ls_list **begin, char *str, blkcnt_t bl)
 	}
 }
 
+void	ft_puttime(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (i >= 4 && i <= 15)
+			write(1, &str[i], 1);
+		i++;
+	}
+	write(1, " ", 1);
+}
+
+int             ft_ishidden(char *str)
+{
+        if (str[0] == '.')
+                return (1);
+        return (0);
+}
+
+/*
+void	ft_putbytes(int nbr)
+{
+	int max_len;
+
+	max_len = ft_fin_max_len
+
+	
+}
+
+int	ft_find_max_bytes_len(t_ls_list *start)
+{
+	int x;
+	int y;
+
+	x = 1;
+	y = 1;
+	while (start)
+	{
+		x = start->bytes_len;
+		if (x > y)
+			y = x;
+		start = start->next;
+	}
+	return (y);
+}
+*/
 void	ft_putlist_lsa(t_ls_list *start)
 {
 	while (start)
 	{
-		ft_putendl(start->name);
-		ft_putnbr((int)start->blocks);
-		ft_putchar('\n');
+		if (!ft_ishidden(start->name))		
+		{
+			ft_putnbr((int)start->bytes_size);
+			ft_putchar(' ');
+			ft_puttime(ctime(&start->mtime));
+			ft_putendl(start->name);
+		}
 		start = start->next;
 	}
 }
@@ -77,20 +131,20 @@ int		main(int argc, char **argv)
 	int				i;
 	t_ls_list		*start;
 	struct stat		*buf;
-	int				sint;
+	//int				sint;
 
 	i = 1;
 	while (i < argc) // *TODO add multiple flags functionality
 	{
-		if (ft_isflag(i, "-a", argv) == 1 && i < 2)
+		if (ft_isflag(i, "-l", argv) == 1 && i < 2)
 		{
 			i++;
 			if (argv[i] == NULL) // flag only.
 			argv[i] = ".";
 		}
-		while (ft_isflag(i, "-a", argv) == 1 && i >= 2 && i < argc - 1)
+		while (ft_isflag(i, "-l", argv) == 1 && i >= 2 && i < argc - 1)
 			i++;
-		if (ft_isflag(i, "-a", argv) == 1 && i >= 2 && i == argc - 1)
+		if (ft_isflag(i, "-l", argv) == 1 && i >= 2 && i == argc - 1)
 			return (0);
 		dirp = opendir(argv[i]);
 		if (dirp != NULL)
@@ -99,8 +153,8 @@ int		main(int argc, char **argv)
 			while ((dp = readdir(dirp)) != NULL)
 			{
 				buf = (struct stat*)malloc(sizeof(*buf));
-				sint = stat(dp->d_name, buf);
-				ft_push_sort_lsa(&start, dp->d_name, buf->st_blocks);
+				(void)stat(dp->d_name, buf);
+				ft_push_sort_lsa(&start, dp->d_name, buf->st_size, buf->st_mtime);
 
 				if (dp == NULL) // *TODO move this 2 lines to top of while
 					perror("readdir error");
