@@ -24,7 +24,9 @@
 
 typedef struct s_ls_list
 {
-	char			*name;
+	char			*name;			/* readdir - */
+	uid_t			uid;	 		/* stat - user ID of owner */
+   	gid_t			gid;	    		/* stat - group ID of owner */
 	off_t			bytes_size;		/* stat - total size, in bytes */
 	int			biggest_size_len;	/* bigest bytes_size length */
 	time_t   		mtime;			/* stat - time of last modification */

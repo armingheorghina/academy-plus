@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	ft_push_sort_lsa(t_ls_list **begin, char *str, off_t size, time_t time)
+void	ft_push_sort_lsa(t_ls_list **begin, char *str, off_t size, time_t time, uid_t st_uid, gid_t st_gid)
 {
 	t_ls_list *new;
 	t_ls_list *list;
@@ -22,6 +22,8 @@ void	ft_push_sort_lsa(t_ls_list **begin, char *str, off_t size, time_t time)
 	new->name = ft_strdup(str);
 	new->bytes_size = size;
 	new->mtime = time;
+	new->uid = st_uid;
+	new->gid = st_gid;
 	list = *begin;
 	new->next = NULL;
 	if (list == NULL)
@@ -112,6 +114,9 @@ void	ft_putlist_lsa(t_ls_list *start)
 	{
 		if (!ft_ishidden(start->name))		
 		{
+			//printf("Ownership:                UID=%ld   GID=%ld\n", (long) start->uid, (long) start->gid);
+			//printf("%d", start->gid);
+			//ft_putendl((char*)start->gid);
 			ft_putbytes((int)start->bytes_size, start->biggest_size_len);
 			ft_puttime(ctime(&start->mtime));
 			ft_putendl(start->name);
@@ -157,8 +162,8 @@ int		main(int argc, char **argv)
 			while ((dp = readdir(dirp)) != NULL)
 			{
 				buf = (struct stat*)malloc(sizeof(*buf));
-				(void)stat(dp->d_name, buf);
-				ft_push_sort_lsa(&start, dp->d_name, buf->st_size, buf->st_mtime);
+				(void)stat(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), buf);
+				ft_push_sort_lsa(&start, dp->d_name, buf->st_size, buf->st_mtime, buf->st_uid, buf->st_gid);
 				if (dp == NULL) // *TODO move this 2 lines to top of while in all files
 					perror("readdir error");
 			}
