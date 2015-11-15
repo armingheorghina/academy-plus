@@ -229,7 +229,7 @@ int		main(int argc, char **argv)
 			while ((dp = readdir(dirp)) != NULL)
 			{
 				buf = (struct stat*)malloc(sizeof(*buf));
-				(void)stat(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), buf);
+				(void)lstat(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), buf);
 				ft_push_sort_lsa(&start, dp->d_name, buf->st_size, buf->st_mtime, buf->st_uid, buf->st_gid, buf->st_nlink, buf->st_mode);
 				if (dp == NULL) // *TODO move this 2 lines to top of while in all files
 					perror("readdir error");
