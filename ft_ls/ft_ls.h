@@ -25,6 +25,8 @@
 typedef struct s_ls_list
 {
 	char			*name;			/* readdir - */
+	mode_t			mode;	 		/* stat - protection */
+	nlink_t			nlink;			/* stat - number of hard links */
 	uid_t			uid;	 		/* stat - user ID of owner */
    	gid_t			gid;	    		/* stat - group ID of owner */
 	off_t			bytes_size;		/* stat - total size, in bytes */

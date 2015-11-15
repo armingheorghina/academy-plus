@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	ft_push_sort_lsa(t_ls_list **begin, char *str, off_t size, time_t time, uid_t st_uid, gid_t st_gid)
+void	ft_push_sort_lsa(t_ls_list **begin, char *str, off_t size, time_t time, uid_t st_uid, gid_t st_gid, nlink_t st_nlink, mode_t st_mode)
 {
 	t_ls_list *new;
 	t_ls_list *list;
@@ -24,6 +24,8 @@ void	ft_push_sort_lsa(t_ls_list **begin, char *str, off_t size, time_t time, uid
 	new->mtime = time;
 	new->uid = st_uid;
 	new->gid = st_gid;
+	new->nlink = st_nlink;
+	new->mode = st_mode;
 	list = *begin;
 	new->next = NULL;
 	if (list == NULL)
@@ -108,15 +110,80 @@ void	ft_putbytes(int bytes_size, int biggest_size_len)
 	write(1, " ", 1);
 }
 
+void	ft_putuid_name(struct passwd *pwd)
+{
+	ft_putstr(pwd->pw_name);
+	ft_putchar(' ');
+}
+
+void	ft_putgid_name(struct group *grp)
+{
+	ft_putstr(grp->gr_name);
+	ft_putchar(' ');
+}
+
+void	ft_putnumberofhardlinks(int nlink)
+{
+	ft_putnbr(nlink);
+	ft_putchar(' ');
+}
+
+void	ft_putmode(mode_t mode)
+{
+	
+	if (S_ISDIR(mode) == 1)
+		ft_putchar('d');
+	else 
+		ft_putchar('-');
+	if (mode & S_IRUSR)
+		ft_putchar('r');
+	else
+		ft_putchar('-');
+	if (mode & S_IWUSR)
+		ft_putchar('w');
+	else
+		ft_putchar('-');
+    	if (mode & S_IXUSR)
+		ft_putchar('x');
+	else
+		ft_putchar('-');
+    	if (mode & S_IRGRP)
+		ft_putchar('r');
+	else
+		ft_putchar('-');
+    	if (mode & S_IWGRP)
+		ft_putchar('w');
+	else
+		ft_putchar('-');
+    	if (mode & S_IXGRP)
+		ft_putchar('x');
+	else
+		ft_putchar('-');
+    	if (mode & S_IROTH)
+		ft_putchar('r');
+	else
+		ft_putchar('-');
+    	if (mode & S_IWOTH)
+		ft_putchar('w');
+	else
+		ft_putchar('-');
+    	if (mode & S_IXOTH)
+		ft_putchar('x');
+	else
+		ft_putchar('-');
+	ft_putchar(' ');
+}
+
 void	ft_putlist_lsa(t_ls_list *start)
 {
 	while (start)
 	{
 		if (!ft_ishidden(start->name))		
 		{
-			//printf("Ownership:                UID=%ld   GID=%ld\n", (long) start->uid, (long) start->gid);
-			//printf("%d", start->gid);
-			//ft_putendl((char*)start->gid);
+			ft_putmode(start->mode);
+			ft_putnumberofhardlinks((int)start->nlink);
+			ft_putgid_name(getgrgid(start->gid));
+			ft_putuid_name(getpwuid(start->uid));
 			ft_putbytes((int)start->bytes_size, start->biggest_size_len);
 			ft_puttime(ctime(&start->mtime));
 			ft_putendl(start->name);
@@ -163,7 +230,7 @@ int		main(int argc, char **argv)
 			{
 				buf = (struct stat*)malloc(sizeof(*buf));
 				(void)stat(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), buf);
-				ft_push_sort_lsa(&start, dp->d_name, buf->st_size, buf->st_mtime, buf->st_uid, buf->st_gid);
+				ft_push_sort_lsa(&start, dp->d_name, buf->st_size, buf->st_mtime, buf->st_uid, buf->st_gid, buf->st_nlink, buf->st_mode);
 				if (dp == NULL) // *TODO move this 2 lines to top of while in all files
 					perror("readdir error");
 			}
