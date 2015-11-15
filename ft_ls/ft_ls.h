@@ -25,9 +25,9 @@
 typedef struct s_ls_list
 {
 	char			*name;
-	off_t			bytes_size;	/* stat - total size, in bytes */
-	int			bytes_len;
-	time_t   		mtime;		/* stat - time of last modification */
+	off_t			bytes_size;		/* stat - total size, in bytes */
+	int			biggest_size_len;	/* bigest bytes_size length */
+	time_t   		mtime;			/* stat - time of last modification */
 	struct s_ls_list	*next;
 }t_ls_list;
 

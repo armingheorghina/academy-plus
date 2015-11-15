@@ -21,7 +21,6 @@ void	ft_push_sort_lsa(t_ls_list **begin, char *str, off_t size, time_t time)
 	new = (t_ls_list*)malloc(sizeof(t_ls_list));
 	new->name = ft_strdup(str);
 	new->bytes_size = size;
-	new->bytes_len = ft_strlen(ft_itoa((int)size)); //*TODO nbrlen instead of this
 	new->mtime = time;
 	list = *begin;
 	new->next = NULL;
@@ -74,41 +73,46 @@ int             ft_ishidden(char *str)
         return (0);
 }
 
-/*
-void	ft_putbytes(int nbr)
+void	ft_push_biggest_size_len_to_list(t_ls_list *start)
 {
-	int max_len;
+	int		x;
+	int		y;
+	t_ls_list	*start2;
 
-	max_len = ft_fin_max_len
-
-	
-}
-
-int	ft_find_max_bytes_len(t_ls_list *start)
-{
-	int x;
-	int y;
-
-	x = 1;
-	y = 1;
+	x = 0;
+	y = 0;
+	start2 = start;
 	while (start)
 	{
-		x = start->bytes_len;
+		x = ft_strlen(ft_itoa((int)start->bytes_size)); //*TODO use a smarter way to count this.
 		if (x > y)
 			y = x;
 		start = start->next;
 	}
-	return (y);
+	while (start2)
+	{
+		start2->biggest_size_len = y;
+		start2 = start2->next;
+	}
 }
-*/
+
+void	ft_putbytes(int bytes_size, int biggest_size_len)
+{
+	int x;
+
+	x = ft_strlen(ft_itoa(bytes_size)); //*TODO use a smarter way to count this.
+	write(1, "                                          ", biggest_size_len - x);
+	ft_putnbr(bytes_size);
+	write(1, " ", 1);
+}
+
 void	ft_putlist_lsa(t_ls_list *start)
 {
 	while (start)
 	{
 		if (!ft_ishidden(start->name))		
 		{
-			ft_putnbr((int)start->bytes_size);
-			ft_putchar(' ');
+			ft_putbytes((int)start->bytes_size, start->biggest_size_len);
 			ft_puttime(ctime(&start->mtime));
 			ft_putendl(start->name);
 		}
@@ -125,13 +129,13 @@ int		ft_isflag(int i, char *flag, char **argv)
 
 int		main(int argc, char **argv)
 {
-	DIR				*dirp;
-	struct dirent	*dp;
-	int				close_dir;
-	int				i;
+	DIR			*dirp;
+	struct dirent		*dp;
+	int			close_dir;
+	int			i;
 	t_ls_list		*start;
 	struct stat		*buf;
-	//int				sint;
+	//int			stat_return;
 
 	i = 1;
 	while (i < argc) // *TODO add multiple flags functionality
@@ -155,8 +159,7 @@ int		main(int argc, char **argv)
 				buf = (struct stat*)malloc(sizeof(*buf));
 				(void)stat(dp->d_name, buf);
 				ft_push_sort_lsa(&start, dp->d_name, buf->st_size, buf->st_mtime);
-
-				if (dp == NULL) // *TODO move this 2 lines to top of while
+				if (dp == NULL) // *TODO move this 2 lines to top of while in all files
 					perror("readdir error");
 			}
 			if (argc > 3)
@@ -164,6 +167,7 @@ int		main(int argc, char **argv)
 				ft_putstr(argv[i]);
 				ft_putstr(":\n");
 			}
+			ft_push_biggest_size_len_to_list(start);
 			ft_putlist_lsa(start);
 			// *TODO free list : use ft_lstdel(start, f_free_str)
 			if (argc > 3 && i != argc - 1) // && ft_isflag(argc - 1, "-a", argv))
