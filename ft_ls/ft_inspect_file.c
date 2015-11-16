@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/16 17:13:28 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/16 18:09:38 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,7 +262,22 @@ void	ft_putmode(mode_t mode)
 	ft_putchar(' ');
 }
 
-void	ft_putlist_lsa(t_ls_list **start)
+void	ft_putlist_lsa(t_ls_list *start)
+{
+	while (start)
+	{
+		ft_putmode(start->mode);
+		ft_putnumberofhardlinks((int)start->nlink, start->biggest_nlink_len);
+		ft_putuid_name(getpwuid(start->uid), start->biggest_uid_len);
+		ft_putgid_name(getgrgid(start->gid), start->biggest_gid_len);
+		ft_putbytes((int)start->bytes_size, start->biggest_size_len);
+		ft_puttime(ctime(&(start->mtime)));
+		ft_putendl(start->name);
+		start = start->next;
+	}
+}
+
+void	ft_delete_hidden_from_list(t_ls_list **start)
 {
 	t_ls_list *start2;
 
@@ -275,20 +290,6 @@ void	ft_putlist_lsa(t_ls_list **start)
 			free(start2);
 		}
 		start2 = start2->next;
-	}
-	while (*start)
-	{
-	//	if (!ft_ishidden(*start->name))		
-	//	{
-			ft_putmode((*start)->mode);
-			ft_putnumberofhardlinks((int)(*start)->nlink, (*start)->biggest_nlink_len);
-			ft_putuid_name(getpwuid((*start)->uid), (*start)->biggest_uid_len);
-			ft_putgid_name(getgrgid((*start)->gid), (*start)->biggest_gid_len);
-			ft_putbytes((int)(*start)->bytes_size, (*start)->biggest_size_len);
-			ft_puttime(ctime((&((*start)->mtime))));
-			ft_putendl((*start)->name);
-	//	}
-		(*start) = (*start)->next;
 	}
 }
 
@@ -339,9 +340,10 @@ int		main(int argc, char **argv)
 				ft_putstr(argv[i]);
 				ft_putstr(":\n");
 			}
+			ft_delete_hidden_from_list(&start);
 			ft_push_bsl_bnl_to_list(start);
 			ft_push_buidl_bgidl_to_list(start);
-			ft_putlist_lsa(&start);
+			ft_putlist_lsa(start);
 			// *TODO free list : use ft_lstdel(start, f_free_str)
 			if (argc > 3 && i != argc - 1) // && ft_isflag(argc - 1, "-a", argv))
 				ft_putchar('\n');
