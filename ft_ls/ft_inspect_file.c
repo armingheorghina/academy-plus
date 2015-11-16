@@ -6,13 +6,13 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/16 18:09:38 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/16 19:02:34 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_push_sort_lsa(t_ls_list **begin, char *str, off_t size, time_t time, uid_t st_uid, gid_t st_gid, nlink_t st_nlink, mode_t st_mode)
+void	ft_push_sort_lsl(t_ls_list **begin, char *str, off_t size, time_t time, uid_t st_uid, gid_t st_gid, nlink_t st_nlink, mode_t st_mode, blkcnt_t st_blocks)
 {
 	t_ls_list *new;
 	t_ls_list *list;
@@ -26,6 +26,7 @@ void	ft_push_sort_lsa(t_ls_list **begin, char *str, off_t size, time_t time, uid
 	new->gid = st_gid;
 	new->nlink = st_nlink;
 	new->mode = st_mode;
+	new->blocks = st_blocks;
 	list = *begin;
 	new->next = NULL;
 	if (list == NULL)
@@ -79,11 +80,11 @@ int             ft_ishidden(char *str)
 
 void	ft_push_bsl_bnl_to_list(t_ls_list *start)
 {
-	int		a;
-	int		b;
-	int		c;
-	int		d;
-	t_ls_list *start2;
+	int			a;
+	int			b;
+	int			c;
+	int			d;
+	t_ls_list	*start2;
 
 	a = 0;
 	b = 0;
@@ -262,8 +263,25 @@ void	ft_putmode(mode_t mode)
 	ft_putchar(' ');
 }
 
-void	ft_putlist_lsa(t_ls_list *start)
+void		ft_put_total(t_ls_list *start)
 {
+	int x;
+
+	x = 0;
+	while (start)
+	{
+		x = (int)start->blocks + x;
+		start = start->next;
+	}
+	ft_putstr("total ");
+	ft_putnbr(x);
+	ft_putchar('\n');
+}
+
+void	ft_putlist_lsl(t_ls_list *start)
+{
+
+	ft_put_total(start);
 	while (start)
 	{
 		ft_putmode(start->mode);
@@ -331,7 +349,7 @@ int		main(int argc, char **argv)
 			{
 				buf = (struct stat*)malloc(sizeof(*buf));
 				(void)lstat(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), buf);
-				ft_push_sort_lsa(&start, dp->d_name, buf->st_size, buf->st_mtime, buf->st_uid, buf->st_gid, buf->st_nlink, buf->st_mode);
+				ft_push_sort_lsl(&start, dp->d_name, buf->st_size, buf->st_mtime, buf->st_uid, buf->st_gid, buf->st_nlink, buf->st_mode, buf->st_blocks);
 				if (dp == NULL) // *TODO move this 2 lines to top of while in all files
 					perror("readdir error");
 			}
@@ -343,7 +361,7 @@ int		main(int argc, char **argv)
 			ft_delete_hidden_from_list(&start);
 			ft_push_bsl_bnl_to_list(start);
 			ft_push_buidl_bgidl_to_list(start);
-			ft_putlist_lsa(start);
+			ft_putlist_lsl(start);
 			// *TODO free list : use ft_lstdel(start, f_free_str)
 			if (argc > 3 && i != argc - 1) // && ft_isflag(argc - 1, "-a", argv))
 				ft_putchar('\n');
