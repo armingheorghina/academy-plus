@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/14 01:34:06 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/16 15:46:03 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,25 +77,68 @@ int             ft_ishidden(char *str)
         return (0);
 }
 
-void	ft_push_biggest_size_len_to_list(t_ls_list *start)
+void	ft_push_bsl_bnl_to_list(t_ls_list *start)
 {
-	int		x;
-	int		y;
-	t_ls_list	*start2;
+	int		a;
+	int		b;
+	int		c;
+	int		d;
+	t_ls_list *start2;
 
-	x = 0;
-	y = 0;
+	a = 0;
+	b = 0;
+	c = 0;
+	d = 0;
 	start2 = start;
 	while (start)
 	{
-		x = ft_strlen(ft_itoa((int)start->bytes_size)); //*TODO use a smarter way to count this.
-		if (x > y)
-			y = x;
+		c = ft_strlen(ft_itoa((int)start->bytes_size)); //*TODO do it smarter.
+		if (c > d)
+			d = c;
+		a = ft_strlen(ft_itoa((int)start->nlink)); //*TODO do it smarter.
+		if (a > b)
+			b = a;
 		start = start->next;
 	}
 	while (start2)
 	{
-		start2->biggest_size_len = y;
+		start2->biggest_size_len = d;
+		start2->biggest_nlink_len = b;
+		start2 = start2->next;
+	}
+}
+
+void	ft_push_buidl_bgidl_to_list(t_ls_list *start)
+{
+	int				a;
+	int 			b;
+	struct passwd	*pwd;
+	int				c;
+	int				d;
+	struct group	*grp;
+	t_ls_list		*start2;
+
+	a = 0;
+	b = 0;
+	c = 0;
+	d = 0;
+	start2 = start;
+	while (start)
+	{
+		pwd = getpwuid(start->uid);
+		a = ft_strlen(pwd->pw_name);
+		if (a > b)
+			b = a;
+		grp = getgrgid(start->gid);
+		c = ft_strlen(grp->gr_name);
+		if (c > d)
+			d = c;
+		start = start->next;
+	}
+	while (start2)
+	{
+		start2->biggest_uid_len = b;
+		start2->biggest_gid_len = d;
 		start2 = start2->next;
 	}
 }
@@ -103,27 +146,61 @@ void	ft_push_biggest_size_len_to_list(t_ls_list *start)
 void	ft_putbytes(int bytes_size, int biggest_size_len)
 {
 	int x;
+	int i;
 
 	x = ft_strlen(ft_itoa(bytes_size)); //*TODO use a smarter way to count this.
-	write(1, "                                          ", biggest_size_len - x);
+	i = 0;
+	while (i < biggest_size_len - x)
+	{
+		write(1, " ", 1);
+		i++;
+	}
 	ft_putnbr(bytes_size);
 	write(1, " ", 1);
 }
 
-void	ft_putuid_name(struct passwd *pwd)
+void	ft_putuid_name(struct passwd *pwd, int biggest_uid_len)
 {
+	unsigned long i;
+
+	i = 0;
 	ft_putstr(pwd->pw_name);
+	while (i < biggest_uid_len - ft_strlen(pwd->pw_name))
+	{
+		write(1, " ", 1);
+		i++;
+	}
+	ft_putchar(' ');
 	ft_putchar(' ');
 }
 
-void	ft_putgid_name(struct group *grp)
+void	ft_putgid_name(struct group *grp, int biggest_gid_len)
 {
+	unsigned long i;
+
+	i = 0;
 	ft_putstr(grp->gr_name);
+	while (i < biggest_gid_len - ft_strlen(grp->gr_name))
+	{
+		write(1, " ", 1);
+		i++;
+	}
+	ft_putchar(' ');
 	ft_putchar(' ');
 }
 
-void	ft_putnumberofhardlinks(int nlink)
+void	ft_putnumberofhardlinks(int nlink, int biggest_nlink_len)
 {
+	int x;
+	int i;
+
+	x = ft_strlen(ft_itoa(nlink));
+	i = 0;
+	while (i < biggest_nlink_len - x)
+	{
+		write(1, " ", 1);
+		i++;
+	}
 	ft_putnbr(nlink);
 	ft_putchar(' ');
 }
@@ -131,10 +208,20 @@ void	ft_putnumberofhardlinks(int nlink)
 void	ft_putmode(mode_t mode)
 {
 	
+	if (S_ISREG(mode) == 1)
+		ft_putchar('-');
 	if (S_ISDIR(mode) == 1)
 		ft_putchar('d');
-	else 
-		ft_putchar('-');
+	if (S_ISCHR(mode) == 1)
+		ft_putchar('c');
+	if (S_ISBLK(mode) == 1)
+		ft_putchar('b');
+	if (S_ISFIFO(mode) == 1)
+		ft_putchar('f');
+	if (S_ISLNK(mode) == 1)
+		ft_putchar('l');
+	if (S_ISSOCK(mode) == 1)
+		ft_putchar('s');
 	if (mode & S_IRUSR)
 		ft_putchar('r');
 	else
@@ -143,34 +230,35 @@ void	ft_putmode(mode_t mode)
 		ft_putchar('w');
 	else
 		ft_putchar('-');
-    	if (mode & S_IXUSR)
+   	if (mode & S_IXUSR)
 		ft_putchar('x');
 	else
 		ft_putchar('-');
-    	if (mode & S_IRGRP)
+   	if (mode & S_IRGRP)
 		ft_putchar('r');
 	else
 		ft_putchar('-');
-    	if (mode & S_IWGRP)
+   	if (mode & S_IWGRP)
 		ft_putchar('w');
 	else
 		ft_putchar('-');
-    	if (mode & S_IXGRP)
+   	if (mode & S_IXGRP)
 		ft_putchar('x');
 	else
 		ft_putchar('-');
-    	if (mode & S_IROTH)
+   	if (mode & S_IROTH)
 		ft_putchar('r');
 	else
 		ft_putchar('-');
-    	if (mode & S_IWOTH)
+   	if (mode & S_IWOTH)
 		ft_putchar('w');
 	else
 		ft_putchar('-');
-    	if (mode & S_IXOTH)
+   	if (mode & S_IXOTH)
 		ft_putchar('x');
 	else
 		ft_putchar('-');
+	ft_putchar(' ');
 	ft_putchar(' ');
 }
 
@@ -181,9 +269,9 @@ void	ft_putlist_lsa(t_ls_list *start)
 		if (!ft_ishidden(start->name))		
 		{
 			ft_putmode(start->mode);
-			ft_putnumberofhardlinks((int)start->nlink);
-			ft_putgid_name(getgrgid(start->gid));
-			ft_putuid_name(getpwuid(start->uid));
+			ft_putnumberofhardlinks((int)start->nlink, start->biggest_nlink_len);
+			ft_putuid_name(getpwuid(start->uid), start->biggest_uid_len);
+			ft_putgid_name(getgrgid(start->gid), start->biggest_gid_len);
 			ft_putbytes((int)start->bytes_size, start->biggest_size_len);
 			ft_puttime(ctime(&start->mtime));
 			ft_putendl(start->name);
@@ -239,7 +327,8 @@ int		main(int argc, char **argv)
 				ft_putstr(argv[i]);
 				ft_putstr(":\n");
 			}
-			ft_push_biggest_size_len_to_list(start);
+			ft_push_bsl_bnl_to_list(start);
+			ft_push_buidl_bgidl_to_list(start);
 			ft_putlist_lsa(start);
 			// *TODO free list : use ft_lstdel(start, f_free_str)
 			if (argc > 3 && i != argc - 1) // && ft_isflag(argc - 1, "-a", argv))

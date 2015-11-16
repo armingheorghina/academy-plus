@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/14 01:34:10 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/16 15:46:05 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,17 @@
 
 typedef struct s_ls_list
 {
-	char			*name;			/* readdir - */
-	mode_t			mode;	 		/* stat - protection */
-	nlink_t			nlink;			/* stat - number of hard links */
-	uid_t			uid;	 		/* stat - user ID of owner */
-   	gid_t			gid;	    		/* stat - group ID of owner */
-	off_t			bytes_size;		/* stat - total size, in bytes */
-	int			biggest_size_len;	/* bigest bytes_size length */
-	time_t   		mtime;			/* stat - time of last modification */
+	char				*name;				/* readdir - get dir name*/
+	mode_t				mode;	 			/* stat - protection */
+	nlink_t				nlink;				/* stat - number of hard links */
+	int					biggest_nlink_len;	/* bigest nlink length*/
+	uid_t				uid;	 			/* stat - user ID of owner */
+	int					biggest_uid_len;
+	gid_t				gid;	    		/* stat - group ID of owner */
+	int					biggest_gid_len;
+	off_t				bytes_size;			/* stat - total size, in bytes */
+	int					biggest_size_len;	/* bigest bytes_size length */
+	time_t   			mtime;				/* stat - time of last modification */
 	struct s_ls_list	*next;
 }t_ls_list;
 
@@ -41,19 +44,19 @@ typedef struct s_ls_list
 /*
  * ◦ write
  * ◦ opendir
-DIR				*opendir(const char *filename);
+ DIR				*opendir(const char *filename);
  * ◦ readdir
-struct dirent	*readdir(DIR *dirp);
+ struct dirent	*readdir(DIR *dirp);
  * ◦ closedir
-int				closedir(DIR *dirp);
+ int				closedir(DIR *dirp);
  * ◦ stat
-int				stat(const char *restrict path, struct stat *restrict buf);
+ int				stat(const char *restrict path, struct stat *restrict buf);
  * ◦ lstat
-int				lstat(const char *restrict path, struct stat *restrict buf);
+ int				lstat(const char *restrict path, struct stat *restrict buf);
  * ◦ getpwuid
-struct passwd	*getpwuid(uid_t uid);
+ struct passwd	*getpwuid(uid_t uid);
  * ◦ getgrgid
-struct group	*getgrgid(gid_t gid);
+ struct group	*getgrgid(gid_t gid);
  * ◦ listxattr
  * ◦ getxattr
  * ◦ time
