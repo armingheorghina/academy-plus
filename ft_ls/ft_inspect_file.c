@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/17 12:02:52 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/17 13:03:18 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -330,6 +330,16 @@ int		ft_isflag(int i, char *flag, char **argv)
 	return (0);
 }
 
+
+void	ft_files_flag_management(int i, char **argv)
+{
+	struct stat		*buf;
+
+	buf = (struct stat*)malloc(sizeof(*buf));
+	(void)lstat(ft_strjoin(ft_strjoin(argv[i], "/"), argv[i]), buf);
+
+}
+
 int		main(int argc, char **argv)
 {
 	DIR				*dirp;
@@ -355,6 +365,7 @@ int		main(int argc, char **argv)
 			i++;
 		if (ft_isflag(i, "-l", argv) == 1 && i >= 2 && i == argc - 1)
 			return (0);
+		ft_files_flag_management(i, argv); // working on!!!
 		dirp = opendir(argv[i]);
 		if (dirp != NULL)
 		{
