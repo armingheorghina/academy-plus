@@ -12,7 +12,7 @@
 
 NAME = ft_ls
 
-SRCS = ft_inspect_file.c ft_work_with_d.c ft_work_with_e.c
+SRCS = ft_ls.c ft_work_with_d.c ft_work_with_e.c
 
 OBJ = $(SRCS:.c=.o)
 

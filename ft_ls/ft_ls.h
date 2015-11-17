@@ -40,11 +40,15 @@ typedef struct s_ls_list
 	struct s_ls_list	*next;
 }t_ls_list;
 
-void	ft_work_with_d(int i, int argc, char **argv);
 void	ft_work_with_e(int i, char **argv);
+void	ft_work_with_d(int i, int argc, char **argv, char *flag);
+
 
 char	ft_get_file_type(int i, char **argv);
-void	ft_push_sort_lsl(t_ls_list **begin, char *str, off_t size, time_t time, uid_t st_uid, gid_t st_gid, nlink_t st_nlink, mode_t st_mode, blkcnt_t st_blocks, char *lbuf);
+void	ft_push_sort_lsl(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *lbuf);
+void	ft_push_sort_lsl2(t_ls_list *start, char *str, off_t size, time_t time);
+void	ft_push_sort_lsl3(t_ls_list *start, char *str, uid_t st_uid, gid_t st_gid);
+void	ft_push_sort_lsl4(t_ls_list *start, char *str, nlink_t st_nlink, mode_t st_mode);
 void	ft_push_bsl_bnl_to_list(t_ls_list *start);
 void	ft_puttime(char *str);
 void	ft_push_bsl_bnl_to_list(t_ls_list *start);
@@ -56,12 +60,13 @@ void	ft_puthardlinks(int nlink, int biggest_nlink_len);
 void	ft_putmode(mode_t mode);
 void	ft_put_total(t_ls_list *start);
 void	ft_putlink(char	*file_name, char *link_name);
-void	ft_putlist_lsl(t_ls_list *start);
+void	ft_putlist_lsl(t_ls_list *start, char *flag);
 void	ft_delete_hidden_from_list(t_ls_list **start);
 int		ft_isflag(int i, char *flag, char **argv);
 char	ft_get_file_type(int i, char **argv);
 char	*ft_get_flag(int i, int argc, char **argv);
 int		ft_get_flags_number(int i, int argc, char** argv);
+int	ft_check_if_flag_contains(char *str, char c);
 #endif
 /*
  * ◦ write

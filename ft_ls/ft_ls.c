@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	ft_push_sort_lsl(t_ls_list **begin, char *str, off_t size, time_t time, uid_t st_uid, gid_t st_gid, nlink_t st_nlink, mode_t st_mode, blkcnt_t st_blocks, char *lbuf)
+void	ft_push_sort_lsl(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *lbuf)
 {
 	t_ls_list *new;
 	t_ls_list *list;
@@ -20,12 +20,10 @@ void	ft_push_sort_lsl(t_ls_list **begin, char *str, off_t size, time_t time, uid
 
 	new = (t_ls_list*)malloc(sizeof(t_ls_list));
 	new->name = ft_strdup(str);
-	new->bytes_size = size;
-	new->mtime = time;
-	new->uid = st_uid;
-	new->gid = st_gid;
-	new->nlink = st_nlink;
-	new->mode = st_mode;
+//	new->uid = st_uid;
+//	new->gid = st_gid;
+//	new->nlink = st_nlink;
+//	new->mode = st_mode;
 	new->blocks = st_blocks;
 	new->link_name = lbuf;
 	list = *begin;
@@ -55,6 +53,45 @@ void	ft_push_sort_lsl(t_ls_list **begin, char *str, off_t size, time_t time, uid
 			if (ok == 1)
 				list->next = new;			
 		}
+	}
+}
+
+void	ft_push_sort_lsl2(t_ls_list *start, char *str, off_t st_size, time_t time)
+{
+	while (start)
+	{
+		if (ft_strcmp(str, start->name) == 0)
+		{
+			start->bytes_size = st_size;
+			start->mtime = time;
+		}
+		start = start->next;
+	}
+}
+
+void	ft_push_sort_lsl3(t_ls_list *start, char *str, uid_t st_uid, gid_t st_gid)
+{
+	while (start)
+	{
+		if (ft_strcmp(str, start->name) == 0)
+		{
+			start->uid = st_uid;
+			start->gid = st_gid;
+		}
+		start = start->next;
+	}
+}
+
+void	ft_push_sort_lsl4(t_ls_list *start, char *str, nlink_t st_nlink, mode_t st_mode)
+{
+	while (start)
+	{
+		if (ft_strcmp(str, start->name) == 0)
+		{
+			start->nlink = st_nlink;
+			start->mode = st_mode;
+		}
+		start = start->next;
 	}
 }
 
@@ -287,18 +324,22 @@ void	ft_putlink(char	*file_name, char *link_name)
 	ft_putchar('\n');
 }
 
-void	ft_putlist_lsl(t_ls_list *start)
+void	ft_putlist_lsl(t_ls_list *start, char *flag)
 {
-
-	ft_put_total(start);
+	if (ft_check_if_flag_contains(flag, 'l') == 1)
+		ft_put_total(start);
 	while (start)
 	{
-		ft_putmode(start->mode);
-		ft_puthardlinks((int)start->nlink, start->biggest_nlink_len);
-		ft_putuid_name(getpwuid(start->uid), start->biggest_uid_len);
-		ft_putgid_name(getgrgid(start->gid), start->biggest_gid_len);
-		ft_putbytes((int)start->bytes_size, start->biggest_size_len);
-		ft_puttime(ctime(&(start->mtime)));
+		
+		if (ft_check_if_flag_contains(flag, 'l') == 1)
+		{
+			ft_putmode(start->mode);
+			ft_puthardlinks((int)start->nlink, start->biggest_nlink_len);
+			ft_putuid_name(getpwuid(start->uid), start->biggest_uid_len);
+			ft_putgid_name(getgrgid(start->gid), start->biggest_gid_len);
+			ft_putbytes((int)start->bytes_size, start->biggest_size_len);
+			ft_puttime(ctime(&(start->mtime)));
+		}
 		if (S_ISLNK(start->mode) == 1) /* if file is a link*/
 			ft_putlink(start->name, start->link_name);
 		else
@@ -382,22 +423,23 @@ int		ft_get_flags_number(int i, int argc, char** argv)
 
 int		main(int argc, char **argv)
 {
-	int				i;
-	int				flags_number;
+	int	i;
+	char	*flag;
+	int	flags_number;
 
 	i = 1;
-	printf("%s", ft_get_flag(i, argc, argv));
+	flag = ft_get_flag(i, argc, argv);
 	flags_number = ft_get_flags_number(i, argc, argv);
 	i = i + flags_number;
 	if (argv[i] == NULL && i == argc) // flags only.
 	{
 		argv[i] = ".";
-		ft_work_with_d(i, argc, argv);
+		ft_work_with_d(i, argc, argv, flag);
 	}
 	while (i < argc) // *TODO add multiple flags functionality
 	{
 		ft_work_with_e(i, argv);
-		ft_work_with_d(i, argc, argv);
+		ft_work_with_d(i, argc, argv, flag);
 		i++;
 	}
 	return (0);
