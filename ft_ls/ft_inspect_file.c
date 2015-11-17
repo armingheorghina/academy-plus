@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/17 20:05:10 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/17 20:10:04 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -405,4 +405,6 @@ int		main(int argc, char **argv)
 /*
 a -delete sau nu hidden;
 sortare - daca nu aapare t si u ... sortez dupa nume
-l - long listing;*/
+l - long listing;
+delete ft_isflag - nu se foloseste si oricum e gresita
+*/

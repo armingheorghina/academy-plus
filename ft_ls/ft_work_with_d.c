@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/17 20:07:01 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/17 20:09:37 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_work_with_d(int i, int argc, char **argv)
 			ft_push_buidl_bgidl_to_list(start);
 			ft_putlist_lsl(start);
 			// *TODO free list : use ft_lstdel(start, f_free_str)
-			if (argc > 3 && i != argc - 1) // && ft_isflag(argc - 1, "-a", argv))
+			if (argc > 3 && i != argc - 1)
 				ft_putchar('\n');
 			close_dir = closedir(dirp);
 			if (close_dir == -1)
