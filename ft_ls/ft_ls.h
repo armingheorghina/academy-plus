@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/16 18:53:36 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/17 12:02:54 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_ls_list
 	int					biggest_size_len;	/* bigest bytes_size length */
 	blkcnt_t			blocks;				/* number of 512B blocks allocated */
 	time_t   			mtime;				/* stat - time of last modification */
+	char				*link_name;			/* readlink */				
 	struct s_ls_list	*next;
 }t_ls_list;
 
@@ -63,6 +64,8 @@ typedef struct s_ls_list
  * ◦ time
  * ◦ ctime
  * ◦ readlink
+ *ssize_t
+      readlink(const char *restrict path, char *restrict buf, size_t bufsize);
  * ◦ malloc
  * ◦ free
  * ◦ perror

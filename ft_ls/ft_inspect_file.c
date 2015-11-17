@@ -6,13 +6,13 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/16 19:02:34 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/17 12:02:52 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_push_sort_lsl(t_ls_list **begin, char *str, off_t size, time_t time, uid_t st_uid, gid_t st_gid, nlink_t st_nlink, mode_t st_mode, blkcnt_t st_blocks)
+void	ft_push_sort_lsl(t_ls_list **begin, char *str, off_t size, time_t time, uid_t st_uid, gid_t st_gid, nlink_t st_nlink, mode_t st_mode, blkcnt_t st_blocks, char *lbuf)
 {
 	t_ls_list *new;
 	t_ls_list *list;
@@ -27,6 +27,7 @@ void	ft_push_sort_lsl(t_ls_list **begin, char *str, off_t size, time_t time, uid
 	new->nlink = st_nlink;
 	new->mode = st_mode;
 	new->blocks = st_blocks;
+	new->link_name = lbuf;
 	list = *begin;
 	new->next = NULL;
 	if (list == NULL)
@@ -190,7 +191,7 @@ void	ft_putgid_name(struct group *grp, int biggest_gid_len)
 	ft_putchar(' ');
 }
 
-void	ft_putnumberofhardlinks(int nlink, int biggest_nlink_len)
+void	ft_puthardlinks(int nlink, int biggest_nlink_len)
 {
 	int x;
 	int i;
@@ -278,6 +279,14 @@ void		ft_put_total(t_ls_list *start)
 	ft_putchar('\n');
 }
 
+void	ft_putlink(char	*file_name, char *link_name)
+{
+	ft_putstr(file_name);
+	ft_putstr(" -> ");
+	ft_putstr(link_name);
+	ft_putchar('\n');
+}
+
 void	ft_putlist_lsl(t_ls_list *start)
 {
 
@@ -285,12 +294,15 @@ void	ft_putlist_lsl(t_ls_list *start)
 	while (start)
 	{
 		ft_putmode(start->mode);
-		ft_putnumberofhardlinks((int)start->nlink, start->biggest_nlink_len);
+		ft_puthardlinks((int)start->nlink, start->biggest_nlink_len);
 		ft_putuid_name(getpwuid(start->uid), start->biggest_uid_len);
 		ft_putgid_name(getgrgid(start->gid), start->biggest_gid_len);
 		ft_putbytes((int)start->bytes_size, start->biggest_size_len);
 		ft_puttime(ctime(&(start->mtime)));
-		ft_putendl(start->name);
+		if (S_ISLNK(start->mode) == 1) /* if file is a link*/
+			ft_putlink(start->name, start->link_name);
+		else
+			ft_putendl(start->name);
 		start = start->next;
 	}
 }
@@ -326,6 +338,7 @@ int		main(int argc, char **argv)
 	int				i;
 	t_ls_list		*start;
 	struct stat		*buf;
+	char			*lbuf = NULL;
 	//int			stat_return;
 
 	i = 1;
@@ -337,6 +350,7 @@ int		main(int argc, char **argv)
 			if (argv[i] == NULL) // flag only.
 			argv[i] = ".";
 		}
+
 		while (ft_isflag(i, "-l", argv) == 1 && i >= 2 && i < argc - 1)
 			i++;
 		if (ft_isflag(i, "-l", argv) == 1 && i >= 2 && i == argc - 1)
@@ -349,7 +363,9 @@ int		main(int argc, char **argv)
 			{
 				buf = (struct stat*)malloc(sizeof(*buf));
 				(void)lstat(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), buf);
-				ft_push_sort_lsl(&start, dp->d_name, buf->st_size, buf->st_mtime, buf->st_uid, buf->st_gid, buf->st_nlink, buf->st_mode, buf->st_blocks);
+				lbuf = (char*)malloc(buf->st_size);
+				(void)readlink(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), lbuf, buf->st_size);
+				ft_push_sort_lsl(&start, dp->d_name, buf->st_size, buf->st_mtime, buf->st_uid, buf->st_gid, buf->st_nlink, buf->st_mode, buf->st_blocks, lbuf);
 				if (dp == NULL) // *TODO move this 2 lines to top of while in all files
 					perror("readdir error");
 			}
