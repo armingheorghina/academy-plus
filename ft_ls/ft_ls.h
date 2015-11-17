@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/17 13:03:20 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/17 19:40:10 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,28 @@ typedef struct s_ls_list
 	struct s_ls_list	*next;
 }t_ls_list;
 
+void	ft_work_with_d(int i, int argc, char **argv);
+void	ft_work_with_e(int i, char **argv);
 
-
+char	ft_get_file_type(int i, char **argv);
+void	ft_push_sort_lsl(t_ls_list **begin, char *str, off_t size, time_t time, uid_t st_uid, gid_t st_gid, nlink_t st_nlink, mode_t st_mode, blkcnt_t st_blocks, char *lbuf);
+void	ft_push_bsl_bnl_to_list(t_ls_list *start);
+void	ft_puttime(char *str);
+void	ft_push_bsl_bnl_to_list(t_ls_list *start);
+void	ft_push_buidl_bgidl_to_list(t_ls_list *start);
+void	ft_putbytes(int bytes_size, int biggest_size_len);
+void	ft_putuid_name(struct passwd *pwd, int biggest_uid_len);
+void	ft_putgid_name(struct group *grp, int biggest_gid_len);
+void	ft_puthardlinks(int nlink, int biggest_nlink_len);
+void	ft_putmode(mode_t mode);
+void	ft_put_total(t_ls_list *start);
+void	ft_putlink(char	*file_name, char *link_name);
+void	ft_putlist_lsl(t_ls_list *start);
+void	ft_delete_hidden_from_list(t_ls_list **start);
+int		ft_isflag(int i, char *flag, char **argv);
+char	ft_get_file_type(int i, char **argv);
+char	*ft_get_flag(int i, int argc, char **argv);
+int		ft_get_flags_number(int i, int argc, char** argv);
 #endif
 /*
  * ◦ write

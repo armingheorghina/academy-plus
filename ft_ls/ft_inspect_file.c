@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/17 13:03:18 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/17 20:05:10 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -330,79 +330,79 @@ int		ft_isflag(int i, char *flag, char **argv)
 	return (0);
 }
 
-
-void	ft_files_flag_management(int i, char **argv)
+char	ft_get_file_type(int i, char **argv)
 {
 	struct stat		*buf;
-
+	
 	buf = (struct stat*)malloc(sizeof(*buf));
-	(void)lstat(ft_strjoin(ft_strjoin(argv[i], "/"), argv[i]), buf);
+	(void)lstat((argv[i]), buf);
+	if (S_ISDIR(buf->st_mode) == 1)
+		return ('d');
+	if (S_ISREG(buf->st_mode) == 1)
+		return ('-');
+	if (S_ISCHR(buf->st_mode) == 1)
+		return ('c');
+	if (S_ISBLK(buf->st_mode) == 1)
+		return ('b');
+	if (S_ISFIFO(buf->st_mode) == 1)
+		return ('f');
+	if (S_ISLNK(buf->st_mode) == 1)
+		return ('l');
+	if (S_ISSOCK(buf->st_mode) == 1)
+		return ('s');
+	else
+		return ('e');
+}
 
+char	*ft_get_flag(int i, int argc, char **argv)
+{
+	char	*flag;
+
+	flag = ft_strdup("");
+	while (i < argc && argv[i][0] == '-' && ft_strlen(argv[i]) > 1)
+	{
+		flag = ft_strjoin(flag, argv[i] + 1);
+		i++;
+	}
+	return (flag);
+}
+
+int		ft_get_flags_number(int i, int argc, char** argv)
+{
+	int flags_number;
+
+	flags_number = 0;
+	while (i < argc && argv[i][0] == '-' && ft_strlen(argv[i]) > 1)
+	{
+		flags_number++;
+		i++;
+	}
+	return (flags_number);
 }
 
 int		main(int argc, char **argv)
 {
-	DIR				*dirp;
-	struct dirent	*dp;
-	int				close_dir;
 	int				i;
-	t_ls_list		*start;
-	struct stat		*buf;
-	char			*lbuf = NULL;
-	//int			stat_return;
+	int				flags_number;
 
 	i = 1;
+	printf("%s", ft_get_flag(i, argc, argv));
+	flags_number = ft_get_flags_number(i, argc, argv);
+	i = i + flags_number;
+	if (argv[i] == NULL && i == argc) // flags only.
+	{
+		argv[i] = ".";
+		ft_work_with_d(i, argc, argv);
+	}
 	while (i < argc) // *TODO add multiple flags functionality
 	{
-		if (ft_isflag(i, "-l", argv) == 1 && i < 2)
-		{
-			i++;
-			if (argv[i] == NULL) // flag only.
-			argv[i] = ".";
-		}
-
-		while (ft_isflag(i, "-l", argv) == 1 && i >= 2 && i < argc - 1)
-			i++;
-		if (ft_isflag(i, "-l", argv) == 1 && i >= 2 && i == argc - 1)
-			return (0);
-		ft_files_flag_management(i, argv); // working on!!!
-		dirp = opendir(argv[i]);
-		if (dirp != NULL)
-		{
-			start = NULL;
-			while ((dp = readdir(dirp)) != NULL)
-			{
-				buf = (struct stat*)malloc(sizeof(*buf));
-				(void)lstat(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), buf);
-				lbuf = (char*)malloc(buf->st_size);
-				(void)readlink(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), lbuf, buf->st_size);
-				ft_push_sort_lsl(&start, dp->d_name, buf->st_size, buf->st_mtime, buf->st_uid, buf->st_gid, buf->st_nlink, buf->st_mode, buf->st_blocks, lbuf);
-				if (dp == NULL) // *TODO move this 2 lines to top of while in all files
-					perror("readdir error");
-			}
-			if (argc > 3)
-			{
-				ft_putstr(argv[i]);
-				ft_putstr(":\n");
-			}
-			ft_delete_hidden_from_list(&start);
-			ft_push_bsl_bnl_to_list(start);
-			ft_push_buidl_bgidl_to_list(start);
-			ft_putlist_lsl(start);
-			// *TODO free list : use ft_lstdel(start, f_free_str)
-			if (argc > 3 && i != argc - 1) // && ft_isflag(argc - 1, "-a", argv))
-				ft_putchar('\n');
-			close_dir = closedir(dirp);
-			if (close_dir == -1)
-				perror("closedir error");
-		}
-		else if (dirp == NULL)
-		{
-			ft_putstr(argv[0]);
-			ft_putstr(": ");
-			perror(argv[i]);
-		}
+		ft_work_with_e(i, argv);
+		ft_work_with_d(i, argc, argv);
 		i++;
 	}
 	return (0);
 }
+/*
+a -delete sau nu hidden;
+sortare - daca nu aapare t si u ... sortez dupa nume
+l - long listing;*/
