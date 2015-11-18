@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/18 17:33:14 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/18 18:32:34 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -444,6 +444,33 @@ void	ft_nlinkswap(nlink_t *nlink1, nlink_t *nlink2)
 	*nlink2 = temp;
 }
 
+void	ft_intswap(int *a, int *b)
+{
+	int temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+void	ft_uid_tswap(uid_t *uid1, uid_t *uid2)
+{
+	uid_t temp;
+
+	temp = *uid1;
+	*uid1 = *uid2;
+	*uid2 = temp;
+}
+/*
+void	ft_swap_all(void *a, void *b)
+{
+	void temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+*/
 void	ft_sort_list_reverse(t_ls_list *start)
 {
 	t_ls_list *start2;
@@ -458,6 +485,9 @@ void	ft_sort_list_reverse(t_ls_list *start)
 				ft_strswap(&(start->name), &(start2->name));
 				ft_modeswap(&(start->mode), &(start2->mode));
 				ft_nlinkswap(&(start->nlink), &(start2->nlink));
+				ft_intswap(&(start->biggest_nlink_len), &(start2->biggest_nlink_len));
+				ft_uid_tswap(&(start->uid), &(start2->uid));
+				ft_intswap(&(start->biggest_uid_len), &(start2->biggest_uid_len));
 				
 				// *TODO swap nodes :)
 			}
