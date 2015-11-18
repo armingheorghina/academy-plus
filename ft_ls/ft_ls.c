@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/18 18:32:34 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/18 19:02:03 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -461,16 +461,16 @@ void	ft_uid_tswap(uid_t *uid1, uid_t *uid2)
 	*uid1 = *uid2;
 	*uid2 = temp;
 }
-/*
-void	ft_swap_all(void *a, void *b)
-{
-	void temp;
 
-	temp = *a;
-	*a = *b;
-	*b = temp;
+void	ft_gid_tswap(gid_t *gid1, gid_t *gid2)
+{
+	gid_t temp;
+
+	temp = *gid1;
+	*gid1 = *gid2;
+	*gid2 = temp;
 }
-*/
+
 void	ft_sort_list_reverse(t_ls_list *start)
 {
 	t_ls_list *start2;
@@ -488,6 +488,7 @@ void	ft_sort_list_reverse(t_ls_list *start)
 				ft_intswap(&(start->biggest_nlink_len), &(start2->biggest_nlink_len));
 				ft_uid_tswap(&(start->uid), &(start2->uid));
 				ft_intswap(&(start->biggest_uid_len), &(start2->biggest_uid_len));
+				ft_gid_tswap(&(start->gid), &(start2->gid));
 				
 				// *TODO swap nodes :)
 			}
