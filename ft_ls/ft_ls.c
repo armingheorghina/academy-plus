@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/18 15:52:39 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/18 17:33:14 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -426,6 +426,24 @@ void	ft_strswap(char **str1, char **str2)
 	*str2 = temp;
 }
 
+void	ft_modeswap(mode_t *mode1, mode_t *mode2)
+{
+	mode_t temp;
+
+	temp = *mode1;
+	*mode1 = *mode2;
+	*mode2 = temp;
+}
+
+void	ft_nlinkswap(nlink_t *nlink1, nlink_t *nlink2)
+{
+	nlink_t	temp;
+	
+	temp = *nlink1;
+	*nlink1 = *nlink2;
+	*nlink2 = temp;
+}
+
 void	ft_sort_list_reverse(t_ls_list *start)
 {
 	t_ls_list *start2;
@@ -437,8 +455,11 @@ void	ft_sort_list_reverse(t_ls_list *start)
 		{
 			if (ft_strcmp(start->name, (start2)->name) < 0)
 			{
-				ft_strswap(&(start->name), &((start2->name)));
-				// *TODO swap nodes 
+				ft_strswap(&(start->name), &(start2->name));
+				ft_modeswap(&(start->mode), &(start2->mode));
+				ft_nlinkswap(&(start->nlink), &(start2->nlink));
+				
+				// *TODO swap nodes :)
 			}
 			start2 = start2->next;
 		}
