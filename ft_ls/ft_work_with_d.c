@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/17 20:09:37 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/18 15:52:42 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	ft_work_with_d(int i, int argc, char **argv, char *flag)
 				ft_delete_hidden_from_list(&start);
 			ft_push_bsl_bnl_to_list(start);
 			ft_push_buidl_bgidl_to_list(start);
+			if (ft_check_if_flag_contains(flag, 'r') == 1)
+				ft_sort_list_reverse(start);
 			ft_putlist_lsl(start, flag);
 			// *TODO free list : use ft_lstdel(start, f_free_str)
 			if (argc > 3 && i != argc - 1)

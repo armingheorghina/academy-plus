@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/17 20:10:04 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/18 15:52:39 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ void	ft_push_sort_lsl(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *lb
 
 	new = (t_ls_list*)malloc(sizeof(t_ls_list));
 	new->name = ft_strdup(str);
-//	new->uid = st_uid;
-//	new->gid = st_gid;
-//	new->nlink = st_nlink;
-//	new->mode = st_mode;
 	new->blocks = st_blocks;
 	new->link_name = lbuf;
 	list = *begin;
@@ -340,7 +336,7 @@ void	ft_putlist_lsl(t_ls_list *start, char *flag)
 			ft_putbytes((int)start->bytes_size, start->biggest_size_len);
 			ft_puttime(ctime(&(start->mtime)));
 		}
-		if (S_ISLNK(start->mode) == 1) /* if file is a link*/
+		if (S_ISLNK(start->mode) == 1) /* special case for links listing*/
 			ft_putlink(start->name, start->link_name);
 		else
 			ft_putendl(start->name);
@@ -419,6 +415,35 @@ int		ft_get_flags_number(int i, int argc, char** argv)
 		i++;
 	}
 	return (flags_number);
+}
+
+void	ft_strswap(char **str1, char **str2)
+{
+	char *temp;
+
+	temp = *str1;
+	*str1 = *str2;
+	*str2 = temp;
+}
+
+void	ft_sort_list_reverse(t_ls_list *start)
+{
+	t_ls_list *start2;
+
+	while (start)
+	{
+		start2 = start->next;
+		while (start2)
+		{
+			if (ft_strcmp(start->name, (start2)->name) < 0)
+			{
+				ft_strswap(&(start->name), &((start2->name)));
+				// *TODO swap nodes 
+			}
+			start2 = start2->next;
+		}
+		start = start->next;
+	}
 }
 
 int		main(int argc, char **argv)
