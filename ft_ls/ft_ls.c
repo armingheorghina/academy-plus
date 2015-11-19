@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/18 19:02:03 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/19 12:01:47 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,16 @@ void	ft_push_sort_lsl4(t_ls_list *start, char *str, nlink_t st_nlink, mode_t st_
 	}
 }
 
+void	ft_push_sort_lsl5(t_ls_list *start, char *str, ssize_t xattr)
+{
+	while (start)
+	{
+		if (ft_strcmp(str, start->name) == 0)
+			start->xattr_nbr = xattr;
+		start = start->next;
+	}
+}
+
 void	ft_puttime(char *str)
 {
 	int i;
@@ -161,11 +171,17 @@ void	ft_push_buidl_bgidl_to_list(t_ls_list *start)
 	while (start)
 	{
 		pwd = getpwuid(start->uid);
-		a = ft_strlen(pwd->pw_name);
+		if (pwd == NULL)
+			a = ft_strlen(ft_itoa((int)start->uid));
+		else
+			a = ft_strlen(pwd->pw_name);
 		if (a > b)
 			b = a;
 		grp = getgrgid(start->gid);
-		c = ft_strlen(grp->gr_name);
+		if (grp == NULL)
+			c = ft_strlen(ft_itoa((int)start->gid));
+		else
+			c = ft_strlen(grp->gr_name);
 		if (c > d)
 			d = c;
 		start = start->next;
@@ -194,34 +210,66 @@ void	ft_putbytes(int bytes_size, int biggest_size_len)
 	write(1, " ", 1);
 }
 
-void	ft_putuid_name(struct passwd *pwd, int biggest_uid_len)
+void	ft_putuid_name(uid_t name, int biggest_uid_len)
 {
 	unsigned long i;
-
+ 	struct passwd *pwd;
+	
 	i = 0;
-	ft_putstr(pwd->pw_name);
-	while (i < biggest_uid_len - ft_strlen(pwd->pw_name))
+	pwd = getpwuid(name);
+	if (pwd == NULL)
 	{
-		write(1, " ", 1);
-		i++;
+		ft_putstr(ft_itoa((int)name));
+		while (i < biggest_uid_len - ft_strlen(ft_itoa((int)name)))
+		{
+			write(1, " ", 1);
+			i++;
+		}
+		ft_putchar(' ');
+		ft_putchar(' ');
 	}
-	ft_putchar(' ');
-	ft_putchar(' ');
+	else
+	{
+		ft_putstr(pwd->pw_name);
+		while (i < biggest_uid_len - ft_strlen(pwd->pw_name))
+		{
+			write(1, " ", 1);
+			i++;
+		}
+		ft_putchar(' ');
+		ft_putchar(' ');
+	}
 }
 
-void	ft_putgid_name(struct group *grp, int biggest_gid_len)
+void	ft_putgid_name(gid_t name, int biggest_gid_len)
 {
 	unsigned long i;
+	struct group *grp;
 
 	i = 0;
-	ft_putstr(grp->gr_name);
-	while (i < biggest_gid_len - ft_strlen(grp->gr_name))
+	grp = getgrgid(name);
+	if (grp == NULL)
 	{
-		write(1, " ", 1);
-		i++;
+		ft_putstr(ft_itoa((int)name));
+		while (i < biggest_gid_len - ft_strlen(ft_itoa((int)name)))
+		{
+			write(1, " ", 1);
+			i++;
+		}
+		ft_putchar(' ');
+		ft_putchar(' ');
 	}
-	ft_putchar(' ');
-	ft_putchar(' ');
+	else
+	{
+		ft_putstr(grp->gr_name);
+		while (i < biggest_gid_len - ft_strlen(grp->gr_name))
+		{
+			write(1, " ", 1);
+			i++;
+		}
+		ft_putchar(' ');
+		ft_putchar(' ');
+	}
 }
 
 void	ft_puthardlinks(int nlink, int biggest_nlink_len)
@@ -240,7 +288,7 @@ void	ft_puthardlinks(int nlink, int biggest_nlink_len)
 	ft_putchar(' ');
 }
 
-void	ft_putmode(mode_t mode)
+void	ft_putmode(mode_t mode, ssize_t xattr_nbr)
 {
 	
 	if (S_ISREG(mode) == 1)
@@ -293,7 +341,10 @@ void	ft_putmode(mode_t mode)
 		ft_putchar('x');
 	else
 		ft_putchar('-');
-	ft_putchar(' ');
+	if (xattr_nbr > 0)
+		ft_putchar('@');
+	else
+		ft_putchar(' ');
 	ft_putchar(' ');
 }
 
@@ -329,10 +380,12 @@ void	ft_putlist_lsl(t_ls_list *start, char *flag)
 		
 		if (ft_check_if_flag_contains(flag, 'l') == 1)
 		{
-			ft_putmode(start->mode);
+			ft_putmode(start->mode, start->xattr_nbr);
 			ft_puthardlinks((int)start->nlink, start->biggest_nlink_len);
-			ft_putuid_name(getpwuid(start->uid), start->biggest_uid_len);
-			ft_putgid_name(getgrgid(start->gid), start->biggest_gid_len);
+		//	ft_putuid_name(getpwuid(start->uid), start->biggest_uid_len);
+			ft_putuid_name(start->uid, start->biggest_uid_len);
+	//		ft_putgid_name(getgrgid(start->gid), start->biggest_gid_len);
+			ft_putgid_name(start->gid, start->biggest_gid_len);
 			ft_putbytes((int)start->bytes_size, start->biggest_size_len);
 			ft_puttime(ctime(&(start->mtime)));
 		}
@@ -471,6 +524,42 @@ void	ft_gid_tswap(gid_t *gid1, gid_t *gid2)
 	*gid2 = temp;
 }
 
+void	ft_off_tswap(off_t *bytes_size1, off_t *bytes_size2)
+{
+	off_t temp;
+
+	temp = *bytes_size1;
+	*bytes_size1 = *bytes_size2;
+	*bytes_size2 = temp;
+}
+
+void	ft_blkcnt_tswap(blkcnt_t *blocks1, blkcnt_t *blocks2)
+{
+	blkcnt_t temp;
+
+	temp = *blocks1;
+	*blocks1 = *blocks2;
+	*blocks2 = temp;
+}
+
+void	ft_time_tswap(time_t *time1, time_t *time2)
+{
+	time_t temp;
+
+	temp = *time1;
+	*time1 = *time2;
+	*time2 = temp;
+}
+
+void	ft_ssize_tswap(ssize_t *a, ssize_t *b)
+{
+	ssize_t temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
 void	ft_sort_list_reverse(t_ls_list *start)
 {
 	t_ls_list *start2;
@@ -485,12 +574,13 @@ void	ft_sort_list_reverse(t_ls_list *start)
 				ft_strswap(&(start->name), &(start2->name));
 				ft_modeswap(&(start->mode), &(start2->mode));
 				ft_nlinkswap(&(start->nlink), &(start2->nlink));
-				ft_intswap(&(start->biggest_nlink_len), &(start2->biggest_nlink_len));
 				ft_uid_tswap(&(start->uid), &(start2->uid));
-				ft_intswap(&(start->biggest_uid_len), &(start2->biggest_uid_len));
 				ft_gid_tswap(&(start->gid), &(start2->gid));
-				
-				// *TODO swap nodes :)
+				ft_off_tswap(&(start->bytes_size), &(start2->bytes_size));
+				ft_blkcnt_tswap(&(start->blocks), &(start2->blocks));
+				ft_time_tswap(&(start->mtime), &(start2->mtime));
+				ft_strswap(&(start->link_name), &(start2->link_name));
+				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
 			}
 			start2 = start2->next;
 		}

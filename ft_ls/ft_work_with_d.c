@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/18 15:52:42 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/19 12:01:50 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ void	ft_work_with_d(int i, int argc, char **argv, char *flag)
 				(void)lstat(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), buf);
 				lbuf = (char*)malloc(buf->st_size);
 				(void)readlink(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), lbuf, buf->st_size);
+				
 				ft_push_sort_lsl(&start, dp->d_name, buf->st_blocks, lbuf);
 				ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 				ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 				ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
+				ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW));
 			}
 			if (argc > 3)
 			{

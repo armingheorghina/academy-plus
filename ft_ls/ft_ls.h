@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/18 19:02:05 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/19 12:01:52 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <grp.h>
 # include <stdio.h>
 # include <time.h>
+# include <sys/xattr.h>
 
 typedef struct s_ls_list
 {
@@ -36,7 +37,8 @@ typedef struct s_ls_list
 	int					biggest_size_len;	/* bigest bytes_size length */
 	blkcnt_t			blocks;				/* number of 512B blocks allocated */
 	time_t   			mtime;				/* stat - time of last modification */
-	char				*link_name;			/* readlink */				
+	char				*link_name;			/* readlink */			
+	ssize_t				xattr_nbr;			/* listxattr*/	
 	struct s_ls_list	*next;
 }t_ls_list;
 
@@ -49,15 +51,16 @@ void	ft_push_sort_lsl(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *lb
 void	ft_push_sort_lsl2(t_ls_list *start, char *str, off_t size, time_t time);
 void	ft_push_sort_lsl3(t_ls_list *start, char *str, uid_t st_uid, gid_t st_gid);
 void	ft_push_sort_lsl4(t_ls_list *start, char *str, nlink_t st_nlink, mode_t st_mode);
+void	ft_push_sort_lsl5(t_ls_list *start, char *str, ssize_t xattr);
 void	ft_push_bsl_bnl_to_list(t_ls_list *start);
 void	ft_puttime(char *str);
 void	ft_push_bsl_bnl_to_list(t_ls_list *start);
 void	ft_push_buidl_bgidl_to_list(t_ls_list *start);
 void	ft_putbytes(int bytes_size, int biggest_size_len);
-void	ft_putuid_name(struct passwd *pwd, int biggest_uid_len);
-void	ft_putgid_name(struct group *grp, int biggest_gid_len);
+void	ft_putuid_name(uid_t uid, int biggest_uid_len);
+void	ft_putgid_name(gid_t gid, int biggest_gid_len);
 void	ft_puthardlinks(int nlink, int biggest_nlink_len);
-void	ft_putmode(mode_t mode);
+void	ft_putmode(mode_t mode, ssize_t xattr_nbr);
 void	ft_put_total(t_ls_list *start);
 void	ft_putlink(char	*file_name, char *link_name);
 void	ft_putlist_lsl(t_ls_list *start, char *flag);
