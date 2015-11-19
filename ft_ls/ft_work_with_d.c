@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/19 12:01:50 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/19 15:49:21 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_work_with_d(int i, int argc, char **argv, char *flag)
 	t_ls_list		*start;
 	struct stat		*buf;
 	char			*lbuf;
+	ssize_t			readlink_return;
 
 	if (ft_get_file_type(i, argv) == 'd')
 	{
@@ -48,9 +49,14 @@ void	ft_work_with_d(int i, int argc, char **argv, char *flag)
 					perror("readdir error");
 				buf = (struct stat*)malloc(sizeof(*buf));
 				(void)lstat(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), buf);
-				lbuf = (char*)malloc(buf->st_size);
-				(void)readlink(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), lbuf, buf->st_size);
-				
+				if (S_ISLNK(buf->st_mode) == 1)
+				{
+				lbuf = (char*)malloc(1024);
+				readlink_return = readlink(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), lbuf, 1024);
+				lbuf[readlink_return] = '\0';
+				}
+				else
+					lbuf = ft_strdup("");
 				ft_push_sort_lsl(&start, dp->d_name, buf->st_blocks, lbuf);
 				ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 				ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
@@ -66,8 +72,10 @@ void	ft_work_with_d(int i, int argc, char **argv, char *flag)
 				ft_delete_hidden_from_list(&start);
 			ft_push_bsl_bnl_to_list(start);
 			ft_push_buidl_bgidl_to_list(start);
+			if (ft_check_if_flag_contains(flag, 't') == 1)
+				ft_sort_list_by_mtime(start);
 			if (ft_check_if_flag_contains(flag, 'r') == 1)
-				ft_sort_list_reverse(start);
+				ft_sort_list_reverse(start, flag);
 			ft_putlist_lsl(start, flag);
 			// *TODO free list : use ft_lstdel(start, f_free_str)
 			if (argc > 3 && i != argc - 1)

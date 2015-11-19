@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/19 12:01:47 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/19 15:49:23 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -388,9 +388,11 @@ void	ft_putlist_lsl(t_ls_list *start, char *flag)
 			ft_putgid_name(start->gid, start->biggest_gid_len);
 			ft_putbytes((int)start->bytes_size, start->biggest_size_len);
 			ft_puttime(ctime(&(start->mtime)));
+			if (S_ISLNK(start->mode) == 1) /* special case for links listing*/
+				ft_putlink(start->name, start->link_name);
+			else
+				ft_putendl(start->name);
 		}
-		if (S_ISLNK(start->mode) == 1) /* special case for links listing*/
-			ft_putlink(start->name, start->link_name);
 		else
 			ft_putendl(start->name);
 		start = start->next;
@@ -560,7 +562,7 @@ void	ft_ssize_tswap(ssize_t *a, ssize_t *b)
 	*b = temp;
 }
 
-void	ft_sort_list_reverse(t_ls_list *start)
+void	ft_sort_list_reverse(t_ls_list *start, char *flag)
 {
 	t_ls_list *start2;
 
@@ -569,7 +571,48 @@ void	ft_sort_list_reverse(t_ls_list *start)
 		start2 = start->next;
 		while (start2)
 		{
-			if (ft_strcmp(start->name, (start2)->name) < 0)
+			if ((start->mtime > start2->mtime) && ft_check_if_flag_contains(flag, 't') == 1)
+			{
+				ft_strswap(&(start->name), &(start2->name));
+				ft_modeswap(&(start->mode), &(start2->mode));
+				ft_nlinkswap(&(start->nlink), &(start2->nlink));
+				ft_uid_tswap(&(start->uid), &(start2->uid));
+				ft_gid_tswap(&(start->gid), &(start2->gid));
+				ft_off_tswap(&(start->bytes_size), &(start2->bytes_size));
+				ft_blkcnt_tswap(&(start->blocks), &(start2->blocks));
+				ft_time_tswap(&(start->mtime), &(start2->mtime));
+				ft_strswap(&(start->link_name), &(start2->link_name));
+				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
+			}
+			else if	(ft_strcmp(start->name, (start2)->name) < 0)
+			{
+				ft_strswap(&(start->name), &(start2->name));
+				ft_modeswap(&(start->mode), &(start2->mode));
+				ft_nlinkswap(&(start->nlink), &(start2->nlink));
+				ft_uid_tswap(&(start->uid), &(start2->uid));
+				ft_gid_tswap(&(start->gid), &(start2->gid));
+				ft_off_tswap(&(start->bytes_size), &(start2->bytes_size));
+				ft_blkcnt_tswap(&(start->blocks), &(start2->blocks));
+				ft_time_tswap(&(start->mtime), &(start2->mtime));
+				ft_strswap(&(start->link_name), &(start2->link_name));
+				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
+			}
+
+			start2 = start2->next;
+		}
+		start = start->next;
+	}
+}
+void	ft_sort_list_by_mtime(t_ls_list *start)
+{
+	t_ls_list *start2;
+
+	while (start)
+	{
+		start2 = start->next;
+		while (start2)
+		{
+			if (start->mtime < start2->mtime)
 			{
 				ft_strswap(&(start->name), &(start2->name));
 				ft_modeswap(&(start->mode), &(start2->mode));
@@ -587,7 +630,6 @@ void	ft_sort_list_reverse(t_ls_list *start)
 		start = start->next;
 	}
 }
-
 int		main(int argc, char **argv)
 {
 	int	i;

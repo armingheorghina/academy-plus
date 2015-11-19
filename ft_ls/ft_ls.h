@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/19 12:01:52 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/19 15:48:32 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ char	ft_get_file_type(int i, char **argv);
 char	*ft_get_flag(int i, int argc, char **argv);
 int		ft_get_flags_number(int i, int argc, char** argv);
 int	ft_check_if_flag_contains(char *str, char c);
-void	ft_sort_list_reverse(t_ls_list *start);
+void	ft_sort_list_reverse(t_ls_list *start, char *flag);
+void	ft_sort_list_by_mtime(t_ls_list *start);
 #endif
 /*
  * ◦ write
