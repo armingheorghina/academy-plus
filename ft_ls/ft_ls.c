@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/19 15:49:23 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/20 13:00:27 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,45 @@ void	ft_push_sort_lsl(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *lb
 		}
 	}
 }
+
+
+void	ft_push_sort_lsl0(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *lbuf)
+{
+	t_ls_list *new;
+	t_ls_list *list;
+	t_ls_list *p;
+	t_ls_list *timep;
+
+	new = (t_ls_list*)malloc(sizeof(t_ls_list));
+	new->name = ft_strdup(str);
+	new->blocks = st_blocks;
+	new->link_name = lbuf;
+	list = *begin;
+	new->next = NULL;
+	if (list == NULL)
+		*begin = new;
+	else
+	{
+		p = *begin;
+		while (p->next)
+			p = p->next;
+		p->next = new;
+	}
+	timep = *begin;
+	while (timep)
+
+//	while (*begin)
+//	{
+//
+//		*begin = *begin->next
+//	}
+}
+
+
+
+
+
+
 
 void	ft_push_sort_lsl2(t_ls_list *start, char *str, off_t st_size, time_t time)
 {
@@ -401,17 +440,24 @@ void	ft_putlist_lsl(t_ls_list *start, char *flag)
 
 void	ft_delete_hidden_from_list(t_ls_list **start)
 {
-	t_ls_list *start2;
+	t_ls_list *curr;
+	t_ls_list *prev;
 
-	start2 = *start;
-	while (start2)
+	curr = *start;
+	prev = NULL;
+	while (curr)
 	{
-		if (ft_ishidden(start2->name))
+		if (ft_ishidden(curr->name))
 		{
-			*start = start2->next;
-			free(start2);
+			if (prev == NULL)
+				*start = curr->next;
+			else
+				prev->next = curr->next;
+			free(curr);
 		}
-		start2 = start2->next;
+		else
+			prev = curr;
+		curr = curr->next;
 	}
 }
 

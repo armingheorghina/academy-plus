@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/19 15:49:21 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/20 13:00:30 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ void	ft_work_with_d(int i, int argc, char **argv, char *flag)
 				}
 				else
 					lbuf = ft_strdup("");
-				ft_push_sort_lsl(&start, dp->d_name, buf->st_blocks, lbuf);
+				if (ft_check_if_flag_contains(flag, 't') == 1) //no sort list
+					ft_push_sort_lsl0(&start, dp->d_name, buf->st_blocks, lbuf);
+				else
+					ft_push_sort_lsl(&start, dp->d_name, buf->st_blocks, lbuf);
 				ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 				ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 				ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
