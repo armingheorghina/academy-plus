@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/20 13:00:27 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/20 16:49:48 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	ft_push_sort_lsl0(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *l
 	t_ls_list *new;
 	t_ls_list *list;
 	t_ls_list *p;
-	t_ls_list *timep;
 
 	new = (t_ls_list*)malloc(sizeof(t_ls_list));
 	new->name = ft_strdup(str);
@@ -75,18 +74,7 @@ void	ft_push_sort_lsl0(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *l
 			p = p->next;
 		p->next = new;
 	}
-	timep = *begin;
-	while (timep)
-
-//	while (*begin)
-//	{
-//
-//		*begin = *begin->next
-//	}
 }
-
-
-
 
 
 
@@ -130,12 +118,15 @@ void	ft_push_sort_lsl4(t_ls_list *start, char *str, nlink_t st_nlink, mode_t st_
 	}
 }
 
-void	ft_push_sort_lsl5(t_ls_list *start, char *str, ssize_t xattr)
+void	ft_push_sort_lsl5(t_ls_list *start, char *str, ssize_t xattr, time_t time)
 {
 	while (start)
 	{
 		if (ft_strcmp(str, start->name) == 0)
+		{
 			start->xattr_nbr = xattr;
+			start->atime = time;
+		}
 		start = start->next;
 	}
 }
@@ -412,21 +403,25 @@ void	ft_putlink(char	*file_name, char *link_name)
 
 void	ft_putlist_lsl(t_ls_list *start, char *flag)
 {
-	if (ft_check_if_flag_contains(flag, 'l') == 1)
+	if ((ft_check_if_flag_contains(flag, 'l') == 1 || ft_check_if_flag_contains(flag, 'g') == 1) && ft_check_if_flag_contains(flag, 'd') == 0)
 		ft_put_total(start);
 	while (start)
 	{
 		
-		if (ft_check_if_flag_contains(flag, 'l') == 1)
+		if (ft_check_if_flag_contains(flag, 'l') == 1 || ft_check_if_flag_contains(flag, 'g') == 1)
 		{
 			ft_putmode(start->mode, start->xattr_nbr);
 			ft_puthardlinks((int)start->nlink, start->biggest_nlink_len);
-		//	ft_putuid_name(getpwuid(start->uid), start->biggest_uid_len);
-			ft_putuid_name(start->uid, start->biggest_uid_len);
-	//		ft_putgid_name(getgrgid(start->gid), start->biggest_gid_len);
+			if (ft_check_if_flag_contains(flag, 'l') == 1 && ft_check_if_flag_contains(flag, 'g') == 0)
+				ft_putuid_name(start->uid, start->biggest_uid_len);
 			ft_putgid_name(start->gid, start->biggest_gid_len);
 			ft_putbytes((int)start->bytes_size, start->biggest_size_len);
-			ft_puttime(ctime(&(start->mtime)));
+				
+			if (ft_check_if_flag_contains(flag, 'u') == 1)
+				ft_puttime(ctime(&(start->atime)));
+			else
+				ft_puttime(ctime(&(start->mtime)));
+
 			if (S_ISLNK(start->mode) == 1) /* special case for links listing*/
 				ft_putlink(start->name, start->link_name);
 			else
@@ -649,6 +644,82 @@ void	ft_sort_list_reverse(t_ls_list *start, char *flag)
 		start = start->next;
 	}
 }
+
+char	*ft_enable_flag_a(char *str, char c)
+{
+	char *fin;
+	int i;
+
+	fin = (char*)malloc(sizeof(*fin) * ft_strlen(str) + 2);
+	i = 0;
+	while (str[i])
+	{
+		fin[i] = str[i];
+		i++;
+	}
+	fin[i] = c;
+	fin[i + 1] = '\0';
+	return (fin);
+}
+
+void	ft_sort_list_by_ascii_for_time_equal(t_ls_list *start)
+{
+	t_ls_list *start2;
+
+	while (start)
+	{
+		start2 = start->next;
+		while (start2)
+		{
+			if ((start->mtime == start2->mtime) && (ft_strcmp(start->name, (start2)->name) > 0))
+			{
+				ft_strswap(&(start->name), &(start2->name));
+				ft_modeswap(&(start->mode), &(start2->mode));
+				ft_nlinkswap(&(start->nlink), &(start2->nlink));
+				ft_uid_tswap(&(start->uid), &(start2->uid));
+				ft_gid_tswap(&(start->gid), &(start2->gid));
+				ft_off_tswap(&(start->bytes_size), &(start2->bytes_size));
+				ft_blkcnt_tswap(&(start->blocks), &(start2->blocks));
+				ft_time_tswap(&(start->mtime), &(start2->mtime));
+				ft_time_tswap(&(start->atime), &(start2->atime));
+				ft_strswap(&(start->link_name), &(start2->link_name));
+				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
+			}
+			start2 = start2->next;
+		}
+		start = start->next;
+	}
+}
+
+void	ft_sort_list_by_ascii_for_atime_equal(t_ls_list *start)
+{
+	t_ls_list *start2;
+
+	while (start)
+	{
+		start2 = start->next;
+		while (start2)
+		{
+			if ((start->atime == start2->atime) && (ft_strcmp(start->name, (start2)->name) > 0))
+			{
+				ft_strswap(&(start->name), &(start2->name));
+				ft_modeswap(&(start->mode), &(start2->mode));
+				ft_nlinkswap(&(start->nlink), &(start2->nlink));
+				ft_uid_tswap(&(start->uid), &(start2->uid));
+				ft_gid_tswap(&(start->gid), &(start2->gid));
+				ft_off_tswap(&(start->bytes_size), &(start2->bytes_size));
+				ft_blkcnt_tswap(&(start->blocks), &(start2->blocks));
+				ft_time_tswap(&(start->mtime), &(start2->mtime));
+				ft_time_tswap(&(start->atime), &(start2->atime));
+				ft_strswap(&(start->link_name), &(start2->link_name));
+				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
+			}
+			start2 = start2->next;
+		}
+		start = start->next;
+	}
+}
+
 void	ft_sort_list_by_mtime(t_ls_list *start)
 {
 	t_ls_list *start2;
@@ -676,6 +747,36 @@ void	ft_sort_list_by_mtime(t_ls_list *start)
 		start = start->next;
 	}
 }
+
+void	ft_sort_list_by_atime(t_ls_list *start)
+{
+	t_ls_list *start2;
+
+	while (start)
+	{
+		start2 = start->next;
+		while (start2)
+		{
+			if (start->atime < start2->atime)
+			{
+				ft_strswap(&(start->name), &(start2->name));
+				ft_modeswap(&(start->mode), &(start2->mode));
+				ft_nlinkswap(&(start->nlink), &(start2->nlink));
+				ft_uid_tswap(&(start->uid), &(start2->uid));
+				ft_gid_tswap(&(start->gid), &(start2->gid));
+				ft_off_tswap(&(start->bytes_size), &(start2->bytes_size));
+				ft_blkcnt_tswap(&(start->blocks), &(start2->blocks));
+				ft_time_tswap(&(start->mtime), &(start2->mtime));
+				ft_time_tswap(&(start->atime), &(start2->atime));
+				ft_strswap(&(start->link_name), &(start2->link_name));
+				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
+			}
+			start2 = start2->next;
+		}
+		start = start->next;
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	int	i;

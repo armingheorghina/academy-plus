@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/20 12:16:47 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/20 16:48:57 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_ls_list
 	int					biggest_size_len;	/* bigest bytes_size length */
 	blkcnt_t			blocks;				/* number of 512B blocks allocated */
 	time_t   			mtime;				/* stat - time of last modification */
+	time_t   			atime;				/* stat - time of last access */
 	char				*link_name;			/* readlink */			
 	ssize_t				xattr_nbr;			/* listxattr*/	
 	struct s_ls_list	*next;
@@ -52,7 +53,7 @@ void	ft_push_sort_lsl0(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *l
 void	ft_push_sort_lsl2(t_ls_list *start, char *str, off_t size, time_t time);
 void	ft_push_sort_lsl3(t_ls_list *start, char *str, uid_t st_uid, gid_t st_gid);
 void	ft_push_sort_lsl4(t_ls_list *start, char *str, nlink_t st_nlink, mode_t st_mode);
-void	ft_push_sort_lsl5(t_ls_list *start, char *str, ssize_t xattr);
+void	ft_push_sort_lsl5(t_ls_list *start, char *str, ssize_t xattr, time_t time);
 void	ft_push_bsl_bnl_to_list(t_ls_list *start);
 void	ft_puttime(char *str);
 void	ft_push_bsl_bnl_to_list(t_ls_list *start);
@@ -73,6 +74,10 @@ int		ft_get_flags_number(int i, int argc, char** argv);
 int	ft_check_if_flag_contains(char *str, char c);
 void	ft_sort_list_reverse(t_ls_list *start, char *flag);
 void	ft_sort_list_by_mtime(t_ls_list *start);
+void	ft_sort_list_by_atime(t_ls_list *start);
+void	ft_sort_list_by_ascii_for_time_equal(t_ls_list *start);
+void	ft_sort_list_by_ascii_for_atime_equal(t_ls_list *start);
+char	*ft_enable_flag_a(char *str, char c);
 #endif
 /*
  * ◦ write

@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/20 13:00:30 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/20 16:49:46 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,48 @@ void	ft_work_with_d(int i, int argc, char **argv, char *flag)
 				}
 				else
 					lbuf = ft_strdup("");
-				if (ft_check_if_flag_contains(flag, 't') == 1) //no sort list
+				if (ft_check_if_flag_contains(flag, 't') == 1 || ft_check_if_flag_contains(flag, 'f') == 1 || ft_check_if_flag_contains(flag, 'u') == 1)
+				{
 					ft_push_sort_lsl0(&start, dp->d_name, buf->st_blocks, lbuf);
-				else
+					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
+					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
+					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
+
+				}
+				else	/* sort by ascii */
+				{
 					ft_push_sort_lsl(&start, dp->d_name, buf->st_blocks, lbuf);
-				ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
-				ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
-				ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-				ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW));
+					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
+					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
+					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
+				}
 			}
 			if (argc > 3)
 			{
 				ft_putstr(argv[i]);
 				ft_putstr(":\n");
 			}
+			if (ft_check_if_flag_contains(flag, 'f') == 1)
+				flag = ft_enable_flag_a(flag, 'a');
 			if (ft_check_if_flag_contains(flag, 'a') == 0)
 				ft_delete_hidden_from_list(&start);
 			ft_push_bsl_bnl_to_list(start);
 			ft_push_buidl_bgidl_to_list(start);
-			if (ft_check_if_flag_contains(flag, 't') == 1)
-				ft_sort_list_by_mtime(start);
+			if (ft_check_if_flag_contains(flag, 't') == 1 || ft_check_if_flag_contains(flag, 'u') == 1)
+			{
+				if (ft_check_if_flag_contains(flag, 'u') == 1)
+				{
+					ft_sort_list_by_atime(start);
+					ft_sort_list_by_ascii_for_atime_equal(start);
+				}
+				else
+				{
+					ft_sort_list_by_mtime(start);
+					ft_sort_list_by_ascii_for_time_equal(start);
+				}
+			}
 			if (ft_check_if_flag_contains(flag, 'r') == 1)
 				ft_sort_list_reverse(start, flag);
 			ft_putlist_lsl(start, flag);
