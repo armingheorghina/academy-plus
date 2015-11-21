@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/21 13:37:11 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/21 15:12:28 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_check_if_flag_contains(char *str, char c)
 	return (0);
 }
 
-void	ft_work_with_d(int i, int argc, char **argv, char *flag)
+void	ft_work_with_d(int i, char **argv, char *flag)
 {
 	DIR				*dirp;
 	struct dirent	*dp;
@@ -75,11 +75,7 @@ void	ft_work_with_d(int i, int argc, char **argv, char *flag)
 					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
 				}
 			}
-		/*	if (ft_get_valid_targets_number(i, argc, argv) >= 2)
-			{
-				ft_putstr(argv[i]);
-				ft_putstr(":\n");
-			}*/
+
 			if (ft_check_if_flag_contains(flag, 'f') == 1)
 				flag = ft_enable_flag_a(flag, 'a');
 			if (ft_check_if_flag_contains(flag, 'a') == 0)
@@ -98,10 +94,15 @@ void	ft_work_with_d(int i, int argc, char **argv, char *flag)
 			}
 			if (ft_check_if_flag_contains(flag, 'r') == 1)
 				ft_sort_list_reverse(start, flag);
+			if (g_targets_number >= 2)
+			{
+				if (ft_first_valid_target() != 1)
+					ft_putchar('\n');
+				ft_putstr(argv[i]);
+				ft_putstr(":\n");
+			}
 			ft_putlist_lsl(start, flag);
 			// *TODO free list : use ft_lstdel(start, f_free_str)
-			if (argc > 3 && i != argc - 1)
-				ft_putchar('\n');
 			close_dir = closedir(dirp);
 			if (close_dir == -1)
 				perror("closedir error");

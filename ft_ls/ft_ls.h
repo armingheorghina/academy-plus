@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/21 13:18:37 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/21 15:00:24 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdio.h>
 # include <time.h>
 # include <sys/xattr.h>
+
+int		g_targets_number;
 
 typedef struct s_ls_list
 {
@@ -44,7 +46,7 @@ typedef struct s_ls_list
 }t_ls_list;
 
 void	ft_work_with_e(int i, char **argv);
-void	ft_work_with_d(int i, int argc, char **argv, char *flag);
+void	ft_work_with_d(int i, char **argv, char *flag);
 
 
 char	ft_get_file_type(int i, char **argv);
@@ -78,6 +80,7 @@ void	ft_sort_list_by_atime(t_ls_list *start);
 void	ft_sort_list_by_ascii_for_mtime_equal(t_ls_list *start);
 void	ft_sort_list_by_ascii_for_atime_equal(t_ls_list *start);
 char	*ft_enable_flag_a(char *str, char c);
+int		ft_first_valid_target(void);
 #endif
 /*
  * ◦ write

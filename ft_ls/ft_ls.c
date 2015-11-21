@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_inspect_file.c                                  :+:      :+:    :+:   */
+/*   ft_ls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/13 23:26:11 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/21 13:37:21 by vdruta           ###   ########.fr       */
+/*   Created: 2015/11/21 13:49:49 by vdruta            #+#    #+#             */
+/*   Updated: 2015/11/21 15:12:25 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -456,13 +456,6 @@ void	ft_delete_hidden_from_list(t_ls_list **start)
 	}
 }
 
-int		ft_isflag(int i, char *flag, char **argv)
-{
-	if (ft_strcmp(argv[i], flag) == 0)
-		return (1);
-	return (0);
-}
-
 char	ft_get_file_type(int i, char **argv)
 {
 	struct stat		*buf;
@@ -791,12 +784,29 @@ void	ft_sort_list_by_atime(t_ls_list *start)
 		start = start->next;
 	}
 }
-/*
-int		ft_get_valid_targets_number(int i, int argc, char **argv)
+
+void	ft_get_valid_targets_number(int i, int argc, char **argv)
 {
-	
+
+	g_targets_number = 0;
+
+	while (i < argc)
+	{
+		if (ft_get_file_type(i, argv) != 'e')
+			g_targets_number++;
+		i++;
+	}
 }
-*/
+
+int		ft_first_valid_target(void)
+{
+	static int x = 0;
+	
+	x = x + 1;
+	return (x);
+}
+
+
 int		main(int argc, char **argv)
 {
 	int	i;
@@ -807,15 +817,19 @@ int		main(int argc, char **argv)
 	flag = ft_get_flag(i, argc, argv);
 	flags_number = ft_get_flags_number(i, argc, argv);
 	i = i + flags_number;
+	ft_get_valid_targets_number(i, argc, argv);
 	if (argv[i] == NULL && i == argc) // flags only.
 	{
 		argv[i] = ".";
-		ft_work_with_d(i, argc, argv, flag);
+		ft_work_with_d(i, argv, flag);
 	}
+	
 	while (i < argc) // *TODO add multiple flags functionality
 	{
+		path = ft_get_path(i, argv);
 		ft_work_with_e(i, argv);
-		ft_work_with_d(i, argc, argv, flag);
+		ft_work_with_d(i, argv, flag);
+		ft_work_with_f(path, flag);
 		i++;
 	}
 	return (0);
