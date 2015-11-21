@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 13:49:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/21 15:12:25 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/21 19:05:28 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,28 @@ void	ft_push_sort_lsl0(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *l
 }
 
 
+void	ft_push_sort_lsl0f(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *lbuf)
+{
+	t_ls_list *new;
+	t_ls_list *list;
+	t_ls_list *p;
+
+	new = (t_ls_list*)malloc(sizeof(t_ls_list));
+	new->name = ft_strdup(str);
+	new->blocks = st_blocks;
+	new->link_name = lbuf;
+	list = *begin;
+	new->next = NULL;
+	if (list == NULL)
+		*begin = new;
+	else
+	{
+		p = *begin;
+		while (p->next)
+			p = p->next;
+		p->next = new;
+	}
+}
 
 
 void	ft_push_sort_lsl2(t_ls_list *start, char *str, off_t st_size, time_t time)
@@ -826,10 +848,9 @@ int		main(int argc, char **argv)
 	
 	while (i < argc) // *TODO add multiple flags functionality
 	{
-		path = ft_get_path(i, argv);
 		ft_work_with_e(i, argv);
 		ft_work_with_d(i, argv, flag);
-		ft_work_with_f(path, flag);
+		ft_work_with_f(i, argv, flag);
 		i++;
 	}
 	return (0);

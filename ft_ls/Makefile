@@ -6,13 +6,13 @@
 #    By: vdruta <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/02 16:35:04 by vdruta            #+#    #+#              #
-#    Updated: 2015/11/17 19:41:13 by vdruta           ###   ########.fr        #
+#    Updated: 2015/11/21 16:42:21 by vdruta           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-SRCS = ft_ls.c ft_work_with_d.c ft_work_with_e.c
+SRCS = ft_ls.c ft_work_with_d.c ft_work_with_e.c ft_work_with_f.c
 
 OBJ = $(SRCS:.c=.o)
 
