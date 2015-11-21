@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/20 16:48:57 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/21 13:18:37 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ft_check_if_flag_contains(char *str, char c);
 void	ft_sort_list_reverse(t_ls_list *start, char *flag);
 void	ft_sort_list_by_mtime(t_ls_list *start);
 void	ft_sort_list_by_atime(t_ls_list *start);
-void	ft_sort_list_by_ascii_for_time_equal(t_ls_list *start);
+void	ft_sort_list_by_ascii_for_mtime_equal(t_ls_list *start);
 void	ft_sort_list_by_ascii_for_atime_equal(t_ls_list *start);
 char	*ft_enable_flag_a(char *str, char c);
 #endif
