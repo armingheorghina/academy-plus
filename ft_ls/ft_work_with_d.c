@@ -27,7 +27,7 @@ int	ft_check_if_flag_contains(char *str, char c)
 	return (0);
 }
 
-void	ft_work_with_d(int i, char **argv, char *flag)
+void	ft_work_with_d(char *path, char *flag)
 {
 	DIR				*dirp;
 	struct dirent	*dp;
@@ -37,9 +37,9 @@ void	ft_work_with_d(int i, char **argv, char *flag)
 	char			*lbuf;
 	ssize_t			readlink_return;
 
-	if (ft_get_file_type(i, argv) == 'd')
+	if (ft_get_file_type_2(path) == 'd')
 	{
-		dirp = opendir(argv[i]);
+		dirp = opendir(path);
 		if (dirp != NULL)
 		{
 			start = NULL;
@@ -48,11 +48,11 @@ void	ft_work_with_d(int i, char **argv, char *flag)
 				if (dp == NULL)
 					perror("readdir error");
 				buf = (struct stat*)malloc(sizeof(*buf));
-				(void)lstat(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), buf);
+				(void)lstat(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), buf);
 				if (S_ISLNK(buf->st_mode) == 1)
 				{
 					lbuf = (char*)malloc(1024);
-					readlink_return = readlink(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), lbuf, 1024);
+					readlink_return = readlink(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), lbuf, 1024);
 					lbuf[readlink_return] = '\0';
 				}
 				else
@@ -63,8 +63,7 @@ void	ft_work_with_d(int i, char **argv, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), NULL, 0), buf->st_atime);
-
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0), buf->st_atime);
 				}
 				else	/* sort by ascii */
 				{
@@ -72,10 +71,9 @@ void	ft_work_with_d(int i, char **argv, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), NULL, 0), buf->st_atime);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0), buf->st_atime);
 				}
 			}
-
 			if (ft_check_if_flag_contains(flag, 'f') == 1)
 				flag = ft_enable_flag_a(flag, 'a');
 			if (ft_check_if_flag_contains(flag, 'a') == 0)
@@ -98,7 +96,7 @@ void	ft_work_with_d(int i, char **argv, char *flag)
 			{
 				if (ft_first_valid_directory_target() != 1)
 					ft_putchar('\n');
-				ft_putstr(argv[i]);
+				ft_putstr(path);
 				ft_putstr(":\n");
 			}
 			ft_putlist_lsl(start, flag);
@@ -106,6 +104,17 @@ void	ft_work_with_d(int i, char **argv, char *flag)
 			close_dir = closedir(dirp);
 			if (close_dir == -1)
 				perror("closedir error");
+		}
+	}
+	if (ft_check_if_flag_contains(flag, 'R') == 1)
+	{
+		while (start)
+		{
+			buf = (struct stat*)malloc(sizeof(*buf));
+			(void)lstat(ft_strjoin(ft_strjoin(path, "/"), start->name), buf);
+			if (S_ISDIR(buf->st_mode) == 1)
+				ft_work_with_d(ft_strjoin(ft_strjoin(path, "/"), start->name), flag);
+			start = start->next;
 		}
 	}
 }

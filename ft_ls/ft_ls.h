@@ -66,11 +66,12 @@ typedef struct s_ls_list_f
 }t_ls_list_f;
 
 void		ft_work_with_e(int i, char **argv);
-void		ft_work_with_d(int i, char **argv, char *flag);
+void		ft_work_with_d(char *path, char *flag);
 t_ls_list_f	*ft_work_with_f(int i, char **argv, char *flag);
 
 
 char	ft_get_file_type(int i, char **argv);
+char	ft_get_file_type_2(char *path);
 void	ft_push_sort_lsl(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *lbuf);
 void	ft_push_sort_lsl0(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *lbuf);
 void	ft_push_sort_lsl2(t_ls_list *start, char *str, off_t size, time_t time);

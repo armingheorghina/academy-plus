@@ -504,6 +504,30 @@ char	ft_get_file_type(int i, char **argv)
 		return ('e');
 }
 
+char	ft_get_file_type_2(char *path)
+{
+	struct stat		*buf;
+	
+	buf = (struct stat*)malloc(sizeof(*buf));
+	(void)lstat(path, buf);
+	if (S_ISDIR(buf->st_mode) == 1)
+		return ('d');
+	if (S_ISREG(buf->st_mode) == 1)
+		return ('-');
+	if (S_ISCHR(buf->st_mode) == 1)
+		return ('c');
+	if (S_ISBLK(buf->st_mode) == 1)
+		return ('b');
+	if (S_ISFIFO(buf->st_mode) == 1)
+		return ('f');
+	if (S_ISLNK(buf->st_mode) == 1)
+		return ('l');
+	if (S_ISSOCK(buf->st_mode) == 1)
+		return ('s');
+	else
+		return ('e');
+}
+
 char	*ft_get_flag(int i, int argc, char **argv)
 {
 	char	*flag;
@@ -809,15 +833,40 @@ void	ft_sort_list_by_atime(t_ls_list *start)
 	}
 }
 
-void	ft_get_valid_targets_number(int i, int argc, char **argv)
+
+void	ft_get_directories_number_for_R(char *path)
+{
+	DIR		*dirp;
+	struct dirent	*dp;
+	struct stat	 *buf;
+
+	dirp = opendir(path);
+	if (dirp != NULL)
+	{
+		while ((dp = readdir(dirp)) != NULL)
+		{
+			buf = (struct stat*)malloc(sizeof(*buf));
+			(void)lstat(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), buf);
+			if (S_ISDIR(buf->st_mode) == 1)
+				g_targets_number++;
+		}
+	}
+	(void)closedir(dirp);
+}
+
+void	ft_get_valid_targets_number(int i, int argc, char **argv, char *flag)
 {
 
+	
 	g_targets_number = 0;
-
 	while (i < argc)
 	{
-		if (ft_get_file_type(i, argv) != 'e')
+		if (ft_get_file_type_2(argv[i]) != 'e')
+		{
 			g_targets_number++;
+			if (ft_check_if_flag_contains(flag, 'R') == 1 && ft_get_file_type_2(argv[i]) == 'd')
+				ft_get_directories_number_for_R(argv[i]);
+		}
 		i++;
 	}
 }
@@ -834,37 +883,41 @@ int		ft_first_valid_directory_target(void)
 int		main(int argc, char **argv)
 {
 	int	i;
+	int	j;
 	char	*flag;
 	int	flags_number;
-	static t_ls_list_f	*start;
+	t_ls_list_f	*start;
 
 	start = NULL;
 	i = 1;
 	flag = ft_get_flag(i, argc, argv);
 	flags_number = ft_get_flags_number(i, argc, argv);
 	i = i + flags_number;
-	ft_get_valid_targets_number(i, argc, argv);
+	j = i;
+	ft_get_valid_targets_number(i, argc, argv, flag);     //uses a global variable
 	if (argv[i] == NULL && i == argc) // flags only.
 	{
 		argv[i] = ".";
-		ft_work_with_d(i, argv, flag);
+		ft_work_with_d(argv[i], flag);
 	}
-	while (i < argc) // *TODO add multiple flags functionality
+	
+	while (i < argc)
 	{
 		ft_work_with_e(i, argv);
-		start = ft_work_with_f(i, argv, flag);
-		ft_work_with_d(i, argv, flag);
-
 		i++;
 	}
-	ft_push_bsl_bnl_to_list_f(start);
-	ft_push_buidl_bgidl_to_list_f(start);
+	i = j;
+	while (i < argc) //*TODO -t , -u , -r 
+	{
+		start = ft_work_with_f(i, argv, flag);
+		i++;
+	}
 	ft_putlist_lsl_f(start, flag);
+	i = j;
+	while (i < argc)
+	{
+		ft_work_with_d(argv[i], flag);
+		i++;
+	}
 	return (0);
 }
-/*
-a -delete sau nu hidden;
-sortare - daca nu aapare t si u ... sortez dupa nume
-l - long listing;
-delete ft_isflag - nu se foloseste si oricum e gresita
-*/
