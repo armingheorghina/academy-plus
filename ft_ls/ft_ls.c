@@ -76,7 +76,7 @@ void	ft_push_sort_lsl0(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *l
 	}
 }
 
-
+/*
 void	ft_push_sort_lsl0f(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *lbuf)
 {
 	t_ls_list *new;
@@ -99,7 +99,7 @@ void	ft_push_sort_lsl0f(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *
 		p->next = new;
 	}
 }
-
+*/
 
 void	ft_push_sort_lsl2(t_ls_list *start, char *str, off_t st_size, time_t time)
 {
@@ -454,6 +454,8 @@ void	ft_putlist_lsl(t_ls_list *start, char *flag)
 		start = start->next;
 	}
 }
+
+
 
 void	ft_delete_hidden_from_list(t_ls_list **start)
 {
@@ -820,7 +822,7 @@ void	ft_get_valid_targets_number(int i, int argc, char **argv)
 	}
 }
 
-int		ft_first_valid_target(void)
+int		ft_first_valid_directory_target(void)
 {
 	static int x = 0;
 	
@@ -834,7 +836,9 @@ int		main(int argc, char **argv)
 	int	i;
 	char	*flag;
 	int	flags_number;
+	static t_ls_list_f	*start;
 
+	start = NULL;
 	i = 1;
 	flag = ft_get_flag(i, argc, argv);
 	flags_number = ft_get_flags_number(i, argc, argv);
@@ -845,14 +849,17 @@ int		main(int argc, char **argv)
 		argv[i] = ".";
 		ft_work_with_d(i, argv, flag);
 	}
-	
 	while (i < argc) // *TODO add multiple flags functionality
 	{
 		ft_work_with_e(i, argv);
+		start = ft_work_with_f(i, argv, flag);
 		ft_work_with_d(i, argv, flag);
-		ft_work_with_f(i, argv, flag);
+
 		i++;
 	}
+	ft_push_bsl_bnl_to_list_f(start);
+	ft_push_buidl_bgidl_to_list_f(start);
+	ft_putlist_lsl_f(start, flag);
 	return (0);
 }
 /*

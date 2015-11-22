@@ -12,11 +12,11 @@
 
 #include "ft_ls.h"
 
-void	ft_work_with_f(int i, char **argv, char *flag)
+t_ls_list_f	*ft_work_with_f(int i, char **argv, char *flag)
 {
-	struct stat			*buf;
-	static t_ls_list	*start = NULL;
-	char				*lbuf;
+	struct stat		*buf;
+	static t_ls_list_f	*start = NULL;
+	char			*lbuf;
 
 	if	(ft_get_file_type(i, argv) == '-')
 	{
@@ -24,30 +24,22 @@ void	ft_work_with_f(int i, char **argv, char *flag)
 		buf = (struct stat*)malloc(sizeof(*buf));
 		(void)lstat((argv[i]), buf);
 		lbuf = ft_strdup("");
-		ft_push_sort_lsl0(&start, argv[i], buf->st_blocks, lbuf);
-		ft_push_sort_lsl2(start, argv[i], buf->st_size, buf->st_mtime);
-		ft_push_sort_lsl3(start, argv[i], buf->st_uid, buf->st_gid);
-		ft_push_sort_lsl4(start, argv[i], buf->st_nlink, buf->st_mode);
-		ft_push_sort_lsl5(start, argv[i], listxattr(argv[i], NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
-		ft_push_bsl_bnl_to_list(start);
-		ft_push_buidl_bgidl_to_list(start);
-		ft_putlist_lsl(start, flag);
-	//	if (ft_check_if_flag_contains(flag, 'l'))
-	//	{
-	//		ft_putmode(buf->st_mode, listxattr(argv[i], NULL, 0, XATTR_NOFOLLOW));
-		//	ft_puthardlinks((int)buf->nlink, biggest_nlink_len);
-	//		if (ft_check_if_flag_contains(flag, 'l') == 1 && ft_check_if_flag_contains(flag, 'g') == 0)
-		//		ft_putuid_name(buf->st_uid, biggest_uid_len);
-		//	ft_putgid_name(buf->st_gid, biggest_gid_len);
-		//	ft_putbytes((int)buf->st_size, biggest_size_len);
-				
-	//		if (ft_check_if_flag_contains(flag, 'u') == 1)
-	//			ft_puttime(ctime(&(buf->st_atime)));
-	//		else
-	//			ft_puttime(ctime(&(buf->st_mtime)));
-	//		ft_putendl(argv[i]);
-	//	}
-	//	else
-	//		ft_putendl(argv[i]);
+		if (ft_check_if_flag_contains(flag, 't') == 1 || ft_check_if_flag_contains(flag, 'f') == 1)
+		{
+			ft_push_sort_lsl0_f(&start, argv[i], buf->st_blocks, lbuf);
+			ft_push_sort_lsl2_f(start, argv[i], buf->st_size, buf->st_mtime);
+			ft_push_sort_lsl3_f(start, argv[i], buf->st_uid, buf->st_gid);
+			ft_push_sort_lsl4_f(start, argv[i], buf->st_nlink, buf->st_mode);
+			ft_push_sort_lsl5_f(start, argv[i], listxattr(argv[i], NULL, 0), buf->st_atime);
+		}
+		else	/* sort by ascii*/
+		{
+			ft_push_sort_lsl_f(&start, argv[i], buf->st_blocks, lbuf);
+			ft_push_sort_lsl2_f(start, argv[i], buf->st_size, buf->st_mtime);
+			ft_push_sort_lsl3_f(start, argv[i], buf->st_uid, buf->st_gid);
+			ft_push_sort_lsl4_f(start, argv[i], buf->st_nlink, buf->st_mode);
+			ft_push_sort_lsl5_f(start, argv[i], listxattr(argv[i], NULL, 0), buf->st_atime);
+		}
 	}
+	return (start);
 }	

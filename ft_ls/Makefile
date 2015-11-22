@@ -10,9 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
+
 NAME = ft_ls
 
-SRCS = ft_ls.c ft_work_with_d.c ft_work_with_e.c ft_work_with_f.c
+SRCS = ft_ls.c ft_work_with_d.c ft_work_with_e.c ft_work_with_f.c ft_push_sort_lsl_f.c ft_push_sort_lsl0_f.c ft_push_sort_lsl2_f.c ft_push_sort_lsl3_f.c ft_push_sort_lsl4_f.c ft_push_sort_lsl5_f.c ft_push_bsl_bnl_to_list_f.c ft_push_buidl_bgidl_to_list_f.c ft_put_list_lsl_f.c
 
 OBJ = $(SRCS:.c=.o)
 
@@ -21,27 +22,15 @@ all: $(NAME)
 $(NAME):
 	make -C libft/ fclean
 	make -C libft/
-	gcc -Wall -Werror -Wextra -I libft/ -c ft_ls_a.c
-	gcc -o ft_ls_a ft_ls_a.o -L libft/ -lft
-	gcc -Wall -Werror -Wextra -I libft/ -c ft_ls_r.c
-	gcc -o ft_ls_r ft_ls_r.o -L libft/ -lft
-	gcc -Wall -Werror -Wextra -I libft/ -c ft_ls_rm.c
-	gcc -o ft_ls_rm ft_ls_rm.o -L libft/ -lft
 	gcc -Wall -Werror -Wextra -I libft/ -c $(SRCS)
 	gcc -o $(NAME) $(OBJ) -L libft/ -lft
 
 clean:
 	/bin/rm -f $(OBJ)
-	/bin/rm -f ft_ls_a.o
-	/bin/rm -f ft_ls_r.o
-	/bin/rm -f ft_ls_rm.o
 	make -C libft/ clean
 
 fclean: clean
 	/bin/rm -f $(NAME)
-	/bin/rm -f ft_ls_a
-	/bin/rm -f ft_ls_r
-	/bin/rm -f ft_ls_rm
 	/bin/rm -f libft/libft.a
 
 re: fclean all

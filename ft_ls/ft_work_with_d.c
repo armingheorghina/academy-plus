@@ -63,7 +63,7 @@ void	ft_work_with_d(int i, char **argv, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), NULL, 0), buf->st_atime);
 
 				}
 				else	/* sort by ascii */
@@ -72,7 +72,7 @@ void	ft_work_with_d(int i, char **argv, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(argv[i], "/"), dp->d_name), NULL, 0), buf->st_atime);
 				}
 			}
 
@@ -96,7 +96,7 @@ void	ft_work_with_d(int i, char **argv, char *flag)
 				ft_sort_list_reverse(start, flag);
 			if (g_targets_number >= 2)
 			{
-				if (ft_first_valid_target() != 1)
+				if (ft_first_valid_directory_target() != 1)
 					ft_putchar('\n');
 				ft_putstr(argv[i]);
 				ft_putstr(":\n");
