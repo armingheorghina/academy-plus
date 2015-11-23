@@ -30,7 +30,7 @@ t_ls_list_f	*ft_work_with_f(int i, char **argv, char *flag)
 			ft_push_sort_lsl2_f(start, argv[i], buf->st_size, buf->st_mtime);
 			ft_push_sort_lsl3_f(start, argv[i], buf->st_uid, buf->st_gid);
 			ft_push_sort_lsl4_f(start, argv[i], buf->st_nlink, buf->st_mode);
-			ft_push_sort_lsl5_f(start, argv[i], listxattr(argv[i], NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
+			ft_push_sort_lsl5_f(start, argv[i], listxattr(argv[i], NULL, 0), buf->st_atime);
 		}
 		else	/* sort by ascii*/
 		{
@@ -38,7 +38,7 @@ t_ls_list_f	*ft_work_with_f(int i, char **argv, char *flag)
 			ft_push_sort_lsl2_f(start, argv[i], buf->st_size, buf->st_mtime);
 			ft_push_sort_lsl3_f(start, argv[i], buf->st_uid, buf->st_gid);
 			ft_push_sort_lsl4_f(start, argv[i], buf->st_nlink, buf->st_mode);
-			ft_push_sort_lsl5_f(start, argv[i], listxattr(argv[i], NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
+			ft_push_sort_lsl5_f(start, argv[i], listxattr(argv[i], NULL, 0), buf->st_atime);
 		}
 		ft_push_bsl_bnl_to_list_f(start);
 		ft_push_buidl_bgidl_to_list_f(start);

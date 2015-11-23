@@ -39,12 +39,7 @@ void	ft_work_with_d(char *path, char *flag)
 
 	if (ft_get_file_type_2(path) == 'd')
 	{
-	//	dirp = opendir(path);
-	//	if (dirp == NULL)
-	//	{
-	//		ft_putstr("./ft_ls: ");
-	//		perror(path);
-	//	}
+		dirp = opendir(path);
 		if (dirp != NULL)
 		{
 			start = NULL;
@@ -68,7 +63,7 @@ void	ft_work_with_d(char *path, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0), buf->st_atime);
 				}
 				else	/* sort by ascii */
 				{
@@ -76,7 +71,7 @@ void	ft_work_with_d(char *path, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0), buf->st_atime);
 				}
 			}
 			if (ft_check_if_flag_contains(flag, 'f') == 1)

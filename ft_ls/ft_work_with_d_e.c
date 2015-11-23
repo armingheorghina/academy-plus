@@ -10,9 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_ls.h"
+
 void	ft_work_with_d_e(char *path, char *flag)
 {
-	if	(ft_get_file_type_(path) == 'd')
+	DIR *dirp;
+	int i;
+	
+	i = 0;
+	while (flag[i++])	//just to use the flag. for the moment :)
+	if (ft_get_file_type_2(path) == 'd')
 	{
 		dirp = opendir(path);
 		if (dirp == NULL)

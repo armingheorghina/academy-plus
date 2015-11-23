@@ -920,7 +920,7 @@ int		main(int argc, char **argv)
 	i = i + flags_number;
 	j = i;
 	ft_get_valid_targets_number(i, argc, argv, flag);     //uses a global variable
-	if (argv[i] == NULL && i == argc) // flags only.
+	if (argv[i] == NULL && i == argc) // 1.flags only or 2.no flags, no targets
 	{
 		g_targets_number++;
 		argv[i] = ".";
@@ -928,7 +928,7 @@ int		main(int argc, char **argv)
 
 	}
 	
-	while (i < argc)
+	while (i < argc)	// no such file or directory
 	{
 		ft_work_with_e(i, argv);
 		i++;
@@ -947,7 +947,7 @@ int		main(int argc, char **argv)
 		i++;
 	}
 	i = j;
-	while (i < argc)
+	while (i < argc)	// permision denied (cannot open directory)
 	{
 		ft_work_with_d_e(argv[i], flag);
 		i++;
