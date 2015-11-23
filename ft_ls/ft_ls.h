@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/21 18:49:23 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/23 14:54:15 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	ft_sort_list_by_ascii_for_mtime_equal(t_ls_list *start);
 void	ft_sort_list_by_ascii_for_atime_equal(t_ls_list *start);
 char	*ft_enable_flag_a(char *str, char c);
 int		ft_first_valid_directory_target(void);
+int		ft_dir_is_empty(t_ls_list *start);
 #endif
 /*
  * ◦ write

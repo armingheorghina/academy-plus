@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/21 17:28:34 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/23 13:27:45 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_work_with_d(char *path, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0), buf->st_atime);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
 				}
 				else	/* sort by ascii */
 				{
@@ -71,7 +71,7 @@ void	ft_work_with_d(char *path, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0), buf->st_atime);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
 				}
 			}
 			if (ft_check_if_flag_contains(flag, 'f') == 1)
@@ -98,6 +98,10 @@ void	ft_work_with_d(char *path, char *flag)
 					ft_putchar('\n');
 				ft_putstr(path);
 				ft_putstr(":\n");
+			}
+			if (ft_check_if_flag_contains(flag, 'R') == 1)
+			{	g_targets_number++;
+				ft_first_valid_directory_target();
 			}
 			ft_putlist_lsl(start, flag);
 			// *TODO free list : use ft_lstdel(start, f_free_str)

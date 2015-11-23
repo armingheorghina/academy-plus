@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 13:49:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/21 19:05:28 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/23 15:03:51 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,19 +400,44 @@ void	ft_putmode(mode_t mode, ssize_t xattr_nbr)
 	ft_putchar(' ');
 }
 
-void		ft_put_total(t_ls_list *start)
+int		ft_dir_is_empty(t_ls_list *start)
 {
-	int x;
+	DIR				*dirp;
+	struct dirent	*dp;
 
+	
+	while (start)
+	{
+		dirp = opendir(start->name);
+		while ((dp = readdir(dirp)) != NULL)
+		{
+			if (ft_get_file_type_2(dp->d_name) != 'e')
+				return (0);
+		}
+		start = start->next;
+	}
+	return (1);
+}
+
+void	ft_put_total(t_ls_list *start)
+{
+	int			x;
+	t_ls_list	*start2;
+
+	start2 = start;
 	x = 0;
 	while (start)
 	{
 		x = (int)start->blocks + x;
 		start = start->next;
 	}
-	ft_putstr("total ");
-	ft_putnbr(x);
-	ft_putchar('\n');
+	if (ft_dir_is_empty(start2) == 0)
+	{
+		ft_putstr("total ");
+		ft_putnbr(x);
+		ft_putchar('\n');
+	}
+
 }
 
 void	ft_putlink(char	*file_name, char *link_name)
@@ -856,7 +881,9 @@ void	ft_get_directories_number_for_R(char *path)
 
 void	ft_get_valid_targets_number(int i, int argc, char **argv, char *flag)
 {
+	int j;
 
+	j = 0;
 	
 	g_targets_number = 0;
 	while (i < argc)
@@ -865,7 +892,10 @@ void	ft_get_valid_targets_number(int i, int argc, char **argv, char *flag)
 		{
 			g_targets_number++;
 			if (ft_check_if_flag_contains(flag, 'R') == 1 && ft_get_file_type_2(argv[i]) == 'd')
-				ft_get_directories_number_for_R(argv[i]);
+			{	//ft_get_directories_number_for_R(argv[i]);
+				while (flag[j])
+					j++;
+			}
 		}
 		i++;
 	}
@@ -897,8 +927,10 @@ int		main(int argc, char **argv)
 	ft_get_valid_targets_number(i, argc, argv, flag);     //uses a global variable
 	if (argv[i] == NULL && i == argc) // flags only.
 	{
+		g_targets_number++;
 		argv[i] = ".";
 		ft_work_with_d(argv[i], flag);
+
 	}
 	
 	while (i < argc)
