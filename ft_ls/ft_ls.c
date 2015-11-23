@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 13:49:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/23 15:03:51 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/23 18:59:03 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -365,7 +365,11 @@ void	ft_putmode(mode_t mode, ssize_t xattr_nbr)
 		ft_putchar('w');
 	else
 		ft_putchar('-');
-   	if (mode & S_IXUSR)
+   	if (mode & S_ISUID && (S_IEXEC & mode))		// or special s,t, S,T
+		ft_putchar('s');
+	else if (mode & S_ISUID)		// or special s,t, S,T
+		ft_putchar('S');
+	else if (mode & S_IXUSR)		// or special s,t, S,T
 		ft_putchar('x');
 	else
 		ft_putchar('-');
@@ -377,7 +381,11 @@ void	ft_putmode(mode_t mode, ssize_t xattr_nbr)
 		ft_putchar('w');
 	else
 		ft_putchar('-');
-   	if (mode & S_IXGRP)
+	if (mode & S_ISGID && (mode & S_IREAD))	
+		ft_putchar('s');
+	else if (mode & S_ISGID)	
+		ft_putchar('S');
+	else if (mode & S_IXGRP)		// or special
 		ft_putchar('x');
 	else
 		ft_putchar('-');
@@ -389,7 +397,11 @@ void	ft_putmode(mode_t mode, ssize_t xattr_nbr)
 		ft_putchar('w');
 	else
 		ft_putchar('-');
-   	if (mode & S_IXOTH)
+	if (mode & S_ISVTX && (mode & S_IEXEC))	
+		ft_putchar('t');
+	else if (mode & S_ISVTX)	
+		ft_putchar('T');
+	else if (mode & S_IXOTH)		// or special 
 		ft_putchar('x');
 	else
 		ft_putchar('-');
@@ -398,25 +410,6 @@ void	ft_putmode(mode_t mode, ssize_t xattr_nbr)
 	else
 		ft_putchar(' ');
 	ft_putchar(' ');
-}
-
-int		ft_dir_is_empty(t_ls_list *start)
-{
-	DIR				*dirp;
-	struct dirent	*dp;
-
-	
-	while (start)
-	{
-		dirp = opendir(start->name);
-		while ((dp = readdir(dirp)) != NULL)
-		{
-			if (ft_get_file_type_2(dp->d_name) != 'e')
-				return (0);
-		}
-		start = start->next;
-	}
-	return (1);
 }
 
 void	ft_put_total(t_ls_list *start)
@@ -431,13 +424,12 @@ void	ft_put_total(t_ls_list *start)
 		x = (int)start->blocks + x;
 		start = start->next;
 	}
-	if (ft_dir_is_empty(start2) == 0)
+	if (start2 != NULL)
 	{
 		ft_putstr("total ");
 		ft_putnbr(x);
 		ft_putchar('\n');
 	}
-
 }
 
 void	ft_putlink(char	*file_name, char *link_name)
@@ -450,8 +442,11 @@ void	ft_putlink(char	*file_name, char *link_name)
 
 void	ft_putlist_lsl(t_ls_list *start, char *flag)
 {
+	t_ls_list	*start2;
+
+	start2 = start;
 	if ((ft_check_if_flag_contains(flag, 'l') == 1 || ft_check_if_flag_contains(flag, 'g') == 1) && ft_check_if_flag_contains(flag, 'd') == 0)
-		ft_put_total(start);
+		ft_put_total(start2);
 	while (start)
 	{
 		
@@ -949,6 +944,12 @@ int		main(int argc, char **argv)
 	while (i < argc)
 	{
 		ft_work_with_d(argv[i], flag);
+		i++;
+	}
+	i = j;
+	while (i < argc)
+	{
+		ft_work_with_d_e(argv[i], flag);
 		i++;
 	}
 	return (0);

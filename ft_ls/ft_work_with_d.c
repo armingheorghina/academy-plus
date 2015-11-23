@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/23 13:27:45 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/23 18:59:36 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,12 @@ void	ft_work_with_d(char *path, char *flag)
 
 	if (ft_get_file_type_2(path) == 'd')
 	{
-		dirp = opendir(path);
+	//	dirp = opendir(path);
+	//	if (dirp == NULL)
+	//	{
+	//		ft_putstr("./ft_ls: ");
+	//		perror(path);
+	//	}
 		if (dirp != NULL)
 		{
 			start = NULL;

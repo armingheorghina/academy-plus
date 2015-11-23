@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/23 14:54:15 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/23 19:00:11 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_ls_list_f
 
 void		ft_work_with_e(int i, char **argv);
 void		ft_work_with_d(char *path, char *flag);
+void		ft_work_with_d_e(char *path, char *flag);
 t_ls_list_f	*ft_work_with_f(int i, char **argv, char *flag);
 
 
@@ -112,8 +113,8 @@ void	ft_sort_list_by_ascii_for_mtime_equal(t_ls_list *start);
 void	ft_sort_list_by_ascii_for_atime_equal(t_ls_list *start);
 char	*ft_enable_flag_a(char *str, char c);
 int		ft_first_valid_directory_target(void);
-int		ft_dir_is_empty(t_ls_list *start);
 #endif
+
 /*
  * ◦ write
  * ◦ opendir
