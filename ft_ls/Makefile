@@ -13,7 +13,7 @@
 
 NAME = ft_ls
 
-SRCS = ft_ls.c ft_work_with_d.c ft_work_with_d_e.c ft_work_with_e.c ft_work_with_f.c ft_push_sort_lsl_f.c ft_push_sort_lsl0_f.c ft_push_sort_lsl2_f.c ft_push_sort_lsl3_f.c ft_push_sort_lsl4_f.c ft_push_sort_lsl5_f.c ft_push_bsl_bnl_to_list_f.c ft_push_buidl_bgidl_to_list_f.c ft_put_list_lsl_f.c
+SRCS = ft_ls.c ft_work_with_d.c ft_work_with_d_e.c ft_work_with_e.c ft_work_with_f.c ft_push_sort_lsl_f.c ft_push_sort_lsl0_f.c ft_push_sort_lsl2_f.c ft_push_sort_lsl3_f.c ft_push_sort_lsl4_f.c ft_push_sort_lsl5_f.c ft_push_bsl_bnl_to_list_f.c ft_push_buidl_bgidl_to_list_f.c ft_put_list_lsl_f.c ft_directories_job.c
 
 OBJ = $(SRCS:.c=.o)
 

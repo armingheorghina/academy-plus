@@ -941,11 +941,7 @@ int		main(int argc, char **argv)
 	}
 	ft_putlist_lsl_f(start, flag);
 	i = j;
-	while (i < argc)
-	{
-		ft_work_with_d(argv[i], flag);
-		i++;
-	}
+	ft_directories_job(i, argc, argv, flag);
 	i = j;
 	while (i < argc)	// permision denied (cannot open directory)
 	{

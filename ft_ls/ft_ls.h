@@ -113,6 +113,8 @@ void	ft_sort_list_by_ascii_for_mtime_equal(t_ls_list *start);
 void	ft_sort_list_by_ascii_for_atime_equal(t_ls_list *start);
 char	*ft_enable_flag_a(char *str, char c);
 int		ft_first_valid_directory_target(void);
+void	ft_directories_job(int i, int argc, char **argv, char *flag);
+void	ft_strswap(char **str1, char **str2);
 #endif
 
 /*
