@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/24 11:55:11 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/24 16:59:41 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void		ft_work_with_e(int i, char **argv);
 void		ft_work_with_d(char *path, char *flag);
 void		ft_work_with_d_e(char *path, char *flag);
 t_ls_list	*ft_work_with_f(int i, char **argv, char *flag);
+void	ft_work_with_l(int i, char **argv, char *flag);
 
 
 char	ft_get_file_type(int i, char **argv);

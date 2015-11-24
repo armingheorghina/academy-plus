@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 13:49:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/24 11:53:08 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/24 16:55:18 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -553,8 +553,10 @@ char	*ft_get_flag(int i, int argc, char **argv)
 	char	*flag;
 
 	flag = ft_strdup("");
-	while (i < argc && argv[i][0] == '-' && ft_strlen(argv[i]) > 1)
+	while (i < argc && argv[i][0] == '-' && ft_strlen(argv[i]) >= 2)
 	{
+		if (ft_strcmp(argv[i], "--") == 0)
+			break;
 		flag = ft_strjoin(flag, argv[i] + 1);
 		i++;
 	}
@@ -566,8 +568,13 @@ int		ft_get_flags_number(int i, int argc, char** argv)
 	int flags_number;
 
 	flags_number = 0;
-	while (i < argc && argv[i][0] == '-' && ft_strlen(argv[i]) > 1)
+	while (i < argc && argv[i][0] == '-' && ft_strlen(argv[i]) >= 2)
 	{
+		if (ft_strcmp(argv[i], "--") == 0)
+		{
+			flags_number++;
+			return (flags_number);
+		}
 		flags_number++;
 		i++;
 	}
@@ -916,6 +923,11 @@ int		main(int argc, char **argv)
 	start = NULL;
 	i = 1;
 	flag = ft_get_flag(i, argc, argv);
+	if (ft_strchr(flag, 'Z') != NULL) //*TODO solve all cases not only Z
+	{	ft_putendl("./ft_ls: illegal option -- Z");
+		ft_putendl("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]");
+		return (0);
+	}
 	flags_number = ft_get_flags_number(i, argc, argv);
 	i = i + flags_number;
 	j = i;
@@ -934,12 +946,18 @@ int		main(int argc, char **argv)
 		i++;
 	}
 	i = j;
-	while (i < argc) //*TODO -t , -u , -r 
+	while (i < argc)
 	{
 		start = ft_work_with_f(i, argv, flag);
 		i++;
 	}
 	ft_putlist_lsl_f(start, flag);
+	i = j;
+	while (i < argc) 
+	{
+		ft_work_with_l(i, argv, flag);
+		i++;
+	}
 	i = j;
 	ft_directories_job(i, argc, argv, flag);
 //	i = j;

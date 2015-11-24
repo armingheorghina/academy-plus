@@ -18,7 +18,10 @@ void	ft_putlist_lsl_f(t_ls_list *start, char *flag)
 				ft_puttime(ctime(&(start->atime)));
 			else
 				ft_puttime(ctime(&(start->mtime)));
-			ft_putendl(start->name);
+			if (S_ISLNK(start->mode) == 1)
+				ft_putlink(start->name, start->link_name);
+			else
+				ft_putendl(start->name);
 		}
 		else
 			ft_putendl(start->name);

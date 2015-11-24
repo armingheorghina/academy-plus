@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/24 11:23:10 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/24 17:46:45 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_work_with_d(char *path, char *flag)
 	char			*lbuf;
 	ssize_t			readlink_return;
 
-	if (ft_get_file_type_2(path) == 'd')
+	if (ft_get_file_type_2(path) == 'd' && ft_check_if_flag_contains(flag, 'd') == 0)
 	{
 		dirp = opendir(path);
 		if (dirp == NULL)
@@ -121,14 +121,17 @@ void	ft_work_with_d(char *path, char *flag)
 			if (close_dir == -1)
 				perror("closedir error");
 		}
-		if (ft_check_if_flag_contains(flag, 'R') == 1)
+		if (dirp != NULL && (ft_check_if_flag_contains(flag, 'R') == 1))
 		{
 			while (start)
 			{
-				buf = (struct stat*)malloc(sizeof(*buf));
-				(void)lstat(ft_strjoin(ft_strjoin(path, "/"), start->name), buf);
-				if (S_ISDIR(buf->st_mode) == 1)
-					ft_work_with_d(ft_strjoin(ft_strjoin(path, "/"), start->name), flag);
+		//		buf = (struct stat*)malloc(sizeof(*buf));
+				if (ft_strcmp(start->name, ".") != 0 && ft_strcmp(start->name, "..") != 0 )
+				{
+					(void)lstat(ft_strjoin(ft_strjoin(path, "/"), start->name), buf);
+					if (S_ISDIR(buf->st_mode) == 1)
+						ft_work_with_d(ft_strjoin(ft_strjoin(path, "/"), start->name), flag);
+				}
 				start = start->next;
 			}
 		}

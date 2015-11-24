@@ -1,43 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_work_with_f.c                                   :+:      :+:    :+:   */
+/*   ft_work_with_l.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/21 16:03:14 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/24 17:43:42 by vdruta           ###   ########.fr       */
+/*   Created: 2015/11/24 16:21:26 by vdruta            #+#    #+#             */
+/*   Updated: 2015/11/24 17:31:32 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_ls_list	*ft_work_with_f(int i, char **argv, char *flag)
+void	ft_work_with_l(int i, char **argv, char *flag) // *TODO find a way to print corectly when -l is not present!
 {
 	struct stat			*buf;
-	static t_ls_list	*start = NULL;
 	char				*lbuf;
 	int					readlink_return;
 
-	if	(ft_get_file_type(i, argv) == '-' || (ft_get_file_type(i, argv) == 'l' && ft_check_if_flag_contains(flag, 'l')) || (ft_get_file_type(i, argv) == 'd' && ft_check_if_flag_contains(flag, 'd') == 1))
+	if	(ft_get_file_type(i, argv) == 'l' && ft_check_if_flag_contains(flag, 'l') == 0)
 	{
-		if (ft_first_valid_directory_target() == 0) // if targets contains dirs and files. can't be 0 :) for print
-			ft_putchar('c');
 		buf = (struct stat*)malloc(sizeof(*buf));
 		(void)lstat((argv[i]), buf);
-		if (S_ISLNK(buf->st_mode) == 1)
-		{
-			lbuf = (char*)malloc(1024);
-			readlink_return = readlink(argv[i], lbuf, 1024);
-			lbuf[readlink_return] = '\0';
-		}
-		else
-			lbuf = ft_strdup("");
-
-//		if (ft_check_if_flag_contains(flag, 'l') == 1)
-
-
-		if (ft_check_if_flag_contains(flag, 't') == 1 || ft_check_if_flag_contains(flag, 'f') == 1)
+		lbuf = (char*)malloc(1024);
+		readlink_return = readlink(argv[i], lbuf, 1024);
+		lbuf[readlink_return] = '\0';
+		if (ft_check_if_flag_contains(flag, 'l') == 0)
+			ft_work_with_d(lbuf, flag);
+		ft_work_with_f(i, argv, flag);
+/*		if (ft_check_if_flag_contains(flag, 't') == 1 || ft_check_if_flag_contains(flag, 'f') == 1)
 		{
 			ft_push_sort_lsl0(&start, argv[i], buf->st_blocks, lbuf);
 			ft_push_sort_lsl2(start, argv[i], buf->st_size, buf->st_mtime);
@@ -45,7 +36,7 @@ t_ls_list	*ft_work_with_f(int i, char **argv, char *flag)
 			ft_push_sort_lsl4(start, argv[i], buf->st_nlink, buf->st_mode);
 			ft_push_sort_lsl5(start, argv[i], listxattr(argv[i], NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
 		}
-		else	/* sort by ascii*/
+		else	
 		{
 			ft_push_sort_lsl(&start, argv[i], buf->st_blocks, lbuf);
 			ft_push_sort_lsl2(start, argv[i], buf->st_size, buf->st_mtime);
@@ -67,6 +58,9 @@ t_ls_list	*ft_work_with_f(int i, char **argv, char *flag)
 			ft_sort_list_reverse(start, flag);
 		ft_push_bsl_bnl_to_list(start);
 		ft_push_buidl_bgidl_to_list(start);
+		
+		if (S_ISLNK(buf->st_mode) == 1)
+			start = NULL;
+		*/
 	}
-	return (start);
 }	
