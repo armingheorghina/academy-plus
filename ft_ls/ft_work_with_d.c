@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/23 18:59:36 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/24 11:23:10 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ void	ft_work_with_d(char *path, char *flag)
 	if (ft_get_file_type_2(path) == 'd')
 	{
 		dirp = opendir(path);
+		if (dirp == NULL)
+		{
+			if (g_targets_number >= 2)
+			{
+				if (ft_first_valid_directory_target() != 1)
+					ft_putchar('\n');
+				ft_putstr(path);
+				ft_putstr(":\n");
+			}
+			ft_putstr("./ft_ls: ");
+			perror(path);
+		}
 		if (dirp != NULL)
 		{
 			start = NULL;
@@ -63,7 +75,7 @@ void	ft_work_with_d(char *path, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0), buf->st_atime);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
 				}
 				else	/* sort by ascii */
 				{
@@ -71,7 +83,7 @@ void	ft_work_with_d(char *path, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0), buf->st_atime);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
 				}
 			}
 			if (ft_check_if_flag_contains(flag, 'f') == 1)
@@ -109,16 +121,16 @@ void	ft_work_with_d(char *path, char *flag)
 			if (close_dir == -1)
 				perror("closedir error");
 		}
-	}
-	if (ft_check_if_flag_contains(flag, 'R') == 1)
-	{
-		while (start)
+		if (ft_check_if_flag_contains(flag, 'R') == 1)
 		{
-			buf = (struct stat*)malloc(sizeof(*buf));
-			(void)lstat(ft_strjoin(ft_strjoin(path, "/"), start->name), buf);
-			if (S_ISDIR(buf->st_mode) == 1)
-				ft_work_with_d(ft_strjoin(ft_strjoin(path, "/"), start->name), flag);
-			start = start->next;
+			while (start)
+			{
+				buf = (struct stat*)malloc(sizeof(*buf));
+				(void)lstat(ft_strjoin(ft_strjoin(path, "/"), start->name), buf);
+				if (S_ISDIR(buf->st_mode) == 1)
+					ft_work_with_d(ft_strjoin(ft_strjoin(path, "/"), start->name), flag);
+				start = start->next;
+			}
 		}
 	}
 }

@@ -54,7 +54,7 @@ char	**ft_create_map(int i, int argc, char **argv, char *flag)
 		j++;
 	}
 	map[j] = 0;
-	j = 0;
+//	j = 0;
 	map = ft_sort_map_by_ascii(map);
 	if (ft_check_if_flag_contains(flag, 'r') == 1)
 		map = ft_sort_map_by_ascii_reverse(map);

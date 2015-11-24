@@ -1,6 +1,6 @@
 #include "ft_ls.h"
 
-void	ft_putlist_lsl_f(t_ls_list_f *start, char *flag)
+void	ft_putlist_lsl_f(t_ls_list *start, char *flag)
 {
 	while (start)
 	{

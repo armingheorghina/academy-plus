@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/23 19:00:11 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/24 11:55:11 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_ls_list_f
 void		ft_work_with_e(int i, char **argv);
 void		ft_work_with_d(char *path, char *flag);
 void		ft_work_with_d_e(char *path, char *flag);
-t_ls_list_f	*ft_work_with_f(int i, char **argv, char *flag);
+t_ls_list	*ft_work_with_f(int i, char **argv, char *flag);
 
 
 char	ft_get_file_type(int i, char **argv);
@@ -79,12 +79,12 @@ void	ft_push_sort_lsl2(t_ls_list *start, char *str, off_t size, time_t time);
 void	ft_push_sort_lsl3(t_ls_list *start, char *str, uid_t st_uid, gid_t st_gid);
 void	ft_push_sort_lsl4(t_ls_list *start, char *str, nlink_t st_nlink, mode_t st_mode);
 void	ft_push_sort_lsl5(t_ls_list *start, char *str, ssize_t xattr, time_t time);
-void	ft_push_sort_lsl_f(t_ls_list_f **begin, char *str, blkcnt_t st_blocks, char *lbuf);
-void	ft_push_sort_lsl0_f(t_ls_list_f **begin, char *str, blkcnt_t st_blocks, char *lbuf);
-void	ft_push_sort_lsl2_f(t_ls_list_f *start, char *str, off_t size, time_t time);
-void	ft_push_sort_lsl3_f(t_ls_list_f *start, char *str, uid_t st_uid, gid_t st_gid);
-void	ft_push_sort_lsl4_f(t_ls_list_f *start, char *str, nlink_t st_nlink, mode_t st_mode);
-void	ft_push_sort_lsl5_f(t_ls_list_f *start, char *str, ssize_t xattr, time_t time);
+//void	ft_push_sort_lsl_f(t_ls_list_f **begin, char *str, blkcnt_t st_blocks, char *lbuf);
+//void	ft_push_sort_lsl0_f(t_ls_list_f **begin, char *str, blkcnt_t st_blocks, char *lbuf);
+//void	ft_push_sort_lsl2_f(t_ls_list_f *start, char *str, off_t size, time_t time);
+//void	ft_push_sort_lsl3_f(t_ls_list_f *start, char *str, uid_t st_uid, gid_t st_gid);
+//void	ft_push_sort_lsl4_f(t_ls_list_f *start, char *str, nlink_t st_nlink, mode_t st_mode);
+//void	ft_push_sort_lsl5_f(t_ls_list_f *start, char *str, ssize_t xattr, time_t time);
 void	ft_push_bsl_bnl_to_list(t_ls_list *start);
 void	ft_push_bsl_bnl_to_list_f(t_ls_list_f *start);
 void	ft_puttime(char *str);
@@ -98,7 +98,7 @@ void	ft_putmode(mode_t mode, ssize_t xattr_nbr);
 void	ft_put_total(t_ls_list *start);
 void	ft_putlink(char	*file_name, char *link_name);
 void	ft_putlist_lsl(t_ls_list *start, char *flag);
-void	ft_putlist_lsl_f(t_ls_list_f *start, char *flag);
+void	ft_putlist_lsl_f(t_ls_list *start, char *flag);
 void	ft_delete_hidden_from_list(t_ls_list **start);
 void	ft_delete_duplicates_from_list(t_ls_list **start);
 int		ft_isflag(int i, char *flag, char **argv);

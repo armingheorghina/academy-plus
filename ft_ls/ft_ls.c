@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 13:49:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/23 18:59:03 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/24 11:53:08 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -911,7 +911,7 @@ int		main(int argc, char **argv)
 	int	j;
 	char	*flag;
 	int	flags_number;
-	t_ls_list_f	*start;
+	t_ls_list	*start;
 
 	start = NULL;
 	i = 1;
@@ -942,11 +942,11 @@ int		main(int argc, char **argv)
 	ft_putlist_lsl_f(start, flag);
 	i = j;
 	ft_directories_job(i, argc, argv, flag);
-	i = j;
-	while (i < argc)	// permision denied (cannot open directory)
-	{
-		ft_work_with_d_e(argv[i], flag);
-		i++;
-	}
+//	i = j;
+//	while (i < argc)	// permision denied (cannot open directory)
+//	{
+//		ft_work_with_d_e(argv[i], flag);
+//		i++;
+//	}
 	return (0);
 }
