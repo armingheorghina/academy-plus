@@ -45,26 +45,6 @@ typedef struct s_ls_list
 	struct s_ls_list		*next;
 }t_ls_list;
 
-typedef struct s_ls_list_f
-{
-	char				*name;				/* readdir - get dir name*/
-	mode_t				mode;	 			/* stat - protection */
-	nlink_t				nlink;				/* stat - number of hard links */
-	int					biggest_nlink_len;	/* bigest nlink length*/
-	uid_t				uid;	 			/* stat - user ID of owner */
-	int					biggest_uid_len;
-	gid_t				gid;	    		/* stat - group ID of owner */
-	int					biggest_gid_len;
-	off_t				bytes_size;			/* stat - total size, in bytes */
-	int					biggest_size_len;	/* bigest bytes_size length */
-	blkcnt_t			blocks;				/* number of 512B blocks allocated */
-	time_t   			mtime;				/* stat - time of last modification */
-	time_t   			atime;				/* stat - time of last access */
-	char				*link_name;			/* readlink */			
-	ssize_t				xattr_nbr;			/* listxattr*/	
-	struct s_ls_list_f		*next;
-}t_ls_list_f;
-
 void		ft_work_with_e(int i, char **argv);
 void		ft_work_with_d(char *path, char *flag);
 void		ft_work_with_d_e(char *path, char *flag);
@@ -80,17 +60,9 @@ void	ft_push_sort_lsl2(t_ls_list *start, char *str, off_t size, time_t time);
 void	ft_push_sort_lsl3(t_ls_list *start, char *str, uid_t st_uid, gid_t st_gid);
 void	ft_push_sort_lsl4(t_ls_list *start, char *str, nlink_t st_nlink, mode_t st_mode);
 void	ft_push_sort_lsl5(t_ls_list *start, char *str, ssize_t xattr, time_t time);
-//void	ft_push_sort_lsl_f(t_ls_list_f **begin, char *str, blkcnt_t st_blocks, char *lbuf);
-//void	ft_push_sort_lsl0_f(t_ls_list_f **begin, char *str, blkcnt_t st_blocks, char *lbuf);
-//void	ft_push_sort_lsl2_f(t_ls_list_f *start, char *str, off_t size, time_t time);
-//void	ft_push_sort_lsl3_f(t_ls_list_f *start, char *str, uid_t st_uid, gid_t st_gid);
-//void	ft_push_sort_lsl4_f(t_ls_list_f *start, char *str, nlink_t st_nlink, mode_t st_mode);
-//void	ft_push_sort_lsl5_f(t_ls_list_f *start, char *str, ssize_t xattr, time_t time);
 void	ft_push_bsl_bnl_to_list(t_ls_list *start);
-void	ft_push_bsl_bnl_to_list_f(t_ls_list_f *start);
 void	ft_puttime(char *str);
 void	ft_push_buidl_bgidl_to_list(t_ls_list *start);
-void	ft_push_buidl_bgidl_to_list_f(t_ls_list_f *start);
 void	ft_putbytes(int bytes_size, int biggest_size_len);
 void	ft_putuid_name(uid_t uid, int biggest_uid_len);
 void	ft_putgid_name(gid_t gid, int biggest_gid_len);

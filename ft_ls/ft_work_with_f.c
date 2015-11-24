@@ -19,7 +19,7 @@ t_ls_list	*ft_work_with_f(int i, char **argv, char *flag)
 	char				*lbuf;
 	int					readlink_return;
 
-	if	(ft_get_file_type(i, argv) == '-' || (ft_get_file_type(i, argv) == 'l' && ft_check_if_flag_contains(flag, 'l')) || (ft_get_file_type(i, argv) == 'd' && ft_check_if_flag_contains(flag, 'd') == 1))
+	if	(ft_get_file_type(i, argv) == '-' || (ft_get_file_type(i, argv) == 'l' && ft_check_if_flag_contains(flag, 'l') == 1) || (ft_get_file_type(i, argv) == 'd' && ft_check_if_flag_contains(flag, 'd') == 1))
 	{
 		if (ft_first_valid_directory_target() == 0) // if targets contains dirs and files. can't be 0 :) for print
 			ft_putchar('c');
@@ -43,7 +43,7 @@ t_ls_list	*ft_work_with_f(int i, char **argv, char *flag)
 			ft_push_sort_lsl2(start, argv[i], buf->st_size, buf->st_mtime);
 			ft_push_sort_lsl3(start, argv[i], buf->st_uid, buf->st_gid);
 			ft_push_sort_lsl4(start, argv[i], buf->st_nlink, buf->st_mode);
-			ft_push_sort_lsl5(start, argv[i], listxattr(argv[i], NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
+			ft_push_sort_lsl5(start, argv[i], listxattr(argv[i], NULL, 0), buf->st_atime);
 		}
 		else	/* sort by ascii*/
 		{
@@ -51,7 +51,7 @@ t_ls_list	*ft_work_with_f(int i, char **argv, char *flag)
 			ft_push_sort_lsl2(start, argv[i], buf->st_size, buf->st_mtime);
 			ft_push_sort_lsl3(start, argv[i], buf->st_uid, buf->st_gid);
 			ft_push_sort_lsl4(start, argv[i], buf->st_nlink, buf->st_mode);
-			ft_push_sort_lsl5(start, argv[i], listxattr(argv[i], NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
+			ft_push_sort_lsl5(start, argv[i], listxattr(argv[i], NULL, 0), buf->st_atime);
 		}
 		if (ft_check_if_flag_contains(flag, 't') == 1 && ft_check_if_flag_contains(flag, 'u') == 1)
 		{

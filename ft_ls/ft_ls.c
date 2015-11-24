@@ -960,11 +960,11 @@ int		main(int argc, char **argv)
 	}
 	ft_putlist_lsl_f(start, flag);
 	i = j;
-	while (i < argc) 
-	{
-		ft_work_with_l(i, argv, flag);
-		i++;
-	}
+//	while (i < argc) 
+//	{
+//		ft_work_with_l(i, argv, flag);
+//		i++;
+//	}
 	i = j;
 	ft_directories_job(i, argc, argv, flag);
 //	i = j;
