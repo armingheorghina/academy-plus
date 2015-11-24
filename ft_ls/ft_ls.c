@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 13:49:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/24 16:55:18 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/24 18:08:35 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -934,10 +934,17 @@ int		main(int argc, char **argv)
 	ft_get_valid_targets_number(i, argc, argv, flag);     //uses a global variable
 	if (argv[i] == NULL && i == argc) // 1.flags only or 2.no flags, no targets
 	{
-		g_targets_number++;
-		argv[i] = ".";
-		ft_work_with_d(argv[i], flag);
-
+		if (ft_check_if_flag_contains(flag, 'd') == 1)
+		{
+			argv[i] = ".";
+			start = ft_work_with_f(i, argv, flag);
+		}
+		else
+		{	
+			g_targets_number++;
+			argv[i] = ".";
+			ft_work_with_d(argv[i], flag);
+		}
 	}
 	
 	while (i < argc)	// no such file or directory
