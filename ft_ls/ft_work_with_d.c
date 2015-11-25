@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/25 14:42:05 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/25 18:44:32 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,12 @@ void	ft_work_with_d(char *path, char *flag)
 				ft_delete_hidden_from_list(&start);
 			ft_push_bsl_bnl_to_list(start);
 			ft_push_buidl_bgidl_to_list(start);
-			if (ft_check_if_flag_contains(flag, 't') == 1 && ft_check_if_flag_contains(flag, 'u') == 1)
+			if (ft_check_if_flag_contains(flag, 'S') == 1)
+			{
+				ft_sort_list_by_bytes_size(start);
+				ft_sort_list_by_ascii_for_bytes_size_equal(start);
+			}
+			else if (ft_check_if_flag_contains(flag, 't') == 1 && ft_check_if_flag_contains(flag, 'u') == 1)
 			{
 				ft_sort_list_by_atime(start);
 				ft_sort_list_by_ascii_for_atime_equal(start);
@@ -110,6 +115,9 @@ void	ft_work_with_d(char *path, char *flag)
 				ft_sort_list_by_mtime(start);
 				ft_sort_list_by_ascii_for_mtime_equal(start);
 			}
+
+
+
 			if (ft_check_if_flag_contains(flag, 'r') == 1)
 				ft_sort_list_reverse(start, flag);
 			if (g_targets_number >= 2)

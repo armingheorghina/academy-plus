@@ -2,6 +2,9 @@
 
 void	ft_putlist_lsl_f(t_ls_list *start, char *flag)
 {
+	time_t		local_time;
+
+	local_time = time((time_t*)NULL);
 	while (start)
 	{
 		
@@ -15,9 +18,29 @@ void	ft_putlist_lsl_f(t_ls_list *start, char *flag)
 			ft_putbytes((int)start->bytes_size, start->biggest_size_len);
 				
 			if (ft_check_if_flag_contains(flag, 'u') == 1)
-				ft_puttime(ctime(&(start->atime)));
+			{
+				if (ft_year_is_lower_than_1970(ctime(&(start->atime))))
+					ft_putstr("Jan  1  10000 ");
+				else
+				{
+					if (start->atime > local_time || start->atime < local_time - 15778463)
+						ft_puttime_2(ctime(&(start->atime)));
+					else
+						ft_puttime(ctime(&(start->atime)));
+				}
+			}
 			else
-				ft_puttime(ctime(&(start->mtime)));
+			{
+				if (ft_year_is_lower_than_1970(ctime(&(start->mtime))))
+					ft_putstr("Jan  1  10000 ");
+				else
+				{
+					if (start->mtime > local_time || start->mtime < (local_time - 15778463))
+						ft_puttime_2(ctime(&(start->mtime)));
+					else
+						ft_puttime(ctime(&(start->mtime)));
+				}
+			}
 			if (S_ISLNK(start->mode) == 1)
 				ft_putlink(start->name, start->link_name);
 			else

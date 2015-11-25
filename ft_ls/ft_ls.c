@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 13:49:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/25 14:55:46 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/25 18:29:51 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -440,16 +440,42 @@ void	ft_putlink(char	*file_name, char *link_name)
 	ft_putchar('\n');
 }
 
+void	ft_puttime_2(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (i >= 4 && i <= 10)
+			write(1, &str[i], 1);
+		if (i >=19  && i <= 23)
+			write(1, &str[i], 1);
+		i++;
+	}
+	write(1, " ", 1);
+}
+
+int		ft_year_is_lower_than_1970(char *str)
+{
+	if (ft_atoi(ft_strsub(str, 19, 5)) < 1970)
+		return (1);
+	else
+		return (0);
+}
+
+
 void	ft_putlist_lsl(t_ls_list *start, char *flag)
 {
 	t_ls_list	*start2;
+	time_t		local_time;
 
+	local_time = time((time_t*)NULL);
 	start2 = start;
 	if ((ft_check_if_flag_contains(flag, 'l') == 1 || ft_check_if_flag_contains(flag, 'g') == 1) && ft_check_if_flag_contains(flag, 'd') == 0)
 		ft_put_total(start2);
 	while (start)
 	{
-		
 		if (ft_check_if_flag_contains(flag, 'l') == 1 || ft_check_if_flag_contains(flag, 'g') == 1 || (ft_check_if_flag_contains(flag, 'p') == 1 && ft_check_if_flag_contains(flag, 'l') == 1))
 		{
 			ft_putmode(start->mode, start->xattr_nbr);
@@ -460,9 +486,29 @@ void	ft_putlist_lsl(t_ls_list *start, char *flag)
 			ft_putbytes((int)start->bytes_size, start->biggest_size_len);
 				
 			if (ft_check_if_flag_contains(flag, 'u') == 1)
-				ft_puttime(ctime(&(start->atime)));
+			{
+				if (ft_year_is_lower_than_1970(ctime(&(start->atime))))
+					ft_putstr("Jan  1  10000 ");
+				else
+				{
+					if (start->atime > local_time || start->atime < local_time - 15778463)
+						ft_puttime_2(ctime(&(start->atime)));
+					else
+						ft_puttime(ctime(&(start->atime)));
+				}
+			}
 			else
-				ft_puttime(ctime(&(start->mtime)));
+			{
+				if (ft_year_is_lower_than_1970(ctime(&(start->mtime))))
+					ft_putstr("Jan  1  10000 ");
+				else
+				{	
+					if (start->mtime > local_time || start->mtime < (local_time - 15778463))
+						ft_puttime_2(ctime(&(start->mtime)));
+					else
+						ft_puttime(ctime(&(start->mtime)));
+				}
+			}
 
 			if (S_ISLNK(start->mode) == 1) /* special case for links listing*/
 				ft_putlink(start->name, start->link_name);
@@ -718,6 +764,20 @@ void	ft_sort_list_reverse(t_ls_list *start, char *flag)
 				ft_strswap(&(start->link_name), &(start2->link_name));
 				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
 			}
+			else if ((start->bytes_size > start2->bytes_size) && ft_check_if_flag_contains(flag, 'S') == 1)
+			{
+				ft_strswap(&(start->name), &(start2->name));
+				ft_modeswap(&(start->mode), &(start2->mode));
+				ft_nlinkswap(&(start->nlink), &(start2->nlink));
+				ft_uid_tswap(&(start->uid), &(start2->uid));
+				ft_gid_tswap(&(start->gid), &(start2->gid));
+				ft_off_tswap(&(start->bytes_size), &(start2->bytes_size));
+				ft_blkcnt_tswap(&(start->blocks), &(start2->blocks));
+				ft_time_tswap(&(start->mtime), &(start2->mtime));
+				ft_time_tswap(&(start->atime), &(start2->atime));
+				ft_strswap(&(start->link_name), &(start2->link_name));
+				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
+			}
 			else if	(ft_strcmp(start->name, (start2)->name) < 0)
 			{
 				ft_strswap(&(start->name), &(start2->name));
@@ -728,6 +788,7 @@ void	ft_sort_list_reverse(t_ls_list *start, char *flag)
 				ft_off_tswap(&(start->bytes_size), &(start2->bytes_size));
 				ft_blkcnt_tswap(&(start->blocks), &(start2->blocks));
 				ft_time_tswap(&(start->mtime), &(start2->mtime));
+				ft_time_tswap(&(start->atime), &(start2->atime));
 				ft_strswap(&(start->link_name), &(start2->link_name));
 				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
 			}
@@ -753,6 +814,35 @@ char	*ft_enable_flag_a(char *str, char c)
 	fin[i] = c;
 	fin[i + 1] = '\0';
 	return (fin);
+}
+
+void	ft_sort_list_by_ascii_for_bytes_size_equal(t_ls_list *start)
+{
+	t_ls_list *start2;
+
+	while (start)
+	{
+		start2 = start->next;
+		while (start2)
+		{
+			if ((start->bytes_size == start2->bytes_size) && (ft_strcmp(start->name, (start2)->name) > 0))
+			{
+				ft_strswap(&(start->name), &(start2->name));
+				ft_modeswap(&(start->mode), &(start2->mode));
+				ft_nlinkswap(&(start->nlink), &(start2->nlink));
+				ft_uid_tswap(&(start->uid), &(start2->uid));
+				ft_gid_tswap(&(start->gid), &(start2->gid));
+				ft_off_tswap(&(start->bytes_size), &(start2->bytes_size));
+				ft_blkcnt_tswap(&(start->blocks), &(start2->blocks));
+				ft_time_tswap(&(start->mtime), &(start2->mtime));
+				ft_time_tswap(&(start->atime), &(start2->atime));
+				ft_strswap(&(start->link_name), &(start2->link_name));
+				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
+			}
+			start2 = start2->next;
+		}
+		start = start->next;
+	}
 }
 
 void	ft_sort_list_by_ascii_for_mtime_equal(t_ls_list *start)
@@ -870,6 +960,34 @@ void	ft_sort_list_by_atime(t_ls_list *start)
 	}
 }
 
+void	ft_sort_list_by_bytes_size(t_ls_list *start)
+{
+	t_ls_list *start2;
+
+	while (start)
+	{
+		start2 = start->next;
+		while (start2)
+		{
+			if (start->bytes_size < start2->bytes_size)
+			{
+				ft_strswap(&(start->name), &(start2->name));
+				ft_modeswap(&(start->mode), &(start2->mode));
+				ft_nlinkswap(&(start->nlink), &(start2->nlink));
+				ft_uid_tswap(&(start->uid), &(start2->uid));
+				ft_gid_tswap(&(start->gid), &(start2->gid));
+				ft_off_tswap(&(start->bytes_size), &(start2->bytes_size));
+				ft_blkcnt_tswap(&(start->blocks), &(start2->blocks));
+				ft_time_tswap(&(start->mtime), &(start2->mtime));
+				ft_time_tswap(&(start->atime), &(start2->atime));
+				ft_strswap(&(start->link_name), &(start2->link_name));
+				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
+			}
+			start2 = start2->next;
+		}
+		start = start->next;
+	}
+}
 
 void	ft_get_directories_number_for_R(char *path)
 {

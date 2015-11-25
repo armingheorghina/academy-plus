@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/25 13:24:42 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/25 18:27:34 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	ft_push_sort_lsl4(t_ls_list *start, char *str, nlink_t st_nlink, mode_t st_
 void	ft_push_sort_lsl5(t_ls_list *start, char *str, ssize_t xattr, time_t time);
 void	ft_push_bsl_bnl_to_list(t_ls_list *start);
 void	ft_puttime(char *str);
+void	ft_puttime_2(char *str);
 void	ft_push_buidl_bgidl_to_list(t_ls_list *start);
 void	ft_putbytes(int bytes_size, int biggest_size_len);
 void	ft_putuid_name(uid_t uid, int biggest_uid_len);
@@ -82,13 +83,16 @@ int	ft_check_if_flag_contains(char *str, char c);
 void	ft_sort_list_reverse(t_ls_list *start, char *flag);
 void	ft_sort_list_by_mtime(t_ls_list *start);
 void	ft_sort_list_by_atime(t_ls_list *start);
+void	ft_sort_list_by_bytes_size(t_ls_list *start);
 void	ft_sort_list_by_ascii_for_mtime_equal(t_ls_list *start);
 void	ft_sort_list_by_ascii_for_atime_equal(t_ls_list *start);
+void	ft_sort_list_by_ascii_for_bytes_size_equal(t_ls_list *start);
 char	*ft_enable_flag_a(char *str, char c);
 int		ft_first_valid_directory_target(void);
 void	ft_directories_job(int i, int argc, char **argv, char *flag);
 void	ft_strswap(char **str1, char **str2);
 int		ft_special_case_link_to_dir(void);
+int		ft_year_is_lower_than_1970(char *str);
 #endif
 
 /*

@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 16:03:14 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/25 14:12:16 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/25 18:31:46 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_ls_list	*ft_work_with_f(int i, char **argv, char *flag)
 			ft_putchar('c');
 
 
-		if (ft_check_if_flag_contains(flag, 't') == 1 || ft_check_if_flag_contains(flag, 'f') == 1)
+		if ((ft_check_if_flag_contains(flag, 't') == 1 || ft_check_if_flag_contains(flag, 'f') == 1) && ft_check_if_flag_contains(flag, 'S') == 0)
 		{
 			ft_push_sort_lsl0(&start, argv[i], buf->st_blocks, lbuf);
 			ft_push_sort_lsl2(start, argv[i], buf->st_size, buf->st_mtime);
@@ -64,7 +64,12 @@ t_ls_list	*ft_work_with_f(int i, char **argv, char *flag)
 			ft_push_sort_lsl4(start, argv[i], buf->st_nlink, buf->st_mode);
 			ft_push_sort_lsl5(start, argv[i], listxattr(argv[i], NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
 		}
-		if (ft_check_if_flag_contains(flag, 't') == 1 && ft_check_if_flag_contains(flag, 'u') == 1)
+		if (ft_check_if_flag_contains(flag, 'S') == 1)
+		{
+			ft_sort_list_by_bytes_size(start);
+			ft_sort_list_by_ascii_for_bytes_size_equal(start);
+		}
+		else if (ft_check_if_flag_contains(flag, 't') == 1 && ft_check_if_flag_contains(flag, 'u') == 1)
 		{
 			ft_sort_list_by_atime(start);
 			ft_sort_list_by_ascii_for_atime_equal(start);
@@ -74,6 +79,7 @@ t_ls_list	*ft_work_with_f(int i, char **argv, char *flag)
 			ft_sort_list_by_mtime(start);
 			ft_sort_list_by_ascii_for_mtime_equal(start);
 		}
+
 		if (ft_check_if_flag_contains(flag, 'r') == 1)
 			ft_sort_list_reverse(start, flag);
 		ft_push_bsl_bnl_to_list(start);
