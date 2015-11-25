@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 19:31:48 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/17 19:43:14 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/25 14:27:33 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	ft_work_with_e(int i, char **argv)
 		dirp = opendir(argv[i]);
 		if (dirp == NULL)
 		{
-			ft_putstr(argv[0]);
-			ft_putstr(": ");
+			ft_putstr("ls: ");
+		//	ft_putstr(": ");
 			perror(argv[i]);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 13:49:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/24 18:08:35 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/25 14:55:46 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -450,7 +450,7 @@ void	ft_putlist_lsl(t_ls_list *start, char *flag)
 	while (start)
 	{
 		
-		if (ft_check_if_flag_contains(flag, 'l') == 1 || ft_check_if_flag_contains(flag, 'g') == 1)
+		if (ft_check_if_flag_contains(flag, 'l') == 1 || ft_check_if_flag_contains(flag, 'g') == 1 || (ft_check_if_flag_contains(flag, 'p') == 1 && ft_check_if_flag_contains(flag, 'l') == 1))
 		{
 			ft_putmode(start->mode, start->xattr_nbr);
 			ft_puthardlinks((int)start->nlink, start->biggest_nlink_len);
@@ -467,10 +467,20 @@ void	ft_putlist_lsl(t_ls_list *start, char *flag)
 			if (S_ISLNK(start->mode) == 1) /* special case for links listing*/
 				ft_putlink(start->name, start->link_name);
 			else
-				ft_putendl(start->name);
+			{
+				if (S_ISDIR(start->mode) && ft_check_if_flag_contains(flag, 'p') == 1)
+					ft_putendl(ft_strjoin(start->name, "/"));
+				else
+					ft_putendl(start->name);
+			}
 		}
 		else
-			ft_putendl(start->name);
+		{
+			if (S_ISDIR(start->mode) && ft_check_if_flag_contains(flag, 'p') == 1)
+				ft_putendl(ft_strjoin(start->name, "/"));
+			else
+				ft_putendl(start->name);
+		}
 		start = start->next;
 	}
 }
@@ -960,18 +970,6 @@ int		main(int argc, char **argv)
 	}
 	ft_putlist_lsl_f(start, flag);
 	i = j;
-//	while (i < argc) 
-//	{
-//		ft_work_with_l(i, argv, flag);
-//		i++;
-//	}
-	i = j;
 	ft_directories_job(i, argc, argv, flag);
-//	i = j;
-//	while (i < argc)	// permision denied (cannot open directory)
-//	{
-//		ft_work_with_d_e(argv[i], flag);
-//		i++;
-//	}
 	return (0);
 }

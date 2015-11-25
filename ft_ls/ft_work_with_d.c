@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/24 17:46:45 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/25 14:42:05 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,18 @@ void	ft_work_with_d(char *path, char *flag)
 	char			*lbuf;
 	ssize_t			readlink_return;
 
-	if ((ft_get_file_type_2(path) == 'd' && ft_check_if_flag_contains(flag, 'd') == 0) || (ft_get_file_type_2(path) == 'l' && ft_check_if_flag_contains(flag, 'l') == 0))
+				buf = (struct stat*)malloc(sizeof(*buf));
+				(void)lstat(path, buf);
+				if (S_ISLNK(buf->st_mode) == 1)
+				{
+					lbuf = (char*)malloc(1024);
+					readlink_return = readlink(path, lbuf, 1024);
+					lbuf[readlink_return] = '\0';
+				}
+	if ((ft_get_file_type_2(path) == 'd' && ft_check_if_flag_contains(flag, 'd') == 0) || (ft_get_file_type_2(path) == 'l' && ft_check_if_flag_contains(flag, 'l') == 0 && ft_get_file_type_2(lbuf) == 'd'))
 	{
 		dirp = opendir(path);
-		if (dirp == NULL)
+		if (dirp == NULL) //permision denied, cannot open directory
 		{
 			if (g_targets_number >= 2)
 			{
@@ -49,7 +57,7 @@ void	ft_work_with_d(char *path, char *flag)
 				ft_putstr(path);
 				ft_putstr(":\n");
 			}
-			ft_putstr("./ft_ls: ");
+			ft_putstr("ls: ");
 			perror(path);
 		}
 		if (dirp != NULL)
@@ -75,7 +83,7 @@ void	ft_work_with_d(char *path, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0), buf->st_atime);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
 				}
 				else	/* sort by ascii */
 				{
@@ -83,7 +91,7 @@ void	ft_work_with_d(char *path, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0), buf->st_atime);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
 				}
 			}
 			if (ft_check_if_flag_contains(flag, 'f') == 1)

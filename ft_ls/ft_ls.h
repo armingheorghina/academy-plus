@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/10 17:56:32 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/24 16:59:41 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/25 13:24:42 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ char	*ft_enable_flag_a(char *str, char c);
 int		ft_first_valid_directory_target(void);
 void	ft_directories_job(int i, int argc, char **argv, char *flag);
 void	ft_strswap(char **str1, char **str2);
+int		ft_special_case_link_to_dir(void);
 #endif
 
 /*
