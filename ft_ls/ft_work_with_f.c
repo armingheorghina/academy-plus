@@ -54,7 +54,7 @@ t_ls_list	*ft_work_with_f(int i, char **argv, char *flag)
 			ft_push_sort_lsl2(start, argv[i], buf->st_size, buf->st_mtime);
 			ft_push_sort_lsl3(start, argv[i], buf->st_uid, buf->st_gid);
 			ft_push_sort_lsl4(start, argv[i], buf->st_nlink, buf->st_mode);
-			ft_push_sort_lsl5(start, argv[i], listxattr(argv[i], NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
+			ft_push_sort_lsl5(start, argv[i], listxattr(argv[i], NULL, 0/*, XATTR_NOFOLLOW*/), buf->st_atime);
 		}
 		else	/* sort by ascii*/
 		{
@@ -62,7 +62,7 @@ t_ls_list	*ft_work_with_f(int i, char **argv, char *flag)
 			ft_push_sort_lsl2(start, argv[i], buf->st_size, buf->st_mtime);
 			ft_push_sort_lsl3(start, argv[i], buf->st_uid, buf->st_gid);
 			ft_push_sort_lsl4(start, argv[i], buf->st_nlink, buf->st_mode);
-			ft_push_sort_lsl5(start, argv[i], listxattr(argv[i], NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
+			ft_push_sort_lsl5(start, argv[i], listxattr(argv[i], NULL, 0/*, XATTR_NOFOLLOW*/), buf->st_atime);
 		}
 		if (ft_check_if_flag_contains(flag, 'S') == 1)
 		{

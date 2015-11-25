@@ -736,7 +736,21 @@ void	ft_sort_list_reverse(t_ls_list *start, char *flag)
 		start2 = start->next;
 		while (start2)
 		{
-			if ((start->atime > start2->atime) && ft_check_if_flag_contains(flag, 't') == 1 && ft_check_if_flag_contains(flag, 'u') == 1)
+			if ((start->bytes_size > start2->bytes_size) && ft_check_if_flag_contains(flag, 'S') == 1)
+			{
+				ft_strswap(&(start->name), &(start2->name));
+				ft_modeswap(&(start->mode), &(start2->mode));
+				ft_nlinkswap(&(start->nlink), &(start2->nlink));
+				ft_uid_tswap(&(start->uid), &(start2->uid));
+				ft_gid_tswap(&(start->gid), &(start2->gid));
+				ft_off_tswap(&(start->bytes_size), &(start2->bytes_size));
+				ft_blkcnt_tswap(&(start->blocks), &(start2->blocks));
+				ft_time_tswap(&(start->mtime), &(start2->mtime));
+				ft_time_tswap(&(start->atime), &(start2->atime));
+				ft_strswap(&(start->link_name), &(start2->link_name));
+				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
+			}
+			else if ((start->atime > start2->atime) && ft_check_if_flag_contains(flag, 't') == 1 && ft_check_if_flag_contains(flag, 'u') == 1)
 			{
 				ft_strswap(&(start->name), &(start2->name));
 				ft_modeswap(&(start->mode), &(start2->mode));
@@ -751,20 +765,6 @@ void	ft_sort_list_reverse(t_ls_list *start, char *flag)
 				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
 			}
 			else if ((start->mtime > start2->mtime) && ft_check_if_flag_contains(flag, 't') == 1)
-			{
-				ft_strswap(&(start->name), &(start2->name));
-				ft_modeswap(&(start->mode), &(start2->mode));
-				ft_nlinkswap(&(start->nlink), &(start2->nlink));
-				ft_uid_tswap(&(start->uid), &(start2->uid));
-				ft_gid_tswap(&(start->gid), &(start2->gid));
-				ft_off_tswap(&(start->bytes_size), &(start2->bytes_size));
-				ft_blkcnt_tswap(&(start->blocks), &(start2->blocks));
-				ft_time_tswap(&(start->mtime), &(start2->mtime));
-				ft_time_tswap(&(start->atime), &(start2->atime));
-				ft_strswap(&(start->link_name), &(start2->link_name));
-				ft_ssize_tswap(&(start->xattr_nbr), &(start2->xattr_nbr));
-			}
-			else if ((start->bytes_size > start2->bytes_size) && ft_check_if_flag_contains(flag, 'S') == 1)
 			{
 				ft_strswap(&(start->name), &(start2->name));
 				ft_modeswap(&(start->mode), &(start2->mode));
