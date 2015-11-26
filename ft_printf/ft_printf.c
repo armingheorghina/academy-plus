@@ -10,7 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+
 int		ft_printf(const char *format, ...)
 {
+	va_list ap;
+	char *s;
+
+	va_start(ap, format);
+	
+		s = va_arg(ap, char *);
+		ft_putendl(s);
+		s = va_arg(ap, char *);
+		ft_putendl(s);
+
+	va_end(ap);
 	return (0);
 }

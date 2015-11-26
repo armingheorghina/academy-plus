@@ -22,11 +22,11 @@ all: $(NAME)
 $(NAME):
 	make -C libft/ fclean
 	make -C libft/
-	gcc -Wall -Werror -Wextra -c $(SRCS)
+	gcc -Wall -Werror -Wextra -I libft/ -c $(SRCS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
-	gcc -Wall -Werror -Wextra -I libft/ -c main.c 
-	gcc -o ft_printf main.o -L libft/ -lft -L. -lftprintf
+	gcc -Wall -Werror -Wextra -I libft/ -c main.c ft_printf.c
+	gcc -o ft_printf main.o ft_printf.o -L libft/ -lft
 
 clean:
 	/bin/rm -f $(OBJ)
