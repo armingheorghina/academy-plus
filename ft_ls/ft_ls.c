@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 13:49:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/25 18:29:51 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/26 14:17:28 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,31 +75,6 @@ void	ft_push_sort_lsl0(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *l
 		p->next = new;
 	}
 }
-
-/*
-void	ft_push_sort_lsl0f(t_ls_list **begin, char *str, blkcnt_t st_blocks, char *lbuf)
-{
-	t_ls_list *new;
-	t_ls_list *list;
-	t_ls_list *p;
-
-	new = (t_ls_list*)malloc(sizeof(t_ls_list));
-	new->name = ft_strdup(str);
-	new->blocks = st_blocks;
-	new->link_name = lbuf;
-	list = *begin;
-	new->next = NULL;
-	if (list == NULL)
-		*begin = new;
-	else
-	{
-		p = *begin;
-		while (p->next)
-			p = p->next;
-		p->next = new;
-	}
-}
-*/
 
 void	ft_push_sort_lsl2(t_ls_list *start, char *str, off_t st_size, time_t time)
 {
@@ -189,10 +164,10 @@ void	ft_push_bsl_bnl_to_list(t_ls_list *start)
 	start2 = start;
 	while (start)
 	{
-		c = ft_strlen(ft_itoa((int)start->bytes_size)); //*TODO do it smarter.
+		c = ft_strlen(ft_itoa((int)start->bytes_size));
 		if (c > d)
 			d = c;
-		a = ft_strlen(ft_itoa((int)start->nlink)); //*TODO do it smarter.
+		a = ft_strlen(ft_itoa((int)start->nlink));
 		if (a > b)
 			b = a;
 		start = start->next;
@@ -251,7 +226,7 @@ void	ft_putbytes(int bytes_size, int biggest_size_len)
 	int x;
 	int i;
 
-	x = ft_strlen(ft_itoa(bytes_size)); //*TODO use a smarter way to count this.
+	x = ft_strlen(ft_itoa(bytes_size));
 	i = 0;
 	while (i < biggest_size_len - x)
 	{
@@ -365,11 +340,11 @@ void	ft_putmode(mode_t mode, ssize_t xattr_nbr)
 		ft_putchar('w');
 	else
 		ft_putchar('-');
-   	if (mode & S_ISUID && (S_IEXEC & mode))		// or special s,t, S,T
+   	if (mode & S_ISUID && (S_IEXEC & mode))
 		ft_putchar('s');
-	else if (mode & S_ISUID)		// or special s,t, S,T
+	else if (mode & S_ISUID)
 		ft_putchar('S');
-	else if (mode & S_IXUSR)		// or special s,t, S,T
+	else if (mode & S_IXUSR)
 		ft_putchar('x');
 	else
 		ft_putchar('-');
@@ -385,7 +360,7 @@ void	ft_putmode(mode_t mode, ssize_t xattr_nbr)
 		ft_putchar('s');
 	else if (mode & S_ISGID)	
 		ft_putchar('S');
-	else if (mode & S_IXGRP)		// or special
+	else if (mode & S_IXGRP)
 		ft_putchar('x');
 	else
 		ft_putchar('-');
@@ -401,7 +376,7 @@ void	ft_putmode(mode_t mode, ssize_t xattr_nbr)
 		ft_putchar('t');
 	else if (mode & S_ISVTX)	
 		ft_putchar('T');
-	else if (mode & S_IXOTH)		// or special 
+	else if (mode & S_IXOTH)
 		ft_putchar('x');
 	else
 		ft_putchar('-');
@@ -510,7 +485,7 @@ void	ft_putlist_lsl(t_ls_list *start, char *flag)
 				}
 			}
 
-			if (S_ISLNK(start->mode) == 1) /* special case for links listing*/
+			if (S_ISLNK(start->mode) == 1)
 				ft_putlink(start->name, start->link_name);
 			else
 			{
@@ -1022,7 +997,7 @@ void	ft_get_valid_targets_number(int i, int argc, char **argv, char *flag)
 		{
 			g_targets_number++;
 			if (ft_check_if_flag_contains(flag, 'R') == 1 && ft_get_file_type_2(argv[i]) == 'd')
-			{	//ft_get_directories_number_for_R(argv[i]);
+			{
 				while (flag[j])
 					j++;
 			}
@@ -1039,6 +1014,32 @@ int		ft_first_valid_directory_target(void)
 	return (x);
 }
 
+int		ft_ilegal_options_management(char *flag)
+{
+	char ilegalflags[30] = "DEIJKMNQVXYZjvyz234567890";
+	int i;
+	int j;
+
+	i = 0;
+	while (flag[i])
+	{
+		j = 0;
+		while (ilegalflags[j])
+		{
+			if (flag[i] == ilegalflags[j])
+			{
+				ft_putstr_fd("ls: illegal option -- ", 2);
+				ft_putchar_fd(ilegalflags[j], 2);
+				ft_putchar_fd('\n', 2);
+				ft_putendl_fd("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]", 2);
+				return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
 
 int		main(int argc, char **argv)
 {
@@ -1051,16 +1052,13 @@ int		main(int argc, char **argv)
 	start = NULL;
 	i = 1;
 	flag = ft_get_flag(i, argc, argv);
-	if (ft_strchr(flag, 'Z') != NULL) //*TODO solve all cases not only Z
-	{	ft_putendl("./ft_ls: illegal option -- Z");
-		ft_putendl("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]");
+	if (ft_ilegal_options_management(flag) == 0)
 		return (0);
-	}
 	flags_number = ft_get_flags_number(i, argc, argv);
 	i = i + flags_number;
 	j = i;
-	ft_get_valid_targets_number(i, argc, argv, flag);     //uses a global variable
-	if (argv[i] == NULL && i == argc) // 1.flags only or 2.no flags, no targets
+	ft_get_valid_targets_number(i, argc, argv, flag);
+	if (argv[i] == NULL && i == argc)
 	{
 		if (ft_check_if_flag_contains(flag, 'd') == 1)
 		{
@@ -1074,8 +1072,7 @@ int		main(int argc, char **argv)
 			ft_work_with_d(argv[i], flag);
 		}
 	}
-	
-	while (i < argc)	// no such file or directory
+	while (i < argc)
 	{
 		ft_work_with_e(i, argv);
 		i++;

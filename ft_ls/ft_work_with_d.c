@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/17 18:46:08 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/25 18:44:32 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/26 14:16:42 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_work_with_d(char *path, char *flag)
 	if ((ft_get_file_type_2(path) == 'd' && ft_check_if_flag_contains(flag, 'd') == 0) || (ft_get_file_type_2(path) == 'l' && ft_check_if_flag_contains(flag, 'l') == 0 && ft_get_file_type_2(lbuf) == 'd'))
 	{
 		dirp = opendir(path);
-		if (dirp == NULL) //permision denied, cannot open directory
+		if (dirp == NULL)
 		{
 			if (g_targets_number >= 2)
 			{
@@ -83,7 +83,7 @@ void	ft_work_with_d(char *path, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0/*, XATTR_NOFOLLOW*/), buf->st_atime);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
 				}
 				else	/* sort by ascii */
 				{
@@ -91,7 +91,7 @@ void	ft_work_with_d(char *path, char *flag)
 					ft_push_sort_lsl2(start, dp->d_name, buf->st_size, buf->st_mtime);
 					ft_push_sort_lsl3(start, dp->d_name, buf->st_uid, buf->st_gid);
 					ft_push_sort_lsl4(start, dp->d_name, buf->st_nlink, buf->st_mode);
-					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0/*, XATTR_NOFOLLOW*/), buf->st_atime);
+					ft_push_sort_lsl5(start, dp->d_name, listxattr(ft_strjoin(ft_strjoin(path, "/"), dp->d_name), NULL, 0, XATTR_NOFOLLOW), buf->st_atime);
 				}
 			}
 			if (ft_check_if_flag_contains(flag, 'f') == 1)
@@ -115,9 +115,6 @@ void	ft_work_with_d(char *path, char *flag)
 				ft_sort_list_by_mtime(start);
 				ft_sort_list_by_ascii_for_mtime_equal(start);
 			}
-
-
-
 			if (ft_check_if_flag_contains(flag, 'r') == 1)
 				ft_sort_list_reverse(start, flag);
 			if (g_targets_number >= 2)
@@ -132,7 +129,6 @@ void	ft_work_with_d(char *path, char *flag)
 				ft_first_valid_directory_target();
 			}
 			ft_putlist_lsl(start, flag);
-			// *TODO free list : use ft_lstdel(start, f_free_str)
 			close_dir = closedir(dirp);
 			if (close_dir == -1)
 				perror("closedir error");
@@ -141,7 +137,6 @@ void	ft_work_with_d(char *path, char *flag)
 		{
 			while (start)
 			{
-		//		buf = (struct stat*)malloc(sizeof(*buf));
 				if (ft_strcmp(start->name, ".") != 0 && ft_strcmp(start->name, "..") != 0 )
 				{
 					(void)lstat(ft_strjoin(ft_strjoin(path, "/"), start->name), buf);
