@@ -6,27 +6,40 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:53:31 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/27 14:28:52 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/27 17:09:23 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_descriptor_len(const char *format)
+static int		ft_descriptor_len(const char *format)
 {
 	int i;
 
 	i = 1;
-	while (format[i] && ft_strchr(FLAGS, format[i]) != NULL)
+	while (ft_strchr(FLAGS, format[i]) && format[i])
 		i++;
-	i--;
-	if (format[i + 1] == '\0')
+	if (ft_strchr(CONVERSIONS, format[i]) && format[i] != '\0')
 		return (i + 1);
+	else if (format[i] == '\0' || !ft_strchr(CONVERSIONS, format[i]))
+		return (i - 1);
 	else
-		return (i + 1 + 1);
+		return (i);
 }
 
-static int	ft_process_format(const char *format, va_list *ap)
+static char		*ft_chose_identifier(char *descriptor, va_list *ap, int descriptor_len)
+{
+	char *str;
+	
+	str = NULL;
+	ft_putchar(descriptor[descriptor_len - 1]);
+	if (descriptor[descriptor_len - 1] == 's')
+		str = va_arg(*ap, char *);
+	
+	return (str);
+}
+
+static int		ft_process_format(const char *format, va_list *ap)
 {
 	int bytes;
 	char *descriptor;
@@ -35,19 +48,26 @@ static int	ft_process_format(const char *format, va_list *ap)
 
 	bytes = 0;
 	i = 0;
-	ap = NULL;
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
 			descriptor_len = ft_descriptor_len(format + i);
-			descriptor = ft_strsub(format, i, descriptor_len);
-			ft_putstr(descriptor);
-			i = i + descriptor_len;
+
+			if (descriptor_len > 0)
+			{
+				descriptor = ft_strsub(format, i, descriptor_len);
+				ft_putstr(ft_chose_identifier(descriptor, ap, descriptor_len));
+				bytes = bytes + ft_strlen(ft_chose_identifier(descriptor, ap, descriptor_len));
+				i = i + descriptor_len;
+			}
+			else
+				i++;
 		}
 		else
 		{
 			ft_putchar(format[i]);
+			bytes++;
 			i++;
 		}
 	}
@@ -55,7 +75,7 @@ static int	ft_process_format(const char *format, va_list *ap)
 	return (bytes);
 }
 
-int			ft_printf(const char *format, ...)
+int				ft_printf(const char *format, ...)
 {
 	va_list ap;
 	int		bytes;
