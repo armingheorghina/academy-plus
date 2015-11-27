@@ -32,7 +32,8 @@ void foo(char *fmt, ...)
 int	main()
 {
 
-	ft_printf("%s - %% - %s", "abcd", "efgh");
+	ft_printf("% - %hh - %% - %s - %hhs - %");
+	//printf("%s - %% - %s", "abcd", "efgh");
 	return (0);
 
 }

@@ -6,7 +6,7 @@
 #    By: vdruta <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/02 16:35:04 by vdruta            #+#    #+#              #
-#    Updated: 2015/11/26 18:21:21 by vdruta           ###   ########.fr        #
+#    Updated: 2015/11/27 11:54:12 by vdruta           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ $(NAME):
 	gcc -Wall -Werror -Wextra -I libft/ -c $(SRCS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
-	gcc -Wall -Werror -Wextra -I libft/ -c main.c ft_printf.c
-	gcc -o ft_printf main.o ft_printf.o -L libft/ -lft
+	gcc -Wall -Werror -Wextra -I libft/ -c main.c
+	gcc -o ft_printf main.o -L libft/ -lft -L. -lftprintf
 
 clean:
 	/bin/rm -f $(OBJ)
