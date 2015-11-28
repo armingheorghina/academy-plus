@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/27 17:09:27 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/11/28 16:20:21 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,15 @@
 
 int		ft_printf(const char *format, ...);
 
-char				*ft_itoa(int n);
-void				ft_putchar(char c);
-void				ft_putstr(char const *s);
-size_t				ft_strlen(const char *s);
-char				*ft_strsub(char const *s, unsigned int start, size_t len);
-char				*ft_strchr(const char *s, int c);
+char	*ft_itoa(int n);
+void	ft_putchar(char c);
+void	ft_putstr(char const *s);
+size_t	ft_strlen(const char *s);
+char	*ft_strsub(char const *s, unsigned int start, size_t len);
+char	*ft_strchr(const char *s, int c);
+void	ft_putnbr(int n);
 
+void	ft_process_s_(va_list ap, int *bytes);
+void	ft_process_d_(va_list ap, int *bytes);
+void	ft_process_p_(va_list ap, int *bytes);
 #endif

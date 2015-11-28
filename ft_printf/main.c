@@ -31,9 +31,20 @@ void foo(char *fmt, ...)
 */
 int	main()
 {
-
+	int bytes;
+	char *str;
+	
+	str = "abc";
 	//printf("%%- %s - %%", "abcd");
-	ft_printf("%-s --%d-- %s - %% -%", "abcd", 455, "efgh");
+	//bytes = ft_printf("%-s --%d-- %s -%< - %% -%", "abcd", 455, "efgh");
+	//bytes = ft_printf("%-s %s", "abcd", "efgh");
+	//printf("%d", bytes);
+	//bytes = ft_printf("%-s --%d-- %s -% - %% -%", "abcd", 455, "efgh");
+	//printf("\n%d\n", bytes);
+	bytes = printf("%p", &str);
+	printf("\n%d\n", bytes);
+	//ft_printf("%-s --%d-- %s -%< - %% -%", "abcd", 455, "efgh");
+	//ft_printf("%%", "abcd", 455, "efgh");
 	//ft_printf("\n");
 	//ft_printf("% - %% - %s -", "abcd");
 	//printf("%s - %% - %s", "abcd", "efgh");

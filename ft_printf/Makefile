@@ -6,7 +6,7 @@
 #    By: vdruta <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/02 16:35:04 by vdruta            #+#    #+#              #
-#    Updated: 2015/11/27 11:54:12 by vdruta           ###   ########.fr        #
+#    Updated: 2015/11/28 17:27:29 by vdruta           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@
 NAME = libftprintf.a
 
 
-SRCS = ft_printf.c ft_itoa.c ft_putchar.c ft_putstr.c ft_strlen.c ft_strsub.c ft_strchr.c
+SRCS = ft_printf.c ft_itoa.c ft_putchar.c ft_putstr.c ft_strlen.c ft_strsub.c \
+		ft_strchr.c ft_putnbr.c ft_process_s_.c ft_process_d_.c \
 
 OBJS = $(SRCS:.c=.o)
 
