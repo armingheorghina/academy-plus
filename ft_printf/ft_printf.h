@@ -13,9 +13,17 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <stdarg.h>
-# include "libft.h"
+# include <stdlib.h>
 # define CONVERSIONS "sSpdDioOuUxXcC"
 # define FLAGS "#0-+ jzhl123456789"
 
 int		ft_printf(const char *format, ...);
+
+char				*ft_itoa(int n);
+void				ft_putchar(char c);
+void				ft_putstr(char const *s);
+size_t				ft_strlen(const char *s);
+char				*ft_strsub(char const *s, unsigned int start, size_t len);
+char				*ft_strchr(const char *s, int c);
+
 #endif
