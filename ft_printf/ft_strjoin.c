@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_process_p_.c                                    :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/28 16:18:55 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/28 17:27:12 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/24 19:51:47 by vdruta            #+#    #+#             */
+/*   Updated: 2015/11/02 14:43:15 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_process_p_(va_list ap, int *bytes)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	void	*voidp;
-	char		*str;
+	char	*dst;
+	int		i;
+	int		j;
 
-	voidp = va_arg(ap, void *);
-	str = ft_itoabase((unsigned long)voidp, 16);
-	str = ft_strjoin("0x", str);
-	ft_putstr(str);
-	*bytes += ft_strlen(str);
+	dst = (char*)malloc(sizeof(*dst) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!dst)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[j])
+	{
+		dst[i] = s1[j];
+		j++;
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		dst[i] = s2[j];
+		j++;
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }

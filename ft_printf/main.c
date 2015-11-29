@@ -3,6 +3,7 @@
 int	main()
 {
 	int bytes;
+	int a = 7835877;
 //	int x;
 
 //	x = 1;	
@@ -12,7 +13,9 @@ int	main()
 	//printf("%d", bytes);
 	//bytes = ft_printf("%-s --%d-- %s -% - %% -%", "abcd", 455, "efgh");
 	//printf("\n%d\n", bytes);
-	bytes = ft_printf("%X", 25544);
+	bytes = ft_printf("%p", &a);
+	printf("\n%d\n", bytes);
+	bytes = printf("%p", &a);
 	printf("\n%d\n", bytes);
 	//ft_printf("%-s --%d-- %s -%< - %% -%", "abcd", 455, "efgh");
 	//ft_printf("%%", "abcd", 455, "efgh");

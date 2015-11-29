@@ -17,7 +17,8 @@ NAME = libftprintf.a
 SRCS = ft_printf.c ft_itoa.c ft_putchar.c ft_putstr.c ft_strlen.c ft_strsub.c \
 		ft_strchr.c ft_putnbr.c ft_process_s_.c ft_process_d_.c \
 		ft_process_c_.c ft_process_o_.c ft_itoabase.c ft_process_u_.c \
-		ft_process_x_.c ft_process_X_.c ft_itoaBase.c
+		ft_process_x_.c ft_process_X_.c ft_itoaBase.c ft_process_p_.c \
+		ft_strjoin.c
 
 OBJS = $(SRCS:.c=.o)
 

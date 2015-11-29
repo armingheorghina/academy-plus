@@ -37,4 +37,5 @@ void	ft_process_x_(va_list ap, int *bytes);
 void	ft_process_X_(va_list ap, int *bytes);
 char	*ft_itoabase(unsigned long long val, int base);
 char	*ft_itoaBase(unsigned long long val, int base);
+char	*ft_strjoin(const char *s1, const char *s2);
 #endif
