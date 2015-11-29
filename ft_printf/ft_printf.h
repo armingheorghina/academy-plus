@@ -30,4 +30,11 @@ void	ft_putnbr(int n);
 void	ft_process_s_(va_list ap, int *bytes);
 void	ft_process_d_(va_list ap, int *bytes);
 void	ft_process_p_(va_list ap, int *bytes);
+void	ft_process_c_(va_list ap, int *bytes);
+void	ft_process_o_(va_list ap, int *bytes);
+void	ft_process_u_(va_list ap, int *bytes);
+void	ft_process_x_(va_list ap, int *bytes);
+void	ft_process_X_(va_list ap, int *bytes);
+char	*ft_itoabase(unsigned long long val, int base);
+char	*ft_itoaBase(unsigned long long val, int base);
 #endif
