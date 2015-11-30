@@ -21,6 +21,8 @@ int		ft_printf(const char *format, ...);
 
 char	*ft_itoa(int n);
 void	ft_putchar(char c);
+void	ft_putwchar(wchar_t wc);
+int	ft_wcharsize(wchar_t wc);
 void	ft_putstr(char const *s);
 size_t	ft_strlen(const char *s);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
@@ -28,13 +30,18 @@ char	*ft_strchr(const char *s, int c);
 void	ft_putnbr(int n);
 
 void	ft_process_s_(va_list ap, int *bytes);
+void	ft_process_S_(va_list ap, int *bytes);
 void	ft_process_d_(va_list ap, int *bytes);
 void	ft_process_p_(va_list ap, int *bytes);
 void	ft_process_c_(va_list ap, int *bytes);
+void	ft_process_C_(va_list ap, int *bytes);
 void	ft_process_o_(va_list ap, int *bytes);
+void	ft_process_O_(va_list ap, int *bytes);
 void	ft_process_u_(va_list ap, int *bytes);
+void	ft_process_U_(va_list ap, int *bytes);
 void	ft_process_x_(va_list ap, int *bytes);
 void	ft_process_X_(va_list ap, int *bytes);
+void	ft_process_D_(va_list ap, int *bytes);
 char	*ft_itoabase(unsigned long long val, int base);
 char	*ft_itoaBase(unsigned long long val, int base);
 char	*ft_strjoin(const char *s1, const char *s2);

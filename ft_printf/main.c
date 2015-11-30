@@ -1,9 +1,30 @@
 #include <stdio.h>
 #include "ft_printf.h"
+#include <wchar.h>
+#include <string.h>
 int	main()
 {
+//	int bytes;
+//	long a = 9223372036854775807;
+/*	
+	size_t bytes;
+	char *s;
+	wchar_t wc;
+	mbstate_t ps;
+	
+	s = (char *)malloc(sizeof(*s) * 99);
+	memset (&ps, '\0', sizeof (ps));
+	wc = L'本';
+	bytes = wcrtomb(s, wc, &ps);
+
+	printf("%s", s);
+	printf("\n%zu\n", bytes);
+*/
 	int bytes;
-	int a = 7835877;
+	unsigned long x = 99;
+
+	bytes = ft_printf("%U", x );
+	printf("\n%d\n", bytes);
 //	int x;
 
 //	x = 1;	
@@ -13,10 +34,10 @@ int	main()
 	//printf("%d", bytes);
 	//bytes = ft_printf("%-s --%d-- %s -% - %% -%", "abcd", 455, "efgh");
 	//printf("\n%d\n", bytes);
-	bytes = ft_printf("%p", &a);
-	printf("\n%d\n", bytes);
-	bytes = printf("%p", &a);
-	printf("\n%d\n", bytes);
+//	bytes = ft_printf("%D", a);
+//	printf("\n%d\n", bytes);
+//	printf("%D", a);
+//	printf("\n%d\n", bytes);
 	//ft_printf("%-s --%d-- %s -%< - %% -%", "abcd", 455, "efgh");
 	//ft_printf("%%", "abcd", 455, "efgh");
 	//ft_printf("\n");

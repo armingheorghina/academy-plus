@@ -18,7 +18,8 @@ SRCS = ft_printf.c ft_itoa.c ft_putchar.c ft_putstr.c ft_strlen.c ft_strsub.c \
 		ft_strchr.c ft_putnbr.c ft_process_s_.c ft_process_d_.c \
 		ft_process_c_.c ft_process_o_.c ft_itoabase.c ft_process_u_.c \
 		ft_process_x_.c ft_process_X_.c ft_itoaBase.c ft_process_p_.c \
-		ft_strjoin.c
+		ft_strjoin.c ft_process_D_.c ft_process_S_.c ft_putwchar.c \
+		ft_wcharsize.c ft_process_C_.c ft_process_O_.c ft_process_U_.c\
 
 OBJS = $(SRCS:.c=.o)
 

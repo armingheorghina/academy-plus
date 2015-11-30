@@ -18,5 +18,5 @@ void	ft_process_d_(va_list ap, int *bytes)
 
 	nbr = va_arg(ap, int);
 	ft_putnbr(nbr);
-	*bytes += ft_strlen(ft_itoa(nbr)); /* TODO ft_nbrlen; */
+	*bytes += ft_strlen(ft_itoa(nbr));
 }
