@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/02 16:57:47 by rcalina          ###   ########.fr       */
+/*   Updated: 2015/12/02 18:10:41 by rcalina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ char	*ft_strjoin(const char *s1, const char *s2);
 
 void	ft_process_s_(va_list ap, int *bytes);
 void	ft_process_ss_(va_list ap, int *bytes);
-void	ft_process_d_(va_list ap, int *bytes);
-void	ft_process_dd_(va_list ap, int *bytes);
+void	ft_process_d_(va_list ap, int *bytes, char *descriptor);
+void	ft_process_dd_(va_list ap, int *bytes, char *descriptor);
 void	ft_process_p_(va_list ap, int *bytes);
 void	ft_process_c_(va_list ap, int *bytes);
 void	ft_process_cc_(va_list ap, int *bytes);

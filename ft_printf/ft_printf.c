@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:53:31 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/02 16:57:26 by rcalina          ###   ########.fr       */
+/*   Updated: 2015/12/02 18:10:59 by rcalina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 	if (descriptor[descriptor_len - 1] == 'p')
 		ft_process_p_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'd' || descriptor[descriptor_len - 1] == 'i')
-		ft_process_d_(ap, bytes);
+		ft_process_d_(ap, bytes, descriptor);
+	if (descriptor[descriptor_len - 1] == 'D')
+		ft_process_dd_(ap, bytes, descriptor);
 	if (descriptor[descriptor_len - 1] == 'o')
 		ft_process_o_(ap, bytes, descriptor);
 	if (descriptor[descriptor_len - 1] == 'O')
@@ -62,8 +64,7 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 		ft_process_x_(ap, bytes, descriptor);
 	if (descriptor[descriptor_len - 1] == 'X')
 		ft_process_xx_(ap, bytes, descriptor);
-	if (descriptor[descriptor_len - 1] == 'D')
-		ft_process_dd_(ap, bytes);
+
 	if (descriptor[descriptor_len - 1] == 'c')
 		ft_process_c_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'C')

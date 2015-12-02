@@ -6,13 +6,13 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 12:59:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/02 13:00:59 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/02 18:11:01 by rcalina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_process_dd_(va_list ap, int *bytes)
+void	ft_process_dd_(va_list ap, int *bytes, char *descriptor)
 {
 	long 		nbr;
 	unsigned long	ulnbr;
@@ -24,6 +24,20 @@ void	ft_process_dd_(va_list ap, int *bytes)
 		ulnbr = -1 * nbr;
 		str = ft_itoabase(ulnbr, 10);
 		ft_putstr(ft_strjoin("-", str));
+		*bytes += ft_strlen(str) + 1;
+	}
+	else if (ft_strchr(descriptor, '+') && nbr >= 0)
+	{
+		ft_putchar('+');
+		str = ft_itoabase(nbr, 10);
+		ft_putstr(str);
+		*bytes += ft_strlen(str) + 1;
+	}
+	else if (ft_strchr(descriptor, ' ') && nbr >= 0)
+	{
+		ft_putchar(' ');
+		str = ft_itoabase(nbr, 10);
+		ft_putstr(str);
 		*bytes += ft_strlen(str) + 1;
 	}
 	else

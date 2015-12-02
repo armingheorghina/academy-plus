@@ -23,10 +23,10 @@ int	main()
 	int bytes;
 	int a;
 
-	a = 0;
-	bytes = ft_printf("%#X", a);
+	a = 40;
+	bytes = ft_printf("%+o", a);
 	printf("\n%d\n", bytes);
-	bytes = printf("%#X", a);
+	bytes = printf("%ld", a);
 	printf("\n%d\n", bytes);
 //	int x;
 
