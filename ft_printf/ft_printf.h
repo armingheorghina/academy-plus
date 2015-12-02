@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/02 13:23:43 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/02 16:57:47 by rcalina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	ft_process_dd_(va_list ap, int *bytes);
 void	ft_process_p_(va_list ap, int *bytes);
 void	ft_process_c_(va_list ap, int *bytes);
 void	ft_process_cc_(va_list ap, int *bytes);
-void	ft_process_o_(va_list ap, int *bytes);
+void	ft_process_o_(va_list ap, int *bytes, char *descriptor);
 void	ft_process_oo_(va_list ap, int *bytes);
 void	ft_process_u_(va_list ap, int *bytes);
 void	ft_process_uu_(va_list ap, int *bytes);
-void	ft_process_x_(va_list ap, int *bytes);
-void	ft_process_xx_(va_list ap, int *bytes);
+void	ft_process_x_(va_list ap, int *bytes, char *descriptor);
+void	ft_process_xx_(va_list ap, int *bytes, char *descriptor);
 
 
 #endif

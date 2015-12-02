@@ -21,8 +21,12 @@ int	main()
 	printf("\n%zu\n", bytes);
 */
 	int bytes;
+	int a;
 
-	bytes = ft_printf("%");
+	a = 0;
+	bytes = ft_printf("%#X", a);
+	printf("\n%d\n", bytes);
+	bytes = printf("%#X", a);
 	printf("\n%d\n", bytes);
 //	int x;
 
