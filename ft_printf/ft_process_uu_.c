@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoabase.c                                      :+:      :+:    :+:   */
+/*   ft_process_uu_.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/02 12:47:17 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/02 12:47:27 by vdruta           ###   ########.fr       */
+/*   Created: 2015/12/02 12:55:51 by vdruta            #+#    #+#             */
+/*   Updated: 2015/12/02 12:56:27 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_itoabase(unsigned long long val, int base)
+void	ft_process_uu_(va_list ap, int *bytes)
 {
-	static char	buf[32] = "0";
-	int		i;
+	unsigned long 	nbr;
+	char		*str;
 
-	i = 30;
-	if (val == 0)
-		return (buf);
-	while (val > 0 && i > 0)
-	{
-		buf[i] = "0123456789abcdef"[val % base];
-		val = val / base;
-		--i;
-	}
-	return (buf + i + 1);
+	nbr = va_arg(ap, unsigned long);
+	str = ft_itoabase(nbr, 10);
+	ft_putstr(str);
+	*bytes = *bytes + ft_strlen(str);
 }

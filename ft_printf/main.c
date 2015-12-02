@@ -21,9 +21,9 @@ int	main()
 	printf("\n%zu\n", bytes);
 */
 	int bytes;
-	int x = 99;
+	long x = 99;
 
-	bytes = printf("%jd", x );
+	bytes = ft_printf("%jd", x);
 	printf("\n%d\n", bytes);
 //	int x;
 

@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:53:31 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/28 17:27:23 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/02 13:01:13 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 	if (descriptor[descriptor_len - 1] == 's')
 		ft_process_s_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'S')
-		ft_process_S_(ap, bytes);
+		ft_process_ss_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'p')
 		ft_process_p_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'd' || descriptor[descriptor_len - 1] == 'i')
@@ -53,21 +53,21 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 	if (descriptor[descriptor_len - 1] == 'o')
 		ft_process_o_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'O')
-		ft_process_O_(ap, bytes);
+		ft_process_oo_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'u')
 		ft_process_u_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'U')
-		ft_process_U_(ap, bytes);
+		ft_process_uu_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'x')
 		ft_process_x_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'X')
-		ft_process_X_(ap, bytes);
+		ft_process_xx_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'D')
-		ft_process_D_(ap, bytes);
+		ft_process_dd_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'c')
 		ft_process_c_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'C')
-		ft_process_C_(ap, bytes);
+		ft_process_cc_(ap, bytes);
 
 
 
