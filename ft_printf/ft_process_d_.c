@@ -14,24 +14,35 @@
 
 void	ft_process_d_(va_list ap, int *bytes, char *descriptor)
 {
-	int nbr;
+	int	 nbr;
+	intmax_t nbr2;
+	char	 *str;
 
-	nbr = va_arg(ap, int);
+	if (ft_strchr(descriptor, 'j'))
+	{
+		nbr2 = va_arg(ap, intmax_t);
+		str = ft_intmax_t_to_ascii_base(nbr2, 10);
+	}
+	else
+	{
+		nbr = va_arg(ap, int);
+		str = ft_intmax_t_to_ascii_base(nbr, 10);
+	}
 	if (ft_strchr(descriptor, '+') && nbr >= 0)
 	{
 		ft_putchar('+');
-		ft_putnbr(nbr);
-		*bytes += ft_strlen(ft_itoa(nbr)) + 1;
+		ft_putstr(str);
+		*bytes += ft_strlen(str) + 1;
 	}
 	else if (ft_strchr(descriptor, ' ') && nbr >= 0)
 	{
 		ft_putchar(' ');
-		ft_putnbr(nbr);
-		*bytes += ft_strlen(ft_itoa(nbr)) + 1;
+		ft_putstr(str);
+		*bytes += ft_strlen(str) + 1;
 	}
 	else
 	{
-		ft_putnbr(nbr);
-		*bytes += ft_strlen(ft_itoa(nbr));
+		ft_putstr(str);
+		*bytes += ft_strlen(str);
 	}
 }

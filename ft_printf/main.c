@@ -2,6 +2,8 @@
 #include "ft_printf.h"
 #include <wchar.h>
 #include <string.h>
+#include <inttypes.h>
+
 int	main()
 {
 //	int bytes;
@@ -23,10 +25,10 @@ int	main()
 	int bytes;
 	int a;
 
-	a = 40;
-	bytes = ft_printf("%+o", a);
+	a = -92233;//72036854775808;
+	bytes = ft_printf("%d", a);
 	printf("\n%d\n", bytes);
-	bytes = printf("%ld", a);
+	bytes = printf("%d", a);
 	printf("\n%d\n", bytes);
 //	int x;
 

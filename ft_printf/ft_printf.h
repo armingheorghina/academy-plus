@@ -14,6 +14,7 @@
 # define FT_PRINTF_H
 # include <stdarg.h>
 # include <stdlib.h>
+# include <inttypes.h>
 # define CONVERSIONS "sSpdDioOuUxXcC"
 # define FLAGS "#0-+ jzhl123456789"
 
@@ -28,8 +29,9 @@ size_t	ft_strlen(const char *s);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *s, int c);
 void	ft_putnbr(int n);
-char	*ft_itoabase(unsigned long long val, int base);
-char	*ft_itoabbase(unsigned long long val, int base);
+char	*ft_itoabase(uintmax_t val, int base);
+char	*ft_itoabbase(uintmax_t val, int base);
+char	*ft_intmax_t_to_ascii_base(intmax_t val, int base);
 char	*ft_strjoin(const char *s1, const char *s2);
 
 void	ft_process_s_(va_list ap, int *bytes);
