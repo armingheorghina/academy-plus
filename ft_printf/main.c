@@ -23,12 +23,12 @@ int	main()
 	printf("\n%zu\n", bytes);
 */
 	int bytes;
-	int a;
+	intmax_t a;
 
-	a = -92233;//72036854775808;
-	bytes = ft_printf("%d", a);
+	a = -9223372036854775808;
+	bytes = ft_printf("%ld", a);
 	printf("\n%d\n", bytes);
-	bytes = printf("%d", a);
+	bytes = printf("%ld", a);
 	printf("\n%d\n", bytes);
 //	int x;
 

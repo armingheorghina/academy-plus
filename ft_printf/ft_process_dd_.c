@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 12:59:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/02 18:11:01 by rcalina          ###   ########.fr       */
+/*   Updated: 2015/12/03 15:29:52 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_process_dd_(va_list ap, int *bytes, char *descriptor)
 {
-	long 		nbr;
+	long	 		nbr;
 	unsigned long	ulnbr;
-	char 		*str;
+	char 			*str;
 
 	nbr = va_arg(ap, long);
 	if (nbr < 0)

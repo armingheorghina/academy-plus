@@ -6,7 +6,7 @@
 #    By: vdruta <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/02 16:35:04 by vdruta            #+#    #+#              #
-#    Updated: 2015/12/02 13:02:41 by vdruta           ###   ########.fr        #
+#    Updated: 2015/12/03 15:17:36 by vdruta           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(NAME):
 	gcc -Wall -Werror -Wextra -c $(SRCS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
-	gcc -Wall -Werror -Wextra -c main.c
+	gcc -c main.c
 	gcc -o ft_printf main.o -L. -lftprintf
 
 clean:

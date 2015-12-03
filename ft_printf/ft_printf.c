@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:53:31 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/02 18:10:59 by rcalina          ###   ########.fr       */
+/*   Updated: 2015/12/03 15:43:12 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 	if (descriptor[descriptor_len - 1] == 'O')
 		ft_process_oo_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'u')
-		ft_process_u_(ap, bytes);
+		ft_process_u_(ap, bytes, descriptor);
 	if (descriptor[descriptor_len - 1] == 'U')
 		ft_process_uu_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'x')
@@ -90,7 +90,7 @@ static int		ft_process_format(const char *format, va_list ap)
 			if (ft_is_a_valid_descriptor(format + i))
 			{
 				descriptor_len = ft_descriptor_len(format + i);
-				if (format[i + descriptor_len - 1] == '%')
+				if (format[i + descriptor_len - 1] == '%') //TODO trateaza acest caz.
 				{
 					ft_putchar('%');
 					bytes++;
