@@ -14,7 +14,7 @@
 
 void	ft_process_d_(va_list ap, int *bytes, char *descriptor)
 {
-	int			nbr;
+	int		nbr;
 	intmax_t	nbr2;
 	char	 	*str;
 	char		*findhh;

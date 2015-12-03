@@ -18,6 +18,21 @@
 # define CONVERSIONS "sSpdDioOuUxXcC"
 # define FLAGS "#0-+ jzhl123456789"
 
+typedef struct		s_arg
+{
+	int			flag_hash;
+	int			flag_zero;
+	int			flag_minus;
+	int			flag_plus;
+	int			flag_space;
+	int			lm_j;
+	int			lm_z;
+	int			lm_h;
+	int			lm_hh;
+	int			lm_l;
+	int			lm_ll;
+}					t_arg;
+
 int		ft_printf(const char *format, ...);
 
 char	*ft_itoa(int n);
@@ -35,7 +50,7 @@ char	*ft_intmax_t_to_ascii_base(intmax_t val, int base);
 char	*ft_uintmax_t_to_ascii_base(uintmax_t val, int base);
 char	*ft_strjoin(const char *s1, const char *s2);
 
-void	ft_process_s_(va_list ap, int *bytes, char *descriptor);
+void	ft_process_s_(va_list ap, int *bytes, t_arg arg);
 void	ft_process_ss_(va_list ap, int *bytes);
 void	ft_process_d_(va_list ap, int *bytes, char *descriptor);
 void	ft_process_dd_(va_list ap, int *bytes, char *descriptor);

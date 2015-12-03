@@ -40,10 +40,81 @@ static int		ft_descriptor_len(const char *format)
 	return (i);
 }
 
+
+void	ft_initialize_flags_and_lm(t_arg *arg)
+{
+	arg->flag_hash = 0;
+        arg->flag_zero = 0;
+        arg->flag_minus = 0;
+        arg->flag_plus = 0;
+        arg->flag_space = 0;
+        arg->lm_j = 0;
+        arg->lm_z = 0;
+        arg->lm_h = 0;
+        arg->lm_hh = 0;
+        arg->lm_l = 0;
+        arg->lm_ll = 0;
+}
+
+void	ft_verify_flags(t_arg *arg, char *descriptor)
+{
+	int i;
+
+	i = 0;
+	while (descriptor[i])
+	{
+		if (descriptor[i] == '#')
+			arg->flag_hash = 1;
+		else if (descriptor[i] == '0')
+			arg->flag_zero = 1;
+		else if (descriptor[i] == '-')
+			arg->flag_minus = 1;
+		else if (descriptor[i] == '+')
+			arg->flag_plus = 1;
+		else if (descriptor[i] == ' ')
+			arg->flag_space = 1;
+		i++;
+	}
+}
+
+void	ft_verify_length_modifiers(t_arg *arg, char *descriptor)
+{
+	int i;
+
+	i = 0;
+	while (descriptor[i])
+	{
+		if (descriptor[i] == 'h' && descriptor[i + 1] == 'h')
+		{
+			arg->lm_hh = 1;
+			i++;
+		}
+		else if (descriptor[i] == 'h')
+			arg->lm_h = 1;
+		else if (descriptor[i] == 'l' && descriptor[i + 1] == 'l')
+		{
+			arg->lm_ll = 1;
+			i++;
+		}
+		else if (descriptor[i] == 'l')
+			arg->lm_l = 1;
+		else if (descriptor[i] == 'j')
+			arg->lm_j = 1;
+		else if (descriptor[i] == 'z')
+			arg->lm_z = 1;
+		i++;
+	}
+}
+
 static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_len, int *bytes)
 {
+	t_arg	arg;
+
+	ft_initialize_flags_and_lm(&arg);
+	ft_verify_flags(&arg, descriptor);
+	ft_verify_length_modifiers(&arg, descriptor);
 	if (descriptor[descriptor_len - 1] == 's')
-		ft_process_s_(ap, bytes, descriptor);
+		ft_process_s_(ap, bytes, arg);
 	if (descriptor[descriptor_len - 1] == 'S')
 		ft_process_ss_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'p')
@@ -90,7 +161,7 @@ static int		ft_process_format(const char *format, va_list ap)
 			if (ft_is_a_valid_descriptor(format + i))
 			{
 				descriptor_len = ft_descriptor_len(format + i);
-				if (format[i + descriptor_len - 1] == '%') //TODO trateaza acest caz.
+				if (format[i + descriptor_len - 1] == '%') //TODO ce se intampla cand intre %...% exista flaguri?
 				{
 					ft_putchar('%');
 					bytes++;

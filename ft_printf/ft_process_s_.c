@@ -12,11 +12,12 @@
 
 #include "ft_printf.h"
 
-void	ft_process_s_(va_list ap, int *bytes, char *descriptor)
+void	ft_process_s_(va_list ap, int *bytes, t_arg arg)
 {
 	char *str;
 
-	if (ft_strchr(descriptor, 'l'))
+//	if (ft_strchr(descriptor, 'l'))
+	if (arg.lm_l)
 		ft_process_ss_(ap, bytes);
 	else
 	{
