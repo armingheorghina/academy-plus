@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:18:55 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/28 17:27:12 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/03 16:37:12 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_process_p_(va_list ap, int *bytes)
 {
 	void	*voidp;
-	char		*str;
+	char	*str;
 
 	voidp = va_arg(ap, void *);
 	str = ft_itoabase((unsigned long)voidp, 16);

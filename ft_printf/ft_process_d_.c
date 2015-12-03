@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:02:56 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/03 15:29:29 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/03 17:31:35 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void	ft_process_d_(va_list ap, int *bytes, char *descriptor)
 	int			nbr;
 	intmax_t	nbr2;
 	char	 	*str;
+	char		*findhh;
 
-	if (ft_strchr(descriptor, 'l'))
+	if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h')
+		ft_process_c_(ap, bytes, descriptor);
+	else if (ft_strchr(descriptor, 'l'))
 		ft_process_dd_(ap, bytes, descriptor);
 	else if (ft_strchr(descriptor, 'j'))
 	{
@@ -31,19 +34,21 @@ void	ft_process_d_(va_list ap, int *bytes, char *descriptor)
 		str = ft_intmax_t_to_ascii_base(nbr, 10);
 	}
 /* print side of the file*/	
-	if (ft_strchr(descriptor, '+') && nbr >= 0 && !ft_strchr(descriptor, 'l'))
+	if (ft_strchr(descriptor, '+') && nbr >= 0 && !ft_strchr(descriptor, 'l') &&
+		!((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h'))
 	{
 		ft_putchar('+');
 		ft_putstr(str);
 		*bytes += ft_strlen(str) + 1;
 	}
-	else if (ft_strchr(descriptor, ' ') && nbr >= 0 && !ft_strchr(descriptor, 'l'))
+	else if (ft_strchr(descriptor, ' ') && nbr >= 0 && !ft_strchr(descriptor, 'l')
+			 && !((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h'))
 	{
 		ft_putchar(' ');
 		ft_putstr(str);
 		*bytes += ft_strlen(str) + 1;
 	}
-	else if (!ft_strchr(descriptor, 'l'))
+	else if (!ft_strchr(descriptor, 'l') && !((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h'))
 	{
 		ft_putstr(str);
 		*bytes += ft_strlen(str);

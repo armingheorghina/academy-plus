@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:53:31 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/03 15:43:12 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/03 16:32:21 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int		ft_descriptor_len(const char *format)
 static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_len, int *bytes)
 {
 	if (descriptor[descriptor_len - 1] == 's')
-		ft_process_s_(ap, bytes);
+		ft_process_s_(ap, bytes, descriptor);
 	if (descriptor[descriptor_len - 1] == 'S')
 		ft_process_ss_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'p')
@@ -66,7 +66,7 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 		ft_process_xx_(ap, bytes, descriptor);
 
 	if (descriptor[descriptor_len - 1] == 'c')
-		ft_process_c_(ap, bytes);
+		ft_process_c_(ap, bytes, descriptor);
 	if (descriptor[descriptor_len - 1] == 'C')
 		ft_process_cc_(ap, bytes);
 

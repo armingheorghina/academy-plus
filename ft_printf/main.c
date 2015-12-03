@@ -3,6 +3,7 @@
 #include <wchar.h>
 #include <string.h>
 #include <inttypes.h>
+#include <limits.h>
 
 int	main()
 {
@@ -23,12 +24,12 @@ int	main()
 	printf("\n%zu\n", bytes);
 */
 	int bytes;
-	intmax_t a;
+	char a;
 
-	a = -9223372036854775808;
-	bytes = ft_printf("%ld", a);
+	a = CHAR_MAX;
+	bytes = ft_printf("%hhd", a + 42);
 	printf("\n%d\n", bytes);
-	bytes = printf("%ld", a);
+	bytes = printf("%hhd", a + 42);
 	printf("\n%d\n", bytes);
 //	int x;
 
