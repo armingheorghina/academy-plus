@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 16:08:19 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/03 19:05:38 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/03 20:11:38 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_process_x_(va_list ap, int *bytes, char *descriptor)
 {
 	unsigned int 	nbr;
 	unsigned long 	ulnbr;
+	uintmax_t	 	nbr2;
 	char			*str;
 	char			*findhh;
 	
@@ -25,6 +26,11 @@ void	ft_process_x_(va_list ap, int *bytes, char *descriptor)
 	{
 		ulnbr = va_arg(ap, unsigned long);
 		str = ft_itoabase(ulnbr, 16);
+	}
+	else if (ft_strchr(descriptor, 'z'))
+	{	
+		nbr2 = va_arg(ap, uintmax_t);
+		str = ft_itoabase(nbr2, 16);
 	}
 	else
 	{

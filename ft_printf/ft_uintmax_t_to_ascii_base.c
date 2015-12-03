@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_process_oo_.c                                   :+:      :+:    :+:   */
+/*   ft_uintmax_t_to_ascii_base.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/02 12:54:24 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/03 20:23:00 by vdruta           ###   ########.fr       */
+/*   Created: 2015/12/03 20:04:38 by vdruta            #+#    #+#             */
+/*   Updated: 2015/12/03 20:10:57 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_process_oo_(va_list ap, int *bytes, char *descriptor)
+char	*ft_uintmax_t_to_ascii_base(uintmax_t val, int base)
 {
-	unsigned long 	nbr;
-	char		*str;
+	static char	buf[32] = "0";
+	int		i;
 
-	nbr = va_arg(ap, unsigned long);
-	str = ft_itoabase(nbr, 8);
-	if (ft_strchr(descriptor, '#') && nbr != 0 )
+	i = 30;
+	if (val == 0)
+		return (buf);
+	while (val > 0 && i > 0)
 	{
-		ft_putchar('0');
-		ft_putstr(str);
-		*bytes = *bytes + ft_strlen(str) + 1;
+		buf[i] = "0123456789abcdef"[val % base];
+		val = val / base;
+		--i;
 	}
-	else
-	{
-		ft_putstr(str);
-		*bytes = *bytes + ft_strlen(str);
-	}
-
+	return (buf + i + 1);
 }

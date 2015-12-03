@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/03 16:32:05 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/03 20:23:26 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_putnbr(int n);
 char	*ft_itoabase(uintmax_t val, int base);
 char	*ft_itoabbase(uintmax_t val, int base);
 char	*ft_intmax_t_to_ascii_base(intmax_t val, int base);
+char	*ft_uintmax_t_to_ascii_base(uintmax_t val, int base);
 char	*ft_strjoin(const char *s1, const char *s2);
 
 void	ft_process_s_(va_list ap, int *bytes, char *descriptor);
@@ -42,7 +43,7 @@ void	ft_process_p_(va_list ap, int *bytes);
 void	ft_process_c_(va_list ap, int *bytes, char *descriptor);
 void	ft_process_cc_(va_list ap, int *bytes);
 void	ft_process_o_(va_list ap, int *bytes, char *descriptor);
-void	ft_process_oo_(va_list ap, int *bytes);
+void	ft_process_oo_(va_list ap, int *bytes, char *descriptor);
 void	ft_process_u_(va_list ap, int *bytes, char *descriptor);
 void	ft_process_uu_(va_list ap, int *bytes);
 void	ft_process_x_(va_list ap, int *bytes, char *descriptor);

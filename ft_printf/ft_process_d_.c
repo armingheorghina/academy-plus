@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:02:56 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/03 17:31:35 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/03 19:56:33 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_process_d_(va_list ap, int *bytes, char *descriptor)
 		ft_process_c_(ap, bytes, descriptor);
 	else if (ft_strchr(descriptor, 'l'))
 		ft_process_dd_(ap, bytes, descriptor);
-	else if (ft_strchr(descriptor, 'j'))
+	else if (ft_strchr(descriptor, 'j') || ft_strchr(descriptor, 'z'))
 	{
 		nbr2 = va_arg(ap, intmax_t);
 		str = ft_intmax_t_to_ascii_base(nbr2, 10);

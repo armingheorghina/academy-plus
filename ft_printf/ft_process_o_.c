@@ -8,10 +8,10 @@ void	ft_process_o_(va_list ap, int *bytes, char *descriptor)
 	char			*findhh;
 	
 	if (ft_strchr(descriptor, 'l'))
-		ft_process_oo_(ap, bytes);
+		ft_process_oo_(ap, bytes, descriptor);
 	else if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h')
 		ft_process_c_(ap, bytes, descriptor);
-	else if (ft_strchr(descriptor, 'j'))
+	else if (ft_strchr(descriptor, 'j') || ft_strchr(descriptor, 'z'))
 	{	
 		nbr2 = va_arg(ap, uintmax_t);
 		str = ft_itoabase(nbr2, 8);
