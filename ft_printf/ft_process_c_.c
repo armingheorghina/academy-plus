@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 16:23:45 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/03 18:52:53 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/03 19:09:44 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,20 @@ void	ft_process_c_(va_list ap, int *bytes, char *descriptor)
 		{
 			usc = va_arg(ap, int);
 			str = ft_itoabase(usc, 8);
+			ft_putstr(str);
+			*bytes += ft_strlen(str);
+		}
+		else if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h' && descriptor[ft_strlen(descriptor) - 1] == 'x')
+		{
+			usc = va_arg(ap, int);
+			str = ft_itoabase(usc, 16);
+			ft_putstr(str);
+			*bytes += ft_strlen(str);
+		}
+		else if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h' && descriptor[ft_strlen(descriptor) - 1] == 'X')
+		{
+			usc = va_arg(ap, int);
+			str = ft_itoabbase(usc, 16);
 			ft_putstr(str);
 			*bytes += ft_strlen(str);
 		}
