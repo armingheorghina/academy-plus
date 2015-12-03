@@ -24,11 +24,11 @@ int	main()
 	printf("\n%zu\n", bytes);
 */
 	int bytes;
-	int a = 42;
+	int a = -42;
 
-	bytes = ft_printf("%zd", a);
+	bytes = ft_printf("%hhd", a);
 	printf("\n%d\n", bytes);
-	bytes = printf("%zd", a);
+	bytes = printf("%hhd", a);
 	printf("\n%d\n", bytes);
 //	int x;
 

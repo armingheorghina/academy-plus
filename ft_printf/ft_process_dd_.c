@@ -46,5 +46,4 @@ void	ft_process_dd_(va_list ap, int *bytes, char *descriptor)
 		ft_putstr(str);
 		*bytes += ft_strlen(str);
 	}
-
 }
