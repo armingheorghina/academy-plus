@@ -55,13 +55,31 @@ void	ft_process_o_lm_h(va_list ap, int *bytes, t_arg arg)
 	}
 }
 
+void	ft_process_o_lm_ll(va_list ap, int *bytes, t_arg arg)
+{
+	unsigned long long	nbr;
+	char 			*str;
+
+	nbr = va_arg(ap, unsigned long long);
+	str = ft_unsigned_long_long_to_ascii_base(nbr, 8);
+	if (arg.flag_hash && nbr != 0)
+		ft_process_o_flag_hash(bytes, str);
+	else
+	{
+		ft_putstr(str);
+		*bytes = *bytes + ft_strlen(str);
+	}
+}
+
 void	ft_process_o_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned int	nbr;
 	char			*str;
 
 	if (arg.lm_l)
-		ft_process_oo_(ap, bytes, descriptor);
+		ft_process_oo_(ap, bytes, arg);
+	else if (arg.lm_ll)
+		ft_process_o_lm_ll(ap, bytes, arg);
 	else if (arg.lm_hh)
 		ft_process_c_(ap, bytes, descriptor, arg);
 	else if (arg.lm_h)

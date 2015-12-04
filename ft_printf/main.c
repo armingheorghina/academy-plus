@@ -25,9 +25,9 @@ int	main()
 */
 	int bytes;
 
-	bytes = ft_printf("%lld", LLONG_MAX);
+	bytes = ft_printf("%lo", LONG_MAX);
 	printf("\n%d\n", bytes);
-	bytes = printf("%lld", LLONG_MAX);
+	bytes = printf("%lo", LONG_MAX);
 	printf("\n%d\n", bytes);
 //	int x;
 

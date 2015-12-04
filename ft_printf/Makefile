@@ -23,7 +23,8 @@ SRCS = ft_printf.c ft_itoa.c ft_putchar.c ft_putstr.c ft_strlen.c ft_strsub.c \
 		ft_intmax_t_to_ascii_base.c ft_uintmax_t_to_ascii_base.c \
 		ft_short_to_ascii_base.c ft_ssize_t_to_ascii_base.c \
 		ft_size_t_to_ascii_base.c ft_unsigned_short_to_ascii_base.c \
-		ft_long_long_to_ascii_base.c
+		ft_long_long_to_ascii_base.c ft_unsigned_long_long_to_ascii_base.c \
+		ft_unsigned_long_to_ascii_base.c
 
 OBJS = $(SRCS:.c=.o)
 

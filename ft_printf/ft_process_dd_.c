@@ -14,9 +14,9 @@
 
 void	ft_process_dd_(va_list ap, int *bytes, t_arg arg)
 {
-	long	 		nbr;
+	long 		nbr;
 	unsigned long	ulnbr;
-	char 			*str;
+	char		*str;
 
 	nbr = va_arg(ap, long);
 	if (nbr < 0)
