@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/04 17:31:44 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/04 18:35:55 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_putnbr(int n);
 char	*ft_itoabase(uintmax_t val, int base);
 char	*ft_itoabbase(uintmax_t val, int base);
 char	*ft_short_to_ascii_base(short val, int base);
+char	*ft_long_long_to_ascii_base(long long val, int base);
 char	*ft_unsigned_short_to_ascii_base(unsigned short val, int base);
 char	*ft_intmax_t_to_ascii_base(intmax_t val, int base);
 char	*ft_ssize_t_to_ascii_base(ssize_t val, int base);

@@ -6,7 +6,7 @@
 #    By: vdruta <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/02 16:35:04 by vdruta            #+#    #+#              #
-#    Updated: 2015/12/04 17:30:14 by vdruta           ###   ########.fr        #
+#    Updated: 2015/12/04 18:31:13 by vdruta           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS = ft_printf.c ft_itoa.c ft_putchar.c ft_putstr.c ft_strlen.c ft_strsub.c \
 		ft_intmax_t_to_ascii_base.c ft_uintmax_t_to_ascii_base.c \
 		ft_short_to_ascii_base.c ft_ssize_t_to_ascii_base.c \
 		ft_size_t_to_ascii_base.c ft_unsigned_short_to_ascii_base.c \
+		ft_long_long_to_ascii_base.c
 
 OBJS = $(SRCS:.c=.o)
 

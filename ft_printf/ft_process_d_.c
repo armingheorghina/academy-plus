@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:02:56 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/04 17:13:41 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/04 18:47:20 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,25 @@ void	ft_process_d_short(va_list ap, int *bytes, t_arg arg)
 	}
 }
 
+void	ft_process_d_long_long(va_list ap, int *bytes, t_arg arg)
+{
+	long long	nbr;
+	char 		*str;
+
+	nbr = va_arg(ap, long long);
+	str = ft_long_long_to_ascii_base(nbr, 10);
+//	str = ft_itoabase(nbr, 10);
+	if (arg.flag_plus && nbr >= 0)
+		ft_process_d_put_flag_plus(str, bytes);
+	else if (arg.flag_space && nbr >= 0)
+		ft_process_d_put_flag_space(str, bytes);
+	else
+	{
+		ft_putstr(str);
+		*bytes += ft_strlen(str);
+	}
+}
+
 void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	int		nbr;
@@ -91,6 +110,8 @@ void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		ft_process_c_(ap, bytes, descriptor, arg);
 	else if (arg.lm_l)
 		ft_process_dd_(ap, bytes, arg);
+	else if (arg.lm_ll)
+		ft_process_d_long_long(ap, bytes, arg);
 	else if (arg.lm_j)
 		ft_process_d_intmax_t(ap, bytes, arg);
 	else if (arg.lm_z)

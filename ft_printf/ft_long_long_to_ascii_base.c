@@ -1,30 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoabbase.c                                     :+:      :+:    :+:   */
+/*   ft_long_long_to_ascii_base.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/02 12:48:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/04 18:46:20 by vdruta           ###   ########.fr       */
+/*   Created: 2015/12/04 18:28:24 by vdruta            #+#    #+#             */
+/*   Updated: 2015/12/04 18:47:17 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_itoabbase(uintmax_t val, int base)
+char	*ft_long_long_to_ascii_base(long long val, int base)
 {
 	static char	buf[32] = "0";
 	int		i;
+	int		ok;
+	intmax_t	val2;
 
+	val2 = val;
 	i = 30;
-	if (val == 0)
+	ok = 0;
+	if (val2 == 0)
 		return (buf);
-	while (val > 0 && i > 0)
+	if (val2 < 0)
 	{
-		buf[i] = "0123456789ABCDEF"[val % base];
-		val = val / base;
+		val2 = -1 * val2;
+		ok = 1;
+	}
+	while (val2 > 0 && i > 0)
+	{
+		buf[i] = "0123456789abcdef"[val2 % base];
+		val2 = val2 / base;
 		--i;
+	}
+	if (ok == 1)
+	{
+		buf[i] = '-';
+		return (buf + i);
 	}
 	return (buf + i + 1);
 }
