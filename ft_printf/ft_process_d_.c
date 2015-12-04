@@ -87,7 +87,6 @@ void	ft_process_d_long_long(va_list ap, int *bytes, t_arg arg)
 
 	nbr = va_arg(ap, long long);
 	str = ft_long_long_to_ascii_base(nbr, 10);
-//	str = ft_itoabase(nbr, 10);
 	if (arg.flag_plus && nbr >= 0)
 		ft_process_d_put_flag_plus(str, bytes);
 	else if (arg.flag_space && nbr >= 0)

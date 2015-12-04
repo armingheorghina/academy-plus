@@ -24,11 +24,10 @@ int	main()
 	printf("\n%zu\n", bytes);
 */
 	int bytes;
-	wchar_t a[100] = L"abcd";
 
-	bytes = ft_printf("%ls", a);
+	bytes = ft_printf("%lld", LLONG_MIN);
 	printf("\n%d\n", bytes);
-	bytes = printf("%ls", a);
+	bytes = printf("%lld", LLONG_MIN);
 	printf("\n%d\n", bytes);
 //	int x;
 

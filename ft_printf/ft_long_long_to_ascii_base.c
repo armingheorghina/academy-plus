@@ -17,22 +17,22 @@ char	*ft_long_long_to_ascii_base(long long val, int base)
 	static char	buf[32] = "0";
 	int		i;
 	int		ok;
-	intmax_t	val2;
 
-	val2 = val;
 	i = 30;
 	ok = 0;
-	if (val2 == 0)
+	if (val == -9223372036854775807 - 1 && base == 10)
+		return ("-9223372036854775808");
+	if (val == 0)
 		return (buf);
-	if (val2 < 0)
+	if (val < 0)
 	{
-		val2 = -1 * val2;
+		val = -val;
 		ok = 1;
 	}
-	while (val2 > 0 && i > 0)
+	while (val > 0 && i > 0)
 	{
-		buf[i] = "0123456789abcdef"[val2 % base];
-		val2 = val2 / base;
+		buf[i] = "0123456789abcdef"[val % base];
+		val = val / base;
 		--i;
 	}
 	if (ok == 1)

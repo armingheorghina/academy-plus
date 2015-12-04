@@ -27,7 +27,7 @@ int main()
    printf("The minimum value of LLONG = %lld\n", LLONG_MIN);
    printf("The maximum value of LLONG = %lld\n", LLONG_MAX);
    
+   printf("The minimum value of intmax_t = %jd\n", INTMAX_MIN);
    printf("The maximum value of intmax_t = %jd\n", INTMAX_MAX);
-   printf("The maximum value of uintmax_t = %jd\n", UINTMAX_MAX);
    return(0);
 }
