@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/04 14:26:48 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/04 17:31:44 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <inttypes.h>
+#include <sys/types.h>
 # define CONVERSIONS "sSpdDioOuUxXcC"
 # define FLAGS "#0-+ jzhl123456789"
 
@@ -46,7 +47,11 @@ char	*ft_strchr(const char *s, int c);
 void	ft_putnbr(int n);
 char	*ft_itoabase(uintmax_t val, int base);
 char	*ft_itoabbase(uintmax_t val, int base);
+char	*ft_short_to_ascii_base(short val, int base);
+char	*ft_unsigned_short_to_ascii_base(unsigned short val, int base);
 char	*ft_intmax_t_to_ascii_base(intmax_t val, int base);
+char	*ft_ssize_t_to_ascii_base(ssize_t val, int base);
+char	*ft_size_t_to_ascii_base(size_t val, int base);
 char	*ft_uintmax_t_to_ascii_base(uintmax_t val, int base);
 char	*ft_strjoin(const char *s1, const char *s2);
 
