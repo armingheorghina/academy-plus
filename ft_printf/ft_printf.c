@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:53:31 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/03 20:23:46 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/04 15:23:19 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int		ft_descriptor_len(const char *format)
 
 void	ft_initialize_flags_and_lm(t_arg *arg)
 {
-	arg->flag_hash = 0;
+		arg->flag_hash = 0;
         arg->flag_zero = 0;
         arg->flag_minus = 0;
         arg->flag_plus = 0;
@@ -120,24 +120,24 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 	if (descriptor[descriptor_len - 1] == 'p')
 		ft_process_p_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'd' || descriptor[descriptor_len - 1] == 'i')
-		ft_process_d_(ap, bytes, descriptor);
+		ft_process_d_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'D')
-		ft_process_dd_(ap, bytes, descriptor);
+		ft_process_dd_(ap, bytes, arg);
 	if (descriptor[descriptor_len - 1] == 'o')
-		ft_process_o_(ap, bytes, descriptor);
+		ft_process_o_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'O')
 		ft_process_oo_(ap, bytes, descriptor);
 	if (descriptor[descriptor_len - 1] == 'u')
-		ft_process_u_(ap, bytes, descriptor);
+		ft_process_u_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'U')
 		ft_process_uu_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'x')
-		ft_process_x_(ap, bytes, descriptor);
+		ft_process_x_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'X')
-		ft_process_xx_(ap, bytes, descriptor);
+		ft_process_xx_(ap, bytes, descriptor, arg);
 
 	if (descriptor[descriptor_len - 1] == 'c')
-		ft_process_c_(ap, bytes, descriptor);
+		ft_process_c_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'C')
 		ft_process_cc_(ap, bytes);
 

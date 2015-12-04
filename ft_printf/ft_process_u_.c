@@ -6,13 +6,13 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 17:53:10 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/03 20:05:42 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/04 14:24:40 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_process_u_(va_list ap, int *bytes, char *descriptor)
+void	ft_process_u_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned int 	nbr;
 	uintmax_t		nbr2;
@@ -20,7 +20,7 @@ void	ft_process_u_(va_list ap, int *bytes, char *descriptor)
 	char			*findhh;
 
 	if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h')
-		ft_process_c_(ap, bytes, descriptor);
+		ft_process_c_(ap, bytes, descriptor, arg);
 	else if (ft_strchr(descriptor, 'l'))
 		ft_process_uu_(ap, bytes);
 	else if (ft_strchr(descriptor, 'z'))

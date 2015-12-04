@@ -1,36 +1,67 @@
 #include "ft_printf.h"
 
-void	ft_process_o_(va_list ap, int *bytes, char *descriptor)
+void	ft_process_o_flag_hash(int *bytes, char *str)
+{
+		ft_putchar('0');
+		ft_putstr(str);
+		*bytes = *bytes + ft_strlen(str) + 1;
+}
+
+void	ft_process_o_lm_j(va_list ap, int *bytes, t_arg arg)
+{
+	uintmax_t	nbr;
+	char 		*str;
+
+	nbr = va_arg(ap, uintmax_t);
+	str = ft_itoabase(nbr, 8);
+	if (arg.flag_hash && nbr != 0)
+		ft_process_o_flag_hash(bytes, str);
+	else
+	{
+		ft_putstr(str);
+		*bytes = *bytes + ft_strlen(str);
+	}
+}
+
+void	ft_process_o_lm_z(va_list ap, int *bytes, t_arg arg)
+{
+	size_t	nbr;
+	char 	*str;
+
+	nbr = va_arg(ap, size_t);
+	str = ft_itoabase(nbr, 8);
+	if (arg.flag_hash && nbr != 0)
+		ft_process_o_flag_hash(bytes, str);
+	else
+	{
+		ft_putstr(str);
+		*bytes = *bytes + ft_strlen(str);
+	}
+}
+
+void	ft_process_o_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned int	nbr;
-	uintmax_t		nbr2;
 	char			*str;
-	char			*findhh;
-	
-	if (ft_strchr(descriptor, 'l'))
+
+	if (arg.lm_l)
 		ft_process_oo_(ap, bytes, descriptor);
-	else if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h')
-		ft_process_c_(ap, bytes, descriptor);
-	else if (ft_strchr(descriptor, 'j') || ft_strchr(descriptor, 'z'))
-	{	
-		nbr2 = va_arg(ap, uintmax_t);
-		str = ft_itoabase(nbr2, 8);
-	}
+	else if (arg.lm_hh)
+		ft_process_c_(ap, bytes, descriptor, arg);
+	else if (arg.lm_j)
+		ft_process_o_lm_j(ap, bytes, arg);
+	else if (arg.lm_z)
+		ft_process_o_lm_z(ap, bytes, arg);
 	else
 	{
 		nbr = va_arg(ap, unsigned int);
 		str = ft_itoabase(nbr, 8);
-	}
-/*print side of the function*/	
-	if (ft_strchr(descriptor, '#') && nbr != 0 && !ft_strchr(descriptor, 'l') && !((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h'))
-	{
-		ft_putchar('0');
-		ft_putstr(str);
-		*bytes = *bytes + ft_strlen(str) + 1;
-	}
-	else if (!ft_strchr(descriptor, 'l') && !((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h'))
-	{
-		ft_putstr(str);
-		*bytes = *bytes + ft_strlen(str);
+		if (arg.flag_hash && nbr != 0)
+			ft_process_o_flag_hash(bytes, str);
+		else
+		{
+			ft_putstr(str);
+			*bytes = *bytes + ft_strlen(str);
+		}
 	}
 }

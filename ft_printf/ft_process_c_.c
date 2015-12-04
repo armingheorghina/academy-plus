@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 16:23:45 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/03 19:09:44 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/04 12:58:15 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,27 @@ void	ft_process_c_hhxxx(va_list ap, int *bytes, char *descriptor)
 	usc = va_arg(ap, int);
 	if (descriptor[ft_strlen(descriptor) - 1] == 'x')
 		str = ft_itoabase(usc, 16);
-	else if (descriptor[ft_strlen(descriptor) - 1] == 'X')
+	else
 		str = ft_itoabbase(usc, 16);
 	ft_putstr(str);
 	*bytes += ft_strlen(str);
 }
 
-void	ft_process_c_(va_list ap, int *bytes, char *descriptor)
+void	ft_process_c_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned char	c;
-	char		*findhh;
 
-	if (ft_strchr(descriptor, 'l'))
+	if (arg.lm_l)
 		ft_process_cc_(ap, bytes);
-	else if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h' && descriptor[ft_strlen(descriptor) - 1] == 'u')
+	else if (arg.lm_hh && descriptor[ft_strlen(descriptor) - 1] == 'u')
 		ft_process_c_hhu(ap, bytes);
-	else if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h' && (descriptor[ft_strlen(descriptor) - 1] == 'd' || descriptor[ft_strlen(descriptor) - 1] == 'i'))
+	else if (arg.lm_hh && (descriptor[ft_strlen(descriptor) - 1] == 'd' || descriptor[ft_strlen(descriptor) - 1] == 'i'))
 		ft_process_c_hhd(ap, bytes);
-	else if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h' && descriptor[ft_strlen(descriptor) - 1] == 'o')
+	else if (arg.lm_hh && descriptor[ft_strlen(descriptor) - 1] == 'o')
 		ft_process_c_hho(ap, bytes);
-	else if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h' && descriptor[ft_strlen(descriptor) - 1] == 'x')
+	else if (arg.lm_hh && descriptor[ft_strlen(descriptor) - 1] == 'x')
 		ft_process_c_hhxxx(ap, bytes, descriptor);
-	else if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h' && descriptor[ft_strlen(descriptor) - 1] == 'X')
+	else if (arg.lm_hh && descriptor[ft_strlen(descriptor) - 1] == 'X')
 		ft_process_c_hhxxx(ap, bytes, descriptor);
 	else
 	{

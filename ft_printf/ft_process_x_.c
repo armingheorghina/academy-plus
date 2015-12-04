@@ -6,13 +6,13 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 16:08:19 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/03 20:11:38 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/04 14:21:53 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_process_x_(va_list ap, int *bytes, char *descriptor)
+void	ft_process_x_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned int 	nbr;
 	unsigned long 	ulnbr;
@@ -21,7 +21,7 @@ void	ft_process_x_(va_list ap, int *bytes, char *descriptor)
 	char			*findhh;
 	
 	if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h')
-		ft_process_c_(ap, bytes, descriptor);
+		ft_process_c_(ap, bytes, descriptor, arg);
 	else if (ft_strchr(descriptor, 'l'))
 	{
 		ulnbr = va_arg(ap, unsigned long);

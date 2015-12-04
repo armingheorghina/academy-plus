@@ -6,51 +6,88 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:02:56 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/03 19:56:33 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/04 15:11:19 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_process_d_(va_list ap, int *bytes, char *descriptor)
+void	ft_process_d_put_flag_plus(char *str, int *bytes)
+{
+	ft_putchar('+');
+	ft_putstr(str);
+	*bytes += ft_strlen(str) + 1;
+}
+
+void	ft_process_d_put_flag_space(char *str, int *bytes)
+{
+	ft_putchar(' ');
+	ft_putstr(str);
+	*bytes += ft_strlen(str) + 1;
+}
+
+void	ft_process_d_intmax_t(va_list ap, int *bytes, t_arg arg)
+{
+	intmax_t	nbr;
+	char	 	*str;
+
+	nbr = va_arg(ap, intmax_t);
+	str = ft_intmax_t_to_ascii_base(nbr, 10);
+	if (arg.flag_plus && nbr >= 0)
+		ft_process_d_put_flag_plus(str, bytes);
+	else if (arg.flag_space && nbr >= 0)
+		ft_process_d_put_flag_space(str, bytes);
+	else
+	{
+		ft_putstr(str);
+		*bytes += ft_strlen(str);
+	}
+}
+
+void	ft_process_d_size_t(va_list ap, int *bytes, t_arg arg)
+{
+	size_t	nbr;
+	char 	*str;
+
+	nbr = va_arg(ap, size_t);
+	str = ft_intmax_t_to_ascii_base(nbr, 10);
+	if (arg.flag_plus)// && nbr >= 0)
+		ft_process_d_put_flag_plus(str, bytes);
+	else if (arg.flag_space)// && nbr >= 0)
+		ft_process_d_put_flag_space(str, bytes);
+	else
+	{
+		ft_putstr(str);
+		*bytes += ft_strlen(str);
+	}
+}
+
+
+void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	int		nbr;
-	intmax_t	nbr2;
-	char	 	*str;
-	char		*findhh;
+	char 	*str;
 
-	if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h')
-		ft_process_c_(ap, bytes, descriptor);
-	else if (ft_strchr(descriptor, 'l'))
-		ft_process_dd_(ap, bytes, descriptor);
-	else if (ft_strchr(descriptor, 'j') || ft_strchr(descriptor, 'z'))
-	{
-		nbr2 = va_arg(ap, intmax_t);
-		str = ft_intmax_t_to_ascii_base(nbr2, 10);
-	}
+	if (arg.lm_hh)
+		ft_process_c_(ap, bytes, descriptor, arg);
+	else if (arg.lm_l)
+		ft_process_dd_(ap, bytes, arg);
+	else if (arg.lm_j)
+		ft_process_d_intmax_t(ap, bytes, arg);
+	else if (arg.lm_z)
+		ft_process_d_size_t(ap, bytes, arg);
 	else
 	{
 		nbr = va_arg(ap, int);
 		str = ft_intmax_t_to_ascii_base(nbr, 10);
-	}
-/* print side of the file*/	
-	if (ft_strchr(descriptor, '+') && nbr >= 0 && !ft_strchr(descriptor, 'l') &&
-		!((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h'))
-	{
-		ft_putchar('+');
-		ft_putstr(str);
-		*bytes += ft_strlen(str) + 1;
-	}
-	else if (ft_strchr(descriptor, ' ') && nbr >= 0 && !ft_strchr(descriptor, 'l')
-			 && !((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h'))
-	{
-		ft_putchar(' ');
-		ft_putstr(str);
-		*bytes += ft_strlen(str) + 1;
-	}
-	else if (!ft_strchr(descriptor, 'l') && !((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h'))
-	{
-		ft_putstr(str);
-		*bytes += ft_strlen(str);
+		if (arg.flag_plus && nbr >= 0)
+			ft_process_d_put_flag_plus(str, bytes);
+		else if (arg.flag_space && nbr >= 0)
+			ft_process_d_put_flag_space(str, bytes);
+		else
+		{
+			ft_putstr(str);
+			*bytes += ft_strlen(str);
+		}
 	}
 }
