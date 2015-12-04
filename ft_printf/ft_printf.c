@@ -161,7 +161,7 @@ static int		ft_process_format(const char *format, va_list ap)
 			if (ft_is_a_valid_descriptor(format + i))
 			{
 				descriptor_len = ft_descriptor_len(format + i);
-				if (format[i + descriptor_len - 1] == '%') //TODO ce se intampla cand intre %...% exista flaguri?
+				if (format[i + descriptor_len - 1] == '%')
 				{
 					ft_putchar('%');
 					bytes++;

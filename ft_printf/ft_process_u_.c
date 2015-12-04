@@ -15,15 +15,14 @@
 void	ft_process_u_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned int 	nbr;
-	uintmax_t		nbr2;
-	char			*str;
-	char			*findhh;
+	uintmax_t	nbr2;
+	char		*str;
 
-	if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h')
+	if (arg.lm_hh)
 		ft_process_c_(ap, bytes, descriptor, arg);
-	else if (ft_strchr(descriptor, 'l'))
+	else if (arg.lm_l)
 		ft_process_uu_(ap, bytes);
-	else if (ft_strchr(descriptor, 'z'))
+	else if (arg.lm_z)
 	{
 		nbr2 = va_arg(ap, uintmax_t);
 		str = ft_uintmax_t_to_ascii_base(nbr2, 10);
@@ -33,7 +32,7 @@ void	ft_process_u_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	else
 	{
 		nbr = va_arg(ap, unsigned int);
-		str = ft_itoabase(nbr, 10);
+		str = ft_unsigned_int_to_ascii_base(nbr, 10);
 		ft_putstr(str);
 		*bytes = *bytes + ft_strlen(str);
 	}
