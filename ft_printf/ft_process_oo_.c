@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 12:54:24 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/04 14:18:33 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/05 12:37:20 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,4 @@ void	ft_process_oo_(va_list ap, int *bytes, t_arg arg)
 		ft_putstr(str);
 		*bytes = *bytes + ft_strlen(str);
 	}
-
 }

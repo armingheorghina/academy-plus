@@ -9,26 +9,22 @@ int	main()
 {
 //	int bytes;
 //	long a = 9223372036854775807;
-/*	
-	size_t bytes;
-	char *s;
-	wchar_t wc;
-	mbstate_t ps;
 	
-	s = (char *)malloc(sizeof(*s) * 99);
-	memset (&ps, '\0', sizeof (ps));
-	wc = L'本';
-	bytes = wcrtomb(s, wc, &ps);
-
-	printf("%s", s);
-	printf("\n%zu\n", bytes);
-*/
 	int bytes;
+	wchar_t wc;
+	
+	wc = L'本';
 
-	bytes = ft_printf("%lo", LONG_MAX);
-	printf("\n%d\n", bytes);
-	bytes = printf("%lo", LONG_MAX);
-	printf("\n%d\n", bytes);
+	bytes = ft_printf("%C", wc);
+	printf("%d", bytes);
+
+
+
+
+	
+	
+	
+	
 //	int x;
 
 //	x = 1;	

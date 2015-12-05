@@ -6,47 +6,118 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 16:08:19 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/04 14:21:53 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/05 15:11:29 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	ft_process_x_(va_list ap, int *bytes, char *descriptor, t_arg arg)
+void	ft_process_x_lm_l(va_list ap, int *bytes, t_arg arg)
 {
-	unsigned int 	nbr;
-	unsigned long 	ulnbr;
-	uintmax_t	 	nbr2;
+	unsigned long 	nbr;
 	char			*str;
-	char			*findhh;
-	
-	if ((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h')
-		ft_process_c_(ap, bytes, descriptor, arg);
-	else if (ft_strchr(descriptor, 'l'))
-	{
-		ulnbr = va_arg(ap, unsigned long);
-		str = ft_itoabase(ulnbr, 16);
-	}
-	else if (ft_strchr(descriptor, 'z'))
-	{	
-		nbr2 = va_arg(ap, uintmax_t);
-		str = ft_itoabase(nbr2, 16);
-	}
-	else
-	{
-		nbr = va_arg(ap, unsigned int);
-		str = ft_itoabase(nbr, 16);
-	}
-/* prind side os below*/
-	if (ft_strchr(descriptor, '#') && nbr != 0 && !((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h'))
+
+	nbr = va_arg(ap, unsigned long);
+	str = ft_unsigned_long_to_ascii_base(nbr, 16);
+	if (arg.flag_hash && nbr != 0)
 	{
 		ft_putstr("0x");
 		ft_putstr(str);
 		*bytes = *bytes + ft_strlen(str) + 2;
 	}
-	else if (!((findhh = ft_strchr(descriptor, 'h')) && findhh[1] == 'h'))
+	else
 	{
 		ft_putstr(str);
 		*bytes = *bytes + ft_strlen(str);
+	}
+}
+
+void	ft_process_x_lm_ll(va_list ap, int *bytes, t_arg arg)
+{	
+	unsigned long long 	nbr;
+	char	*str;
+
+	nbr = va_arg(ap, unsigned long long);
+	str = ft_unsigned_long_long_to_ascii_base(nbr, 16);
+	if (arg.flag_hash && nbr != 0)
+	{
+		ft_putstr("0x");
+		ft_putstr(str);
+		*bytes = *bytes + ft_strlen(str) + 2;
+	}
+	else
+	{
+		ft_putstr(str);
+		*bytes = *bytes + ft_strlen(str);
+	}
+}
+
+void	ft_process_x_lm_z(va_list ap, int *bytes, t_arg arg)
+{	
+	size_t 	nbr;
+	char	*str;
+	nbr = va_arg(ap, size_t);
+	str = ft_size_t_to_ascii_base(nbr, 16);
+	if (arg.flag_hash && nbr != 0)
+	{
+		ft_putstr("0x");
+		ft_putstr(str);
+		*bytes = *bytes + ft_strlen(str) + 2;
+	}
+	else
+	{
+		ft_putstr(str);
+		*bytes = *bytes + ft_strlen(str);
+	}
+}
+
+void	ft_process_x_lm_j(va_list ap, int *bytes, t_arg arg)
+{	
+	uintmax_t 	nbr;
+	char	*str;
+
+	nbr = va_arg(ap, uintmax_t);
+	str = ft_uintmax_t_to_ascii_base(nbr, 16);
+	if (arg.flag_hash && nbr != 0)
+	{
+		ft_putstr("0x");
+		ft_putstr(str);
+		*bytes = *bytes + ft_strlen(str) + 2;
+	}
+	else
+	{
+		ft_putstr(str);
+		*bytes = *bytes + ft_strlen(str);
+	}
+}
+void	ft_process_x_(va_list ap, int *bytes, char *descriptor, t_arg arg)
+{
+	unsigned int 	nbr;
+	char			*str;
+
+	if (arg.lm_hh)
+		ft_process_c_(ap, bytes, descriptor, arg);
+	else if (arg.lm_l)
+		ft_process_x_lm_l(ap, bytes, arg);
+	else if (arg.lm_ll)
+		ft_process_x_lm_ll(ap, bytes, arg);
+	else if (arg.lm_j)
+		ft_process_x_lm_j(ap, bytes, arg);
+	else if (arg.lm_z)
+		ft_process_x_lm_z(ap, bytes, arg);
+	else
+	{
+		nbr = va_arg(ap, unsigned int);
+		str = ft_itoabase(nbr, 16);
+		if (arg.flag_hash && nbr != 0)
+		{
+			ft_putstr("0x");
+			ft_putstr(str);
+			*bytes = *bytes + ft_strlen(str) + 2;
+		}
+		else
+		{
+			ft_putstr(str);
+			*bytes = *bytes + ft_strlen(str);
+		}
 	}
 }
