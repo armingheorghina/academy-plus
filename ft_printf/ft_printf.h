@@ -58,6 +58,7 @@ char	*ft_unsigned_short_to_ascii_base(unsigned short val, int base);
 char	*ft_unsigned_int_to_ascii_base(unsigned int val, int base);
 char	*ft_unsigned_long_to_ascii_base(unsigned long val, int base);
 char	*ft_unsigned_long_long_to_ascii_base(unsigned long long val, int base);
+char	*ft_int_to_ascii_base(int val, int base);
 char	*ft_intmax_t_to_ascii_base(intmax_t val, int base);
 char	*ft_ssize_t_to_ascii_base(ssize_t val, int base);
 char	*ft_size_t_to_ascii_base(size_t val, int base);
