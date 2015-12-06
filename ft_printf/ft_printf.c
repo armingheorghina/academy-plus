@@ -43,17 +43,18 @@ static int		ft_descriptor_len(const char *format)
 
 void	ft_initialize_flags_and_lm(t_arg *arg)
 {
-		arg->flag_hash = 0;
-        arg->flag_zero = 0;
-        arg->flag_minus = 0;
-        arg->flag_plus = 0;
-        arg->flag_space = 0;
-        arg->lm_j = 0;
-        arg->lm_z = 0;
-        arg->lm_h = 0;
-        arg->lm_hh = 0;
-        arg->lm_l = 0;
-        arg->lm_ll = 0;
+	arg->precision = 0;
+	arg->flag_hash = 0;
+	arg->flag_zero = 0;
+	arg->flag_minus = 0;
+	arg->flag_plus = 0;
+	arg->flag_space = 0;
+	arg->lm_j = 0;
+	arg->lm_z = 0;
+	arg->lm_h = 0;
+	arg->lm_hh = 0;
+	arg->lm_l = 0;
+	arg->lm_ll = 0;
 }
 
 void	ft_verify_flags(t_arg *arg, char *descriptor)
@@ -63,7 +64,13 @@ void	ft_verify_flags(t_arg *arg, char *descriptor)
 	i = 0;
 	while (descriptor[i])
 	{
-		if (descriptor[i] == '#')
+		if (descriptor[i] == '.')
+		{	
+			arg->precision = ft_atoi(descriptor + i + 1);
+			while (ft_isdigit(descriptor[i + 1]))
+				i++;
+		}
+		else if (descriptor[i] == '#')
 			arg->flag_hash = 1;
 		else if (descriptor[i] == '0')
 			arg->flag_zero = 1;

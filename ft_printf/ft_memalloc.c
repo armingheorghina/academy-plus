@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/20 19:16:55 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/24 19:36:47 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/26 13:24:55 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/29 15:08:39 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include "ft_printf.h"
 
-int	ft_strlen(const char *s)
+void	*ft_memalloc(size_t size)
 {
-	int i;
+	void *mem;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (!(mem = (void*)malloc(sizeof(*mem) * (size))) || !size)
+		return (NULL);
+	mem = ft_memset(mem, 0, size);
+	return (mem);
 }

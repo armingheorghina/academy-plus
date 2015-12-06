@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/20 19:16:55 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/24 19:36:47 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/20 19:33:47 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/20 20:46:27 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include "ft_printf.h"
-
-int	ft_strlen(const char *s)
+int		ft_atoi(const char *str)
 {
-	int i;
+	long	rez;
+	int		rez2;
+	int		s;
+	int		i;
 
 	i = 0;
-	while (s[i])
+	s = 1;
+	rez = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
-	return (i);
+	if (str[i] == '-')
+	{
+		s = -1;
+		i++;
+	}
+	else if (str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		rez = rez * 10 + str[i] - '0';
+		i++;
+	}
+	rez2 = rez * s;
+	return (rez2);
 }

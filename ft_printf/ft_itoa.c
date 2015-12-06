@@ -14,7 +14,7 @@
 
 static char		*ft_skip_sign(char *dst, char *str, int i)
 {
-	size_t j;
+	int j;
 
 	j = 0;
 	while (j < ft_strlen(str))
@@ -30,7 +30,7 @@ static char		*ft_skip_sign(char *dst, char *str, int i)
 static char		*ft_char_strrev(char c, char *str)
 {
 	int		i;
-	size_t	j;
+	int	j;
 	char	*dst;
 
 	dst = (char*)malloc(sizeof(*dst) * (ft_strlen(str) + 1));

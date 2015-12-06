@@ -11,15 +11,18 @@ int	main()
 //	long a = 9223372036854775807;
 	
 	int bytes;
-	ssize_t a;
+	int a;
+//	t_arg arg;
 //	wchar_t wc;
 	
 //	wc = L'本';
 
-	a = -7;
-	bytes = printf("%zi", a);
+	a = 0;
+	bytes = ft_printf("%.07d", a);
 	printf("\n%d\n", bytes);
 
+	bytes = printf("%.07d", a);
+	printf("\n%d\n", bytes);
 
 
 

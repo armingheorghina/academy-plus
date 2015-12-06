@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/20 19:16:55 by vdruta            #+#    #+#             */
-/*   Updated: 2015/10/24 19:36:47 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/22 16:52:03 by vdruta            #+#    #+#             */
+/*   Updated: 2015/10/28 19:16:39 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include "ft_printf.h"
+#include <string.h>
 
-int	ft_strlen(const char *s)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int i;
+	size_t i;
 
 	i = 0;
-	while (s[i])
+	while (i < len)
+	{
+		*(unsigned char*)(b + i) = (unsigned char)c;
 		i++;
-	return (i);
+	}
+	return (b);
 }

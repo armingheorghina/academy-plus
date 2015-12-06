@@ -102,6 +102,7 @@ void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	int		nbr;
 	char 	*str;
+	char 	*str0;
 
 	if (arg.lm_h)
 		ft_process_d_short(ap, bytes, arg);
@@ -119,7 +120,25 @@ void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	{
 		nbr = va_arg(ap, int);
 		str = ft_intmax_t_to_ascii_base(nbr, 10);
-		if (arg.flag_plus && nbr >= 0)
+		if (arg.precision > 0)
+		{
+			if (arg.precision > ft_strlen(str))
+			{
+				str0 = ft_memalloc(arg.precision - ft_strlen(str) + 1);
+				str0 = ft_memset(str0, '0', arg.precision - ft_strlen(str));
+				str = ft_strjoin(str0, str);
+				ft_putstr(str);
+				*bytes += ft_strlen(str);
+			}
+			else
+			{
+				ft_putstr(str);
+				*bytes += ft_strlen(str);
+			}
+		}
+		else if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
+			*bytes = *bytes + 0;
+		else if (arg.flag_plus && nbr >= 0)
 			ft_process_d_put_flag_plus(str, bytes);
 		else if (arg.flag_space && nbr >= 0)
 			ft_process_d_put_flag_space(str, bytes);

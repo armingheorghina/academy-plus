@@ -17,10 +17,11 @@
 # include <inttypes.h>
 #include <sys/types.h>
 # define CONVERSIONS "sSpdDioOuUxXcC"
-# define FLAGS "#0-+ jzhl123456789"
+# define FLAGS "#0-+ jzhl123456789."
 
 typedef struct		s_arg
 {
+	int			precision;
 	int			flag_hash;
 	int			flag_zero;
 	int			flag_minus;
@@ -36,12 +37,16 @@ typedef struct		s_arg
 
 int		ft_printf(const char *format, ...);
 
+void	*ft_memset(void *b, int c, size_t len);
+void	*ft_memalloc(size_t size);
 char	*ft_itoa(int n);
+int		ft_atoi(const char *str);
+int		ft_isdigit(int c);
 void	ft_putchar(char c);
 void	ft_putwchar(wchar_t wc);
 int		ft_wcharsize(wchar_t wc);
 void	ft_putstr(char const *s);
-size_t	ft_strlen(const char *s);
+int	ft_strlen(const char *s);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *s, int c);
 void	ft_putnbr(int n);
