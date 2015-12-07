@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 18:28:24 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/04 18:47:17 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/07 15:12:43 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_long_long_to_ascii_base(long long val, int base)
 			val2 = val2 / base;
 		}
 		buf[i] = '-';
-		return (buf + i);
+		return (buf + i + 1);
 	}
 	while (val > 0 && i > 0)
 	{

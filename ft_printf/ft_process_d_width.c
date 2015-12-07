@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoabase.c                                      :+:      :+:    :+:   */
+/*   ft_process_d_width.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/02 12:47:17 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/07 18:39:31 by vdruta           ###   ########.fr       */
+/*   Created: 2015/12/07 17:18:41 by vdruta            #+#    #+#             */
+/*   Updated: 2015/12/07 17:19:02 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_itoabase(uintmax_t val, int base)
+char	*ft_process_d_width(char *str, t_arg arg)
 {
-	static char	buf[32] = "0";
-	int		i;
-
-	i = 30;
-	if (val == 0)
-		return (ft_strdup("0"));
-	while (val > 0 && i > 0)
+	char *strp;
+	
+	if (arg.width > ft_strlen(str))
 	{
-		buf[i] = "0123456789abcdef"[val % base];
-		val = val / base;
-		--i;
+		strp = ft_memalloc(arg.width - ft_strlen(str) + 1);
+		strp = ft_memset(strp, ' ', arg.width - ft_strlen(str));
+		str = ft_strjoin(strp, str);
 	}
-	return (buf + i + 1);
+	return (str);
 }

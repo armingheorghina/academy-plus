@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:02:56 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/07 13:41:30 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/07 19:06:52 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,20 @@ void	ft_process_d_put_flag_space(int *bytes)
 void	ft_process_d_intmax_t(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	intmax_t	nbr;
+	intmax_t	lnbr;
 	char	 	*str;
-	char 	*str0;
 
 	nbr = va_arg(ap, intmax_t);
-	str = ft_intmax_t_to_ascii_base(nbr, 10);
-	if (arg.precision > 0)
-	{
-		if (arg.precision > ft_strlen(str))
-		{
-			str0 = ft_memalloc(arg.precision - ft_strlen(str) + 1);
-			str0 = ft_memset(str0, '0', arg.precision - ft_strlen(str));
-			str = ft_strjoin(str0, str);
-		}
-	}
+	lnbr = nbr;
+	if (nbr < 0)
+		lnbr = -nbr;
+	str = ft_intmax_t_to_ascii_base(lnbr, 10);
+	str = ft_process_d_precision(str, arg);
+	if (nbr < 0)
+		str = ft_strjoin("-", str);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
+	str = ft_process_d_width(str, arg);
 	if (arg.flag_plus && nbr >= 0)
 		ft_process_d_put_flag_plus(bytes);
 	else if (arg.flag_space && nbr >= 0)
@@ -54,22 +52,20 @@ void	ft_process_d_intmax_t(va_list ap, int *bytes, char *descriptor, t_arg arg)
 void	ft_process_d_ssize_t(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	ssize_t	nbr;
+	ssize_t	lnbr;
 	char 	*str;
-	char 	*str0;
 
 	nbr = va_arg(ap, ssize_t);
-	str = ft_ssize_t_to_ascii_base(nbr, 10);
-	if (arg.precision > 0)
-	{
-		if (arg.precision > ft_strlen(str))
-		{
-			str0 = ft_memalloc(arg.precision - ft_strlen(str) + 1);
-			str0 = ft_memset(str0, '0', arg.precision - ft_strlen(str));
-			str = ft_strjoin(str0, str);
-		}
-	}
+	lnbr = nbr;
+	if (nbr < 0)
+		lnbr = -nbr;
+	str = ft_ssize_t_to_ascii_base(lnbr, 10);
+	str = ft_process_d_precision(str, arg);
+	if (nbr < 0)
+		str = ft_strjoin("-", str);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
+	str = ft_process_d_width(str, arg);
 	if (arg.flag_plus && nbr >= 0)
 		ft_process_d_put_flag_plus(bytes);
 	else if (arg.flag_space && nbr >= 0)
@@ -81,22 +77,20 @@ void	ft_process_d_ssize_t(va_list ap, int *bytes, char *descriptor, t_arg arg)
 void	ft_process_d_short(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	short	nbr;
+	int		lnbr;
 	char 	*str;
-	char 	*str0;
 
 	nbr = va_arg(ap, int);
-	str = ft_short_to_ascii_base(nbr, 10);
-	if (arg.precision > 0)
-	{
-		if (arg.precision > ft_strlen(str))
-		{
-			str0 = ft_memalloc(arg.precision - ft_strlen(str) + 1);
-			str0 = ft_memset(str0, '0', arg.precision - ft_strlen(str));
-			str = ft_strjoin(str0, str);
-		}
-	}
+	lnbr = nbr;
+	if (nbr < 0)
+		lnbr = -nbr;
+	str = ft_short_to_ascii_base(lnbr, 10);
+	str = ft_process_d_precision(str, arg);
+	if (nbr < 0)
+		str = ft_strjoin("-", str);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
+	str = ft_process_d_width(str, arg);
 	if (arg.flag_plus && nbr >= 0)
 		ft_process_d_put_flag_plus(bytes);
 	else if (arg.flag_space && nbr >= 0)
@@ -108,22 +102,20 @@ void	ft_process_d_short(va_list ap, int *bytes, char *descriptor, t_arg arg)
 void	ft_process_d_long_long(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	long long	nbr;
+	long long	lnbr;
 	char 		*str;
-	char 	*str0;
 
 	nbr = va_arg(ap, long long);
-	str = ft_long_long_to_ascii_base(nbr, 10);
-	if (arg.precision > 0)
-	{
-		if (arg.precision > ft_strlen(str))
-		{
-			str0 = ft_memalloc(arg.precision - ft_strlen(str) + 1);
-			str0 = ft_memset(str0, '0', arg.precision - ft_strlen(str));
-			str = ft_strjoin(str0, str);
-		}
-	}
+	lnbr = nbr;
+	if (nbr < 0)
+		lnbr = -nbr;
+	str = ft_long_long_to_ascii_base(lnbr, 10);
+	str = ft_process_d_precision(str, arg);
+	if (nbr < 0)
+		str = ft_strjoin("-", str);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
+	str = ft_process_d_width(str, arg);
 	if (arg.flag_plus && nbr >= 0)
 		ft_process_d_put_flag_plus(bytes);
 	else if (arg.flag_space && nbr >= 0)
@@ -132,14 +124,34 @@ void	ft_process_d_long_long(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	*bytes += ft_strlen(str);
 }
 
-void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg)
+void	ft_process_d_int(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	int		nbr;
-	int		lnbr;
+	long	lnbr;
 	char 	*str;
-	int		ok;
-	char 	*str0;
-	char 	*strp;
+	
+	nbr = va_arg(ap, int);
+	lnbr = nbr;
+	if (nbr < 0)
+		lnbr = -nbr;
+	str = ft_long_long_to_ascii_base(lnbr, 10); // make it work for int_to_ascii
+	str = ft_process_d_precision(str, arg);
+	if (nbr < 0)
+		str = ft_strjoin("-", str);
+	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
+		str[0] = '\0';
+	str = ft_process_d_width(str, arg);
+	if (arg.flag_plus && nbr >= 0)
+		ft_process_d_put_flag_plus(bytes);
+	else if (arg.flag_space && nbr >= 0)
+		ft_process_d_put_flag_space(bytes);
+	ft_putstr(str);
+	*bytes += ft_strlen(str);
+}
+
+
+void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg)
+{
 
 	if (arg.lm_h)
 		ft_process_d_short(ap, bytes, descriptor, arg);
@@ -154,42 +166,6 @@ void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	else if (arg.lm_z)
 		ft_process_d_ssize_t(ap, bytes, descriptor, arg);
 	else
-	{
-		nbr = va_arg(ap, int);
+		ft_process_d_int(ap, bytes, descriptor, arg);
 
-		lnbr = nbr;
-		ok = 0;
-		if (lnbr < 0)
-		{
-			lnbr = -lnbr;
-			ok = 1;
-		}
-		str = ft_int_to_ascii_base(lnbr, 10);
-		
-		if (arg.precision > ft_strlen(str))
-		{
-			str0 = ft_memalloc(arg.precision - ft_strlen(str) + 1);
-			str0 = ft_memset(str0, '0', arg.precision - ft_strlen(str));
-			str = ft_strjoin(str0, str);
-		}
-
-		if (ok == 1)
-			str = ft_strjoin("-", str);
-		if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
-			str[0] = '\0';
-
-		if (arg.width > ft_strlen(str))
-		{
-			strp = ft_memalloc(arg.width - ft_strlen(str) + 1);
-			strp = ft_memset(strp, ' ', arg.width - ft_strlen(str));
-			str = ft_strjoin(strp, str);
-		}
-
-		if (arg.flag_plus && nbr >= 0)
-			ft_process_d_put_flag_plus(bytes);
-		else if (arg.flag_space && nbr >= 0)
-			ft_process_d_put_flag_space(bytes);
-		ft_putstr(str);
-		*bytes += ft_strlen(str);
-	}
 }

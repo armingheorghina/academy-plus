@@ -20,7 +20,7 @@ char	*ft_intmax_t_to_ascii_base(intmax_t val, int base)
 			--i;
 		}
 		buf[i] = '-';
-		return (buf + i);
+		return (buf + i + 1);
 	}
 	while (val > 0 && i > 0)
 	{

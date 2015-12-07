@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/07 12:59:52 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/07 18:41:34 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct		s_arg
 
 int		ft_printf(const char *format, ...);
 
+
+char	*ft_strdup(const char *s1);
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memalloc(size_t size);
 char	*ft_itoa(int n);
@@ -66,6 +68,8 @@ char	*ft_size_t_to_ascii_base(size_t val, int base);
 char	*ft_uintmax_t_to_ascii_base(uintmax_t val, int base);
 char	*ft_strjoin(const char *s1, const char *s2);
 
+char	*ft_process_d_precision(char *str, t_arg arg);
+char	*ft_process_d_width(char *str, t_arg arg);
 void	ft_process_s_(va_list ap, int *bytes, t_arg arg);
 void	ft_process_ss_(va_list ap, int *bytes);
 void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg);
@@ -74,7 +78,7 @@ void	ft_process_p_(va_list ap, int *bytes);
 void	ft_process_c_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_cc_(va_list ap, int *bytes);
 void	ft_process_o_(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void	ft_process_oo_(va_list ap, int *bytes, t_arg arg);
+void	ft_process_oo_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_u_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_uu_(va_list ap, int *bytes);
 void	ft_process_x_(va_list ap, int *bytes, char *descriptor, t_arg arg);

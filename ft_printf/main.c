@@ -11,17 +11,17 @@ int	main()
 //	long a = 9223372036854775807;
 	
 	int bytes;
-	int a;
+	long long int a;
 //	t_arg arg;
 //	wchar_t wc;
 	
 //	wc = L'本';
 
 	a = -42;
-	bytes = ft_printf("%.4d", a);
+	bytes = ft_printf("%.o", 0);
 	printf("\n%d\n", bytes);
 
-	bytes = printf("%.4d", a);
+	bytes = printf("%.o", 0);
 	printf("\n%d\n", bytes);
 
 

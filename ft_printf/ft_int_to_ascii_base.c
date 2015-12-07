@@ -9,7 +9,7 @@ char	*ft_int_to_ascii_base(int val, int base)
 
 	i = 30;
 	if (val == 0)
-		return (buf);
+		return (ft_strdup("0"));
 	if (val < 0)
 	{
 		val2 = -val;
@@ -20,7 +20,7 @@ char	*ft_int_to_ascii_base(int val, int base)
 			--i;
 		}
 		buf[i] = '-';
-		return (buf + i);
+		return (buf + i + 1);
 	}
 	while (val > 0 && i > 0)
 	{

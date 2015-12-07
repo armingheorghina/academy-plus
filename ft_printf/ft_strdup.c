@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoabase.c                                      :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/02 12:47:17 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/07 18:39:31 by vdruta           ###   ########.fr       */
+/*   Created: 2015/10/21 19:19:18 by vdruta            #+#    #+#             */
+/*   Updated: 2015/12/07 18:41:00 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_itoabase(uintmax_t val, int base)
+char	*ft_strdup(const char *s1)
 {
-	static char	buf[32] = "0";
 	int		i;
+	char	*s2;
 
-	i = 30;
-	if (val == 0)
-		return (ft_strdup("0"));
-	while (val > 0 && i > 0)
+	i = 0;
+	if (!s1)
+		return (NULL);
+	while (s1[i])
+		i++;
+	s2 = (char*)malloc(sizeof(*s2) * (i + 1));
+	if (!s2)
+		return (NULL);
+	i = 0;
+	while (s1[i])
 	{
-		buf[i] = "0123456789abcdef"[val % base];
-		val = val / base;
-		--i;
+		s2[i] = s1[i];
+		i++;
 	}
-	return (buf + i + 1);
+	s2[i] = '\0';
+	return (s2);
 }

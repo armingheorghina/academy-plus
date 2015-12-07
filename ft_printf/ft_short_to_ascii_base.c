@@ -27,7 +27,7 @@ char	*ft_short_to_ascii_base(short val, int base)
 	if (ok == 1)
 	{
 		buf[i] = '-';
-		return (buf + i);
+		return (buf + i + 1);
 	}
 	return (buf + i + 1);
 }
