@@ -12,7 +12,7 @@ char	*ft_short_to_ascii_base(short val, int base)
 	i = 30;
 	ok = 0;
 	if (val2 == 0)
-		return (buf);
+		return (ft_strdup("0"));
 	if (val2 < 0)
 	{
 		val2 = -val2;

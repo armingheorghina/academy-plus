@@ -27,14 +27,10 @@ void	ft_process_d_put_flag_space(int *bytes)
 void	ft_process_d_intmax_t(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	intmax_t	nbr;
-	intmax_t	lnbr;
 	char	 	*str;
 
 	nbr = va_arg(ap, intmax_t);
-	lnbr = nbr;
-	if (nbr < 0)
-		lnbr = -nbr;
-	str = ft_intmax_t_to_ascii_base(lnbr, 10);
+	str = ft_intmax_t_to_ascii_base(nbr, 10);
 	str = ft_process_d_precision(str, arg);
 	if (nbr < 0)
 		str = ft_strjoin("-", str);
@@ -52,14 +48,10 @@ void	ft_process_d_intmax_t(va_list ap, int *bytes, char *descriptor, t_arg arg)
 void	ft_process_d_ssize_t(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	ssize_t	nbr;
-	ssize_t	lnbr;
 	char 	*str;
 
 	nbr = va_arg(ap, ssize_t);
-	lnbr = nbr;
-	if (nbr < 0)
-		lnbr = -nbr;
-	str = ft_ssize_t_to_ascii_base(lnbr, 10);
+	str = ft_ssize_t_to_ascii_base(nbr, 10);
 	str = ft_process_d_precision(str, arg);
 	if (nbr < 0)
 		str = ft_strjoin("-", str);
@@ -77,14 +69,10 @@ void	ft_process_d_ssize_t(va_list ap, int *bytes, char *descriptor, t_arg arg)
 void	ft_process_d_short(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	short	nbr;
-	int		lnbr;
 	char 	*str;
 
 	nbr = va_arg(ap, int);
-	lnbr = nbr;
-	if (nbr < 0)
-		lnbr = -nbr;
-	str = ft_short_to_ascii_base(lnbr, 10);
+	str = ft_short_to_ascii_base(nbr, 10);
 	str = ft_process_d_precision(str, arg);
 	if (nbr < 0)
 		str = ft_strjoin("-", str);
@@ -123,18 +111,14 @@ void	ft_process_d_long_long(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	ft_putstr(str);
 	*bytes += ft_strlen(str);
 }
-
+#include <stdio.h>
 void	ft_process_d_int(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	int		nbr;
-	long	lnbr;
-	char 	*str;
+	char 		*str;
 	
 	nbr = va_arg(ap, int);
-	lnbr = nbr;
-	if (nbr < 0)
-		lnbr = -nbr;
-	str = ft_long_long_to_ascii_base(lnbr, 10); // make it work for int_to_ascii
+	str = ft_int_to_ascii_base(nbr, 10);
 	str = ft_process_d_precision(str, arg);
 	if (nbr < 0)
 		str = ft_strjoin("-", str);

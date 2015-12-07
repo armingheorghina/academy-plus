@@ -9,7 +9,7 @@ char	*ft_ssize_t_to_ascii_base(ssize_t val, int base)
 
 	i = 30;
 	if (val == 0)
-		return (buf);
+		return (ft_strdup("0"));
 	if (val < 0)
 	{
 		val2 = -val;

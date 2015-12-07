@@ -20,7 +20,7 @@ char	*ft_long_long_to_ascii_base(long long val, int base)
 
 	i = 30;
 	if (val == 0)
-		return (buf);
+		return (ft_strdup("0"));
 	if (val < 0)
 	{
 		val2 = -val;
