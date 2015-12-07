@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:53:31 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/04 15:23:19 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/07 13:24:43 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int		ft_descriptor_len(const char *format)
 void	ft_initialize_flags_and_lm(t_arg *arg)
 {
 	arg->precision = 0;
+	arg->width = 0;
 	arg->flag_hash = 0;
 	arg->flag_zero = 0;
 	arg->flag_minus = 0;
@@ -60,11 +61,22 @@ void	ft_initialize_flags_and_lm(t_arg *arg)
 void	ft_verify_flags(t_arg *arg, char *descriptor)
 {
 	int i;
+	int j;
 
 	i = 0;
 	while (descriptor[i])
 	{
-		if (descriptor[i] == '.')
+		if (ft_isdigit(descriptor[i]) && descriptor[i] != '0')
+		{
+			arg->width = ft_atoi(descriptor + i);
+			j = ft_strlen(ft_itoa(arg->width));
+			while (j > 1)
+			{
+				j--;
+				i++;
+			}
+		}
+		else if (descriptor[i] == '.')
 		{	
 			arg->precision = ft_atoi(descriptor + i + 1);
 			while (ft_isdigit(descriptor[i + 1]))

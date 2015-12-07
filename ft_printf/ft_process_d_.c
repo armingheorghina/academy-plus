@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:02:56 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/05 16:07:22 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/07 13:41:30 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,12 @@ void	ft_process_d_long_long(va_list ap, int *bytes, char *descriptor, t_arg arg)
 
 void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
-	int	nbr;
+	int		nbr;
+	int		lnbr;
 	char 	*str;
+	int		ok;
 	char 	*str0;
+	char 	*strp;
 
 	if (arg.lm_h)
 		ft_process_d_short(ap, bytes, descriptor, arg);
@@ -153,18 +156,35 @@ void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	else
 	{
 		nbr = va_arg(ap, int);
-		str = ft_int_to_ascii_base(nbr, 10);
-		if (arg.precision > 0)
+
+		lnbr = nbr;
+		ok = 0;
+		if (lnbr < 0)
 		{
-			if (arg.precision > ft_strlen(str))
-			{
-				str0 = ft_memalloc(arg.precision - ft_strlen(str) + 1);
-				str0 = ft_memset(str0, '0', arg.precision - ft_strlen(str));
-				str = ft_strjoin(str0, str);
-			}
+			lnbr = -lnbr;
+			ok = 1;
 		}
+		str = ft_int_to_ascii_base(lnbr, 10);
+		
+		if (arg.precision > ft_strlen(str))
+		{
+			str0 = ft_memalloc(arg.precision - ft_strlen(str) + 1);
+			str0 = ft_memset(str0, '0', arg.precision - ft_strlen(str));
+			str = ft_strjoin(str0, str);
+		}
+
+		if (ok == 1)
+			str = ft_strjoin("-", str);
 		if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 			str[0] = '\0';
+
+		if (arg.width > ft_strlen(str))
+		{
+			strp = ft_memalloc(arg.width - ft_strlen(str) + 1);
+			strp = ft_memset(strp, ' ', arg.width - ft_strlen(str));
+			str = ft_strjoin(strp, str);
+		}
+
 		if (arg.flag_plus && nbr >= 0)
 			ft_process_d_put_flag_plus(bytes);
 		else if (arg.flag_space && nbr >= 0)

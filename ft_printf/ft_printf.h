@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/05 14:51:31 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/07 12:59:52 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 typedef struct		s_arg
 {
 	int			precision;
+	int			width;
 	int			flag_hash;
 	int			flag_zero;
 	int			flag_minus;

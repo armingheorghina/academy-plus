@@ -17,11 +17,11 @@ int	main()
 	
 //	wc = L'本';
 
-	a = 789;
-	bytes = ft_printf("% .7d", a);
+	a = -42;
+	bytes = ft_printf("%.4d", a);
 	printf("\n%d\n", bytes);
 
-	bytes = printf("% .7d", a);
+	bytes = printf("%.4d", a);
 	printf("\n%d\n", bytes);
 
 
