@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:53:31 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/07 17:57:09 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/08 17:18:14 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,6 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 		ft_process_c_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'C')
 		ft_process_cc_(ap, bytes);
-
 
 
 }

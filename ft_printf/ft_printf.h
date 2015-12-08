@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/07 18:41:34 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/08 15:40:42 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # define CONVERSIONS "sSpdDioOuUxXcC"
 # define FLAGS "#0-+ jzhl123456789."
 
+#include <stdio.h> //*TODO delete this!
+
+long long	g_nbr;
 typedef struct		s_arg
 {
 	int			precision;

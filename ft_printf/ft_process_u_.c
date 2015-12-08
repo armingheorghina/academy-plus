@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 17:53:10 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/07 19:10:04 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/08 17:23:16 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_process_u_lm_ll(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	char		*str;
 
 	nbr = va_arg(ap, unsigned long long);
+	g_nbr = 1;
 	str = ft_unsigned_long_long_to_ascii_base(nbr, 10);
 	str = ft_process_d_precision(str, arg);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
@@ -33,6 +34,7 @@ void	ft_process_u_lm_j(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	char		*str;
 
 	nbr = va_arg(ap, uintmax_t);
+	g_nbr = 1;
 	str = ft_uintmax_t_to_ascii_base(nbr, 10);
 	str = ft_process_d_precision(str, arg);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
@@ -48,6 +50,7 @@ void	ft_process_u_lm_z(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	char	*str;
 
 	nbr = va_arg(ap, size_t);
+	g_nbr = 1;
 	str = ft_size_t_to_ascii_base(nbr, 10);
 	str = ft_process_d_precision(str, arg);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
@@ -63,6 +66,7 @@ void	ft_process_u_uint(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	char			*str;
 	
 	nbr = va_arg(ap, unsigned int);
+	g_nbr = 1;
 	str = ft_unsigned_int_to_ascii_base(nbr, 10);
 	str = ft_process_d_precision(str, arg);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))

@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 17:20:21 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/07 17:20:39 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/08 13:04:23 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*ft_process_d_precision(char *str, t_arg arg)
 {
 	char *str0;
-
 	if (arg.precision > ft_strlen(str))
 	{
 		str0 = ft_memalloc(arg.precision - ft_strlen(str) + 1);
