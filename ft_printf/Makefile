@@ -6,7 +6,7 @@
 #    By: vdruta <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/02 16:35:04 by vdruta            #+#    #+#              #
-#    Updated: 2015/12/07 18:41:13 by vdruta           ###   ########.fr        #
+#    Updated: 2015/12/09 17:03:11 by vdruta           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,25 +27,25 @@ SRCS = ft_printf.c ft_itoa.c ft_putchar.c ft_putstr.c ft_strlen.c ft_strsub.c \
 		ft_unsigned_long_to_ascii_base.c ft_unsigned_int_to_ascii_base.c \
 		ft_atoi.c ft_isdigit.c ft_memalloc.c ft_memset.c \
 		ft_int_to_ascii_base.c ft_process_d_precision.c ft_process_d_width.c \
-		ft_strdup.c
+		ft_strdup.c ft_wstrsub.c
 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME):
-	gcc -Wall -Werror -Wextra -c $(SRCS)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
-	gcc -c main.c
-	gcc -o ft_printf main.o -L. -lftprintf
+	@gcc -Wall -Werror -Wextra -c $(SRCS)
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
+	@gcc -c main.c
+	@gcc -o ft_printf main.o -L. -lftprintf
 
 clean:
-	/bin/rm -f $(OBJS)
-	/bin/rm -f main.o
+	@/bin/rm -f $(OBJS)
+	@/bin/rm -f main.o
 
 fclean: clean
-	/bin/rm -f $(NAME)
-	/bin/rm -f ft_printf
+	@/bin/rm -f $(NAME)
+	@/bin/rm -f ft_printf
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/09 12:34:37 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/09 17:46:23 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		ft_isdigit(int c);
 void	ft_putchar(char c);
 void	ft_putwchar(wchar_t wc);
 int		ft_wcharsize(wchar_t wc);
+wchar_t	*ft_wstrsub(wchar_t const *s, unsigned int start, size_t len);
 void	ft_putstr(char const *s);
 int	ft_strlen(const char *s);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
@@ -73,8 +74,8 @@ char	*ft_strjoin(const char *s1, const char *s2);
 
 char	*ft_process_d_precision(char *str, t_arg arg);
 char	*ft_process_d_width(char *str, t_arg arg);
-void	ft_process_s_(va_list ap, int *bytes, t_arg arg);
-void	ft_process_ss_(va_list ap, int *bytes);
+void	ft_process_s_(va_list ap, int *bytes, char *descriptor, t_arg arg);
+void	ft_process_ss_(va_list ap, int *bytes, t_arg arg);
 void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_dd_(va_list ap, int *bytes, t_arg arg);
 void	ft_process_p_(va_list ap, int *bytes);
