@@ -34,7 +34,7 @@ void	ft_process_s_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	char *str;
 
 	if (arg.lm_l)
-		ft_process_ss_(ap, bytes, arg);
+		ft_process_ss_(ap, bytes, descriptor, arg);
 	else
 	{
 		str = va_arg(ap, char *);

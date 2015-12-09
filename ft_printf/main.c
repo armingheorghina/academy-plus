@@ -17,10 +17,11 @@ int	main()
 	
 //	wc = L'本';
 
-	bytes = ft_printf("%.4S", L"我是一只猫。");
+
+	bytes = ft_printf("%25c", 'c');
 	printf("\n%d\n", bytes);
 	printf("--------\n");
-	bytes = printf("%S", L"我是一只猫。");
+	bytes = printf("%25c", 'c');
 	printf("\n%d\n", bytes);
 	
 

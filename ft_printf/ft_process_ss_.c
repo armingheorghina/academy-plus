@@ -12,24 +12,30 @@
 
 #include "ft_printf.h"
 
-void	ft_process_ss_precision(wchar_t **wstr, t_arg arg)
+void		ft_process_ss_precision(wchar_t **wstr, t_arg arg)
 {
 	*wstr = ft_wstrsub(*wstr, 0, arg.precision);
 }
-/*
-void	ft_process_ss_width(wchar_t **wstr, t_arg arg)
+
+wchar_t		*ft_process_ss_width(wchar_t *wstr, t_arg arg)
 {
 	wchar_t *strp;
+	int i;
 
-	if (arg.width > ft_strlen(*wstr))
+	i = 0;
+	while (wstr[i])
+		i++;
+	if (arg.width > i)
 	{
-		strp = ft_memalloc(arg.width - ft_strlen(*wstr) + 1);
-		strp = ft_memset(strp, ' ', arg.width - ft_strlen(*wstr));
-		*wstr = ft_strjoin(strp, *wstr);
+		strp = (wchar_t*)malloc(sizeof(*strp) * (arg.width - i + 1));
+		strp[arg.width - i] = '\0';
+		strp = ft_wmemset(strp, L' ', arg.width - i);
+		wstr = ft_wstrjoin(strp, wstr);
 	}
+	return (wstr);
 }
-*/
-void	ft_process_ss_(va_list ap, int *bytes, t_arg arg)
+
+void	ft_process_ss_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	wchar_t *wstr;
 	int i;
@@ -40,11 +46,10 @@ void	ft_process_ss_(va_list ap, int *bytes, t_arg arg)
 	{
 		if (arg.precision)
 			ft_process_ss_precision(&wstr, arg);
-//		if (arg.precision == 0 && ft_strchr(descriptor, '.'))
-//			wstr = ft_strdup("");
-	//	if (arg.width)
-	//		ft_process_ss_width(&wstr, arg);
-		
+		if (arg.precision == 0 && ft_strchr(descriptor, '.'))
+			wstr = ft_wstrdup(L"");
+		if (arg.width)
+			wstr = ft_process_ss_width(wstr, arg);
 		while (wstr[i])
 		{
 			ft_putwchar(wstr[i]);

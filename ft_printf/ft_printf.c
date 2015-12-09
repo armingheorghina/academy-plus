@@ -135,7 +135,7 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 	if (descriptor[descriptor_len - 1] == 's')
 		ft_process_s_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'S')
-		ft_process_ss_(ap, bytes, arg);
+		ft_process_ss_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'p')
 		ft_process_p_(ap, bytes);
 	if (descriptor[descriptor_len - 1] == 'd' || descriptor[descriptor_len - 1] == 'i')

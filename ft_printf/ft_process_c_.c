@@ -58,6 +58,7 @@ void	ft_process_c_hhxxx(va_list ap, int *bytes, char *descriptor)
 void	ft_process_c_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned char	c;
+	char *strp;
 
 	if (arg.lm_l)
 		ft_process_cc_(ap, bytes);
@@ -74,6 +75,13 @@ void	ft_process_c_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	else
 	{
 		c = va_arg(ap, int);
+		if (arg.width > 1)
+		{
+			strp = ft_memalloc(arg.width - 1 + 1);
+			strp = ft_memset(strp, ' ', arg.width - 1);
+			ft_putstr(strp);
+			*bytes += ft_strlen(strp);
+		}
 		ft_putchar(c);
 		*bytes = *bytes + 1;
 	}
