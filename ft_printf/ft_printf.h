@@ -20,7 +20,7 @@
 # define FLAGS "#0-+ jzhl123456789."
 
 #include <stdio.h> //*TODO delete this!
-
+//TODO -wchar_t width; -hhu, hhx, hho, tests pt limits + 1 -- am impresia ca itoabase nu e adecvat pt aceste cazuri.
 long long	g_nbr;
 typedef struct		s_arg
 {
