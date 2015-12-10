@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 16:08:19 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/07 18:02:40 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/10 12:53:15 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	ft_process_x_lm_j(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		*bytes = *bytes + ft_strlen(str);
 	}
 }
+
 void	ft_process_x_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned int 	nbr;
