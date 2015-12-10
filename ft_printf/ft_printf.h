@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/09 17:46:23 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/10 11:33:31 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define FLAGS "#0-+ jzhl123456789."
 
 #include <stdio.h> //*TODO delete this!
-//TODO -wchar_t width; -hhu, hhx, hho, tests pt limits + 1 -- am impresia ca itoabase nu e adecvat pt aceste cazuri.
+
 long long	g_nbr;
 typedef struct		s_arg
 {
@@ -51,7 +51,8 @@ int		ft_isdigit(int c);
 void	ft_putchar(char c);
 void	ft_putwchar(wchar_t wc);
 int		ft_wcharsize(wchar_t wc);
-wchar_t	*ft_wstrsub(wchar_t const *s, unsigned int start, size_t len);
+wchar_t	*ft_wstrsub(wchar_t *s, unsigned int start, size_t len);
+int		ft_wstrsize(wchar_t *wstr);
 wchar_t		*ft_wstrdup(const wchar_t *s1);
 wchar_t	*ft_wstrjoin(wchar_t const *s1, wchar_t const *s2);
 int	ft_wstrlen(const wchar_t *s);

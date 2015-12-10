@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_process_p_.c                                    :+:      :+:    :+:   */
+/*   ft_wstrsize.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/28 16:18:55 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/10 11:33:28 by vdruta           ###   ########.fr       */
+/*   Created: 2015/12/10 09:25:17 by vdruta            #+#    #+#             */
+/*   Updated: 2015/12/10 09:34:57 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_process_p_(va_list ap, int *bytes)
+int		ft_wstrsize(wchar_t *wstr)
 {
-	void	*voidp;
-	char	*str;
+	int size;
+	int i;
 
-	voidp = va_arg(ap, void *);
-	str = ft_itoabase((unsigned long)voidp, 16);
-	str = ft_strjoin("0x", str);
-	ft_putstr(str);
-	*bytes += ft_strlen(str);
+	i = 0;
+	size = 0;
+	while (wstr[i])
+	{
+		if (wstr[i] <= 127)
+			size += 1;
+		else if (wstr[i] <= 2047)
+			size += 2;
+		else if (wstr[i] <= 65535)
+			size += 3;
+		else if (wstr[i] <= 1114111)
+			size += 4;
+		i++;
+	}
+	return (size);
 }

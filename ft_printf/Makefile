@@ -6,7 +6,7 @@
 #    By: vdruta <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/02 16:35:04 by vdruta            #+#    #+#              #
-#    Updated: 2015/12/09 17:03:11 by vdruta           ###   ########.fr        #
+#    Updated: 2015/12/10 09:43:19 by vdruta           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS = ft_printf.c ft_itoa.c ft_putchar.c ft_putstr.c ft_strlen.c ft_strsub.c \
 		ft_atoi.c ft_isdigit.c ft_memalloc.c ft_memset.c \
 		ft_int_to_ascii_base.c ft_process_d_precision.c ft_process_d_width.c \
 		ft_strdup.c ft_wstrsub.c ft_wstrdup.c ft_wstrlen.c ft_wstrjoin.c \
-		ft_wmemset.c
+		ft_wmemset.c ft_wstrsize.c
 
 OBJS = $(SRCS:.c=.o)
 
