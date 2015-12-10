@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/10 11:33:31 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/10 15:09:55 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,14 @@ char	*ft_size_t_to_ascii_base(size_t val, int base);
 char	*ft_uintmax_t_to_ascii_base(uintmax_t val, int base);
 char	*ft_strjoin(const char *s1, const char *s2);
 
+char	*ft_process_p_width(char *str, t_arg arg);
 char	*ft_process_d_precision(char *str, t_arg arg);
 char	*ft_process_d_width(char *str, t_arg arg);
 void	ft_process_s_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_ss_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_dd_(va_list ap, int *bytes, t_arg arg);
-void	ft_process_p_(va_list ap, int *bytes);
+void	ft_process_p_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_c_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_cc_(va_list ap, int *bytes);
 void	ft_process_o_(va_list ap, int *bytes, char *descriptor, t_arg arg);

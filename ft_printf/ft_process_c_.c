@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 16:23:45 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/10 11:33:25 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/10 15:46:47 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,43 @@ void	ft_process_c_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	else
 	{
 		c = va_arg(ap, int);
-		if (arg.width > 1)
+		if (arg.flag_minus)
+		{
+			if (arg.width > 1)
+			{
+				ft_putchar(c);
+				*bytes = *bytes + 1;
+				strp = ft_memalloc(arg.width - 1 + 1);
+				strp = ft_memset(strp, ' ', arg.width - 1);
+				ft_putstr(strp);
+				*bytes += ft_strlen(strp);
+			}
+		}
+		else if (arg.flag_zero)
+		{
+			if (arg.width > 1)
+			{
+				strp = ft_memalloc(arg.width - 1 + 1);
+				strp = ft_memset(strp, '0', arg.width - 1);
+				ft_putstr(strp);
+				*bytes += ft_strlen(strp);
+				ft_putchar(c);
+				*bytes = *bytes + 1;
+			}
+		}
+		else if (arg.width > 1)
 		{
 			strp = ft_memalloc(arg.width - 1 + 1);
 			strp = ft_memset(strp, ' ', arg.width - 1);
 			ft_putstr(strp);
 			*bytes += ft_strlen(strp);
+			ft_putchar(c);
+			*bytes = *bytes + 1;
 		}
-		ft_putchar(c);
-		*bytes = *bytes + 1;
+		else
+		{
+			ft_putchar(c);
+			*bytes = *bytes + 1;
+		}
 	}
 }
