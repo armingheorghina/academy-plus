@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:02:56 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/09 12:59:06 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/11 17:29:43 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,15 @@
 
 void	ft_process_d_put_flag_plus(int *bytes, char **str, t_arg arg)
 {
-	if (arg.width > ft_strlen(ft_itoabase(g_nbr, 10)) && g_nbr >= 0)
+	if (arg.width > ft_strlen(ft_itoabase(g_nbr, 10)) && g_nbr >= 0 && !arg.precision && !arg.flag_plus)
 		*str[0] = '+';
+	else if (arg.width > ft_strlen(ft_itoabase(g_nbr, 10)) && g_nbr >= 0 && !arg.precision && arg.flag_zero)
+		*str[0] = '+';
+	else if (!arg.flag_plus)
+	{
+		ft_putchar('+');
+		*bytes += 1;
+	}
 	else
 	{
 		ft_putchar('+');
