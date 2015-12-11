@@ -82,7 +82,7 @@ void	ft_process_u_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	if (arg.lm_hh)
 		ft_process_c_(ap, bytes, descriptor, arg);
 	else if (arg.lm_l)
-		ft_process_uu_(ap, bytes);
+		ft_process_uu_(ap, bytes, descriptor, arg);
 	else if (arg.lm_ll)
 		ft_process_u_lm_ll(ap, bytes, descriptor, arg);
 	else if (arg.lm_j)

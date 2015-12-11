@@ -28,7 +28,8 @@ SRCS = ft_printf.c ft_itoa.c ft_putchar.c ft_putstr.c ft_strlen.c ft_strsub.c \
 		ft_atoi.c ft_isdigit.c ft_memalloc.c ft_memset.c \
 		ft_int_to_ascii_base.c ft_process_d_precision.c ft_process_d_width.c \
 		ft_strdup.c ft_wstrsub.c ft_wstrdup.c ft_wstrlen.c ft_wstrjoin.c \
-		ft_wmemset.c ft_wstrsize.c
+		ft_wmemset.c ft_wstrsize.c ft_long_to_ascii_base.c \
+		ft_process_d_put_flag_plus.c ft_process_d_put_flag_space.c
 
 OBJS = $(SRCS:.c=.o)
 

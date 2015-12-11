@@ -14,7 +14,10 @@
 
 wchar_t		*ft_process_ss_precision(wchar_t *wstr, t_arg arg)
 {
-	wstr = ft_wstrsub(wstr, 0, arg.precision);
+	if (arg.width > ft_wstrsize(wstr))
+	{
+		wstr = ft_wstrsub(wstr, 0, arg.precision);
+	}
 	return (wstr);
 }
 

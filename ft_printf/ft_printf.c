@@ -141,7 +141,7 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 	if (descriptor[descriptor_len - 1] == 'd' || descriptor[descriptor_len - 1] == 'i')
 		ft_process_d_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'D')
-		ft_process_dd_(ap, bytes, arg);
+		ft_process_dd_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'o')
 		ft_process_o_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'O')
@@ -149,7 +149,7 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 	if (descriptor[descriptor_len - 1] == 'u')
 		ft_process_u_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'U')
-		ft_process_uu_(ap, bytes);
+		ft_process_uu_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'x')
 		ft_process_x_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'X')

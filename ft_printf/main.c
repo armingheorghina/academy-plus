@@ -18,10 +18,10 @@ int	main()
 //	wc = L'本';
 
 
-	bytes = ft_printf("%#-7.o", 1);
+	bytes = ft_printf("%-5u", 1);
 	printf("\n%d\n", bytes);
 	printf("--------\n");
-	bytes = printf("%#-7.o", 1);
+	bytes = printf("%-5u", 1);
 	printf("\n%d\n", bytes);
 	
 

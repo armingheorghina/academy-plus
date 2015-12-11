@@ -12,13 +12,18 @@
 
 #include "ft_printf.h"
 
-void	ft_process_uu_(va_list ap, int *bytes)
+void	ft_process_uu_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned long 	nbr;
 	char		*str;
 
 	nbr = va_arg(ap, unsigned long);
-	str = ft_itoabase(nbr, 10);
+	g_nbr = 1;
+	str = ft_unsigned_long_to_ascii_base(nbr, 10);
+	str = ft_process_d_precision(str, arg);
+	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
+		str[0] = '\0';
+	str = ft_process_d_width(str, arg);
 	ft_putstr(str);
 	*bytes = *bytes + ft_strlen(str);
 }

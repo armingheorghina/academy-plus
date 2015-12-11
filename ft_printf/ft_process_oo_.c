@@ -20,25 +20,15 @@ void	ft_process_oo_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	nbr = va_arg(ap, unsigned long);
 	str = ft_unsigned_long_to_ascii_base(nbr, 8);
 	str = ft_process_d_precision(str, arg);
-	str = ft_process_d_width(str, arg);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 	{
 		str[0] = '\0';
 		if (arg.flag_hash)
-		{
-			ft_putchar('0');
-			*bytes = *bytes + 1;
-		}
-	}
-	if (arg.flag_hash && nbr != 0 )
-	{
-		ft_putchar('0');
-		ft_putstr(str);
-		*bytes = *bytes + ft_strlen(str) + 1;
-	}
-	else
-	{
-		ft_putstr(str);
-		*bytes = *bytes + ft_strlen(str);
-	}
+			str = ft_strdup("0");
+	}   
+	if (arg.flag_hash && nbr != 0 && !arg.precision)
+		str = ft_strjoin("0", str);
+	str = ft_process_d_width(str, arg);
+	ft_putstr(str);
+	*bytes = *bytes + ft_strlen(str);
 }

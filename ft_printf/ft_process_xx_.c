@@ -22,18 +22,11 @@ void	ft_process_xx_lm_l(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		str = ft_process_d_precision(str, arg);
 		if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 			str[0] = '\0';
+		if (arg.flag_hash && nbr != 0)
+			str = ft_strjoin("0X", str);
 		str = ft_process_d_width(str, arg);
-	if (arg.flag_hash && nbr != 0)
-	{
-		ft_putstr("0X");
-		ft_putstr(str);
-		*bytes = *bytes + ft_strlen(str) + 2;
-	}
-	else
-	{
 		ft_putstr(str);
 		*bytes = *bytes + ft_strlen(str);
-	}
 }
 
 void	ft_process_xx_lm_z(va_list ap, int *bytes, char *descriptor, t_arg arg)
@@ -46,18 +39,11 @@ void	ft_process_xx_lm_z(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		str = ft_process_d_precision(str, arg);
 		if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 			str[0] = '\0';
+		if (arg.flag_hash && nbr != 0)
+			str = ft_strjoin("0X", str);
 		str = ft_process_d_width(str, arg);
-	if (arg.flag_hash && nbr != 0)
-	{
-		ft_putstr("0X");
-		ft_putstr(str);
-		*bytes = *bytes + ft_strlen(str) + 2;
-	}
-	else
-	{
 		ft_putstr(str);
 		*bytes = *bytes + ft_strlen(str);
-	}
 }
 
 void	ft_process_xx_lm_j(va_list ap, int *bytes, char *descriptor, t_arg arg)
@@ -70,18 +56,11 @@ void	ft_process_xx_lm_j(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		str = ft_process_d_precision(str, arg);
 		if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 			str[0] = '\0';
+		if (arg.flag_hash && nbr != 0)
+			str = ft_strjoin("0X", str);
 		str = ft_process_d_width(str, arg);
-	if (arg.flag_hash && nbr != 0)
-	{
-		ft_putstr("0X");
-		ft_putstr(str);
-		*bytes = *bytes + ft_strlen(str) + 2;
-	}
-	else
-	{
 		ft_putstr(str);
 		*bytes = *bytes + ft_strlen(str);
-	}
 }
 
 void	ft_process_xx_lm_ll(va_list ap, int *bytes, char *descriptor, t_arg arg)
@@ -94,18 +73,11 @@ void	ft_process_xx_lm_ll(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		str = ft_process_d_precision(str, arg);
 		if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 			str[0] = '\0';
+		if (arg.flag_hash && nbr != 0)
+			str = ft_strjoin("0X", str);
 		str = ft_process_d_width(str, arg);
-	if (arg.flag_hash && nbr != 0)
-	{
-		ft_putstr("0X");
-		ft_putstr(str);
-		*bytes = *bytes + ft_strlen(str) + 2;
-	}
-	else
-	{
 		ft_putstr(str);
 		*bytes = *bytes + ft_strlen(str);
-	}
 }
 
 void	ft_process_xx_lm_h(va_list ap, int *bytes, char *descriptor, t_arg arg)
@@ -118,18 +90,11 @@ void	ft_process_xx_lm_h(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		str = ft_process_d_precision(str, arg);
 		if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 			str[0] = '\0';
+		if (arg.flag_hash && nbr != 0)
+			str = ft_strjoin("0X", str);
 		str = ft_process_d_width(str, arg);
-	if (arg.flag_hash && nbr != 0)
-	{
-		ft_putstr("0X");
-		ft_putstr(str);
-		*bytes = *bytes + ft_strlen(str) + 2;
-	}
-	else
-	{
 		ft_putstr(str);
 		*bytes = *bytes + ft_strlen(str);
-	}
 }
 
 void	ft_process_xx_(va_list ap, int *bytes, char *descriptor, t_arg arg)
@@ -157,17 +122,10 @@ void	ft_process_xx_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		str = ft_process_d_precision(str, arg);
 		if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 			str[0] = '\0';
-		str = ft_process_d_width(str, arg);
 		if (arg.flag_hash && nbr != 0)
-		{
-			ft_putstr("0X");
-			ft_putstr(str);
-			*bytes = *bytes + ft_strlen(str) + 2;
-		}
-		else
-		{
-			ft_putstr(str);
-			*bytes = *bytes + ft_strlen(str);
-		}
+			str = ft_strjoin("0X", str);
+		str = ft_process_d_width(str, arg);
+		ft_putstr(str);
+		*bytes = *bytes + ft_strlen(str);
 	}
 }
