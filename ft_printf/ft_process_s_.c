@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 15:43:39 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/09 17:02:42 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/11 21:07:49 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ void	ft_process_s_width(char **str, t_arg arg)
 	}
 }
 
+void	ft_process_s_flag_zero(char **str, t_arg arg)
+{
+	char *strp;
+
+	if (arg.width > ft_strlen(*str))
+	{
+		strp = ft_memalloc(arg.width - ft_strlen(*str) + 1);
+		strp = ft_memset(strp, '0', arg.width - ft_strlen(*str));
+		*str = ft_strjoin(strp, *str);
+	}
+}
+
 void	ft_process_s_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	char *str;
@@ -45,10 +57,29 @@ void	ft_process_s_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 			if (arg.precision == 0 && ft_strchr(descriptor, '.'))
 				str = ft_strdup("");
 			if (arg.width)
+			{
+				if (arg.flag_zero)
+					ft_process_s_flag_zero(&str, arg);
 				ft_process_s_width(&str, arg);
+			}
 			ft_putstr(str);
 			*bytes += ft_strlen(str);
 		}	
+		else if (!str && ft_strchr(descriptor, '.'))
+		{
+			str = ft_strdup("(null)");
+			ft_process_s_precision(&str, arg);
+			if (arg.precision == 0 && ft_strchr(descriptor, '.'))
+				str = ft_strdup("");
+			if (arg.width)
+			{
+				if (arg.flag_zero)
+					ft_process_s_flag_zero(&str, arg);
+				ft_process_s_width(&str, arg);
+			}
+			ft_putstr(str);
+			*bytes += ft_strlen(str);
+		}
 		else
 		{
 			ft_putstr("(null)");

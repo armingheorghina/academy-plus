@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:02:56 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/11 17:29:43 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/11 20:28:09 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,15 @@ void	ft_process_d_put_flag_plus(int *bytes, char **str, t_arg arg)
 
 void	ft_process_d_put_flag_space(int *bytes, char **str, t_arg arg)
 {
-	if (arg.width > ft_strlen(ft_itoabase(g_nbr, 10)) && g_nbr >= 0)
+	if (arg.width > ft_strlen(ft_itoabase(g_nbr, 10)) && g_nbr >= 0 && !arg.precision && !arg.flag_space)
 		*str[0] = ' ';
+	else if (arg.width > ft_strlen(ft_itoabase(g_nbr, 10)) && g_nbr >= 0 && !arg.precision && arg.flag_space)
+		*str[0] = ' ';
+	else if (!arg.flag_space)
+	{
+		ft_putchar(' ');
+		*bytes += 1;
+	}
 	else
 	{
 		ft_putchar(' ');
@@ -128,15 +135,11 @@ void	ft_process_d_short(va_list ap, int *bytes, char *descriptor, t_arg arg)
 void	ft_process_d_long_long(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	long long	nbr;
-	long long	lnbr;
 	char 		*str;
 
 	nbr = va_arg(ap, long long);
 	g_nbr = nbr;
-	lnbr = nbr;
-	if (nbr < 0)
-		lnbr = -nbr;
-	str = ft_long_long_to_ascii_base(lnbr, 10);
+	str = ft_long_long_to_ascii_base(nbr, 10);
 	if (arg.precision)
 	{
 		str = ft_process_d_precision(str, arg);

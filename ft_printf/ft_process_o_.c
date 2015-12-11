@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 13:38:07 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/09 13:38:29 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/11 21:54:47 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,8 +158,8 @@ void	ft_process_o_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 				ft_putchar('0');
 				*bytes = *bytes + 1;
 			}
-		}
-		if (arg.flag_hash && nbr != 0)
+		}   // TODO copy process_d_width to process_o_width
+		if (arg.flag_hash && nbr != 0 && !arg.precision)
 			ft_process_o_flag_hash(bytes, str);
 		else
 		{
