@@ -6,12 +6,36 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:53:31 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/12 16:57:57 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/12 17:45:42 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+/*
+static int		ft_is_a_non_valid_descriptor(const char *str)
+{
+	int i;
 
+	i = 1;
+	while (ft_strchr(FLAGS, str[i]) && str[i])
+		i++;
+	if (!ft_strchr(CONVERSIONS, str[i]) && str[i] && ft_isalpha(str[i]))
+		return (1);
+	return (0);
+}
+
+static int		ft_non_valid_descriptor_len(const char *str)
+{
+	int i;
+
+	i = 1;
+	while (ft_strchr(FLAGS, str[i]) && str[i])
+		i++;
+	if (!ft_strchr(CONVERSIONS, str[i]) && str[i] && ft_isalpha(str[i]))
+		return (i + 1);
+	return (i);
+}
+*/
 static int		ft_is_a_valid_descriptor(const char *str)
 {
 	int i;
@@ -22,6 +46,8 @@ static int		ft_is_a_valid_descriptor(const char *str)
 	if (ft_strchr(CONVERSIONS, str[i]) && str[i])
 		return (1);
 	else if ((str[i] == '%') && str[i])
+		return (1);
+	else if (ft_isalpha(str[i]) && str[i])
 		return (1);
 	return (0);
 }
@@ -36,6 +62,8 @@ static int		ft_descriptor_len(const char *format)
 	if (ft_strchr(CONVERSIONS, format[i]) && format[i])
 		return (i + 1);
 	else if ((format[i] == '%') && format[i])
+		return (i + 1);
+	else if (ft_isalpha(format[i]) && format[i])
 		return (i + 1);
 	return (i);
 }
@@ -134,34 +162,34 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 	ft_verify_length_modifiers(&arg, descriptor);
 	if (descriptor[descriptor_len - 1] == 's')
 		ft_process_s_(ap, bytes, descriptor, arg);
-	if (descriptor[descriptor_len - 1] == 'S')
+	else if (descriptor[descriptor_len - 1] == 'S')
 		ft_process_ss_(ap, bytes, descriptor, arg);
-	if (descriptor[descriptor_len - 1] == 'p')
+	else if (descriptor[descriptor_len - 1] == 'p')
 		ft_process_p_(ap, bytes, descriptor, arg);
-	if (descriptor[descriptor_len - 1] == 'd' || descriptor[descriptor_len - 1] == 'i')
+	else if (descriptor[descriptor_len - 1] == 'd' || descriptor[descriptor_len - 1] == 'i')
 		ft_process_d_(ap, bytes, descriptor, arg);
-	if (descriptor[descriptor_len - 1] == 'D')
+	else if (descriptor[descriptor_len - 1] == 'D')
 		ft_process_dd_(ap, bytes, descriptor, arg);
-	if (descriptor[descriptor_len - 1] == 'o')
+	else if (descriptor[descriptor_len - 1] == 'o')
 		ft_process_o_(ap, bytes, descriptor, arg);
-	if (descriptor[descriptor_len - 1] == 'O')
+	else if (descriptor[descriptor_len - 1] == 'O')
 		ft_process_oo_(ap, bytes, descriptor, arg);
-	if (descriptor[descriptor_len - 1] == 'u')
+	else if (descriptor[descriptor_len - 1] == 'u')
 		ft_process_u_(ap, bytes, descriptor, arg);
-	if (descriptor[descriptor_len - 1] == 'U')
+	else if (descriptor[descriptor_len - 1] == 'U')
 		ft_process_uu_(ap, bytes, descriptor, arg);
-	if (descriptor[descriptor_len - 1] == 'x')
+	else if (descriptor[descriptor_len - 1] == 'x')
 		ft_process_x_(ap, bytes, descriptor, arg);
-	if (descriptor[descriptor_len - 1] == 'X')
+	else if (descriptor[descriptor_len - 1] == 'X')
 		ft_process_xx_(ap, bytes, descriptor, arg);
-	if (descriptor[descriptor_len - 1] == 'c')
+	else if (descriptor[descriptor_len - 1] == 'c')
 		ft_process_c_(ap, bytes, descriptor, arg);
-	if (descriptor[descriptor_len - 1] == 'C')
+	else if (descriptor[descriptor_len - 1] == 'C')
 		ft_process_cc_(ap, bytes);
-	if (descriptor[descriptor_len - 1] == '%')
+	else if (descriptor[descriptor_len - 1] == '%')
 		ft_process_percent_(bytes, arg);
-
-
+	else
+		ft_process_non_valid_conversion_(bytes, descriptor, arg);
 }
 
 static int		ft_process_format(const char *format, va_list ap)

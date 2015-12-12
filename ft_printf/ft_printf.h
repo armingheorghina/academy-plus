@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/12 16:21:34 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/12 17:59:29 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct		s_arg
 int		ft_printf(const char *format, ...);
 
 
+int		ft_isalpha(int c);
 char	*ft_strdup(const char *s1);
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memalloc(size_t size);
@@ -83,6 +84,7 @@ void	ft_process_d_put_flag_plus(int *bytes, char **str, t_arg arg);
 void	ft_process_d_put_flag_space(int *bytes, char **str, t_arg arg);
 char	*ft_process_d_precision(char *str, t_arg arg);
 char	*ft_process_d_width(char *str, t_arg arg);
+void	ft_process_percent_width(char **str, t_arg arg);
 void	ft_process_s_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_ss_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg);
@@ -97,6 +99,7 @@ void	ft_process_uu_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_x_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_xx_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_percent_(int *bytes, t_arg arg);
+void	ft_process_non_valid_conversion_(int *bytes, char *descriptor, t_arg arg);
 
 
 #endif
