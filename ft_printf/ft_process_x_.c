@@ -49,6 +49,7 @@ void	ft_process_x_lm_z(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {	
 	size_t 	nbr;
 	char	*str;
+	
 	nbr = va_arg(ap, size_t);
 	str = ft_size_t_to_ascii_base(nbr, 16);
 	str = ft_process_d_precision(str, arg);
@@ -81,7 +82,7 @@ void	ft_process_x_lm_j(va_list ap, int *bytes, char *descriptor, t_arg arg)
 void	ft_process_x_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned int 	nbr;
-	char			*str;
+	char		*str;
 
 	if (arg.lm_hh)
 		ft_process_c_(ap, bytes, descriptor, arg);

@@ -128,7 +128,7 @@ void	ft_process_d_int(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	int		nbr;
 	char 		*str;
-	
+
 	nbr = va_arg(ap, int);
 	g_nbr = nbr;
 	str = ft_int_to_ascii_base(nbr, 10);
@@ -155,7 +155,7 @@ void	ft_process_d_int(va_list ap, int *bytes, char *descriptor, t_arg arg)
 
 void	ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
-
+	
 	if (arg.lm_h)
 		ft_process_d_short(ap, bytes, descriptor, arg);
 	else if (arg.lm_hh)

@@ -11,31 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-/*
-static int		ft_is_a_non_valid_descriptor(const char *str)
-{
-	int i;
-
-	i = 1;
-	while (ft_strchr(FLAGS, str[i]) && str[i])
-		i++;
-	if (!ft_strchr(CONVERSIONS, str[i]) && str[i] && ft_isalpha(str[i]))
-		return (1);
-	return (0);
-}
-
-static int		ft_non_valid_descriptor_len(const char *str)
-{
-	int i;
-
-	i = 1;
-	while (ft_strchr(FLAGS, str[i]) && str[i])
-		i++;
-	if (!ft_strchr(CONVERSIONS, str[i]) && str[i] && ft_isalpha(str[i]))
-		return (i + 1);
-	return (i);
-}
-*/
 static int		ft_is_a_valid_descriptor(const char *str)
 {
 	int i;
@@ -72,7 +47,9 @@ static int		ft_descriptor_len(const char *format)
 void	ft_initialize_flags_and_lm(t_arg *arg)
 {
 	arg->precision = 0;
+	arg->precision_asterix = 0;
 	arg->width = 0;
+	arg->width_asterix = 0;
 	arg->flag_hash = 0;
 	arg->flag_zero = 0;
 	arg->flag_minus = 0;
@@ -110,6 +87,10 @@ void	ft_verify_flags(t_arg *arg, char *descriptor)
 			while (ft_isdigit(descriptor[i + 1]))
 				i++;
 		}
+		else if (descriptor[i] == '*' && descriptor[i - 1] == '.')
+			arg->precision_asterix = 1;
+		else if (descriptor[i] == '*' && descriptor[i - 1] != '.')
+			arg->width_asterix = 1;
 		else if (descriptor[i] == '#')
 			arg->flag_hash = 1;
 		else if (descriptor[i] == '0')
@@ -153,6 +134,14 @@ void	ft_verify_length_modifiers(t_arg *arg, char *descriptor)
 	}
 }
 
+void	ft_add_precision_and_width_to_struct_if_asterix(va_list ap, t_arg *arg)
+{
+	if (arg->width_asterix)
+		arg->width = va_arg(ap, int);
+	if (arg->precision_asterix)
+		arg->precision = va_arg(ap, int);
+}
+
 static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_len, int *bytes)
 {
 	t_arg	arg;
@@ -160,6 +149,7 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 	ft_initialize_flags_and_lm(&arg);
 	ft_verify_flags(&arg, descriptor);
 	ft_verify_length_modifiers(&arg, descriptor);
+	ft_add_precision_and_width_to_struct_if_asterix(ap, &arg);
 	if (descriptor[descriptor_len - 1] == 's')
 		ft_process_s_(ap, bytes, descriptor, arg);
 	else if (descriptor[descriptor_len - 1] == 'S')

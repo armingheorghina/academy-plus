@@ -17,15 +17,17 @@
 # include <inttypes.h>
 #include <sys/types.h>
 # define CONVERSIONS "sSpdDioOuUxXcC"
-# define FLAGS "#0-+ jzhl123456789."
+# define FLAGS "#0-+ jzhl123456789.*"
 
 #include <stdio.h> //*TODO delete this!
-
+//TODO process_c_ not complete, add process width corectly!
 long long	g_nbr;
 typedef struct		s_arg
 {
 	int			precision;
+	int			precision_asterix;
 	int			width;
+	int			width_asterix;
 	int			flag_hash;
 	int			flag_zero;
 	int			flag_minus;

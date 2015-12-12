@@ -14,7 +14,8 @@
 
 void	ft_process_s_precision(char **str, t_arg arg)
 {
-	*str = ft_strsub(*str, 0, arg.precision);
+	if (arg.precision < ft_strlen(*str))
+		*str = ft_strsub(*str, 0, arg.precision);
 }
 
 void	ft_process_s_width(char **str, t_arg arg)
