@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/10 15:09:55 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/12 16:21:34 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	ft_process_u_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_uu_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_x_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_xx_(va_list ap, int *bytes, char *descriptor, t_arg arg);
+void	ft_process_percent_(int *bytes, t_arg arg);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:53:31 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/10 13:45:39 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/12 16:22:43 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,11 +154,12 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 		ft_process_x_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'X')
 		ft_process_xx_(ap, bytes, descriptor, arg);
-
 	if (descriptor[descriptor_len - 1] == 'c')
 		ft_process_c_(ap, bytes, descriptor, arg);
 	if (descriptor[descriptor_len - 1] == 'C')
 		ft_process_cc_(ap, bytes);
+	if (descriptor[descriptor_len - 1] == '%')
+		ft_process_percent_(bytes, arg);
 
 
 }
@@ -179,18 +180,9 @@ static int		ft_process_format(const char *format, va_list ap)
 			if (ft_is_a_valid_descriptor(format + i))
 			{
 				descriptor_len = ft_descriptor_len(format + i);
-				if (format[i + descriptor_len - 1] == '%')
-				{
-					ft_putchar('%');
-					bytes++;
-					i = i + descriptor_len;
-				}
-				else
-				{
-					descriptor = ft_strsub(format, i, descriptor_len);
-					ft_chose_identifier(descriptor, ap, descriptor_len, &bytes);
-					i = i + descriptor_len;
-				}
+				descriptor = ft_strsub(format, i, descriptor_len);
+				ft_chose_identifier(descriptor, ap, descriptor_len, &bytes);
+				i = i + descriptor_len;
 			}
 			else
 			{

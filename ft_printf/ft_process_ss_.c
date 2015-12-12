@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 12:51:53 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/10 10:54:03 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/12 15:42:39 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 wchar_t		*ft_process_ss_precision(wchar_t *wstr, t_arg arg)
 {
-	if (arg.width > ft_wstrsize(wstr))
+	if (arg.width < ft_wstrsize(wstr))
 	{
 		wstr = ft_wstrsub(wstr, 0, arg.precision);
 	}
@@ -29,8 +29,16 @@ wchar_t		*ft_process_ss_width(wchar_t *wstr, t_arg arg)
 	{
 		strp = (wchar_t*)malloc(sizeof(*strp) * (arg.width - ft_wstrsize(wstr) + 1));
 		strp[arg.width - ft_wstrsize(wstr)] = '\0';
-		strp = ft_wmemset(strp, L' ', arg.width - ft_wstrsize(wstr));
-		wstr = ft_wstrjoin(strp, wstr);
+		if (arg.flag_zero)
+		{
+			strp = ft_wmemset(strp, L'0', arg.width - ft_wstrsize(wstr));
+			wstr = ft_wstrjoin(strp, wstr);
+		}
+		else
+		{
+			strp = ft_wmemset(strp, L' ', arg.width - ft_wstrsize(wstr));
+			wstr = ft_wstrjoin(strp, wstr);
+		}
 	}
 	return (wstr);
 }

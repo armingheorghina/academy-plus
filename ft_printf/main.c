@@ -17,14 +17,11 @@ int	main()
 	
 //	wc = L'本';
 
-
-	bytes = ft_printf("%-5u", 1);
+	bytes = ft_printf("%05Z");
 	printf("\n%d\n", bytes);
 	printf("--------\n");
-	bytes = printf("%-5u", 1);
+	bytes = printf("%05Z");
 	printf("\n%d\n", bytes);
-	
-
 
 	
 	
