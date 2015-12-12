@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <inttypes.h>
 #include <sys/types.h>
-# define CONVERSIONS "sSpdDioOuUxXcC"
+# define CONVERSIONS "sSpdDioOuUxXcCfF"
 # define FLAGS "#0-+ jzhl123456789.*"
 
 #include <stdio.h> //*TODO delete this!
@@ -80,6 +80,7 @@ char	*ft_ssize_t_to_ascii_base(ssize_t val, int base);
 char	*ft_size_t_to_ascii_base(size_t val, int base);
 char	*ft_uintmax_t_to_ascii_base(uintmax_t val, int base);
 char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_ftoa(float val, int precision);
 
 char	*ft_process_p_width(char *str, t_arg arg);
 void	ft_process_d_put_flag_plus(int *bytes, char **str, t_arg arg);
@@ -102,6 +103,7 @@ void	ft_process_x_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_xx_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 void	ft_process_percent_(int *bytes, t_arg arg);
 void	ft_process_non_valid_conversion_(int *bytes, char *descriptor, t_arg arg);
+void	ft_process_f_(va_list ap, int *bytes, char *descriptor, t_arg arg);
 
 
 #endif

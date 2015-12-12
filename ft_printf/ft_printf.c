@@ -176,6 +176,8 @@ static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_le
 		ft_process_c_(ap, bytes, descriptor, arg);
 	else if (descriptor[descriptor_len - 1] == 'C')
 		ft_process_cc_(ap, bytes);
+	else if (descriptor[descriptor_len - 1] == 'f' || descriptor[descriptor_len - 1] == 'F') //create a dif case for F
+		ft_process_f_(ap, bytes, descriptor, arg);
 	else if (descriptor[descriptor_len - 1] == '%')
 		ft_process_percent_(bytes, arg);
 	else

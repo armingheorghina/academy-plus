@@ -17,13 +17,12 @@ int	main()
 	
 //	wc = L'本';
 
-	bytes = ft_printf("%d", 123456789);
+	bytes = ft_printf("%+15.3d", 12);
 	printf("\n%d\n", bytes);
 	printf("--------\n");
-	bytes = printf("%d", 123456789);
+	bytes = printf("%+15.3d", 12);
 	printf("\n%d\n", bytes);
-
-	
+	ft_putstr(ft_ftoa(-12.3456789, 6));
 	
 	
 	

@@ -30,7 +30,8 @@ SRCS = ft_printf.c ft_itoa.c ft_putchar.c ft_putstr.c ft_strlen.c ft_strsub.c \
 		ft_strdup.c ft_wstrsub.c ft_wstrdup.c ft_wstrlen.c ft_wstrjoin.c \
 		ft_wmemset.c ft_wstrsize.c ft_long_to_ascii_base.c ft_isalpha.c \
 		ft_process_d_put_flag_plus.c ft_process_d_put_flag_space.c \
-		ft_process_percent_.c ft_process_non_valid_conversion_.c
+		ft_process_percent_.c ft_process_non_valid_conversion_.c ft_ftoa.c \
+		ft_process_f_.c
 
 OBJS = $(SRCS:.c=.o)
 
