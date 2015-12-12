@@ -20,7 +20,7 @@
 # define FLAGS "#0-+ jzhl123456789.*"
 
 #include <stdio.h> //*TODO delete this!
-//TODO process_c_ not complete, add process width corectly!
+//TODO process_c_ not complete, process width correctly!
 long long	g_nbr;
 typedef struct		s_arg
 {

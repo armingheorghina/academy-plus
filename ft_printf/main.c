@@ -17,10 +17,10 @@ int	main()
 	
 //	wc = L'本';
 
-	bytes = ft_printf("%*.*d", 78, 55, 200);
+	bytes = ft_printf("%d", 123456789);
 	printf("\n%d\n", bytes);
 	printf("--------\n");
-	bytes = printf("%*.*d", 78, 55, 200);
+	bytes = printf("%d", 123456789);
 	printf("\n%d\n", bytes);
 
 	
