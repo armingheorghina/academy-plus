@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 12:51:53 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/12 15:42:39 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/13 11:16:53 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ wchar_t		*ft_process_ss_width(wchar_t *wstr, t_arg arg)
 	{
 		strp = (wchar_t*)malloc(sizeof(*strp) * (arg.width - ft_wstrsize(wstr) + 1));
 		strp[arg.width - ft_wstrsize(wstr)] = '\0';
-		if (arg.flag_zero)
+		if (arg.flag_minus)
+		{
+			strp = ft_wmemset(strp, L' ', arg.width - ft_wstrsize(wstr));
+			wstr = ft_wstrjoin(wstr, strp);
+		}
+		else if (arg.flag_zero)
 		{
 			strp = ft_wmemset(strp, L'0', arg.width - ft_wstrsize(wstr));
 			wstr = ft_wstrjoin(strp, wstr);

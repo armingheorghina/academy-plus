@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_process_d_put_flag_space.c                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/13 12:47:06 by vdruta            #+#    #+#             */
+/*   Updated: 2015/12/13 12:52:54 by vdruta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	ft_process_d_put_flag_space(int *bytes, char **str, t_arg arg)
@@ -11,7 +23,7 @@ void	ft_process_d_put_flag_space(int *bytes, char **str, t_arg arg)
 		ft_putchar(' ');
 		*bytes += 1;
 	}
-	else
+	else if (!arg.width)
 	{
 		ft_putchar(' ');
 		*bytes += 1;

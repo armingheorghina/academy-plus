@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:53:31 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/12 17:45:42 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/13 12:46:01 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ static int		ft_descriptor_len(const char *format)
 void	ft_initialize_flags_and_lm(t_arg *arg)
 {
 	arg->precision = 0;
-	arg->precision_asterix = 0;
 	arg->width = 0;
-	arg->width_asterix = 0;
 	arg->flag_hash = 0;
 	arg->flag_zero = 0;
 	arg->flag_minus = 0;
@@ -63,7 +61,7 @@ void	ft_initialize_flags_and_lm(t_arg *arg)
 	arg->lm_ll = 0;
 }
 
-void	ft_verify_flags(t_arg *arg, char *descriptor)
+void	ft_verify_flags(t_arg *arg, char *descriptor, va_list ap)
 {
 	int i;
 	int j;
@@ -88,9 +86,24 @@ void	ft_verify_flags(t_arg *arg, char *descriptor)
 				i++;
 		}
 		else if (descriptor[i] == '*' && descriptor[i - 1] == '.')
-			arg->precision_asterix = 1;
+		{
+			arg->precision = va_arg(ap, int);
+			if (arg->precision < 0 && descriptor[ft_strlen(descriptor) - 1] == 's')
+			{
+				arg->precision = -1 * arg->precision;
+			}
+			else if (arg->precision < 0)
+				arg->precision = 0;
+		}
 		else if (descriptor[i] == '*' && descriptor[i - 1] != '.')
-			arg->width_asterix = 1;
+		{
+			arg->width = va_arg(ap, int);
+			if (arg->width < 0)
+			{
+				arg->width = -1 * arg->width;
+				arg->flag_minus  = 1;
+			}
+		}
 		else if (descriptor[i] == '#')
 			arg->flag_hash = 1;
 		else if (descriptor[i] == '0')
@@ -134,22 +147,13 @@ void	ft_verify_length_modifiers(t_arg *arg, char *descriptor)
 	}
 }
 
-void	ft_add_precision_and_width_to_struct_if_asterix(va_list ap, t_arg *arg)
-{
-	if (arg->width_asterix)
-		arg->width = va_arg(ap, int);
-	if (arg->precision_asterix)
-		arg->precision = va_arg(ap, int);
-}
-
 static void		ft_chose_identifier(char *descriptor, va_list ap, int descriptor_len, int *bytes)
 {
 	t_arg	arg;
 
 	ft_initialize_flags_and_lm(&arg);
-	ft_verify_flags(&arg, descriptor);
+	ft_verify_flags(&arg, descriptor, ap);
 	ft_verify_length_modifiers(&arg, descriptor);
-	ft_add_precision_and_width_to_struct_if_asterix(ap, &arg);
 	if (descriptor[descriptor_len - 1] == 's')
 		ft_process_s_(ap, bytes, descriptor, arg);
 	else if (descriptor[descriptor_len - 1] == 'S')

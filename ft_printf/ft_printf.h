@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/12 17:59:29 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/13 13:27:37 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ long long	g_nbr;
 typedef struct		s_arg
 {
 	int			precision;
-	int			precision_asterix;
 	int			width;
-	int			width_asterix;
 	int			flag_hash;
 	int			flag_zero;
 	int			flag_minus;
@@ -80,7 +78,7 @@ char	*ft_ssize_t_to_ascii_base(ssize_t val, int base);
 char	*ft_size_t_to_ascii_base(size_t val, int base);
 char	*ft_uintmax_t_to_ascii_base(uintmax_t val, int base);
 char	*ft_strjoin(const char *s1, const char *s2);
-char	*ft_ftoa(float val, int precision);
+char	*ft_ftoa(double val, int precision);
 
 char	*ft_process_p_width(char *str, t_arg arg);
 void	ft_process_d_put_flag_plus(int *bytes, char **str, t_arg arg);
