@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 16:08:19 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/10 12:53:15 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/14 17:01:45 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_process_x_lm_l(va_list ap, int *bytes, char *descriptor, t_arg arg)
 
 	nbr = va_arg(ap, unsigned long);
 	str = ft_unsigned_long_to_ascii_base(nbr, 16);
+		g_nbr = 1;
 	str = ft_process_d_precision(str, arg);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
@@ -35,6 +36,7 @@ void	ft_process_x_lm_ll(va_list ap, int *bytes, char *descriptor, t_arg arg)
 
 	nbr = va_arg(ap, unsigned long long);
 	str = ft_unsigned_long_long_to_ascii_base(nbr, 16);
+		g_nbr = 1;
 	str = ft_process_d_precision(str, arg);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
@@ -52,6 +54,7 @@ void	ft_process_x_lm_z(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	
 	nbr = va_arg(ap, size_t);
 	str = ft_size_t_to_ascii_base(nbr, 16);
+		g_nbr = 1;
 	str = ft_process_d_precision(str, arg);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
@@ -69,6 +72,7 @@ void	ft_process_x_lm_j(va_list ap, int *bytes, char *descriptor, t_arg arg)
 
 	nbr = va_arg(ap, uintmax_t);
 	str = ft_uintmax_t_to_ascii_base(nbr, 16);
+		g_nbr = 1;
 	str = ft_process_d_precision(str, arg);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
@@ -98,6 +102,7 @@ void	ft_process_x_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	{
 		nbr = va_arg(ap, unsigned int);
 		str = ft_itoabase(nbr, 16);
+		g_nbr = 1;
 		str = ft_process_d_precision(str, arg);
 		if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 			str[0] = '\0';

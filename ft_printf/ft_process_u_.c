@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 17:53:10 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/09 13:51:10 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/14 16:16:23 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_process_u_uint(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		str[0] = '\0';
 	str = ft_process_d_width(str, arg);
 	ft_putstr(str);
-	*bytes = *bytes + ft_strlen(str);
+	*bytes += ft_strlen(str);
 }
 
 void	ft_process_u_(va_list ap, int *bytes, char *descriptor, t_arg arg)

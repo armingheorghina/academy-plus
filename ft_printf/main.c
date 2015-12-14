@@ -26,10 +26,10 @@ int	main()
 	printf("\n%d\n", bytes);
 	*/
 	
-	bytes = ft_printf("%f", 1.42);
+	bytes = ft_printf("%+-5.d", 8);
 	printf("\n%d\n", bytes);
 	printf("--------\n");
-	bytes = printf("%f", 1.42);//444565444646.6465424242242);
+	bytes = printf("%+-5.d", 8);//444565444646.6465424242242);
 	printf("\n%d\n", bytes);
 	
 //	int x;

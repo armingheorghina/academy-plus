@@ -10,12 +10,12 @@ void	ft_process_f_float(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	str = ft_ftoa(nbr, 6);
 	if (arg.precision)
 		str = ft_ftoa(nbr, arg.precision);
-	if(arg.width)
-		str = ft_process_d_width(str, arg);
 	if (nbr < 0 && !arg.precision && !arg.width)
 		str = ft_strjoin("-", str);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
+	if(arg.width)
+		str = ft_process_d_width(str, arg);
 	if (arg.flag_plus && nbr >= 0)
 		ft_process_d_put_flag_plus(bytes, &str, arg);
 	else if (arg.flag_space && nbr >= 0)
@@ -24,8 +24,7 @@ void	ft_process_f_float(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	*bytes += ft_strlen(str);
 }
 
-
 void	ft_process_f_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
-		ft_process_f_float(ap, bytes, descriptor, arg);
+	ft_process_f_float(ap, bytes, descriptor, arg);
 }

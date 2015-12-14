@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:02:56 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/13 12:48:10 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/14 16:15:12 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ void	ft_process_d_intmax_t(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		if (nbr < 0)
 			str = ft_strjoin("-", str);
 	}
-	if(arg.width)
-		str = ft_process_d_width(str, arg);
+
 	if (nbr < 0 && !arg.precision && !arg.width)
 		str = ft_strjoin("-", str);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
+	if(arg.width)
+		str = ft_process_d_width(str, arg);
 	if (arg.flag_plus && nbr >= 0)
 		ft_process_d_put_flag_plus(bytes, &str, arg);
 	else if (arg.flag_space && nbr >= 0)
@@ -54,12 +55,13 @@ void	ft_process_d_ssize_t(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		if (nbr < 0)
 			str = ft_strjoin("-", str);
 	}
-	if(arg.width)
-		str = ft_process_d_width(str, arg);
+
 	if (nbr < 0 && !arg.precision && !arg.width)
 		str = ft_strjoin("-", str);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
+	if(arg.width)
+		str = ft_process_d_width(str, arg);
 	if (arg.flag_plus && nbr >= 0)
 		ft_process_d_put_flag_plus(bytes, &str, arg);
 	else if (arg.flag_space && nbr >= 0)
@@ -82,12 +84,13 @@ void	ft_process_d_short(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		if (nbr < 0)
 			str = ft_strjoin("-", str);
 	}
-	if(arg.width)
-		str = ft_process_d_width(str, arg);
+
 	if (nbr < 0 && !arg.precision && !arg.width)
 		str = ft_strjoin("-", str);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
+	if(arg.width)
+		str = ft_process_d_width(str, arg);
 	if (arg.flag_plus && nbr >= 0)
 		ft_process_d_put_flag_plus(bytes, &str, arg);
 	else if (arg.flag_space && nbr >= 0)
@@ -110,12 +113,13 @@ void	ft_process_d_long_long(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		if (nbr < 0)
 			str = ft_strjoin("-", str);
 	}
-	if(arg.width)
-		str = ft_process_d_width(str, arg);
+
 	if (nbr < 0 && !arg.precision && !arg.width)
 		str = ft_strjoin("-", str);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
+	if(arg.width)
+		str = ft_process_d_width(str, arg);
 	if (arg.flag_plus && nbr >= 0)
 		ft_process_d_put_flag_plus(bytes, &str, arg);
 	else if (arg.flag_space && nbr >= 0)
@@ -138,12 +142,13 @@ void	ft_process_d_int(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		if (nbr < 0)
 			str = ft_strjoin("-", str);
 	}
-	if(arg.width)
-		str = ft_process_d_width(str, arg);
+
 	if (nbr < 0 && !arg.precision && !arg.width)
 		str = ft_strjoin("-", str);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
+	if(arg.width)
+		str = ft_process_d_width(str, arg);
 	if (arg.flag_plus && nbr >= 0)
 		ft_process_d_put_flag_plus(bytes, &str, arg);
 	else if (arg.flag_space && nbr >= 0)

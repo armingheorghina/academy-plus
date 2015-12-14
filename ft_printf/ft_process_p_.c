@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:18:55 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/12 15:45:01 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/14 17:13:06 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_process_p_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 
 	voidp = va_arg(ap, void *);
 	str = ft_unsigned_long_to_ascii_base((unsigned long)voidp, 16);
+	g_nbr = 1;
 	str = ft_process_d_precision(str, arg);
 	if (arg.precision == 0 && ft_atoi(str) == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
