@@ -18,14 +18,19 @@ int	main()
 //	wc = L'本';
 
 	//TODO +15.3d , 12
-
+/*
 	bytes = ft_printf("%f", 1444565444646.6465424242242);
 	printf("\n%d\n", bytes);
 	printf("--------\n");
 	bytes = printf("%f", 1444565444646.6465424242242);
 	printf("\n%d\n", bytes);
+	*/
 	
-	
+	bytes = ft_printf("%f", 1.42);
+	printf("\n%d\n", bytes);
+	printf("--------\n");
+	bytes = printf("%f", 1.42);//444565444646.6465424242242);
+	printf("\n%d\n", bytes);
 	
 //	int x;
 
