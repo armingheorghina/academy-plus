@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/05 12:40:35 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/07 19:09:31 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/14 17:35:43 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_unsigned_long_long_to_ascii_base(unsigned long long val, int base)
 {
 	static char	buf[32] = "0";
-	int		i;
+	int			i;
 
 	i = 30;
 	if (val == 0)

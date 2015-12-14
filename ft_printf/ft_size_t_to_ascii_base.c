@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 17:19:59 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/07 19:08:37 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/14 17:37:07 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_size_t_to_ascii_base(size_t val, int base)
 {
 	static char	buf[32] = "0";
-	int		i;
+	int			i;
 
 	i = 30;
 	if (val == 0)

@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 14:32:54 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/02 14:40:07 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/14 19:01:08 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char		*ft_skip_sign(char *dst, char *str, int i)
 static char		*ft_char_strrev(char c, char *str)
 {
 	int		i;
-	int	j;
+	int		j;
 	char	*dst;
 
 	dst = (char*)malloc(sizeof(*dst) * (ft_strlen(str) + 1));

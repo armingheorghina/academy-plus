@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 12:57:22 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/14 17:02:52 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/14 19:04:47 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_process_xx_lm_l(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
-	unsigned long	 nbr;
+	unsigned long	nbr;
 	char			*str;
 
 	nbr = va_arg(ap, unsigned long);
@@ -106,7 +106,6 @@ void	ft_process_xx_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned int 	nbr;
 	char			*str;
-
 
 	if (arg.lm_hh)
 		ft_process_c_(ap, bytes, descriptor, arg);

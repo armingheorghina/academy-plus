@@ -6,11 +6,12 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 15:58:03 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/12 17:57:43 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/14 17:42:50 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 void	ft_process_percent_width(char **str, t_arg arg)
 {
 	char *strp;

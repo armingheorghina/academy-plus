@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 20:04:38 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/07 19:09:02 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/14 19:00:01 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_uintmax_t_to_ascii_base(uintmax_t val, int base)
 {
 	static char	buf[32] = "0";
-	int		i;
+	int			i;
 
 	i = 30;
 	if (val == 0)

@@ -4,7 +4,7 @@
 char	*ft_unsigned_long_to_ascii_base(unsigned long val, int base)
 {
 	static char	buf[32] = "0";
-	int		i;
+	int			i;
 
 	i = 30;
 	if (val == 0)

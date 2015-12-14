@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 11:50:06 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/14 14:26:20 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/14 17:38:25 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*ft_ftoa(double val, int precision)
 {
-	char 		*str;
-	char 		*str2;
+	char		*str;
+	char		*str2;
 	int			i;
-	intmax_t 	int_part;
+	intmax_t	int_part;
 	intmax_t	decimal_part;
 
 	int_part = val;

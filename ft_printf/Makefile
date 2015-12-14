@@ -6,7 +6,7 @@
 #    By: vdruta <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/02 16:35:04 by vdruta            #+#    #+#              #
-#    Updated: 2015/12/12 17:47:56 by vdruta           ###   ########.fr        #
+#    Updated: 2015/12/14 18:56:50 by vdruta           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRCS = ft_printf.c ft_itoa.c ft_putchar.c ft_putstr.c ft_strlen.c ft_strsub.c \
 		ft_wmemset.c ft_wstrsize.c ft_long_to_ascii_base.c ft_isalpha.c \
 		ft_process_d_put_flag_plus.c ft_process_d_put_flag_space.c \
 		ft_process_percent_.c ft_process_non_valid_conversion_.c ft_ftoa.c \
-		ft_process_f_.c
+		ft_process_f_.c ft_process_d_short.c ft_process_s_precision.c \
+		ft_process_o_lm_j.c
 
 OBJS = $(SRCS:.c=.o)
 

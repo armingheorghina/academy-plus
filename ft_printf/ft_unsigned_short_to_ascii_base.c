@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 17:28:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/04 17:31:06 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/14 18:27:04 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_unsigned_short_to_ascii_base(unsigned short val, int base)
 {
 	static char	buf[32] = "0";
-	int		i;
+	int			i;
 
 	i = 30;
 	if (val == 0)
