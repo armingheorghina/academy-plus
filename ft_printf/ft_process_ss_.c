@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 12:51:53 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/13 11:16:53 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/15 19:40:57 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ wchar_t		*ft_process_ss_width(wchar_t *wstr, t_arg arg)
 
 	if (arg.width > ft_wstrsize(wstr))
 	{
-		strp = (wchar_t*)malloc(sizeof(*strp) * (arg.width - ft_wstrsize(wstr) + 1));
+		strp = (wchar_t*)malloc(sizeof(*strp) *
+				(arg.width - ft_wstrsize(wstr) + 1));
 		strp[arg.width - ft_wstrsize(wstr)] = '\0';
 		if (arg.flag_minus)
 		{
@@ -48,10 +49,10 @@ wchar_t		*ft_process_ss_width(wchar_t *wstr, t_arg arg)
 	return (wstr);
 }
 
-void	ft_process_ss_(va_list ap, int *bytes, char *descriptor, t_arg arg)
+void		ft_process_ss_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
-	wchar_t *wstr;
-	int i;
+	wchar_t	*wstr;
+	int		i;
 
 	i = 0;
 	wstr = va_arg(ap, wchar_t *);

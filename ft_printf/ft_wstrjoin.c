@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/24 19:51:47 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/02 14:43:15 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/15 18:40:09 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ wchar_t	*ft_wstrjoin(wchar_t const *s1, wchar_t const *s2)
 	int		i;
 	int		j;
 
-	dst = (wchar_t*)malloc(sizeof(*dst) * (ft_wstrlen(s1) + ft_wstrlen(s2) + 1));
+	dst = (wchar_t*)malloc(sizeof(*dst) * (ft_wstrlen(s1) +
+				ft_wstrlen(s2) + 1));
 	if (!dst)
 		return (NULL);
 	i = 0;

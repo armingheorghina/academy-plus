@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/15 17:25:24 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/15 19:55:13 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <inttypes.h>
-#include <sys/types.h>
+# include <sys/types.h>
+# include <string.h>
 # define CONVERSIONS "sSpdDioOuUxXcCfF"
 # define FLAGS "#0-+ jzhl123456789.*"
 
@@ -41,6 +42,9 @@ typedef struct	s_arg
 
 
 int				ft_printf(const char *format, ...);
+int		ft_is_a_valid_descriptor(const char *str);
+int		ft_descriptor_len(const char *format);
+void	ft_initialize_flags_and_lm(t_arg *arg);
 void	ft_process_c_uc(va_list ap, int *bytes, t_arg arg);
 void	ft_process_c_width(unsigned char c, int *bytes, t_arg arg);
 void	ft_process_c_flag_zero(unsigned char c, int *bytes, t_arg arg);

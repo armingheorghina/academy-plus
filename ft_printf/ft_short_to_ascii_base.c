@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_short_to_ascii_base.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/15 18:47:28 by vdruta            #+#    #+#             */
+/*   Updated: 2015/12/15 19:38:23 by vdruta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
 char	*ft_short_to_ascii_base(short val, int base)
 {
 	static char	buf[32] = "0";
-	int		i;
-	int		ok;
-	int		val2;
+	int			i;
+	int			ok;
+	int			val2;
 
 	val2 = val;
 	i = 30;
@@ -25,9 +36,6 @@ char	*ft_short_to_ascii_base(short val, int base)
 		--i;
 	}
 	if (ok == 1)
-	{
-		buf[i] = '-';
 		return (buf + i + 1);
-	}
 	return (buf + i + 1);
 }

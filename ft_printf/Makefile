@@ -6,7 +6,7 @@
 #    By: vdruta <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/02 16:35:04 by vdruta            #+#    #+#              #
-#    Updated: 2015/12/15 17:40:19 by vdruta           ###   ########.fr        #
+#    Updated: 2015/12/15 20:22:44 by vdruta           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRCS = ft_printf.c ft_itoa.c ft_putchar.c ft_putstr.c ft_strlen.c ft_strsub.c \
 		ft_process_f_.c ft_process_d_short.c ft_process_s_precision.c \
 		ft_process_o_lm_j.c ft_process_c_flag_minus.c ft_process_c_flag_zero.c \
 		ft_process_c_width.c ft_process_c_uc.c ft_process_x_no_lm.c \
-		ft_process_xx_lm_l.c ft_process_xx_lm_z.c
+		ft_process_xx_lm_l.c ft_process_xx_lm_z.c ft_is_a_valid_descriptor.c \
+		ft_descriptor_len.c ft_initialize_flags_and_lm.c
 
 OBJS = $(SRCS:.c=.o)
 

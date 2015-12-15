@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_long_to_ascii_base.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/15 19:04:13 by vdruta            #+#    #+#             */
+/*   Updated: 2015/12/15 19:20:00 by vdruta           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 char	*ft_long_to_ascii_base(long val, int base)
 {
-	static char		buf[32] = "0";
-	int			i;
-	unsigned long long 	val2;	
+	static char			buf[32] = "0";
+	int					i;
+	unsigned long long	val2;
 
 	i = 30;
 	if (val == 0)

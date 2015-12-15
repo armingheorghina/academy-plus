@@ -6,25 +6,28 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 16:18:55 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/14 17:13:06 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/15 19:17:06 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void	ft_process_p_width_flag_minus(char **str, char **strp, t_arg arg)
+{
+	if (arg.width > ft_strlen(*str))
+	{
+		*strp = ft_memalloc(arg.width - ft_strlen(*str) + 1);
+		*strp = ft_memset(*strp, ' ', arg.width - ft_strlen(*str));
+		*str = ft_strjoin(*str, *strp);
+	}
+}
 
 char	*ft_process_p_width(char *str, t_arg arg)
 {
 	char *strp;
 
 	if (arg.flag_minus)
-	{
-		if (arg.width > ft_strlen(str))
-		{
-			strp = ft_memalloc(arg.width - ft_strlen(str) + 1);
-			strp = ft_memset(strp, ' ', arg.width - ft_strlen(str));
-			str = ft_strjoin(str, strp);
-		}
-	}
+		ft_process_p_width_flag_minus(&str, &strp, arg);
 	else if (arg.flag_zero)
 	{
 		if (arg.width > ft_strlen(str))

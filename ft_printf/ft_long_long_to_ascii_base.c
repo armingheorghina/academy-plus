@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 18:28:24 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/09 13:50:55 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/15 19:19:25 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_long_long_to_ascii_base(long long val, int base)
 {
-	static char		buf[32] = "0";
-	int			i;
-	unsigned long long 	val2;	
+	static char			buf[32] = "0";
+	int					i;
+	unsigned long long	val2;
 
 	i = 30;
 	if (val == 0)
@@ -29,7 +29,6 @@ char	*ft_long_long_to_ascii_base(long long val, int base)
 			buf[i--] = "0123456789abcdef"[val2 % base];
 			val2 = val2 / base;
 		}
-		buf[i] = '-';
 		return (buf + i + 1);
 	}
 	while (val > 0 && i > 0)

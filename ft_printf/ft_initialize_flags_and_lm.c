@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoabase.c                                      :+:      :+:    :+:   */
+/*   ft_initialize_flags_and_lm.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/02 12:47:17 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/15 19:02:13 by vdruta           ###   ########.fr       */
+/*   Created: 2015/12/15 19:55:47 by vdruta            #+#    #+#             */
+/*   Updated: 2015/12/15 19:56:39 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_itoabase(uintmax_t val, int base)
+void	ft_initialize_flags_and_lm(t_arg *arg)
 {
-	static char	buf[32] = "0";
-	int			i;
-
-	i = 30;
-	if (val == 0)
-		return (ft_strdup("0"));
-	while (val > 0 && i > 0)
-	{
-		buf[i] = "0123456789abcdef"[val % base];
-		val = val / base;
-		--i;
-	}
-	return (buf + i + 1);
+	arg->precision = 0;
+	arg->width = 0;
+	arg->flag_hash = 0;
+	arg->flag_zero = 0;
+	arg->flag_minus = 0;
+	arg->flag_plus = 0;
+	arg->flag_space = 0;
+	arg->lm_j = 0;
+	arg->lm_z = 0;
+	arg->lm_h = 0;
+	arg->lm_hh = 0;
+	arg->lm_l = 0;
+	arg->lm_ll = 0;
 }
