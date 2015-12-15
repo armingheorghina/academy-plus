@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 17:53:10 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/14 16:16:23 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/15 16:46:44 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_process_u_lm_ll(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
-	unsigned long long 	nbr;
-	char		*str;
+	unsigned long long	nbr;
+	char				*str;
 
 	nbr = va_arg(ap, unsigned long long);
 	g_nbr = 1;
@@ -30,7 +30,7 @@ void	ft_process_u_lm_ll(va_list ap, int *bytes, char *descriptor, t_arg arg)
 
 void	ft_process_u_lm_j(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
-	uintmax_t nbr;
+	uintmax_t	nbr;
 	char		*str;
 
 	nbr = va_arg(ap, uintmax_t);
@@ -62,9 +62,9 @@ void	ft_process_u_lm_z(va_list ap, int *bytes, char *descriptor, t_arg arg)
 
 void	ft_process_u_uint(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
-	unsigned int 	nbr;
+	unsigned int	nbr;
 	char			*str;
-	
+
 	nbr = va_arg(ap, unsigned int);
 	g_nbr = 1;
 	str = ft_unsigned_int_to_ascii_base(nbr, 10);
@@ -78,7 +78,6 @@ void	ft_process_u_uint(va_list ap, int *bytes, char *descriptor, t_arg arg)
 
 void	ft_process_u_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
-
 	if (arg.lm_hh)
 		ft_process_c_(ap, bytes, descriptor, arg);
 	else if (arg.lm_l)

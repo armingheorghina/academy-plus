@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 12:59:49 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/14 16:45:05 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/15 16:45:01 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_process_dd_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
-	long 		nbr;
-	char		*str;
+	long	nbr;
+	char	*str;
 
 	nbr = va_arg(ap, long);
 	g_nbr = nbr;
@@ -30,7 +30,7 @@ void	ft_process_dd_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		str = ft_strjoin("-", str);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
-	if(arg.width)
+	if (arg.width)
 		str = ft_process_d_width(str, arg);
 	if (arg.flag_plus && nbr >= 0)
 		ft_process_d_put_flag_plus(bytes, &str, arg);

@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 16:23:45 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/14 16:35:13 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/15 16:11:51 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_process_c_hhu(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned char	usc;
 	unsigned int	nbr;
-	char		*str;
+	char			*str;
 
 	usc = va_arg(ap, int);
 	str = ft_itoabase(usc, 10);
@@ -32,8 +32,8 @@ void	ft_process_c_hhu(va_list ap, int *bytes, char *descriptor, t_arg arg)
 
 void	ft_process_c_hhd(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
-	signed char		sc;
-	int		nbr;
+	signed char	sc;
+	int			nbr;
 	char		*str;
 
 	sc = va_arg(ap, int);
@@ -49,7 +49,7 @@ void	ft_process_c_hhd(va_list ap, int *bytes, char *descriptor, t_arg arg)
 		str = ft_strjoin("-", str);
 	if (arg.precision == 0 && nbr == 0 && ft_strchr(descriptor, '.'))
 		str[0] = '\0';
-	if(arg.width)
+	if (arg.width)
 		str = ft_process_d_width(str, arg);
 	if (arg.flag_plus && nbr >= 0)
 		ft_process_d_put_flag_plus(bytes, &str, arg);
@@ -63,8 +63,7 @@ void	ft_process_c_hho(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned char	usc;
 	unsigned int	nbr;
-	char		*str;
-
+	char			*str;
 
 	usc = va_arg(ap, int);
 	str = ft_itoabase(usc, 8);
@@ -82,7 +81,7 @@ void	ft_process_c_hhxxx(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
 	unsigned char	usc;
 	unsigned int	nbr;
-	char		*str;
+	char			*str;
 
 	usc = va_arg(ap, int);
 	if (descriptor[ft_strlen(descriptor) - 1] == 'x')
@@ -101,14 +100,12 @@ void	ft_process_c_hhxxx(va_list ap, int *bytes, char *descriptor, t_arg arg)
 
 void	ft_process_c_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 {
-	unsigned char	c;
-	char *strp;
-
 	if (arg.lm_l)
 		ft_process_cc_(ap, bytes);
 	else if (arg.lm_hh && descriptor[ft_strlen(descriptor) - 1] == 'u')
 		ft_process_c_hhu(ap, bytes, descriptor, arg);
-	else if (arg.lm_hh && (descriptor[ft_strlen(descriptor) - 1] == 'd' || descriptor[ft_strlen(descriptor) - 1] == 'i'))
+	else if (arg.lm_hh && (descriptor[ft_strlen(descriptor) - 1] == 'd' ||
+				descriptor[ft_strlen(descriptor) - 1] == 'i'))
 		ft_process_c_hhd(ap, bytes, descriptor, arg);
 	else if (arg.lm_hh && descriptor[ft_strlen(descriptor) - 1] == 'o')
 		ft_process_c_hho(ap, bytes, descriptor, arg);
@@ -117,45 +114,5 @@ void	ft_process_c_(va_list ap, int *bytes, char *descriptor, t_arg arg)
 	else if (arg.lm_hh && descriptor[ft_strlen(descriptor) - 1] == 'X')
 		ft_process_c_hhxxx(ap, bytes, descriptor, arg);
 	else
-	{
-		c = va_arg(ap, int);
-		if (arg.flag_minus)
-		{
-			if (arg.width > 1)
-			{
-				ft_putchar(c);
-				*bytes = *bytes + 1;
-				strp = ft_memalloc(arg.width - 1 + 1);
-				strp = ft_memset(strp, ' ', arg.width - 1);
-				ft_putstr(strp);
-				*bytes += ft_strlen(strp);
-			}
-		}
-		else if (arg.flag_zero)
-		{
-			if (arg.width > 1)
-			{
-				strp = ft_memalloc(arg.width - 1 + 1);
-				strp = ft_memset(strp, '0', arg.width - 1);
-				ft_putstr(strp);
-				*bytes += ft_strlen(strp);
-				ft_putchar(c);
-				*bytes = *bytes + 1;
-			}
-		}
-		else if (arg.width > 1)
-		{
-			strp = ft_memalloc(arg.width - 1 + 1);
-			strp = ft_memset(strp, ' ', arg.width - 1);
-			ft_putstr(strp);
-			*bytes += ft_strlen(strp);
-			ft_putchar(c);
-			*bytes = *bytes + 1;
-		}
-		else
-		{
-			ft_putchar(c);
-			*bytes = *bytes + 1;
-		}
-	}
+		ft_process_c_uc(ap, bytes, arg);
 }

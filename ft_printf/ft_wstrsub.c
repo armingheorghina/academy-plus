@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 16:57:58 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/10 10:54:15 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/15 15:12:27 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ wchar_t	*ft_wstrsub(wchar_t *s, unsigned int start, size_t len)
 {
 	wchar_t	*dst;
 	size_t	i;
-	int len2;
+	int		len2;
 
 	len2 = (int)len;
 	if (!(dst = (wchar_t*)malloc(sizeof(*dst) * (len + 1))))

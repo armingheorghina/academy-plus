@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_process_d_precision.c                           :+:      :+:    :+:   */
+/*   ft_process_c_width.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/07 17:20:21 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/15 16:17:33 by vdruta           ###   ########.fr       */
+/*   Created: 2015/12/15 16:06:43 by vdruta            #+#    #+#             */
+/*   Updated: 2015/12/15 16:08:24 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_process_d_precision(char *str, t_arg arg)
+void	ft_process_c_width(unsigned char c, int *bytes, t_arg arg)
 {
-	char *str0;
+	char	*strp;
 
-	if (arg.precision > ft_strlen(str))
-	{
-		str0 = ft_memalloc(arg.precision - ft_strlen(str) + 1);
-		str0 = ft_memset(str0, '0', arg.precision - ft_strlen(str));
-		str = ft_strjoin(str0, str);
-	}
-	return (str);
+	strp = ft_memalloc(arg.width - 1 + 1);
+	strp = ft_memset(strp, ' ', arg.width - 1);
+	ft_putstr(strp);
+	*bytes += ft_strlen(strp);
+	ft_putchar(c);
+	*bytes = *bytes + 1;
 }

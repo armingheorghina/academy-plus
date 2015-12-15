@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/14 18:54:37 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/15 17:25:24 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,15 @@ typedef struct	s_arg
 
 
 int				ft_printf(const char *format, ...);
+void	ft_process_c_uc(va_list ap, int *bytes, t_arg arg);
+void	ft_process_c_width(unsigned char c, int *bytes, t_arg arg);
+void	ft_process_c_flag_zero(unsigned char c, int *bytes, t_arg arg);
+void	ft_process_c_flag_minus(unsigned char c, int *bytes, t_arg arg);
 void	ft_process_s_precision(char **str, t_arg arg);
 void	ft_process_o_lm_j(va_list ap, int *bytes, char *descriptor, t_arg arg);
+void	ft_process_x_no_lm(va_list ap, int *bytes, char *descriptor, t_arg arg);
+void	ft_process_xx_lm_l(va_list ap, int *bytes, char *descriptor, t_arg arg);
+void	ft_process_xx_lm_z(va_list ap, int *bytes, char *descriptor, t_arg arg);
 int				ft_isalpha(int c);
 char			*ft_strdup(const char *s1);
 void			*ft_memset(void *b, int c, size_t len);
