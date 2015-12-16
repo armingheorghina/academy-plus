@@ -6,101 +6,18 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:53:31 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/15 20:22:40 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/16 10:18:34 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_verify_flags(t_arg *arg, char *descriptor, va_list ap)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (descriptor[i])
-	{
-		if (ft_isdigit(descriptor[i]) && descriptor[i] != '0')
-		{
-			arg->width = ft_atoi(descriptor + i);
-			j = ft_strlen(ft_itoa(arg->width));
-			while (j > 1)
-			{
-				j--;
-				i++;
-			}
-		}
-		else if (descriptor[i] == '.')
-		{	
-			arg->precision = ft_atoi(descriptor + i + 1);
-			while (ft_isdigit(descriptor[i + 1]))
-				i++;
-		}
-		else if (descriptor[i] == '*' && descriptor[i - 1] == '.')
-		{
-			arg->precision = va_arg(ap, int);
-			if (arg->precision < 0 && descriptor[ft_strlen(descriptor) - 1] == 's')
-			{
-				arg->precision = -1 * arg->precision;
-			}
-			else if (arg->precision < 0)
-				arg->precision = 0;
-		}
-		else if (descriptor[i] == '*' && descriptor[i - 1] != '.')
-		{
-			arg->width = va_arg(ap, int);
-			if (arg->width < 0)
-			{
-				arg->width = -1 * arg->width;
-				arg->flag_minus  = 1;
-			}
-		}
-		else if (descriptor[i] == '#')
-			arg->flag_hash = 1;
-		else if (descriptor[i] == '0')
-			arg->flag_zero = 1;
-		else if (descriptor[i] == '-')
-			arg->flag_minus = 1;
-		else if (descriptor[i] == '+')
-			arg->flag_plus = 1;
-		else if (descriptor[i] == ' ')
-			arg->flag_space = 1;
-		i++;
-	}
-}
-
-void	ft_verify_length_modifiers(t_arg *arg, char *descriptor)
-{
-	int i;
-
-	i = 0;
-	while (descriptor[i])
-	{
-		if (descriptor[i] == 'h' && descriptor[i + 1] == 'h')
-		{
-			arg->lm_hh = 1;
-			i++;
-		}
-		else if (descriptor[i] == 'h')
-			arg->lm_h = 1;
-		else if (descriptor[i] == 'l' && descriptor[i + 1] == 'l')
-		{
-			arg->lm_ll = 1;
-			i++;
-		}
-		else if (descriptor[i] == 'l')
-			arg->lm_l = 1;
-		else if (descriptor[i] == 'j')
-			arg->lm_j = 1;
-		else if (descriptor[i] == 'z')
-			arg->lm_z = 1;
-		i++;
-	}
-}
-
-void	ft_chose_identifier2(char *descriptor, va_list ap, int descriptor_len,
+void	ft_chose_identifier2(char *descriptor, va_list ap,
 		int *bytes, t_arg arg)
 {
+	int descriptor_len;
+
+	descriptor_len = ft_strlen(descriptor);
 	if (descriptor[descriptor_len - 1] == 'U')
 		ft_process_uu_(ap, bytes, descriptor, arg);
 	else if (descriptor[descriptor_len - 1] == 'x')
@@ -111,7 +28,8 @@ void	ft_chose_identifier2(char *descriptor, va_list ap, int descriptor_len,
 		ft_process_c_(ap, bytes, descriptor, arg);
 	else if (descriptor[descriptor_len - 1] == 'C')
 		ft_process_cc_(ap, bytes);
-	else if (descriptor[descriptor_len - 1] == 'f' || descriptor[descriptor_len - 1] == 'F')
+	else if (descriptor[descriptor_len - 1] == 'f' ||
+			descriptor[descriptor_len - 1] == 'F')
 		ft_process_f_(ap, bytes, descriptor, arg);
 	else if (descriptor[descriptor_len - 1] == '%')
 		ft_process_percent_(bytes, arg);
@@ -133,7 +51,8 @@ void	ft_chose_identifier(char *descriptor, va_list ap, int descriptor_len,
 		ft_process_ss_(ap, bytes, descriptor, arg);
 	else if (descriptor[descriptor_len - 1] == 'p')
 		ft_process_p_(ap, bytes, descriptor, arg);
-	else if (descriptor[descriptor_len - 1] == 'd' || descriptor[descriptor_len - 1] == 'i')
+	else if (descriptor[descriptor_len - 1] == 'd' ||
+			descriptor[descriptor_len - 1] == 'i')
 		ft_process_d_(ap, bytes, descriptor, arg);
 	else if (descriptor[descriptor_len - 1] == 'D')
 		ft_process_dd_(ap, bytes, descriptor, arg);
@@ -144,7 +63,7 @@ void	ft_chose_identifier(char *descriptor, va_list ap, int descriptor_len,
 	else if (descriptor[descriptor_len - 1] == 'u')
 		ft_process_u_(ap, bytes, descriptor, arg);
 	else
-		ft_chose_identifier2(descriptor, ap, descriptor_len, bytes, arg);
+		ft_chose_identifier2(descriptor, ap, bytes, arg);
 }
 
 void	ft_process_format_found_percent(const char *format, int *i,
@@ -189,10 +108,10 @@ int		ft_process_format(const char *format, va_list ap)
 	return (bytes);
 }
 
-int				ft_printf(const char *format, ...)
+int		ft_printf(const char *format, ...)
 {
-	va_list ap;
-	int	bytes;
+	va_list	ap;
+	int		bytes;
 
 	bytes = 0;
 	va_start(ap, format);

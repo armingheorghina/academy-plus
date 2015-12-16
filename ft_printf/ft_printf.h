@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 16:52:13 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/15 19:55:13 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/16 11:02:17 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <string.h>
 # define CONVERSIONS "sSpdDioOuUxXcCfF"
 # define FLAGS "#0-+ jzhl123456789.*"
-
-#include <stdio.h> //*TODO delete this!
 
 long long		g_nbr;
 typedef struct	s_arg
@@ -39,21 +37,30 @@ typedef struct	s_arg
 	int			lm_l;
 	int			lm_ll;
 }				t_arg;
-
-
 int				ft_printf(const char *format, ...);
-int		ft_is_a_valid_descriptor(const char *str);
-int		ft_descriptor_len(const char *format);
-void	ft_initialize_flags_and_lm(t_arg *arg);
-void	ft_process_c_uc(va_list ap, int *bytes, t_arg arg);
-void	ft_process_c_width(unsigned char c, int *bytes, t_arg arg);
-void	ft_process_c_flag_zero(unsigned char c, int *bytes, t_arg arg);
-void	ft_process_c_flag_minus(unsigned char c, int *bytes, t_arg arg);
-void	ft_process_s_precision(char **str, t_arg arg);
-void	ft_process_o_lm_j(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void	ft_process_x_no_lm(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void	ft_process_xx_lm_l(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void	ft_process_xx_lm_z(va_list ap, int *bytes, char *descriptor, t_arg arg);
+void			ft_verify_flags_width(t_arg *arg, char *descriptor, int *i);
+void			ft_verify_flags_precision(t_arg *arg, char *descriptor, int *i);
+void			ft_verify_flags_precision_asterix(t_arg *arg, char *descriptor,
+		va_list ap);
+void			ft_verify_flags_width_asterix(t_arg *arg, va_list ap);
+void			ft_verify_flags(t_arg *arg, char *descriptor, va_list ap);
+void			ft_verify_length_modifiers(t_arg *arg, char *descriptor);
+int				ft_is_a_valid_descriptor(const char *str);
+int				ft_descriptor_len(const char *format);
+void			ft_initialize_flags_and_lm(t_arg *arg);
+void			ft_process_c_uc(va_list ap, int *bytes, t_arg arg);
+void			ft_process_c_width(unsigned char c, int *bytes, t_arg arg);
+void			ft_process_c_flag_zero(unsigned char c, int *bytes, t_arg arg);
+void			ft_process_c_flag_minus(unsigned char c, int *bytes, t_arg arg);
+void			ft_process_s_precision(char **str, t_arg arg);
+void			ft_process_o_lm_j(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_x_no_lm(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_xx_lm_l(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_xx_lm_z(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
 int				ft_isalpha(int c);
 char			*ft_strdup(const char *s1);
 void			*ft_memset(void *b, int c, size_t len);
@@ -83,7 +90,8 @@ char			*ft_long_long_to_ascii_base(long long val, int base);
 char			*ft_unsigned_short_to_ascii_base(unsigned short val, int base);
 char			*ft_unsigned_int_to_ascii_base(unsigned int val, int base);
 char			*ft_unsigned_long_to_ascii_base(unsigned long val, int base);
-char			*ft_unsigned_long_long_to_ascii_base(unsigned long long val, int base);
+char			*ft_unsigned_long_long_to_ascii_base(unsigned long long val,
+		int base);
 char			*ft_int_to_ascii_base(int val, int base);
 char			*ft_intmax_t_to_ascii_base(intmax_t val, int base);
 char			*ft_ssize_t_to_ascii_base(ssize_t val, int base);
@@ -97,21 +105,36 @@ void			ft_process_d_put_flag_space(int *bytes, char **str, t_arg arg);
 char			*ft_process_d_precision(char *str, t_arg arg);
 char			*ft_process_d_width(char *str, t_arg arg);
 void			ft_process_percent_width(char **str, t_arg arg);
-void			ft_process_s_(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void			ft_process_ss_(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void			ft_process_d_(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void			ft_process_dd_(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void			ft_process_p_(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void			ft_process_c_(va_list ap, int *bytes, char *descriptor, t_arg arg);
+void			ft_process_s_(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_ss_(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_d_(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_dd_(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_p_(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_c_(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
 void			ft_process_cc_(va_list ap, int *bytes);
-void			ft_process_o_(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void			ft_process_oo_(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void			ft_process_u_(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void			ft_process_uu_(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void			ft_process_x_(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void			ft_process_xx_(va_list ap, int *bytes, char *descriptor, t_arg arg);
+void			ft_process_o_(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_oo_(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_u_(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_uu_(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_x_(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_xx_(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
 void			ft_process_percent_(int *bytes, t_arg arg);
-void			ft_process_non_valid_conversion_(int *bytes, char *descriptor, t_arg arg);
-void			ft_process_f_(va_list ap, int *bytes, char *descriptor, t_arg arg);
-void	ft_process_d_short(va_list ap, int *bytes, char *descriptor, t_arg arg);
+void			ft_process_non_valid_conversion_(int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_f_(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
+void			ft_process_d_short(va_list ap, int *bytes, char *descriptor,
+		t_arg arg);
 #endif
