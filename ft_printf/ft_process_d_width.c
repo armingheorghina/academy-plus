@@ -12,56 +12,62 @@
 
 #include "ft_printf.h"
 
-void	ft_process_d_width_flag_minus(char **str, char **strp, t_arg arg)
+char	*ft_process_d_width_flag_minus(char *str, t_arg arg)
 {
-	if (arg.width > ft_strlen(*str) && !arg.precision && g_nbr >= 0)
+	char *strp;
+
+	if (arg.width > ft_strlen(str) && !arg.precision && g_nbr >= 0)
 	{
-		*strp = ft_memalloc(arg.width - ft_strlen(*str) + 1);
-		*strp = ft_memset(*strp, ' ', arg.width - ft_strlen(*str));
-		*str = ft_strjoin(*str, *strp);
+		strp = ft_memalloc(arg.width - ft_strlen(str) + 1);
+		strp = ft_memset(strp, ' ', arg.width - ft_strlen(str));
+		str = ft_strjoin(str, strp);
 		if (arg.flag_plus)
-			*str[ft_strlen(*str) - 1] = '\0';
+			str[ft_strlen(str) - 1] = '\0';
 	}
-	else if (arg.width > ft_strlen(*str) && !arg.precision && g_nbr < 0)
+	else if (arg.width > ft_strlen(str) && !arg.precision && g_nbr < 0)
 	{
-		*strp = ft_memalloc(arg.width - ft_strlen(*str));
-		*strp = ft_memset(*strp, ' ', arg.width - ft_strlen(*str) - 1);
-		*str = ft_strjoin(*str, *strp);
+		strp = ft_memalloc(arg.width - ft_strlen(str));
+		strp = ft_memset(strp, ' ', arg.width - ft_strlen(str) - 1);
+		str = ft_strjoin(str, strp);
 		if (!arg.precision)
-			*str = ft_strjoin("-", *str);
+			str = ft_strjoin("-", str);
 	}
-	else if (arg.width > ft_strlen(*str) && arg.precision && arg.width)
+	else if (arg.width > ft_strlen(str) && arg.precision && arg.width)
 	{
-		*strp = ft_memalloc(arg.width - ft_strlen(*str) + 1);
-		*strp = ft_memset(*strp, ' ', arg.width - ft_strlen(*str));
-		*str = ft_strjoin(*str, *strp);
+		strp = ft_memalloc(arg.width - ft_strlen(str) + 1);
+		strp = ft_memset(strp, ' ', arg.width - ft_strlen(str));
+		str = ft_strjoin(str, strp);
 		if (arg.flag_plus && g_nbr > 0)
-			*str[ft_strlen(*str) - 1] = '\0';
+			str[ft_strlen(str) - 1] = '\0';
 	}
+	return (str);
 }
 
-void	ft_process_d_width_flag_zero(char **str, char **strp, t_arg arg)
+char	*ft_process_d_width_flag_zero(char *str, t_arg arg)
 {
-	if (arg.width > ft_strlen(*str) && !arg.precision && g_nbr >= 0)
+	char *strp;
+
+	if (arg.width > ft_strlen(str) && !arg.precision && g_nbr >= 0)
 	{
-		*strp = ft_memalloc(arg.width - ft_strlen(*str) + 1);
-		*strp = ft_memset(*strp, '0', arg.width - ft_strlen(*str));
-		*str = ft_strjoin(*strp, *str);
+		strp = ft_memalloc(arg.width - ft_strlen(str) + 1);
+		strp = ft_memset(strp, '0', arg.width - ft_strlen(str));
+		str = ft_strjoin(strp, str);
 	}
-	else if (arg.width > ft_strlen(*str) && !arg.precision && g_nbr < 0)
+	else if (arg.width > ft_strlen(str) && !arg.precision && g_nbr < 0)
 	{
-		*strp = ft_memalloc(arg.width - ft_strlen(*str));
-		*strp = ft_memset(*strp, '0', arg.width - ft_strlen(*str) - 1);
-		*str = ft_strjoin(*strp, *str);
+		strp = ft_memalloc(arg.width - ft_strlen(str));
+		strp = ft_memset(strp, '0', arg.width - ft_strlen(str) - 1);
+		str = ft_strjoin(strp, str);
 		if (!arg.precision)
-			*str = ft_strjoin("-", *str);
+			str = ft_strjoin("-", str);
 	}
-	else if (arg.width > ft_strlen(*str) && arg.precision && arg.width)
+	else if (arg.width > ft_strlen(str) && arg.precision && arg.width)
 	{
-		*strp = ft_memalloc(arg.width - ft_strlen(*str) + 1);
-		*strp = ft_memset(*strp, ' ', arg.width - ft_strlen(*str));
-		*str = ft_strjoin(*strp, *str);
+		strp = ft_memalloc(arg.width - ft_strlen(str) + 1);
+		strp = ft_memset(strp, ' ', arg.width - ft_strlen(str));
+		str = ft_strjoin(strp, str);
 	}
+	return (str);
 }
 
 char	*ft_process_d_width(char *str, t_arg arg)
@@ -69,9 +75,9 @@ char	*ft_process_d_width(char *str, t_arg arg)
 	char *strp;
 
 	if (arg.flag_minus)
-		ft_process_d_width_flag_minus(&str, &strp, arg);
+		str = ft_process_d_width_flag_minus(str, arg);
 	else if (arg.flag_zero)
-		ft_process_d_width_flag_zero(&str, &strp, arg);
+		str = ft_process_d_width_flag_zero(str, arg);
 	else if (arg.width > ft_strlen(str) && g_nbr >= 0)
 	{
 		if (arg.flag_plus)
