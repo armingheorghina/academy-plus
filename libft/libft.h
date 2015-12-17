@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 19:25:07 by vdruta            #+#    #+#             */
-/*   Updated: 2015/11/12 11:08:05 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/17 18:25:28 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,7 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 int					ft_get_next_line(int const fd, char **line);
+
+void				ft_putwchar(wchar_t wc);
+int					ft_wstrsize(wchar_t *wstr);
 #endif
