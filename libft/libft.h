@@ -6,7 +6,7 @@
 /*   By: vdruta <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 19:25:07 by vdruta            #+#    #+#             */
-/*   Updated: 2015/12/17 18:25:28 by vdruta           ###   ########.fr       */
+/*   Updated: 2015/12/17 18:31:24 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_get_next_line(int const fd, char **line);
 
 void				ft_putwchar(wchar_t wc);
+size_t				ft_wstrlen(const wchar_t *str);
 int					ft_wstrsize(wchar_t *wstr);
 #endif
