@@ -30,11 +30,15 @@ void	ft_pa(int *l_a, int *l_b, int items)
 
 	if (!l_b[0])
 		return ;
-	i = items;
-	while (i - 1 > 0) //WTF ... DO TI
+	i = 1;
+	temp = l_a[0];
+	l_a[0] = l_b[0];
+	while (i < items + 1)
 	{
+		temp = l_a[i];
 		l_a[i] = l_a[i - 1];
-		i--;
+		
+		i++;
 	}
 	items++;
 }
