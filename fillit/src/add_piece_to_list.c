@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   add_piece_to_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfazakas <jfazakas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 18:12:34 by jfazakas          #+#    #+#             */
-/*   Updated: 2016/01/09 15:59:49 by jfazakas         ###   ########.fr       */
+/*   Created: 2016/01/11 09:18:30 by vdruta            #+#    #+#             */
+/*   Updated: 2016/01/11 09:18:34 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int		coordinates_are_equal(unsigned char *one, unsigned char *two)
+int			coordinates_are_equal(unsigned char *one, unsigned char *two)
 {
 	int		index;
 
@@ -26,12 +26,12 @@ static int		coordinates_are_equal(unsigned char *one, unsigned char *two)
 	return (1);
 }
 
-static t_tetris	*create_new_tetris_node(t_tetris *tetriminos,
+t_tetris	*create_new_tetris_node(t_tetris *tetriminos,
 						unsigned char *coordinates, char letter)
 {
 	t_tetris	*new_node;
 	t_tetris	*node;
-	
+
 	new_node = malloc(sizeof(t_tetris));
 	new_node->coordinates = coordinates;
 	new_node->letter = letter;
@@ -42,7 +42,7 @@ static t_tetris	*create_new_tetris_node(t_tetris *tetriminos,
 		if (coordinates_are_equal(coordinates, node->coordinates))
 		{
 			new_node->clone = node->letter;
-			break;
+			break ;
 		}
 		node = node->next;
 	}
@@ -50,8 +50,8 @@ static t_tetris	*create_new_tetris_node(t_tetris *tetriminos,
 	return (new_node);
 }
 
-static void		add_new_tetris_node(t_tetris **tetriminos, unsigned char *coordinates,
-						char letter)
+void		add_new_tetris_node(t_tetris **tetriminos,
+		unsigned char *coordinates, char letter)
 {
 	t_tetris	*new_node;
 	t_tetris	*node;
@@ -63,11 +63,12 @@ static void		add_new_tetris_node(t_tetris **tetriminos, unsigned char *coordinat
 	node->next = new_node;
 }
 
-void			add_piece_to_list(t_tetris **tetriminos, unsigned char *coordinates,
+void		add_piece_to_list(t_tetris **tetriminos, unsigned char *coordinates,
 						char letter)
 {
 	if (!(*tetriminos))
-		(*tetriminos) = create_new_tetris_node(*tetriminos, coordinates, letter);
+		(*tetriminos) = create_new_tetris_node(*tetriminos, coordinates,
+				letter);
 	else
 		add_new_tetris_node(tetriminos, coordinates, letter);
 }

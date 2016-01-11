@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfazakas <jfazakas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 19:41:42 by jfazakas          #+#    #+#             */
-/*   Updated: 2016/01/09 16:02:45 by jfazakas         ###   ########.fr       */
+/*   Created: 2016/01/11 10:23:31 by vdruta            #+#    #+#             */
+/*   Updated: 2016/01/11 10:23:34 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static unsigned char	get_map_size(t_tetris *list)
+unsigned char	get_map_size(t_tetris *list)
 {
 	unsigned char	pieces;
 	unsigned char	size;
@@ -31,7 +31,7 @@ static unsigned char	get_map_size(t_tetris *list)
 	return (size);
 }
 
-char		*create_map(unsigned char size)
+char			*create_map(unsigned char size)
 {
 	char	*map;
 	int		index;
@@ -48,7 +48,7 @@ char		*create_map(unsigned char size)
 	return (map);
 }
 
-void		fillit(t_tetris *list)
+void			fillit(t_tetris *list)
 {
 	char				*map;
 	unsigned char		size;

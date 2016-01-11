@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   backtrack.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfazakas <jfazakas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/09 15:08:55 by jfazakas          #+#    #+#             */
-/*   Updated: 2016/01/09 16:53:35 by jfazakas         ###   ########.fr       */
+/*   Created: 2016/01/11 09:20:40 by vdruta            #+#    #+#             */
+/*   Updated: 2016/01/11 09:33:07 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int	place_piece(t_tetris *list, char *map, unsigned char index)
+int		place_piece(t_tetris *list, char *map, unsigned char index)
 {
 	if (map[index + list->coordinates[0]] != '.' ||
 			map[index + list->coordinates[1]] != '.' ||
 			map[index + list->coordinates[2]] != '.' ||
 			map[index + list->coordinates[3]] != '.')
-		return (0);;
+		return (0);
 	map[index + list->coordinates[0]] = list->letter;
 	map[index + list->coordinates[1]] = list->letter;
 	map[index + list->coordinates[2]] = list->letter;
@@ -42,7 +42,7 @@ void	backtrack(t_tetris *list, char *map)
 
 	if (!list)
 		print_map_and_exit(map, 1);
-	index = 0;	
+	index = 0;
 	clone = list->clone;
 	if (clone != '\0')
 	{

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   adjust_coordinates.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfazakas <jfazakas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 18:51:13 by jfazakas          #+#    #+#             */
-/*   Updated: 2016/01/09 15:57:37 by jfazakas         ###   ########.fr       */
+/*   Created: 2016/01/11 09:19:10 by vdruta            #+#    #+#             */
+/*   Updated: 2016/01/11 09:19:43 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int		coordinates_are_not_ok(unsigned char *coordinates)
+int		coordinates_are_not_ok(unsigned char *coordinates)
 {
 	int		index;
 
@@ -26,7 +26,7 @@ static int		coordinates_are_not_ok(unsigned char *coordinates)
 	return (1);
 }
 
-static void		adjust_one_coordinate(unsigned char *coordinates)
+void	adjust_one_coordinate(unsigned char *coordinates)
 {
 	int		index;
 

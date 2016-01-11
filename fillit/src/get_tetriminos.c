@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_tetriminos.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfazakas <jfazakas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 16:32:06 by jfazakas          #+#    #+#             */
-/*   Updated: 2016/01/09 15:47:45 by jfazakas         ###   ########.fr       */
+/*   Created: 2016/01/11 10:24:15 by vdruta            #+#    #+#             */
+/*   Updated: 2016/01/11 10:24:17 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,15 @@ void	get_tetriminos(t_tetris **tetriminos, int fd)
 	while (boolean == 1 && letter <= 'Z')
 	{
 		piece = get_piece(fd);
-
 		coordinates = get_coordinates(piece);
 		adjust_coordinates(coordinates);
 		add_piece_to_list(tetriminos, coordinates, letter);
-		if (get_next_line(fd, &line) == 0)
+		if (ft_get_next_line(fd, &line) == 0)
 			boolean = 0;
 		else if (!ft_strequ(line, ""))
 			print_message_and_exit("error", 2);
 		letter++;
 	}
-	if (get_next_line(fd, &line) > 0)
+	if (ft_get_next_line(fd, &line) > 0)
 		print_message_and_exit("error", 2);
 }

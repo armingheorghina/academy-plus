@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   manipulate_coordinates.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfazakas <jfazakas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/09 14:31:19 by jfazakas          #+#    #+#             */
-/*   Updated: 2016/01/09 16:25:17 by jfazakas         ###   ########.fr       */
+/*   Created: 2016/01/11 10:24:55 by vdruta            #+#    #+#             */
+/*   Updated: 2016/01/11 10:24:57 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static void	change_coordinates_node(t_tetris *list, unsigned char size)
+void	change_coordinates_node(t_tetris *list, unsigned char size)
 {
 	unsigned char	*new_coordinates;
 	unsigned char	index;
@@ -32,7 +32,7 @@ static void	change_coordinates_node(t_tetris *list, unsigned char size)
 void	change_coordinates(t_tetris *list, unsigned char size)
 {
 	t_tetris	*node;
-	
+
 	node = list;
 	while (node)
 	{
@@ -41,7 +41,7 @@ void	change_coordinates(t_tetris *list, unsigned char size)
 	}
 }
 
-static void	increment_coordinates_node(t_tetris *list, unsigned char size)
+void	increment_coordinates_node(t_tetris *list, unsigned char size)
 {
 	unsigned char	*new_coordinates;
 	unsigned int	index;

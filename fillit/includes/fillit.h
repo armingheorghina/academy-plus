@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfazakas <jfazakas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 14:45:51 by jfazakas          #+#    #+#             */
-/*   Updated: 2016/01/09 15:53:15 by jfazakas         ###   ########.fr       */
+/*   Created: 2016/01/11 09:53:26 by vdruta            #+#    #+#             */
+/*   Updated: 2016/01/11 10:06:51 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
-
-#include "libft.h"
-#include "get_next_line.h"
-#include <fcntl.h>
+# include "libft.h"
+# include <fcntl.h>
 
 typedef struct		s_tetris
 {
@@ -33,15 +31,9 @@ char				**get_piece(int fd);
 unsigned char		*get_coordinates(char **piece);
 void				adjust_coordinates(unsigned char *coordinates);
 void				add_piece_to_list(t_tetris **tetriminos,
-							unsigned char *coordinates,	char letter);
+		unsigned char *coordinates, char letter);
 void				fillit(t_tetris *list);
 void				change_coordinates(t_tetris *list, unsigned char size);
 void				increment_coordinates(t_tetris *list, unsigned char size);
 void				backtrack(t_tetris *tetriminos, char *map);
-/*
-void				print_map(char **map);
-void				print_map_temp(char **map);
-char				**save_valid_map(char **map);
-void				back(t_tetris *list, char **map);
-*/
 #endif

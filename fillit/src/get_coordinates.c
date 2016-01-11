@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_coordinates.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jfazakas <jfazakas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 17:22:28 by jfazakas          #+#    #+#             */
-/*   Updated: 2016/01/09 16:57:31 by jfazakas         ###   ########.fr       */
+/*   Created: 2016/01/11 10:23:46 by vdruta            #+#    #+#             */
+/*   Updated: 2016/01/11 10:23:48 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static void		save_coordinates(unsigned char *coordinates, int row, int column)
+void			save_coordinates(unsigned char *coordinates, int row,
+		int column)
 {
 	int		length;
 
@@ -25,8 +26,8 @@ static void		save_coordinates(unsigned char *coordinates, int row, int column)
 	coordinates[length + 1] = column;
 }
 
-static void		get_coordinates_row(char **piece, int row,
-						unsigned char *coordinates,	int *neighbours)
+void			get_coordinates_row(char **piece, int row,
+		unsigned char *coordinates, int *neighbours)
 {
 	int		column;
 
@@ -51,11 +52,11 @@ static void		get_coordinates_row(char **piece, int row,
 		print_message_and_exit("error", 2);
 }
 
-unsigned char			*get_coordinates(char **piece)
+unsigned char	*get_coordinates(char **piece)
 {
 	unsigned char	*coordinates;
-	int		neighbours;
-	int		row;
+	int				neighbours;
+	int				row;
 
 	coordinates = malloc(sizeof(char) * 8);
 	ft_memset(coordinates, 4, 8);
@@ -69,4 +70,4 @@ unsigned char			*get_coordinates(char **piece)
 	if (neighbours < 3)
 		print_message_and_exit("error", 2);
 	return (coordinates);
-}	
+}
