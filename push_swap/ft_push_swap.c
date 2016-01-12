@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 17:06:41 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/12 13:34:51 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/12 17:47:05 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,24 @@ void	ft_rotate_to_end(int *l_a, int aitems)
 
 void	ft_push_swap(int *l_a, int items, int *l_b)
 {
-	int aitems;
-	int bitems;
+	int			aitems;
+	int			bitems;
+	int			*l_sorted;
+	t_pslist	*list;
 
+	l_sorted = ft_bubble_sort(l_a, items);
+	ft_print_result(l_sorted, items);
+	ft_putchar('\n');
+	list = NULL;
+	ft_add_to_list(&list, l_sorted, l_a, items);
+	//TODO print list to verify coordinates;
 	aitems = items;
 	bitems = 0;
 	ft_swap(l_a, aitems); //sa
 	ft_push(l_b, &bitems, l_a, &aitems); //pb
 	ft_rotate_to_start(l_a, aitems); //ra
 	ft_rotate_to_end(l_a, aitems); //rra
+
 	ft_print_result(l_a, aitems);
 	ft_putchar('\n');
 	ft_print_result(l_b, bitems);
