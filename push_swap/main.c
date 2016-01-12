@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 15:35:47 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/11 18:09:56 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/12 13:34:54 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ int		main(int argc, char **argv)
 		ft_add_parameters_to_l_a(l_a, (argc - 1), argv);
 		ft_push_swap(l_a, argc - 1, l_b);
 	}
-	ft_print_result(l_a, (argc - 1));
 	return (0);
 }
