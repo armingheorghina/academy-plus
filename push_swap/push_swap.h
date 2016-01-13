@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 15:34:27 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/13 14:28:31 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/13 15:59:01 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,8 @@ void	ft_rotate_first_to_end(int *l_a, int aitems);
 void	ft_rotate_last_to_start(int *l_a, int aitems);
 int		*ft_bubble_sort(int *l_a, int aitems);
 void	ft_add_to_list(t_pslist **list, int *l_sorted, int *l_a, int items);
+int		ft_l_a_is_complete_and_sorted(int *l_a, int aitems, int items);
+int		ft_find_shortest_route_of_smallest_number(int *l_a, int aitems);
+int		ft_find_smallest_number(int *l_a, int aitems);
+int		ft_find_its_position(int *l_a, int aitems, int small);
 #endif

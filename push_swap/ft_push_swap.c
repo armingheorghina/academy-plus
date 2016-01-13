@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 17:06:41 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/13 13:49:00 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/13 16:00:09 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,22 +98,6 @@ void	ft_rotate_last_to_start(int *l_a, int aitems)
 	l_a[0] = temp;
 }
 
-int		ft_l_a_is_complete_and_sorted(int *l_a, int aitems, int items)
-{
-	int i;
-
-	i = 0;
-	if (aitems != items)
-		return (0);
-	while (i < aitems - 1)
-	{
-		if (l_a[i] > l_a[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 void	ft_push_swap(int *l_a, int items, int *l_b)
 {
 	int			aitems;
@@ -131,7 +115,7 @@ void	ft_push_swap(int *l_a, int items, int *l_b)
 
 	while (!ft_l_a_is_complete_and_sorted(l_a, aitems, items))
 	{
-		ft_find_shortest_route_of_smallest_number();
+		route = ft_find_shortest_route_of_smallest_number(l_a, aitems);
 	}
 
 	ft_swap(l_a, aitems); //sa
