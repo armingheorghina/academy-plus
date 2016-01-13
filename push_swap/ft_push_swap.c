@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 17:06:41 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/12 17:47:05 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/13 13:49:00 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_push(int *l_a, int *aitems, int *l_b, int *bitems)
 	(*aitems)++;
 }
 
-void	ft_rotate_to_start(int *l_a, int aitems)
+void	ft_rotate_first_to_end(int *l_a, int aitems)
 {
 	int temp;
 	int i;
@@ -81,7 +81,7 @@ void	ft_rotate_to_start(int *l_a, int aitems)
 	l_a[aitems - 1] = temp;
 }
 
-void	ft_rotate_to_end(int *l_a, int aitems)
+void	ft_rotate_last_to_start(int *l_a, int aitems)
 {
 	int temp;
 	int	i;
@@ -98,6 +98,22 @@ void	ft_rotate_to_end(int *l_a, int aitems)
 	l_a[0] = temp;
 }
 
+int		ft_l_a_is_complete_and_sorted(int *l_a, int aitems, int items)
+{
+	int i;
+
+	i = 0;
+	if (aitems != items)
+		return (0);
+	while (i < aitems - 1)
+	{
+		if (l_a[i] > l_a[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	ft_push_swap(int *l_a, int items, int *l_b)
 {
 	int			aitems;
@@ -106,19 +122,24 @@ void	ft_push_swap(int *l_a, int items, int *l_b)
 	t_pslist	*list;
 
 	l_sorted = ft_bubble_sort(l_a, items);
-	ft_print_result(l_sorted, items);
-	ft_putchar('\n');
+//	ft_print_result(l_sorted, items);
+//	ft_putchar('\n');
 	list = NULL;
 	ft_add_to_list(&list, l_sorted, l_a, items);
-	//TODO print list to verify coordinates;
 	aitems = items;
 	bitems = 0;
+
+	while (!ft_l_a_is_complete_and_sorted(l_a, aitems, items))
+	{
+		ft_find_shortest_route_of_smallest_number();
+	}
+
 	ft_swap(l_a, aitems); //sa
 	ft_push(l_b, &bitems, l_a, &aitems); //pb
-	ft_rotate_to_start(l_a, aitems); //ra
-	ft_rotate_to_end(l_a, aitems); //rra
+	ft_rotate_first_to_end(l_a, aitems); //ra
+	ft_rotate_last_to_start(l_a, aitems); //rra
 
 	ft_print_result(l_a, aitems);
 	ft_putchar('\n');
-	ft_print_result(l_b, bitems);
+//	ft_print_result(l_b, bitems);
 }

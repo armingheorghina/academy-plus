@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 15:34:27 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/12 17:47:12 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/13 14:28:31 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	ft_add_parameters_to_l_a(int *l_a, int items, char **argvi);
 void	ft_push_swap(int *l_a, int items, int *l_b);
 void	ft_swap(int *l_a, int aitems);
 void	ft_push(int *l_a, int *aitems, int *l_b, int *bitems);
-void	ft_rotate_to_start(int *l_a, int aitems);
-void	ft_rotate_to_end(int *l_a, int aitems);
+void	ft_rotate_first_to_end(int *l_a, int aitems);
+void	ft_rotate_last_to_start(int *l_a, int aitems);
 int		*ft_bubble_sort(int *l_a, int aitems);
 void	ft_add_to_list(t_pslist **list, int *l_sorted, int *l_a, int items);
 #endif
