@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 17:06:41 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/13 16:00:09 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/14 16:10:56 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,17 @@ void	ft_push_swap(int *l_a, int items, int *l_b)
 {
 	int			aitems;
 	int			bitems;
-	int			*l_sorted;
-	t_pslist	*list;
+	t_pslist	*ops;
 
-	l_sorted = ft_bubble_sort(l_a, items);
-//	ft_print_result(l_sorted, items);
-//	ft_putchar('\n');
-	list = NULL;
-	ft_add_to_list(&list, l_sorted, l_a, items);
+	ops = NULL;
 	aitems = items;
 	bitems = 0;
 
 	while (!ft_l_a_is_complete_and_sorted(l_a, aitems, items))
 	{
 		route = ft_find_shortest_route_of_smallest_number(l_a, aitems);
+		if (route == 1)
+			ft_execute_route_1(l_a, &aitems, l_b, &bitems, &ops);
 	}
 
 	ft_swap(l_a, aitems); //sa

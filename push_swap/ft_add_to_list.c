@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 17:09:59 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/12 17:47:10 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/14 16:06:04 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@ int		ft_find_expected(int i, int *l_a, int items, int *l_sorted)
 	return (j);
 }
 
-void	ft_add_to_list(t_pslist **list, int *l_sorted, int *l_a, int items)
+void	ft_add_to_list(t_pslist **ops, int *l_sorted, int *l_a, int items)
 {
 	int			i;
 	t_pslist	*start;
 
 	*list = (t_pslist*)malloc(sizeof(t_pslist));
 	i = 0;
-	start = *list;
-	start->initial_position = i;
-	start->expected_position = ft_find_expected(i, l_a, items, l_sorted);
+	start = *ops;
+	start->operation = xxxxxxxxxxxxxxxxx;
 	i++;
 	while (i < items)
 	{

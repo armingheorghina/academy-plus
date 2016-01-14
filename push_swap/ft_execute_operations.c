@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 14:36:34 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/13 16:23:18 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/14 15:18:52 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ int		ft_find_shortest_route_of_smallest_number(int *l_a, int aitems)
 	}
 	else //lista impara
 	{
-		
+		if ((aitems / 2) == position)
+			route = 0;
+		else if ((aitems / 2) < position)
+			route = 1;
+		else
+			route = -1;
 	}
+	return (route);
 }
