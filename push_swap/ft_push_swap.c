@@ -100,27 +100,36 @@ void	ft_rotate_last_to_start(int *l_a, int aitems)
 
 void	ft_push_swap(int *l_a, int items, int *l_b)
 {
-	int			aitems;
-	int			bitems;
+	int		aitems;
+	int		bitems;
+	int		route;
 	t_pslist	*ops;
 
 	ops = NULL;
 	aitems = items;
 	bitems = 0;
-
 	while (!ft_l_a_is_complete_and_sorted(l_a, aitems, items))
 	{
 		route = ft_find_shortest_route_of_smallest_number(l_a, aitems);
 		if (route == 1)
-			ft_execute_route_1(l_a, &aitems, l_b, &bitems, &ops);
+			ft_execute_route_1(l_a, aitems, &ops);
+		else if (route == -1)
+			ft_execute_route_1(l_a, aitems, &ops);
+			//ft_execute_route_2();
+		else
+			ft_execute_route_1(l_a, aitems, &ops);
+			//ft_select_a_random_route();
 	}
-
+	l_b[0] = 1;
+	bitems++;
+/*
 	ft_swap(l_a, aitems); //sa
 	ft_push(l_b, &bitems, l_a, &aitems); //pb
 	ft_rotate_first_to_end(l_a, aitems); //ra
 	ft_rotate_last_to_start(l_a, aitems); //rra
-
+*/
 	ft_print_result(l_a, aitems);
 	ft_putchar('\n');
+	ft_print_list(ops);
 //	ft_print_result(l_b, bitems);
 }

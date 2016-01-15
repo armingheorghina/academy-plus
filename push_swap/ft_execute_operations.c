@@ -32,10 +32,16 @@ int		ft_find_smallest_number(int *l_a, int aitems)
 {
 	int i;
 	int small;
-	int *sorted;
 	
-	sorted = ft_bubble_sort(l_a, aitems);
-	small = sorted[0];
+	small = l_a[0];
+	i = 1;
+	while (i < aitems)
+	{
+		if (l_a[i] < small)
+			small = l_a[i];
+		i++;
+	}
+	return (small);
 }
 
 int		ft_find_its_position(int *l_a, int aitems, int small)
@@ -56,7 +62,7 @@ int		ft_find_shortest_route_of_smallest_number(int *l_a, int aitems)
 {
 	int small;
 	int position;
-	int route; // -1 to left, 1 to right
+	int route; // 2 to left, 1 to right
 
 	small = ft_find_smallest_number(l_a, aitems);
 	position = ft_find_its_position(l_a, aitems, small);
@@ -65,7 +71,7 @@ int		ft_find_shortest_route_of_smallest_number(int *l_a, int aitems)
 		if (((aitems / 2) - 1) < position)
 			route = 1;
 		else
-			route = -1
+			route = 2;
 	}
 	else //lista impara
 	{
@@ -74,7 +80,7 @@ int		ft_find_shortest_route_of_smallest_number(int *l_a, int aitems)
 		else if ((aitems / 2) < position)
 			route = 1;
 		else
-			route = -1;
+			route = 2;
 	}
 	return (route);
 }

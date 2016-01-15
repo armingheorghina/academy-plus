@@ -12,37 +12,21 @@
 
 #include "push_swap.h"
 
-int		ft_find_expected(int i, int *l_a, int items, int *l_sorted)
+void	ft_add_to_list(t_pslist **begin, int o)
 {
-	int	j;
+	t_pslist	*new;
+	t_pslist	*list;
 
-	j = 0;
-	while (j < items)
+	new = (t_pslist*)malloc(sizeof(*new));
+	new->operation = o;
+	new->next = NULL;
+	list = *begin;
+	if (list == NULL)
+		*begin = new;
+	else
 	{
-		if (l_a[i] == l_sorted[j])
-			return (j);
-		j++;
+		while (list->next)
+			list = list->next;
+		list->next = new;
 	}
-	return (j);
-}
-
-void	ft_add_to_list(t_pslist **ops, int *l_sorted, int *l_a, int items)
-{
-	int			i;
-	t_pslist	*start;
-
-	*list = (t_pslist*)malloc(sizeof(t_pslist));
-	i = 0;
-	start = *ops;
-	start->operation = xxxxxxxxxxxxxxxxx;
-	i++;
-	while (i < items)
-	{
-		start->next = (t_pslist*)malloc(sizeof(t_pslist));
-		start = start->next;
-		start->initial_position = i;
-		start->expected_position =  ft_find_expected(i, l_a, items, l_sorted);
-		i++;
-	}
-	start->next = NULL;
 }
