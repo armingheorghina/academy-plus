@@ -55,11 +55,9 @@ void	ft_execute_route_2(int *l_a, int *aitems, t_pslist **ops, int *l_b, int *bi
 {
 	int small;
 	int next;
-	int ok;
 
 	small = ft_find_smallest_number(l_a, *aitems);
 	next = ft_find_second_small_number(l_a, *aitems);
-	ok = 0;
 	while (!ft_smallest_is_first(l_a, *aitems))
 	{
 		if (ft_next_is_in_formation(l_a, aitems, next, small))
