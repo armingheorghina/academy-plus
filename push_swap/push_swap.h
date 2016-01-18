@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 15:34:27 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/14 16:10:57 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/18 17:48:48 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ int	ft_l_a_is_sorted(int *l_a, int aitems);
 int	ft_find_shortest_route_of_smallest_number(int *l_a, int aitems);
 int	ft_find_smallest_number(int *l_a, int aitems);
 int	ft_find_its_position(int *l_a, int aitems, int small);
-void	ft_execute_route_1(int *l_a, int aitems, t_pslist **ops);
+void	ft_execute_route_1(int *l_a, int *aitems, t_pslist **ops, int *l_b, int *bitems);
 void	ft_execute_route_2(int *l_a, int *aitems, t_pslist **ops, int *l_b, int *bitems);
 int	ft_smallest_is_first(int *tab, int items);
 void	ft_add_to_list(t_pslist **ops, int o);
+int		ft_l_a_is_partialy_sorted(int *l_a, int aitems);
+void	ft_execute_route_extra(int *l_a, int aitems, t_pslist **ops);
 #endif

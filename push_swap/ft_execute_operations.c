@@ -6,11 +6,25 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 14:36:34 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/14 15:18:52 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/18 15:21:36 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int		ft_l_a_is_sorted(int *l_a, int aitems)
+{
+	int i;
+
+	i = 0;
+	while (i < aitems - 1)
+	{
+		if (l_a[i] > l_a[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int		ft_l_a_is_complete_and_sorted(int *l_a, int aitems, int items)
 {

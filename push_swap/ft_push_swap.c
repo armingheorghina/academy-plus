@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 17:06:41 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/14 16:10:56 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/18 17:48:45 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,33 +110,33 @@ void	ft_push_swap(int *l_a, int items, int *l_b)
 	bitems = 0;
 	while (!ft_l_a_is_complete_and_sorted(l_a, aitems, items))
 	{
-		while (!ft_l_a_is_sorted(l_a, aitems))
-		{
-			route = ft_find_shortest_route_of_smallest_number(l_a, aitems);
-			if (route == 1)
+	//	if (ft_l_a_is_partialy_sorted(l_a, aitems))
+	//		ft_execute_route_extra(l_a, aitems, &ops);
+	//	else //TODO list sorted but last 2 are not!!
+	//	{
+			while (!ft_l_a_is_sorted(l_a, aitems))
 			{
-				ft_execute_route_1(l_a, aitems, &ops);
-				ft_push(l_b, &bitems, l_a, &aitems);
-				ft_add_to_list(&ops, 5);
+				route = ft_find_shortest_route_of_smallest_number(l_a, aitems);
+				if (route == 1)
+					ft_execute_route_1(l_a, &aitems, &ops, l_b, &bitems);
+				else
+					ft_execute_route_2(l_a, &aitems, &ops, l_b, &bitems);
 			}
-			else
-				ft_execute_route_2(l_a, &aitems, &ops, l_b, &bitems);
-
-		}
-		if (!ft_l_a_is_complete_and_sorted(l_a, aitems, items))
-		{
-			ft_push(l_a, &aitems, l_b, &bitems);
-			ft_add_to_list(&ops, 4);
-		}
+			if (!ft_l_a_is_complete_and_sorted(l_a, aitems, items))
+			{
+				ft_push(l_a, &aitems, l_b, &bitems);
+				ft_add_to_list(&ops, 4);
+			}
+	//	}
 	}
 	/*
 	   ft_swap(l_a, aitems); //sa
 	   ft_push(l_b, &bitems, l_a, &aitems); //pb
 	   ft_rotate_first_to_end(l_a, aitems); //ra
 	   ft_rotate_last_to_start(l_a, aitems); //rra
-	 */
-	ft_print_result(l_a, aitems);
-	ft_putchar('\n');
+	   */
+	//	ft_print_result(l_a, aitems);
+	//	ft_putchar('\n');
 	ft_print_list(ops);
 	//	ft_print_result(l_b, bitems);
 }
