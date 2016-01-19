@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 15:34:27 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/18 17:48:48 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/19 13:49:10 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void	ft_execute_route_1(int *l_a, int *aitems, t_pslist **ops, int *l_b, int *bi
 void	ft_execute_route_2(int *l_a, int *aitems, t_pslist **ops, int *l_b, int *bitems);
 int	ft_smallest_is_first(int *tab, int items);
 void	ft_add_to_list(t_pslist **ops, int o);
-int		ft_l_a_is_partialy_sorted(int *l_a, int aitems);
-void	ft_execute_route_extra(int *l_a, int aitems, t_pslist **ops);
+int		ft_nbr_of_sorted_is_bigger_than_unsorted(int *l_a, int aitems);
+void	ft_solve_case_special(int *l_a, int *aitems, t_pslist **ops, int *l_b, int *bitems);
 #endif

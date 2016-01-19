@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 17:06:41 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/18 17:48:45 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/19 16:58:23 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,12 @@ void	ft_push_swap(int *l_a, int items, int *l_b)
 	ops = NULL;
 	aitems = items;
 	bitems = 0;
-	while (!ft_l_a_is_complete_and_sorted(l_a, aitems, items))
+	if (ft_nbr_of_sorted_is_bigger_than_unsorted(l_a, aitems))
+		ft_solve_case_special(l_a, &aitems, &ops, l_b, &bitems);
+	else
 	{
-	//	if (ft_l_a_is_partialy_sorted(l_a, aitems))
-	//		ft_execute_route_extra(l_a, aitems, &ops);
-	//	else //TODO list sorted but last 2 are not!!
-	//	{
+		while (!ft_l_a_is_complete_and_sorted(l_a, aitems, items))
+		{
 			while (!ft_l_a_is_sorted(l_a, aitems))
 			{
 				route = ft_find_shortest_route_of_smallest_number(l_a, aitems);
@@ -127,7 +127,7 @@ void	ft_push_swap(int *l_a, int items, int *l_b)
 				ft_push(l_a, &aitems, l_b, &bitems);
 				ft_add_to_list(&ops, 4);
 			}
-	//	}
+		}
 	}
 	/*
 	   ft_swap(l_a, aitems); //sa
