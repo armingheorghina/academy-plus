@@ -6,18 +6,18 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 14:36:34 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/20 18:35:23 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/20 23:52:25 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_l_a_is_sorted(int *l_a, int aitems)
+int		ft_l_a_is_sorted(int *l_a)
 {
 	int i;
 
 	i = 0;
-	while (i < aitems - 1)
+	while (i < g_aitems - 1)
 	{
 		if (l_a[i] > l_a[i + 1])
 			return (0);
@@ -26,14 +26,14 @@ int		ft_l_a_is_sorted(int *l_a, int aitems)
 	return (1);
 }
 
-int		ft_l_a_is_complete_and_sorted(int *l_a, int aitems, int items)
+int		ft_l_a_is_complete_and_sorted(int *l_a, int items)
 {
 	int i;
 
 	i = 0;
-	if (aitems != items)
+	if (g_aitems != items)
 		return (0);
-	while (i < aitems - 1)
+	while (i < g_aitems - 1)
 	{
 		if (l_a[i] > l_a[i + 1])
 			return (0);
@@ -42,14 +42,14 @@ int		ft_l_a_is_complete_and_sorted(int *l_a, int aitems, int items)
 	return (1);
 }
 
-int		ft_find_smallest_number(int *l_a, int aitems)
+int		ft_find_smallest_number(int *l_a)
 {
 	int i;
 	int small;
 
 	small = l_a[0];
 	i = 1;
-	while (i < aitems)
+	while (i < g_aitems)
 	{
 		if (l_a[i] < small)
 			small = l_a[i];
@@ -58,12 +58,12 @@ int		ft_find_smallest_number(int *l_a, int aitems)
 	return (small);
 }
 
-int		ft_find_its_position(int *l_a, int aitems, int small)
+int		ft_find_its_position(int *l_a, int small)
 {
 	int i;
 
 	i = 0;
-	while (i < aitems)
+	while (i < g_aitems)
 	{
 		if (l_a[i] == small)
 			return (i);
@@ -72,26 +72,28 @@ int		ft_find_its_position(int *l_a, int aitems, int small)
 	return (-1);
 }
 
-int		ft_find_shortest_route_of_smallest_number(int *l_a, int aitems)
+int		ft_find_shortest_route_of_smallest_number(int *l_a)
 {
 	int small;
 	int position;
 	int route;
 
-	small = ft_find_smallest_number(l_a, aitems);
-	position = ft_find_its_position(l_a, aitems, small);
-	if ((aitems % 2) == 0)
+	small = ft_find_smallest_number(l_a);
+	ft_putnbr(small);
+	position = ft_find_its_position(l_a, small);
+	ft_putnbr(position);
+	if ((g_aitems % 2) == 0)
 	{
-		if (((aitems / 2) - 1) < position)
+		if (((g_aitems / 2) - 1) < position)
 			route = 1;
 		else
 			route = 2;
 	}
 	else
 	{
-		if ((aitems / 2) == position)
+		if ((g_aitems / 2) == position)
 			route = 0;
-		else if ((aitems / 2) < position)
+		else if ((g_aitems / 2) < position)
 			route = 1;
 		else
 			route = 2;

@@ -6,39 +6,39 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 17:03:52 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/20 18:38:05 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/20 23:34:20 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		ft_find_second_small_number(int *l_a, int aitems)
+int		ft_find_second_small_number(int *l_a)
 {
 	int *copy;
 	int i;
 	int temp;
 
-	copy = (int*)malloc(sizeof(*copy) * (aitems));
+	copy = (int*)malloc(sizeof(*copy) * (g_aitems));
 	i = 0;
-	while (i < aitems)
+	while (i < g_aitems)
 	{
 		copy[i] = l_a[i];
 		i++;
 	}
-	copy = ft_bubble_sort(copy, aitems);
+	copy = ft_bubble_sort(copy);
 	temp = copy[1];
 	free(copy);
 	return (temp);
 }
 
-int		ft_next_is_in_formation(int *l_a, int *aitems, int next, int small)
+int		ft_next_is_in_formation(int *l_a, int next, int small)
 {
 	int i;
 	int temp;
 	int temp2;
 
 	i = 0;
-	while (i < *aitems)
+	while (i < g_aitems)
 	{
 		if (l_a[i] == next)
 			temp = i;
@@ -51,46 +51,45 @@ int		ft_next_is_in_formation(int *l_a, int *aitems, int next, int small)
 	return (0);
 }
 
-void	ft_execute_route_2(int *l_a, int *aitems, t_pslist **ops, int *l_b,
-		int *bitems)
+void	ft_execute_route_2(int *l_a, t_pslist **ops, int *l_b)
 {
 	int small;
 	int next;
 
-	small = ft_find_smallest_number(l_a, *aitems);
-	next = ft_find_second_small_number(l_a, *aitems);
-	while (!ft_smallest_is_first(l_a, *aitems))
+	small = ft_find_smallest_number(l_a);
+	next = ft_find_second_small_number(l_a);
+	while (!ft_smallest_is_first(l_a))
 	{
-		if (ft_next_is_in_formation(l_a, aitems, next, small))
+		if (ft_next_is_in_formation(l_a, next, small))
 		{
 			if (l_a[0] == next && l_a[1] == small)
 			{
-				ft_swap(l_a, *aitems);
+				ft_swap(l_a);
 				ft_add_to_list(ops, 1);
 			}
 			else
 			{
 				if (l_a[0] != next)
 				{
-					ft_rotate_first_to_end(l_a, *aitems);
+					ft_rotate_first_to_end(l_a);
 					ft_add_to_list(ops, 6);
 				}
 				else
 				{
-					ft_swap(l_a, *aitems);
+					ft_swap(l_a);
 					ft_add_to_list(ops, 1);
 				}
 			}
 		}
 		else
 		{
-			ft_rotate_first_to_end(l_a, *aitems);
+			ft_rotate_first_to_end(l_a);
 			ft_add_to_list(ops, 6);
 		}
 	}
-	if (!ft_l_a_is_sorted(l_a, *aitems))
+	if (!ft_l_a_is_sorted(l_a))
 	{
-		ft_push(l_b, bitems, l_a, aitems);
+		ft_pushb(l_b, l_a);
 		ft_add_to_list(ops, 5);
 	}
 }

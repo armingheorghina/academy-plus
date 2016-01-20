@@ -6,18 +6,18 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:23:47 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/12 17:07:04 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/20 22:13:02 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		*ft_tab_copy(int *copy, int *l_a, int aitems)
+int		*ft_tab_copy(int *copy, int *l_a)
 {
 	int i;
 
 	i = 0;
-	while (i < aitems)
+	while (i < g_aitems)
 	{
 		copy[i] = l_a[i];
 		i++;
@@ -34,19 +34,19 @@ void	ft_swap_2(int *a, int *b)
 	*b = temp;
 }
 
-int		*ft_bubble_sort(int *l_a, int aitems)
+int		*ft_bubble_sort(int *l_a)
 {
 	int	*copy;
 	int i;
 	int j;
 
 	i = 0;
-	copy = (int*)malloc(sizeof(*copy) * aitems);
-	copy = ft_tab_copy(copy, l_a, aitems);
-	while (i < aitems)
+	copy = (int*)malloc(sizeof(*copy) * g_aitems);
+	copy = ft_tab_copy(copy, l_a);
+	while (i < g_aitems)
 	{
 		j = i + 1;
-		while (j < aitems)
+		while (j < g_aitems)
 		{
 			if (copy[j] < copy[i])
 				ft_swap_2(&copy[i], &copy[j]);
