@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 15:35:47 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/19 16:58:25 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/20 15:21:54 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		main(int argc, char **argv)
 		ft_error_and_exit();
 	else
 	{
-		//ft_validat_input(argc, argv); TODO
+		ft_validate_input(argc, argv);
 		ft_add_parameters_to_l_a(l_a, (argc - 1), argv);
 		ft_push_swap(l_a, argc - 1, l_b);
 	}

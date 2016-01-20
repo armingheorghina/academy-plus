@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 15:48:04 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/19 16:56:28 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/20 18:40:27 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_nbr_of_sorted_is_bigger_than_unsorted(int *l_a, int aitems)
 		i++;
 	}
 	free(sorted);
-	if (ok > i - ok)
+	if (ok > aitems - ok)
 		return (1);
 	return (0);
 }
@@ -74,7 +74,7 @@ int		ft_count_unsorted(int *l_a, int aitems)
 	return (aitems - ok);
 }
 
-int	ft_other_than_first_two_list_is_sorted(int *l_a, int aitems)
+int		ft_other_than_first_two_list_is_sorted(int *l_a, int aitems)
 {
 	int i;
 
@@ -86,6 +86,24 @@ int	ft_other_than_first_two_list_is_sorted(int *l_a, int aitems)
 		i++;
 	}
 	return (1);
+}
+
+void	ft_execute_operations_case_x(int *l_a, int *aitems, t_pslist **ops)
+{
+	ft_swap(l_a, *aitems);
+	ft_add_to_list(ops, 1);
+	ft_rotate_first_to_end(l_a, *aitems);
+	ft_add_to_list(ops, 6);
+	ft_rotate_first_to_end(l_a, *aitems);
+	ft_add_to_list(ops, 6);
+}
+
+void	ft_execute_operations_case_y(int *l_a, int *aitems, t_pslist **ops, int *l_b, int *bitems)
+{
+	ft_push(l_a, aitems, l_b, bitems);
+	ft_add_to_list(ops, 4);
+	ft_rotate_first_to_end(l_a, *aitems);
+	ft_add_to_list(ops, 6);
 }
 
 void	ft_solve_case_special(int *l_a, int *aitems, t_pslist **ops, int *l_b, int *bitems)
@@ -108,21 +126,7 @@ void	ft_solve_case_special(int *l_a, int *aitems, t_pslist **ops, int *l_b, int 
 				count++;
 			}
 			if (unsorted == count && l_a[0] > l_a[1] && ft_other_than_first_two_list_is_sorted(l_a, *aitems))
-			{
-				ft_swap(l_a, *aitems);
-				ft_add_to_list(ops, 1);
-				ft_rotate_first_to_end(l_a, *aitems);
-				ft_add_to_list(ops, 6);
-				ft_rotate_first_to_end(l_a, *aitems);
-				ft_add_to_list(ops, 6);
-			}
-		//	else if (unsorted == count && l_a[0] < l_a[1] && ft_other_than_first_two_list_is_sorted(l_a, *aitems))
-		//	{
-		//		ft_rotate_first_to_end(l_a, *aitems);
-		//		ft_add_to_list(ops, 6);
-		//		ft_rotate_first_to_end(l_a, *aitems);
-		//		ft_add_to_list(ops, 6);
-		//	}
+				ft_execute_operations_case_x(l_a, aitems, ops);
 			else
 			{
 				ft_push(l_b, bitems, l_a, aitems);
@@ -132,25 +136,6 @@ void	ft_solve_case_special(int *l_a, int *aitems, t_pslist **ops, int *l_b, int 
 			}
 		}
 		if (!ft_l_a_is_complete_and_sorted(l_a, *aitems, items))
-		{
-			ft_push(l_a, aitems, l_b, bitems);
-			ft_add_to_list(ops, 4);
-			ft_rotate_first_to_end(l_a, *aitems);
-			ft_add_to_list(ops, 6);
-		}
+			ft_execute_operations_case_y(l_a, aitems, ops, l_b, bitems);
 	}
-
-
-	/*
-	   ft_rotate_last_to_start(l_a, aitems);
-	   ft_add_to_list(ops, 9);
-	   ft_rotate_last_to_start(l_a, aitems);
-	   ft_add_to_list(ops, 9);
-	   ft_swap(l_a, aitems);
-	   ft_add_to_list(ops, 1);
-	   ft_rotate_first_to_end(l_a, aitems);
-	   ft_add_to_list(ops, 6);
-	   ft_rotate_first_to_end(l_a, aitems);
-	   ft_add_to_list(ops, 6);
-	 */
 }

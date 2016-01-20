@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 14:36:34 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/18 15:21:36 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/20 18:35:23 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		ft_find_smallest_number(int *l_a, int aitems)
 {
 	int i;
 	int small;
-	
+
 	small = l_a[0];
 	i = 1;
 	while (i < aitems)
@@ -69,25 +69,25 @@ int		ft_find_its_position(int *l_a, int aitems, int small)
 			return (i);
 		i++;
 	}
-	return (-1); //in case of error
+	return (-1);
 }
 
 int		ft_find_shortest_route_of_smallest_number(int *l_a, int aitems)
 {
 	int small;
 	int position;
-	int route; // 2 to left, 1 to right
+	int route;
 
 	small = ft_find_smallest_number(l_a, aitems);
 	position = ft_find_its_position(l_a, aitems, small);
-	if ((aitems % 2) == 0) //lista para de numere
+	if ((aitems % 2) == 0)
 	{
 		if (((aitems / 2) - 1) < position)
 			route = 1;
 		else
 			route = 2;
 	}
-	else //lista impara
+	else
 	{
 		if ((aitems / 2) == position)
 			route = 0;

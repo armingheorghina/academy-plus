@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 14:47:43 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/18 15:25:55 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/20 18:30:57 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,48 @@ void	ft_print_list(t_pslist *list)
 			ft_putstr_space("ss");
 			start = start->next;
 		}
-		else if (start->operation == 1)
+		else if (start->operation == 1 && start->next)
 			ft_putstr_space("sa");
-		else if (start->operation == 2)
+		else if (start->operation == 1)
+			ft_putstr("sa");
+		else if (start->operation == 2 && start->next)
 			ft_putstr_space("sb");
-		else if (start->operation == 4)
+		else if (start->operation == 2)
+			ft_putstr("sb");
+		else if (start->operation == 4 && start->next)
 			ft_putstr_space("pa");
-		else if (start->operation == 5)
+		else if (start->operation == 4)
+			ft_putstr("pa");
+		else if (start->operation == 5 && start->next)
 			ft_putstr_space("pb");
+		else if (start->operation == 5)
+			ft_putstr("pb");
 		else if (start->next && start->operation == 6 && (start->next)->operation == 7)
 		{
 			ft_putstr_space("rr");
 			start = start->next;
 		}
-		else if (start->operation == 6)
+		else if (start->operation == 6 && start->next)
 			ft_putstr_space("ra");
-		else if (start->operation == 7)
+		else if (start->operation == 6)
+			ft_putstr("ra");
+		else if (start->operation == 7 && start->next)
 			ft_putstr_space("rb");
+		else if (start->operation == 7)
+			ft_putstr("rb");
 		else if (start->next && start->operation == 9 && (start->next)->operation == 10)
 		{
 			ft_putstr_space("rrr");
 			start = start->next;
 		}
-		else if (start->operation == 9)
+		else if (start->operation == 9 && start->next)
 			ft_putstr_space("rra");
-		else if (start->operation == 10)
+		else if (start->operation == 9)
+			ft_putstr("rra");
+		else if (start->operation == 10 && start->next)
 			ft_putstr_space("rrb");
+		else if (start->operation == 10)
+			ft_putstr("rrb");
 		start = start->next;
 	}
 	ft_putchar('\n');

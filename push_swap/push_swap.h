@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 15:34:27 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/19 13:49:10 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/20 15:21:16 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef	struct		s_pslist
 }					t_pslist;
 
 void	ft_error_and_exit(void);
+void	ft_validate_input(int argc, char **argv);
 void	ft_print_result(int *l_a, int items);
 void	ft_print_list(t_pslist *list);
 void	ft_add_parameters_to_l_a(int *l_a, int items, char **argvi);

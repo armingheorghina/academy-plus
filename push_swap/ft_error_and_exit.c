@@ -6,13 +6,14 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 15:40:47 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/11 15:46:53 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/20 18:34:20 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_error_and_exit()
+void	ft_error_and_exit(void)
 {
+	ft_putstr_fd("Error\n", 2);
 	exit(0);
 }

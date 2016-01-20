@@ -6,13 +6,13 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/14 15:19:08 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/18 17:48:47 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/20 18:37:07 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_smallest_is_first(int *l_a, int aitems)
+int		ft_smallest_is_first(int *l_a, int aitems)
 {
 	int i;
 	int small;
@@ -29,6 +29,7 @@ int	ft_smallest_is_first(int *l_a, int aitems)
 		return (1);
 	return (0);
 }
+
 int		ft_find_biggest_number(int *l_a, int aitems)
 {
 	int i;
@@ -45,7 +46,8 @@ int		ft_find_biggest_number(int *l_a, int aitems)
 	return (big);
 }
 
-int		ft_l_a_contains_small_and_big_at_start_and_rest_is_sorted(int *l_a, int aitems)
+int		ft_l_a_contains_small_and_big_at_start_and_rest_is_sorted(int *l_a,
+		int aitems)
 {
 	int i;
 	int small;
@@ -67,7 +69,8 @@ int		ft_l_a_contains_small_and_big_at_start_and_rest_is_sorted(int *l_a, int ait
 	return (1);
 }
 
-void	ft_execute_route_1(int *l_a, int *aitems, t_pslist **ops, int *l_b, int *bitems)
+void	ft_execute_route_1(int *l_a, int *aitems, t_pslist **ops, int *l_b,
+		int *bitems)
 {
 	while (!ft_smallest_is_first(l_a, *aitems))
 	{

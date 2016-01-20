@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_add_parameters_to_l_a.c                         :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/11 16:32:25 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/20 16:26:45 by vdruta           ###   ########.fr       */
+/*   Created: 2016/01/20 18:42:37 by vdruta            #+#    #+#             */
+/*   Updated: 2016/01/20 18:50:51 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_add_parameters_to_l_a(int *l_a, int items, char **argv)
+void	ft_swap(int *l_a, int aitems)
 {
-	int i;
-	int j;
+	int	temp;
 
-	i = 0;
-	while (i < items)
-	{
-		l_a[i] = ft_atoi(argv[i + 1]);
-		i++;
-	}
-	i = 0;
-	while (i < items)
-	{
-		j = i + 1;
-		while (j < items)
-		{
-			if (l_a[i] == l_a[j])
-				ft_error_and_exit();
-			j++;
-		}
-		i++;
-	}
+	if (aitems < 2)
+		return ;
+	temp = l_a[0];
+	l_a[0] = l_a[1];
+	l_a[1] = temp;
 }

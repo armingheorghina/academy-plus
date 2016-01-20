@@ -6,13 +6,13 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 17:03:52 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/18 17:04:13 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/20 18:38:05 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_find_second_small_number(int *l_a, int aitems)
+int		ft_find_second_small_number(int *l_a, int aitems)
 {
 	int *copy;
 	int i;
@@ -51,7 +51,8 @@ int		ft_next_is_in_formation(int *l_a, int *aitems, int next, int small)
 	return (0);
 }
 
-void	ft_execute_route_2(int *l_a, int *aitems, t_pslist **ops, int *l_b, int *bitems)
+void	ft_execute_route_2(int *l_a, int *aitems, t_pslist **ops, int *l_b,
+		int *bitems)
 {
 	int small;
 	int next;
