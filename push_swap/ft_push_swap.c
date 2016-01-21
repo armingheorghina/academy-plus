@@ -164,7 +164,7 @@ void	ft_rotate_last_to_start(int *l_a)
 
 void	ft_push_swap(int *l_a, int items, int *l_b)
 {
-	int			route;
+	int		route;
 	t_pslist	*ops;
 
 	ops = NULL;
@@ -172,6 +172,8 @@ void	ft_push_swap(int *l_a, int items, int *l_b)
 	g_bitems = 0;
 	if (ft_nbr_of_sorted_is_bigger_than_unsorted(l_a))
 		ft_solve_case_special(l_a, &ops, l_b);
+	else if (ft_l_a_is_sorted_decreasing(l_a) && items > 2)
+		ft_solve_decreasing_list(l_a, &ops, l_b);
 	else
 	{
 		while (!ft_l_a_is_complete_and_sorted(l_a, items))
@@ -188,8 +190,6 @@ void	ft_push_swap(int *l_a, int items, int *l_b)
 				else
 				{
 					route = ft_find_shortest_route_of_smallest_number(l_a);
-					ft_putnbr(route);
-					ft_putnbr(g_aitems);
 					if (route == 1)
 						ft_execute_route_1(l_a, &ops, l_b);
 					else

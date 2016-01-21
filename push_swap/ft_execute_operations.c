@@ -79,9 +79,7 @@ int		ft_find_shortest_route_of_smallest_number(int *l_a)
 	int route;
 
 	small = ft_find_smallest_number(l_a);
-	ft_putnbr(small);
 	position = ft_find_its_position(l_a, small);
-	ft_putnbr(position);
 	if ((g_aitems % 2) == 0)
 	{
 		if (((g_aitems / 2) - 1) < position)

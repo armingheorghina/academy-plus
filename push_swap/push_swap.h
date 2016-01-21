@@ -50,4 +50,6 @@ int		ft_smallest_is_first(int *tab);
 void	ft_add_to_list(t_pslist **ops, int o);
 int		ft_nbr_of_sorted_is_bigger_than_unsorted(int *l_a);
 void	ft_solve_case_special(int *l_a, t_pslist **ops, int *l_b);
+void	ft_solve_decreasing_list(int *l_a, t_pslist **ops, int *l_b);
+int	ft_l_a_is_sorted_decreasing(int *l_a);
 #endif
