@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 17:03:52 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/20 23:34:20 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/21 16:34:47 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,33 +63,18 @@ void	ft_execute_route_2(int *l_a, t_pslist **ops, int *l_b)
 		if (ft_next_is_in_formation(l_a, next, small))
 		{
 			if (l_a[0] == next && l_a[1] == small)
-			{
-				ft_swap(l_a);
-				ft_add_to_list(ops, 1);
-			}
+				ft_swap(l_a, ops);
 			else
 			{
 				if (l_a[0] != next)
-				{
-					ft_rotate_first_to_end(l_a);
-					ft_add_to_list(ops, 6);
-				}
+					ft_rotate_first_to_end(l_a, ops);
 				else
-				{
-					ft_swap(l_a);
-					ft_add_to_list(ops, 1);
-				}
+					ft_swap(l_a, ops);
 			}
 		}
 		else
-		{
-			ft_rotate_first_to_end(l_a);
-			ft_add_to_list(ops, 6);
-		}
+			ft_rotate_first_to_end(l_a, ops);
 	}
 	if (!ft_l_a_is_sorted(l_a))
-	{
-		ft_pushb(l_b, l_a);
-		ft_add_to_list(ops, 5);
-	}
+		ft_pushb(l_b, l_a, ops);
 }

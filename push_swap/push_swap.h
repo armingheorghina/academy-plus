@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 15:34:27 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/20 23:34:23 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/21 17:16:35 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	ft_print_result(int *l_a, int items);
 void	ft_print_list(t_pslist *list);
 void	ft_add_parameters_to_l_a(int *l_a, int items, char **argv);
 void	ft_push_swap(int *l_a, int items, int *l_b);
-void	ft_swap(int *l_a);
-void	ft_swapb(int *l_a);
-void	ft_push(int *l_a, int *l_b);
-void	ft_pushb(int *l_a, int *l_b);
-void	ft_rotate_first_to_end(int *l_a);
-void	ft_rotate_first_to_endb(int *l_a);
-void	ft_rotate_last_to_start(int *l_a);
-void	ft_rotate_last_to_startb(int *l_a);
+void	ft_swap(int *l_a, t_pslist **ops);
+void	ft_swapb(int *l_a, t_pslist **ops);
+void	ft_push(int *l_a, int *l_b, t_pslist **ops);
+void	ft_pushb(int *l_a, int *l_b, t_pslist **ops);
+void	ft_rotate_first_to_end(int *l_a, t_pslist **ops);
+void	ft_rotate_first_to_endb(int *l_a, t_pslist **ops);
+void	ft_rotate_last_to_start(int *l_a, t_pslist **ops);
+void	ft_rotate_last_to_startb(int *l_a, t_pslist **ops);
 int	*ft_bubble_sort(int *l_a);
 
 int	ft_l_a_is_complete_and_sorted(int *l_a, int items);

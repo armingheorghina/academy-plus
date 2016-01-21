@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 15:48:04 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/20 22:43:56 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/21 17:16:33 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_nbr_of_sorted_is_bigger_than_unsorted(int *l_a)
 		if (l_a[i] == sorted[i])
 			ok++;
 		else
-			break;
+			break ;
 		i++;
 	}
 	free(sorted);
@@ -67,7 +67,7 @@ int		ft_count_unsorted(int *l_a)
 		if (l_a[i] == sorted[i])
 			ok++;
 		else
-			break;
+			break ;
 		i++;
 	}
 	free(sorted);
@@ -90,20 +90,15 @@ int		ft_other_than_first_two_list_is_sorted(int *l_a)
 
 void	ft_execute_operations_case_x(int *l_a, t_pslist **ops)
 {
-	ft_swap(l_a);
-	ft_add_to_list(ops, 1);
-	ft_rotate_first_to_end(l_a);
-	ft_add_to_list(ops, 6);
-	ft_rotate_first_to_end(l_a);
-	ft_add_to_list(ops, 6);
+	ft_swap(l_a, ops);
+	ft_rotate_first_to_end(l_a, ops);
+	ft_rotate_first_to_end(l_a, ops);
 }
 
 void	ft_execute_operations_case_y(int *l_a, t_pslist **ops, int *l_b)
 {
-	ft_push(l_a, l_b);
-	ft_add_to_list(ops, 4);
-	ft_rotate_first_to_end(l_a);
-	ft_add_to_list(ops, 6);
+	ft_push(l_a, l_b, ops);
+	ft_rotate_first_to_end(l_a, ops);
 }
 
 void	ft_solve_case_special(int *l_a, t_pslist **ops, int *l_b)
@@ -121,16 +116,14 @@ void	ft_solve_case_special(int *l_a, t_pslist **ops, int *l_b)
 		{
 			while (!ft_biggest_is_first(l_a))
 			{
-				ft_rotate_last_to_start(l_a);
-				ft_add_to_list(ops, 9);
+				ft_rotate_last_to_start(l_a, ops);
 				count++;
 			}
 			if (unsorted == count && l_a[0] > l_a[1] && ft_other_than_first_two_list_is_sorted(l_a))
 				ft_execute_operations_case_x(l_a, ops);
 			else
 			{
-				ft_pushb(l_b, l_a);
-				ft_add_to_list(ops, 5);
+				ft_pushb(l_b, l_a, ops);
 				count--;
 				unsorted--;
 			}

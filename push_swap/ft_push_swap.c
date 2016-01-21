@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 17:06:41 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/20 23:52:28 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/21 16:29:48 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_recreate_borigin(int *l_b)
 	(g_aitems)--;
 }
 
-void	ft_pushb(int *l_a, int *l_b)
+void	ft_pushb(int *l_a, int *l_b, t_pslist **ops)
 {
 	int	temp;
 	int	temp2;
@@ -64,9 +64,10 @@ void	ft_pushb(int *l_a, int *l_b)
 		l_a[0] = l_b[0];
 	ft_recreate_borigin(l_b);
 	(g_bitems)++;
+	ft_add_to_list(ops, 5);
 }
 
-void	ft_push(int *l_a, int *l_b)
+void	ft_push(int *l_a, int *l_b, t_pslist **ops)
 {
 	int	temp;
 	int	temp2;
@@ -92,9 +93,10 @@ void	ft_push(int *l_a, int *l_b)
 		l_a[0] = l_b[0];
 	ft_recreate_origin(l_b);
 	(g_aitems)++;
+	ft_add_to_list(ops, 4);
 }
 
-void	ft_rotate_first_to_endb(int *l_a)
+void	ft_rotate_first_to_endb(int *l_a, t_pslist **ops)
 {
 	int temp;
 	int i;
@@ -109,9 +111,10 @@ void	ft_rotate_first_to_endb(int *l_a)
 		i++;
 	}
 	l_a[g_bitems - 1] = temp;
+	ft_add_to_list(ops, 7);
 }
 
-void	ft_rotate_first_to_end(int *l_a)
+void	ft_rotate_first_to_end(int *l_a, t_pslist **ops)
 {
 	int temp;
 	int i;
@@ -126,9 +129,10 @@ void	ft_rotate_first_to_end(int *l_a)
 		i++;
 	}
 	l_a[g_aitems - 1] = temp;
+	ft_add_to_list(ops, 6);
 }
 
-void	ft_rotate_last_to_startb(int *l_a)
+void	ft_rotate_last_to_startb(int *l_a, t_pslist **ops)
 {
 	int temp;
 	int	i;
@@ -143,9 +147,10 @@ void	ft_rotate_last_to_startb(int *l_a)
 		i--;
 	}
 	l_a[0] = temp;
+	ft_add_to_list(ops, 10);
 }
 
-void	ft_rotate_last_to_start(int *l_a)
+void	ft_rotate_last_to_start(int *l_a, t_pslist **ops)
 {
 	int temp;
 	int	i;
@@ -160,6 +165,7 @@ void	ft_rotate_last_to_start(int *l_a)
 		i--;
 	}
 	l_a[0] = temp;
+	ft_add_to_list(ops, 9);
 }
 
 void	ft_push_swap(int *l_a, int items, int *l_b)
@@ -182,10 +188,8 @@ void	ft_push_swap(int *l_a, int items, int *l_b)
 			{
 				if (g_aitems == 3 && l_a[0] < l_a[1] && l_a[1] > l_a[2] && l_a[0] < l_a[2])
 				{
-					ft_swap(l_a);
-					ft_add_to_list(&ops, 1);
-					ft_rotate_first_to_end(l_a);
-					ft_add_to_list(&ops, 6);
+					ft_swap(l_a, &ops);
+					ft_rotate_first_to_end(l_a, &ops);
 				}
 				else
 				{
@@ -197,10 +201,7 @@ void	ft_push_swap(int *l_a, int items, int *l_b)
 				}
 			}
 			if (!ft_l_a_is_complete_and_sorted(l_a, items))
-			{
-				ft_push(l_a, l_b);
-				ft_add_to_list(&ops, 4);
-			}
+				ft_push(l_a, l_b, &ops);
 		}
 	}
 	ft_print_list(ops);
