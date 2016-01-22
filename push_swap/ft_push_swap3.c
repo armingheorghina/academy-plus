@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_push_swap3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/11 15:35:47 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/22 14:39:58 by vdruta           ###   ########.fr       */
+/*   Created: 2016/01/22 14:38:16 by vdruta            #+#    #+#             */
+/*   Updated: 2016/01/22 14:38:33 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		main(int argc, char **argv)
+void	ft_rotate_first_to_end(int *l_a, t_pslist **ops)
 {
-	int			*l_a;
-	int			*l_b;
-	t_pslist	*ops;
+	int temp;
+	int i;
 
-	ops = NULL;
-	l_a = (int*)malloc(sizeof(*l_a) * (argc - 1));
-	l_b = (int*)malloc(sizeof(*l_b) * (argc - 1));
-	if (argc < 2)
-		ft_error_and_exit();
-	else
+	if (g_aitems < 2)
+		return ;
+	i = 0;
+	temp = l_a[0];
+	while (i < g_aitems - 1)
 	{
-		ft_validate_input(argc, argv);
-		ft_add_parameters_to_l_a(l_a, (argc - 1), argv);
-		ft_push_swap(l_a, argc - 1, l_b, &ops);
-		ft_print_list(ops);
+		l_a[i] = l_a[i + 1];
+		i++;
 	}
-	return (0);
+	l_a[g_aitems - 1] = temp;
+	ft_add_to_list(ops, 6);
 }
