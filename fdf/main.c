@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:53:02 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/25 17:05:58 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/27 13:24:12 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		main()
 
 
 	mlx = mlx_init();
-	win = mlx_new_window(mlx, 400, 400, "fdf 42");
+	win = mlx_new_window(mlx, 400, 400, "fdf");
 	y = 50;
 	while (y < 150)
 	{
