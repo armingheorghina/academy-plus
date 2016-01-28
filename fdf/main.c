@@ -6,29 +6,134 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:53:02 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/27 23:41:41 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/28 16:34:51 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+void	ft_control_height(t_env *m, int control)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < m->rows)
+	{
+		j = 0;
+		while (j < m->columns)
+		{
+			if (m->map2[i][j].z != 0 && control == 1)
+				m->map2[i][j].z *= 2;
+			if (m->map2[i][j].z != 0 && control == -1)
+				m->map2[i][j].z /= 2;
+			j++;
+		}
+		i++;
+	}
+}
+
 int		key_hook(int keycode, t_env *m)
 {
 	if (keycode == 53)
 		exit(0);
+	if (keycode == 116)
+	{
+		ft_control_height(m, 1);
+		expose_hook(m);
+	}
+	if (keycode == 121)
+	{
+		ft_control_height(m, -1);
+		expose_hook(m);
+	}
 	ft_putnbr(keycode);
 	ft_putchar('\n');
-	(void)m;
 	return (0);
 }
 
+float	ft_fabs(float a)
+{
+	if ( a < 0)
+		return (-a);
+	return (a);
+}
+
+float 	ft_fmax(float a, float b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+void	draw_line(t_point v1, t_point v2, t_env *m)
+{
+	float step;
+	float t;
+	t_point sum;
+
+	t = 0;
+	step = (float)(1 / (ft_fmax(ft_fabs(v1.x - v2.x), ft_fabs(v1.y - v2.y)) * 2));
+	while (t <=1)
+	{
+		sum.x = v1.x + t * (v2.x - v1.x);
+		sum.y = v1.y + t * (v2.y - v1.y);
+		mlx_pixel_put(m->mlx, m->win, sum.x, sum.y, 0xFFFFFF);
+		t = t + step;
+	}
+}
+
+void	ft_draw_lines_between_points(t_point **matrix, t_env *m)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < m->rows)
+	{
+		j = 0;
+		while (j < m->columns)
+		{
+			if (j < m->columns - 1)
+				draw_line(matrix[i][j], matrix[i][j + 1], m);
+			if (i < m->rows - 1)
+				draw_line(matrix[i][j], matrix[i + 1][j], m);
+			j++;
+		}
+		i++;
+	}
+}
+
+t_point	**ft_project_isometric_matrix(t_env *m)
+{
+	t_point	**matrix;
+	int 	i;
+	int		j;
+
+	matrix = (t_point**)malloc(sizeof(*matrix) * m->rows);
+	i = 0;
+	while (i < m->rows)
+	{
+		matrix[i] = (t_point*)malloc(sizeof(t_point) * m->columns);
+		j = 0;
+		while (j < m->columns)
+		{
+			matrix[i][j].x = WIDTH / 2 + m->map2[i][j].x * SPACING * cos(DEG30) - m->map2[i][j].y * SPACING * cos(DEG30);
+			matrix[i][j].y = HEIGHT / 2 + m->map2[i][j].x * SPACING * sin(DEG30) + m->map2[i][j].y * SPACING * sin(DEG30) - m->map2[i][j].z * SPACING;
+
+			j++;
+		}
+		i++;
+	}
+	return (matrix);
+}
 int		expose_hook(t_env *m)
 {
 	int i;
 	int j;
-	float	x;
-	float	y;
+	t_point **matrix;
 
+	matrix = ft_project_isometric_matrix(m);
 	mlx_clear_window(m->mlx, m->win);
 	i = 0;
 	while (i < m->rows)
@@ -36,13 +141,12 @@ int		expose_hook(t_env *m)
 		j = 0;
 		while (j < m->columns)
 		{
-			x = (float)((m->map2)[i][j].x) / (m->map2)[i][j].z * -10 + WIDTH / 2;
-			y = (float)((m->map2)[i][j].y) / (m->map2)[i][j].z * -10 + HEIGHT / 2;
-			mlx_pixel_put(m->mlx, m->win, x, y, 0xFFFFFF);
+			mlx_pixel_put(m->mlx, m->win, matrix[i][j].x, matrix[i][j].y, 0xFFFFFF);
 			j++;
 		}
 		i++;
 	}
+	ft_draw_lines_between_points(matrix, m);
 	return (0);
 }
 
@@ -236,8 +340,8 @@ void	ft_transform_all_points_relative_to_map_center(t_env *m)
 		j = 0;
 		while (j < m->columns)
 		{
-			(m->map2)[i][j].x -= (m->columns / 2) * SPACING;
-			(m->map2)[i][j].y -= (m->rows / 2) * SPACING;
+			(m->map2)[i][j].x -= (m->columns / 2);
+			(m->map2)[i][j].y -= (m->rows / 2);
 			j++;
 		}
 		i++;
@@ -270,11 +374,11 @@ int		main(int argc, char **argv)
 
 	m = (t_env*)malloc(sizeof(*m));
 	ft_init_env(m, argc, argv);
-	ft_distantiate_points(m);
+//	ft_distantiate_points(m);
 	ft_transform_all_points_relative_to_map_center(m);
 		ft_print_struct_matrix(m);
-	ft_rotate_45(m);
-		ft_print_struct_matrix(m);
+//	ft_rotate_45(m);
+//		ft_print_struct_matrix(m);
 	//ft_push_all_in_depth(m);
 	mlx_expose_hook(m->win, expose_hook, m);
 	mlx_key_hook(m->win, key_hook, m);

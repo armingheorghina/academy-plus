@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:57:39 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/27 23:41:47 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/01/28 16:34:58 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@
 # include "libft/libft.h"
 # include <mlx.h>
 # include <stdio.h>
+# include <math.h>
 # define WIDTH 800
 # define HEIGHT 800
-# define SPACING 30
+# define SPACING 20
+#define DEG30 0.52398776
 
 typedef struct	s_point
 {
-	int		x;
-	int		y;
-	int		z;
+	float		x;
+	float		y;
+	float		z;
 }				t_point;
 
 typedef struct	s_env
@@ -37,7 +39,7 @@ typedef struct	s_env
 	int				columns;
 	int				rows;
 }					t_env;
-
+int		expose_hook(t_env *m);
 void	ft_error_and_exit(void);
 void	ft_print_int_map(t_env *m);
 void	ft_print_cmap(char **cmap);
