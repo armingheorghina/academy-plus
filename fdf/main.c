@@ -6,11 +6,30 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:53:02 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/01 15:03:15 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/02/01 18:36:10 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+int		ft_color(t_env *m, t_point v)
+{
+	int red;
+	int green;
+	int blue;
+
+	if (v.z == m->zmin || v.z < 0.104969)
+		return (0xFFFFFF);
+	red = v.z / (m->zmax -  m->zmin) * 255;
+	blue = (red << 16) + (red << 8);
+	green = (red << 16) + red;
+	red = (red << 8) + red;
+	if (m->color == 'r')
+		return(0xFFFFFF - red);
+	if (m->color == 'b')
+		return(0xFFFFFF - blue);
+	return (0xFFFFFF - green);
+}
 
 void	ft_control_height(t_env *m, int control)
 {
@@ -70,6 +89,24 @@ void	ft_move(t_env *m, int keycode)
 	}
 }
 
+void	ft_zoom(t_env *m, int keycode)
+{
+	if (keycode == 115)
+		m->spacing *= 1.2;
+	if (keycode == 119)
+		m->spacing /= 1.2;
+}
+
+void	ft_change_color(t_env *m, int keycode)
+{
+	if (keycode == 15)
+		m->color = 'r';
+	if (keycode == 5)
+		m->color = 'g';
+	if (keycode == 11)
+		m->color = 'b';
+}
+
 int		key_hook(int keycode, t_env *m)
 {
 	if (keycode == 53)
@@ -87,6 +124,16 @@ int		key_hook(int keycode, t_env *m)
 	if (keycode == 126 || keycode == 125 || keycode == 123 || keycode == 124)
 	{
 		ft_move(m, keycode);
+		expose_hook(m);
+	}
+	if (keycode == 115 || keycode == 119)
+	{
+		ft_zoom(m, keycode);
+		expose_hook(m);
+	}
+	if (keycode == 15 || keycode == 5 || keycode == 11)
+	{
+		ft_change_color(m, keycode);
 		expose_hook(m);
 	}
 	ft_putnbr(keycode);
@@ -108,6 +155,13 @@ float 	ft_fmax(float a, float b)
 	return (b);
 }
 
+float 	ft_fmin(float a, float b)
+{
+	if (a > b)
+		return (b);
+	return (a);
+}
+
 void	draw_line(t_point v1, t_point v2, t_env *m)
 {
 	float step;
@@ -120,7 +174,8 @@ void	draw_line(t_point v1, t_point v2, t_env *m)
 	{
 		sum.x = v1.x + t * (v2.x - v1.x);
 		sum.y = v1.y + t * (v2.y - v1.y);
-		mlx_pixel_put(m->mlx, m->win, sum.x, sum.y, 0xFFFFFF);
+		sum.z = v1.z + t * (v2.z - v1.z);
+		mlx_pixel_put(m->mlx, m->win, sum.x, sum.y, ft_color(m, sum));
 		t = t + step;
 	}
 }
@@ -160,14 +215,68 @@ t_point	**ft_project_isometric_matrix(t_env *m)
 		j = 0;
 		while (j < m->columns)
 		{
-			matrix[i][j].x = WIDTH / 2 + m->map2[i][j].x * SPACING * cos(DEG30) - m->map2[i][j].y * SPACING * cos(DEG30);
-			matrix[i][j].y = HEIGHT / 2 + m->map2[i][j].x * SPACING * sin(DEG30) + m->map2[i][j].y * SPACING * sin(DEG30) - m->map2[i][j].z * SPACING;
+			matrix[i][j].x = WIDTH / 2 + m->map2[i][j].x * m->spacing * cos(DEG30) - m->map2[i][j].y * m->spacing * cos(DEG30);
+			matrix[i][j].y = HEIGHT / 2 + m->map2[i][j].x * m->spacing * sin(DEG30) + m->map2[i][j].y * m->spacing * sin(DEG30) - m->map2[i][j].z * m->spacing;
+			matrix[i][j].z = m->map2[i][j].z;
 
 			j++;
 		}
 		i++;
 	}
 	return (matrix);
+}
+
+float	ft_get_zmin(t_point **matrix, t_env *m)
+{
+	int 	i;
+	int		j;
+	float	min;
+	
+	min = matrix[0][0].z;
+	i = 0;
+	while (i < m->rows)
+	{
+		j = 0;
+		while (j < m->columns)
+		{
+			if (min > matrix[i][j].z)
+				min = matrix[i][j].z;
+			j++;
+		}
+		i++;
+	}
+	return (min);
+}
+
+float	ft_get_zmax(t_point **matrix, t_env *m)
+{
+	int 	i;
+	int		j;
+	float	max;
+	
+	max = matrix[0][0].z;
+	i = 0;
+	while (i < m->rows)
+	{
+		j = 0;
+		while (j < m->columns)
+		{
+			if (max < matrix[i][j].z)
+				max = matrix[i][j].z;
+			j++;
+		}
+		i++;
+	}
+	return (max);
+}
+
+void	ft_show_usage(t_env *m)
+{
+	mlx_string_put(m->mlx, m->win, 10, 10, 0xFFFFFF, "Usage:");
+	mlx_string_put(m->mlx, m->win, 10, 30, 0xFFFFFF, "Directional keys to move");
+	mlx_string_put(m->mlx, m->win, 10, 50, 0xFFFFFF, "Zoom: Home/End");
+	mlx_string_put(m->mlx, m->win, 10, 70, 0xFFFFFF, "Height: PageUp/PageDown");
+	mlx_string_put(m->mlx, m->win, 10, 90, 0xFFFFFF, "Color: (r)ed, (g)reen, (b)lue");
 }
 
 int		expose_hook(t_env *m)
@@ -177,6 +286,9 @@ int		expose_hook(t_env *m)
 	t_point **matrix;
 
 	matrix = ft_project_isometric_matrix(m);
+	m->zmin = ft_get_zmin(matrix, m);
+	m->zmax = ft_get_zmax(matrix, m);
+
 	mlx_clear_window(m->mlx, m->win);
 	i = 0;
 	while (i < m->rows)
@@ -184,12 +296,13 @@ int		expose_hook(t_env *m)
 		j = 0;
 		while (j < m->columns)
 		{
-			mlx_pixel_put(m->mlx, m->win, matrix[i][j].x, matrix[i][j].y, 0xFFFFFF);
+			mlx_pixel_put(m->mlx, m->win, matrix[i][j].x, matrix[i][j].y, ft_color(m, matrix[i][j]));
 			j++;
 		}
 		i++;
 	}
 	ft_draw_lines_between_points(matrix, m);
+	ft_show_usage(m);
 	return (0);
 }
 
@@ -342,6 +455,8 @@ void	ft_init_env(t_env *m, int argc, char **argv)
 	}
 	else
 	{
+		m->color = 'r';
+		m->spacing = 20;
 		m->file = argv[1];
 		m->mlx = mlx_init();
 		m->win = mlx_new_window(m->mlx, WIDTH, HEIGHT, m->file);

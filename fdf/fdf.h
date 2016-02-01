@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:57:39 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/01 15:03:17 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/02/01 18:03:34 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <math.h>
 # define WIDTH 800
 # define HEIGHT 800
-# define SPACING 20
 # define DEG30 0.52398776
 
 typedef struct	s_point
@@ -38,6 +37,10 @@ typedef struct	s_env
 	t_point			**map2;
 	int				columns;
 	int				rows;
+	float			spacing;
+	float			zmin;
+	float			zmax;
+	int				color;
 }					t_env;
 int		expose_hook(t_env *m);
 void	ft_error_and_exit(void);
