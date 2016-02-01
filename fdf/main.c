@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:53:02 by vdruta            #+#    #+#             */
-/*   Updated: 2016/01/28 16:34:51 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/02/01 15:03:15 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,43 @@ void	ft_control_height(t_env *m, int control)
 	}
 }
 
+void	ft_move(t_env *m, int keycode)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < m->rows)
+	{
+		j = 0;
+		while (j < m->columns)
+		{
+			if (keycode == 126)
+			{
+				m->map2[i][j].x -= 1;
+				m->map2[i][j].y -= 1;
+			}
+			if (keycode == 125)
+			{
+				m->map2[i][j].x += 1;
+				m->map2[i][j].y += 1;
+			}
+			if (keycode == 123)
+			{
+				m->map2[i][j].x -= 1;
+				m->map2[i][j].y += 1;
+			}
+			if (keycode == 124)
+			{
+				m->map2[i][j].x += 1;
+				m->map2[i][j].y -= 1;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 int		key_hook(int keycode, t_env *m)
 {
 	if (keycode == 53)
@@ -45,6 +82,11 @@ int		key_hook(int keycode, t_env *m)
 	if (keycode == 121)
 	{
 		ft_control_height(m, -1);
+		expose_hook(m);
+	}
+	if (keycode == 126 || keycode == 125 || keycode == 123 || keycode == 124)
+	{
+		ft_move(m, keycode);
 		expose_hook(m);
 	}
 	ft_putnbr(keycode);
@@ -127,6 +169,7 @@ t_point	**ft_project_isometric_matrix(t_env *m)
 	}
 	return (matrix);
 }
+
 int		expose_hook(t_env *m)
 {
 	int i;
@@ -249,6 +292,8 @@ void	ft_validate_cmap_line(char *str)
 	{
 		if (str[i] == '-')
 			ok++;
+		if (str[i] == ' ')
+			ok--;
 		i++;
 	}
 	if (ok > 1)
@@ -310,25 +355,6 @@ void	ft_init_env(t_env *m, int argc, char **argv)
 	}
 }
 
-void	ft_distantiate_points(t_env *m)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < m->rows)
-	{
-		j = 0;
-		while (j < m->columns)
-		{
-			(m->map2)[i][j].x *= SPACING;
-			(m->map2)[i][j].y *= SPACING;
-			j++;
-		}
-		i++;
-	}
-}
-
 void	ft_transform_all_points_relative_to_map_center(t_env *m)
 {
 	int i;
@@ -348,38 +374,13 @@ void	ft_transform_all_points_relative_to_map_center(t_env *m)
 	}
 }
 
-void	ft_rotate_45(t_env *m)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < m->rows)
-	{
-		j = 0;
-		while (j < m->columns)
-		{
-			(m->map2)[i][j].z = m->map2[i][j].z - (m->rows / 2) + i;
-			(m->map2)[i][j].y += (m->map2)[i][j].z / 4;
-			(m->map2)[i][j].z = m->map2[i][j].z - 20;
-			j++;
-		}
-		i++;
-	}
-}
-
 int		main(int argc, char **argv)
 {
 	t_env *m;
 
 	m = (t_env*)malloc(sizeof(*m));
 	ft_init_env(m, argc, argv);
-//	ft_distantiate_points(m);
 	ft_transform_all_points_relative_to_map_center(m);
-		ft_print_struct_matrix(m);
-//	ft_rotate_45(m);
-//		ft_print_struct_matrix(m);
-	//ft_push_all_in_depth(m);
 	mlx_expose_hook(m->win, expose_hook, m);
 	mlx_key_hook(m->win, key_hook, m);
 	mlx_loop(m->mlx);
