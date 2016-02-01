@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:53:02 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/01 18:36:10 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/02/01 19:04:42 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_color(t_env *m, t_point v)
 
 	if (v.z == m->zmin || v.z < 0.104969)
 		return (0xFFFFFF);
-	red = v.z / (m->zmax -  m->zmin) * 255;
+	red = v.z / (m->zmax) * 255;
 	blue = (red << 16) + (red << 8);
 	green = (red << 16) + red;
 	red = (red << 8) + red;
@@ -456,7 +456,7 @@ void	ft_init_env(t_env *m, int argc, char **argv)
 	else
 	{
 		m->color = 'r';
-		m->spacing = 20;
+
 		m->file = argv[1];
 		m->mlx = mlx_init();
 		m->win = mlx_new_window(m->mlx, WIDTH, HEIGHT, m->file);
@@ -467,6 +467,7 @@ void	ft_init_env(t_env *m, int argc, char **argv)
 		ft_print_int_map(m); // delete this
 		m->map2 = ft_generate_initial_coordinates(m);
 		ft_print_struct_matrix(m); //delete this
+		m->spacing = (WIDTH - 300) / m->columns;
 	}
 }
 
