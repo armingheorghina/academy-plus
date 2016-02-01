@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 16:53:02 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/01 19:04:42 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/02/01 19:31:58 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -462,11 +462,8 @@ void	ft_init_env(t_env *m, int argc, char **argv)
 		m->win = mlx_new_window(m->mlx, WIDTH, HEIGHT, m->file);
 		cmap = ft_get_cmap(m->file, m);
 		ft_validate_char_map(cmap);
-		ft_print_cmap(cmap); // delete this
 		m->map = ft_get_int_map(cmap, m);
-		ft_print_int_map(m); // delete this
 		m->map2 = ft_generate_initial_coordinates(m);
-		ft_print_struct_matrix(m); //delete this
 		m->spacing = (WIDTH - 300) / m->columns;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:57:39 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/01 19:06:52 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/02/01 19:32:00 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <mlx.h>
 # include <stdio.h>
 # include <math.h>
-# define WIDTH 1280
-# define HEIGHT 780
+# define WIDTH 1300
+# define HEIGHT 900
 # define DEG30 0.52398776
 
 typedef struct	s_point
