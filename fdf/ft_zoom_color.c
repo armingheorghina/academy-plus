@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_zoom_color.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/25 16:53:02 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/02 17:27:35 by vdruta           ###   ########.fr       */
+/*   Created: 2016/02/02 16:05:05 by vdruta            #+#    #+#             */
+/*   Updated: 2016/02/02 16:05:14 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		main(int argc, char **argv)
+void	ft_zoom(t_env *m, int keycode)
 {
-	t_env *m;
+	if (keycode == 115)
+		m->spacing *= 1.2;
+	if (keycode == 119)
+		m->spacing /= 1.2;
+}
 
-	m = (t_env*)malloc(sizeof(*m));
-	ft_init_env(m, argc, argv);
-	ft_transform_all_points_relative_to_map_center(m);
-	mlx_expose_hook(m->win, expose_hook, m);
-	mlx_key_hook(m->win, key_hook, m);
-	mlx_loop(m->mlx);
-	return (0);
+void	ft_change_color(t_env *m, int keycode)
+{
+	if (keycode == 15)
+		m->color = 'r';
+	if (keycode == 5)
+		m->color = 'g';
+	if (keycode == 11)
+		m->color = 'b';
 }

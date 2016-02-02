@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_color.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/25 16:53:02 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/02 17:27:35 by vdruta           ###   ########.fr       */
+/*   Created: 2016/02/02 15:56:18 by vdruta            #+#    #+#             */
+/*   Updated: 2016/02/02 17:32:27 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		main(int argc, char **argv)
+int		ft_color(t_env *m, t_point v)
 {
-	t_env *m;
+	int red;
+	int green;
+	int blue;
 
-	m = (t_env*)malloc(sizeof(*m));
-	ft_init_env(m, argc, argv);
-	ft_transform_all_points_relative_to_map_center(m);
-	mlx_expose_hook(m->win, expose_hook, m);
-	mlx_key_hook(m->win, key_hook, m);
-	mlx_loop(m->mlx);
-	return (0);
+	if (v.z == m->zmin || v.z < 0.00001)
+		return (0xFFFFFF);
+	red = v.z / (m->zmax) * 255;
+	blue = (red << 16) + (red << 8);
+	green = (red << 16) + red;
+	red = (red << 8) + red;
+	if (m->color == 'r')
+		return (0xFFFFFF - red);
+	if (m->color == 'b')
+		return (0xFFFFFF - blue);
+	return (0xFFFFFF - green);
 }

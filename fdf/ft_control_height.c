@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_control_height.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/25 16:53:02 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/02 17:27:35 by vdruta           ###   ########.fr       */
+/*   Created: 2016/02/02 15:59:25 by vdruta            #+#    #+#             */
+/*   Updated: 2016/02/02 15:59:37 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		main(int argc, char **argv)
+void	ft_control_height(t_env *m, int control)
 {
-	t_env *m;
+	int i;
+	int j;
 
-	m = (t_env*)malloc(sizeof(*m));
-	ft_init_env(m, argc, argv);
-	ft_transform_all_points_relative_to_map_center(m);
-	mlx_expose_hook(m->win, expose_hook, m);
-	mlx_key_hook(m->win, key_hook, m);
-	mlx_loop(m->mlx);
-	return (0);
+	i = 0;
+	while (i < m->rows)
+	{
+		j = 0;
+		while (j < m->columns)
+		{
+			if (m->map2[i][j].z != 0 && control == 1)
+				m->map2[i][j].z *= 2;
+			if (m->map2[i][j].z != 0 && control == -1)
+				m->map2[i][j].z /= 2;
+			j++;
+		}
+		i++;
+	}
 }
