@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 17:02:00 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/02 17:02:10 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/02/03 17:01:49 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void	ft_init_env(t_env *m, int argc, char **argv)
 		ft_validate_char_map(cmap);
 		m->map = ft_get_int_map(cmap, m);
 		m->map2 = ft_generate_initial_coordinates(m);
+		m->map3 = ft_generate_initial_coordinates(m);
 		m->spacing = (WIDTH) / (m->columns + 70);
+		m->eye.x = 0;
+		m->eye.y = 0;
+		m->eye.z = (WIDTH / 2) * tan(DEG15);
+		m->projection_type = 'i';
 	}
 }

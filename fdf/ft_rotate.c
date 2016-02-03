@@ -1,43 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expose_hook.c                                      :+:      :+:    :+:   */
+/*   ft_rotate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/02 16:43:53 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/03 16:45:51 by vdruta           ###   ########.fr       */
+/*   Created: 2016/02/03 13:02:54 by vdruta            #+#    #+#             */
+/*   Updated: 2016/02/03 17:20:21 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		expose_hook(t_env *m)
+void	ft_rotate(t_env *m, int keycode) //TODO rotate for perspective
 {
-	int		i;
-	int		j;
-	t_point	**matrix;
+	int i;
+	int j;
 
-	if (m->projection_type == 'i')
-		matrix = ft_project_isometric_matrix(m);
-	else
-		matrix = ft_project_perspective_matrix(m);
-	m->zmin = ft_get_zmin(matrix, m);
-	m->zmax = ft_get_zmax(matrix, m);
-	mlx_clear_window(m->mlx, m->win);
 	i = 0;
 	while (i < m->rows)
 	{
 		j = 0;
 		while (j < m->columns)
 		{
-			mlx_pixel_put(m->mlx, m->win, matrix[i][j].x, matrix[i][j].y,
-					ft_color(m, matrix[i][j]));
+			if (keycode == 114) //insert
+			{
+				m->map3[i][j].x = m->map3[i][j].x;
+				m->map3[i][j].y = m->map3[i][j].y;
+			}
+			if (keycode == 117) //delete
+			{
+				m->map3[i][j].x = m->map3[i][j].x;
+				m->map3[i][j].y = m->map3[i][j].y;
+			}
 			j++;
 		}
 		i++;
 	}
-	ft_draw_lines_between_points(matrix, m);
-	ft_show_usage(m);
-	return (0);
 }

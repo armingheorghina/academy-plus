@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 15:59:25 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/02 15:59:37 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/02/03 17:13:34 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	ft_control_height(t_env *m, int control)
 				m->map2[i][j].z *= 2;
 			if (m->map2[i][j].z != 0 && control == -1)
 				m->map2[i][j].z /= 2;
+			if (m->map3[i][j].z != 0 && control == 1)
+				m->map3[i][j].z *= 2;
+			if (m->map3[i][j].z != 0 && control == -1)
+				m->map3[i][j].z /= 2;
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:03:58 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/02 17:54:55 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/02/03 17:05:59 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_damn_norminette(t_env *m, int i, int j)
 {
 	m->map2[i][j].x -= 1;
+	m->map3[i][j].y -= 1;
 	m->map2[i][j].y -= 1;
 }
 
@@ -22,11 +23,13 @@ void	ft_damn_norminette2(t_env *m, int i, int j)
 {
 	m->map2[i][j].x += 1;
 	m->map2[i][j].y += 1;
+	m->map3[i][j].y += 1;
 }
 
 void	ft_damn_norminette3(t_env *m, int i, int j)
 {
 	m->map2[i][j].x -= 1;
+	m->map3[i][j].x -= 1;
 	m->map2[i][j].y += 1;
 }
 
@@ -51,6 +54,7 @@ void	ft_move(t_env *m, int keycode)
 			{
 				m->map2[i][j].x += 1;
 				m->map2[i][j].y -= 1;
+				m->map3[i][j].x += 1;
 			}
 			j++;
 		}

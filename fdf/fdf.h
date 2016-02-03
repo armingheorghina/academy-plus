@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 13:57:39 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/02 17:28:44 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/02/03 17:13:37 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define WIDTH 1000
 # define HEIGHT 1000
 # define DEG30 0.52398776
+# define DEG15 0.261799388
 
 typedef struct	s_point
 {
@@ -35,14 +36,18 @@ typedef struct	s_env
 	char		*file;
 	int			**map;
 	t_point		**map2;
+	t_point		**map3;
 	int			columns;
 	int			rows;
 	float		spacing;
 	float		zmin;
 	float		zmax;
 	int			color;
+	t_point		eye;
+	int			projection_type;
 }				t_env;
 
+void			ft_rotate(t_env *m, int keycode);
 int				expose_hook(t_env *m);
 void			ft_error_and_exit(void);
 void			ft_print_int_map(t_env *m);
@@ -60,6 +65,7 @@ float			ft_fmax(float a, float b);
 float			ft_fabs(float a);
 void			ft_draw_lines_between_points(t_point **matrix, t_env *m);
 t_point			**ft_project_isometric_matrix(t_env *m);
+t_point			**ft_project_perspective_matrix(t_env *m);
 float			ft_get_zmin(t_point **matrix, t_env *m);
 float			ft_get_zmax(t_point **matrix, t_env *m);
 void			ft_show_usage(t_env *m);
