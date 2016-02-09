@@ -12,45 +12,47 @@
 
 #include "lem_in.h"
 
-char	*ft_get_vertice_name(char *str)
-{
-	char *name;
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		i++;
-	}
-}
-/*
 void	ft_create_graph_edges_list(t_edges **edges, char *input)
 {
 	t_edges	*new;
 	t_edges	*start;
+	char	*minus;
 	
 	new = (t_edges*)malloc(sizeof(*new));
-	new->name1 = ft_get_edges_name(input);
-	new->name2 = ft_get_edges_name(input);
+	minus = ft_strchr(input, '-');
+	new->name1 = ft_strsub(input, 0 , ft_strlen(input) - ft_strlen(minus));
+	new->name2 = ft_strdup(minus + 1);
+	new->next = NULL;
+	start = *edges;
+	if (start == NULL)
+		*edges = new;
+	else
+	{
+		while (start->next)
+			start = start->next;
+		start->next = new;
+	}
 }
-*/
+
 void	ft_create_graph_vertices_list(t_vertices **vertices, char *input)
 {
 	t_vertices	*new;
 	t_vertices	*start;
+	char		**map;
 
+	map = ft_strsplit(input, ' ');
 	new = (t_vertices*)malloc(sizeof(*new));
-	new->name = ft_get_vertice_name(input);
-	new->x = ft_get_coordinate_x(input);
-	new->y = ft_get_coordinate_y(input);
+	new->name = map[0];
+	new->x = ft_atoi(map[1]);
+	new->y = ft_atoi(map[2]);
 	new->start = g_start;
 	g_start = 0;
 	new->end = g_end;
 	g_end = 0;
 	new->next = NULL;
-	start = *list;
+	start = *vertices;
 	if (start == NULL)
-		*list = new;
+		*vertices = new;
 	else
 	{
 		while (start->next)

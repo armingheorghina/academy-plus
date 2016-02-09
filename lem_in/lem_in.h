@@ -17,6 +17,7 @@
 
 int	g_start;
 int g_end;
+int				g_ants;
 typedef struct			s_lemin
 {
 	char				*input_line;
@@ -45,5 +46,6 @@ void					ft_print_initial_list(t_lemin *list);
 void					ft_error_and_exit();
 void	ft_create_graph_vertices_list(t_vertices **vertices, char *input);
 void	ft_create_graph_edges_list(t_edges **edges, char *input);
+void	ft_print_vertices_list(t_vertices *vertices);
 
 #endif
