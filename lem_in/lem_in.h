@@ -6,7 +6,7 @@
 /*   By: vdruta <vdruta@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 13:12:09 by vdruta            #+#    #+#             */
-/*   Updated: 2016/02/08 18:52:25 by vdruta           ###   ########.fr       */
+/*   Updated: 2016/02/17 19:31:16 by vdruta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct			s_lemin
 
 typedef struct			s_vertices
 {
+	int					id;
 	char				*name;
 	int					x;
 	int					y;

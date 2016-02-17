@@ -7,6 +7,9 @@ void	ft_print_vertices_list(t_vertices *vertices)
 	start2 = vertices;
 	while (start2)
 	{
+		ft_putstr("id:");
+		ft_putnbr(start2->id);
+		ft_putchar(' ');
 		ft_putstr(start2->name);
 		ft_putchar(' ');
 		ft_putchar('[');
