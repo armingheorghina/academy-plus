@@ -152,7 +152,131 @@ void	ft_validate_and_create_graph(t_lemin *list, t_vertices **vertices,
 	}
 }
 
-int		main()
+void	ft_validate_vertices_and_edges(t_vertices *vertices, t_edges *edges)
+{
+	t_vertices	*vlist;
+	t_edges		*elist;
+	int		ok;
+
+	if (!vertices || !edges)
+		ft_error_and_exit();
+	elist = edges;
+	while (elist)
+	{
+		if (ft_strcmp(elist->name1, elist->name2) == 0)
+			ft_error_and_exit();
+		vlist = vertices;
+		ok = 0;
+		while (vlist)
+		{
+			if (ft_strcmp(vlist->name, elist->name1) == 0 || ft_strcmp(vlist->name, elist->name2) == 0)
+				ok++;
+			vlist = vlist->next;
+		}
+		if (ok != 2)
+			ft_error_and_exit();
+		elist = elist->next;
+	}
+}
+
+int	ft_get_total_vertices_number(t_vertices *vertices)
+{
+	int		total;
+	t_vertices	*start;
+	
+	total = 0;
+	start = vertices;
+	while (start)
+	{
+		total++;
+		start = start->next;
+	}
+	return (total);
+}
+
+int	**ft_init_adjmat(int total_vertices)
+{
+	int **adjmat;
+	int i;
+	int j;
+
+	adjmat = (int**)malloc(sizeof(*adjmat) * total_vertices);
+	i = 0;
+	while (i < total_vertices)
+	{
+		adjmat[i] = (int*)malloc(sizeof(int) * total_vertices);
+		j = 0;
+		while (j < total_vertices)
+		{
+			adjmat[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+	return (adjmat);
+}
+
+int	**ft_get_adjmat(t_vertices *vertices, int total_vertices, t_edges *edges)
+{
+	int 	**adjmat;
+	int i;
+	int j;
+	t_vertices 	*v;
+	t_edges		*e;
+
+	adjmat = ft_init_adjmat(total_vertices);
+	e = edges;
+	while (e)
+	{
+		v = vertices;
+		i = 0;
+		j = 0;
+		while (v)
+		{
+			if (ft_strcmp(e->name1, v->name) == 0)
+				i = v->id;
+			if (ft_strcmp(e->name2, v->name) == 0)
+				j = v->id;
+			v = v->next;
+		}
+		adjmat[i][j] = 1;
+		adjmat[j][i] = 1;
+		e = e->next;
+	}
+	return (adjmat);
+}
+
+void	ft_print_adjmat(int **adjmat, int total_vertices)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < total_vertices)
+	{
+		j = 0;
+		while (j < total_vertices)
+		{
+			ft_putnbr(adjmat[i][j]);
+			ft_putchar(' ');
+			j++;
+		}
+		ft_putendl("");
+		i++;
+	}
+}
+
+void	ft_lem_in(t_vertices *vertices, t_edges *edges)
+{
+	int	total_vertices;
+	int	**adjmat;
+
+	total_vertices = ft_get_total_vertices_number(vertices);
+	adjmat = ft_get_adjmat(vertices, total_vertices, edges);
+	ft_print_adjmat(adjmat, total_vertices);
+}
+
+int	main()
 {
 	char		*line;
 	t_lemin		*list;
@@ -162,12 +286,13 @@ int		main()
 	list = NULL;
 	while(ft_get_next_line(0, &line))
 		ft_add_to_list(&list, line);
-	ft_print_initial_list(list);
 	vertices = NULL;
 	edges = NULL;
 	ft_validate_and_create_graph(list, &vertices, &edges);
-	ft_print_vertices_list(vertices); //working on
-	if (!vertices || !edges)
-		ft_error_and_exit();
+	ft_validate_vertices_and_edges(vertices, edges);
+	ft_print_initial_list(list);
+	ft_print_vertices_list(vertices);
+	ft_print_edges_list(edges);
+	ft_lem_in(vertices, edges);
 	return (0);
 }
